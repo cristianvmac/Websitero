@@ -1,6 +1,4 @@
 import { Star, Quote } from "lucide-react";
-import { SectionHeading } from "./_ui";
-import { Reveal } from "./motion";
 
 interface Testimonial {
   quote: string;
@@ -46,15 +44,18 @@ const Testimonials = () => {
   return (
     <section id="testimonials" className="bg-white py-24">
       <div className="mx-auto max-w-5xl px-6">
-        <Reveal>
-          <SectionHeading
-            center
-            eyebrow="Social proof"
-            eyebrowIcon={Star}
-            title="Builders ship faster with Websitero"
-            subtitle="From solo founders to agencies — here's what people say after launching."
-          />
-        </Reveal>
+        <div className="mx-auto max-w-3xl text-center">
+          <span className="inline-flex items-center gap-2 rounded-full border border-[#4588ba]/20 bg-[#4588ba]/10 px-3.5 py-1.5 text-sm font-semibold text-[#316994]">
+            <Star className="h-4 w-4" />
+            Social proof
+          </span>
+          <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+            Builders ship faster with Websitero
+          </h2>
+          <p className="mx-auto mt-4 text-lg leading-relaxed text-slate-600">
+            From solo founders to agencies — here&apos;s what people say after launching.
+          </p>
+        </div>
       </div>
 
       <div

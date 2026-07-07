@@ -1,34 +1,35 @@
 import Link from "next/link";
 import { Check, ArrowRight, Layers } from "lucide-react";
-import { SectionHeading } from "./_ui";
-import { Reveal, SpotlightCard } from "./motion";
 import { FRAMEWORKS, FRAMEWORK_ORDER } from "./frameworks-data";
 
 const Frameworks = () => {
   return (
     <section id="frameworks" className="bg-slate-50 px-6 py-24">
       <div className="mx-auto max-w-5xl">
-        <Reveal>
-          <SectionHeading
-            center
-            eyebrow="Two ways to build"
-            eyebrowIcon={Layers}
-            title="Choose your stack — both are included"
-            subtitle="Every plan ships both boilerplates. Start with the one that fits your project, switch whenever you like."
-          />
-        </Reveal>
+        <div className="mx-auto max-w-3xl text-center">
+          <span className="inline-flex items-center gap-2 rounded-full border border-[#4588ba]/20 bg-[#4588ba]/10 px-3.5 py-1.5 text-sm font-semibold text-[#316994]">
+            <Layers className="h-4 w-4" />
+            Two ways to build
+          </span>
+          <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+            Choose your stack — both are included
+          </h2>
+          <p className="mx-auto mt-4 text-lg leading-relaxed text-slate-600">
+            Every plan ships both boilerplates. Start with the one that fits your project, switch
+            whenever you like.
+          </p>
+        </div>
 
         <div className="mt-14 grid gap-6 md:grid-cols-2">
-          {FRAMEWORK_ORDER.map((key, idx) => {
+          {FRAMEWORK_ORDER.map((key) => {
             const f = FRAMEWORKS[key];
             const Icon = f.icon;
             return (
-              <Reveal key={key} delay={idx * 120}>
-                <SpotlightCard
-                  className="h-full rounded-2xl border border-slate-200 bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl"
-                  glow={`${f.accent}26`}
-                >
-                  <div className="flex h-full flex-col p-8">
+              <div
+                key={key}
+                className="relative h-full overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl"
+              >
+                <div className="flex h-full flex-col p-8">
                     <span aria-hidden className="absolute inset-x-0 top-0 h-1" style={{ background: `linear-gradient(90deg, ${f.accent}, transparent)` }} />
 
                     <div className="flex items-center gap-3">
@@ -60,9 +61,8 @@ const Frameworks = () => {
                       Read the {f.name} docs
                       <ArrowRight className="h-4 w-4" />
                     </Link>
-                  </div>
-                </SpotlightCard>
-              </Reveal>
+                </div>
+              </div>
             );
           })}
         </div>

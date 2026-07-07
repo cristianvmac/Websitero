@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Plus, MessageCircle, ArrowRight } from "lucide-react";
-import { SectionHeading, BRAND_GRADIENT } from "./_ui";
 
 const faqs = [
   {
@@ -55,11 +54,17 @@ const FAQ = () => {
   return (
     <section id="faq" className="bg-slate-50 px-6 py-24">
       <div className="mx-auto max-w-6xl">
-        <SectionHeading
-          eyebrow="FAQ"
-          title="Frequently asked questions"
-          subtitle="Find answers to common questions about the Eleventy & Astro boilerplates and our services."
-        />
+        <div className="max-w-3xl">
+          <span className="inline-flex items-center gap-2 rounded-full border border-[#4588ba]/20 bg-[#4588ba]/10 px-3.5 py-1.5 text-sm font-semibold text-[#316994]">
+            FAQ
+          </span>
+          <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+            Frequently asked questions
+          </h2>
+          <p className="mt-4 text-lg leading-relaxed text-slate-600">
+            Find answers to common questions about the Eleventy &amp; Astro boilerplates and our services.
+          </p>
+        </div>
 
         <div className="mt-14 grid gap-10 lg:grid-cols-3">
           <ul className="space-y-3 lg:col-span-2">
@@ -111,7 +116,7 @@ const FAQ = () => {
               </p>
               <Link
                 href="/contact"
-                className={`mt-6 inline-flex w-full items-center justify-center gap-1.5 rounded-full ${BRAND_GRADIENT} px-6 py-3 text-sm font-semibold text-white transition-all hover:shadow-lg hover:shadow-[#4588ba]/30`}
+                className="mt-6 inline-flex w-full items-center justify-center gap-1.5 rounded-full bg-linear-to-br from-[#4588ba] to-[#316994] px-6 py-3 text-sm font-semibold text-white transition-all hover:shadow-lg hover:shadow-[#4588ba]/30"
               >
                 Contact Us
                 <ArrowRight className="h-4 w-4" />

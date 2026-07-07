@@ -4,8 +4,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Transition } from "@headlessui/react";
 import { Menu, X, Rocket, ArrowRight, Sparkles } from "lucide-react";
-import { BRAND_GRADIENT } from "./_ui";
-import { Magnetic } from "./motion";
 
 const navLinks = [
   { label: "Features", href: "/#features" },
@@ -35,10 +33,10 @@ const Header = () => {
   return (
     <header className="fixed inset-x-0 top-0 z-50">
       <div className="absolute inset-x-0 top-0 z-10 h-0.5 bg-transparent">
-        <div className={`h-full ${BRAND_GRADIENT}`} style={{ width: `${progress}%` }} />
+        <div className="h-full bg-linear-to-br from-[#4588ba] to-[#316994]" style={{ width: `${progress}%` }} />
       </div>
 
-      <div className={`${BRAND_GRADIENT} text-white`}>
+      <div className="bg-linear-to-br from-[#4588ba] to-[#316994] text-white">
         <div className="mx-auto flex max-w-7xl items-center justify-center gap-2 px-6 py-2 text-center text-xs font-medium sm:text-sm">
           <Sparkles className="h-3.5 w-3.5 shrink-0" />
           <span>Early-adopter deal — $50 off, 10 spots left.</span>
@@ -57,7 +55,7 @@ const Header = () => {
       >
         <div className={`mx-auto flex max-w-7xl items-center justify-between px-6 transition-all ${scrolled ? "py-2.5" : "py-3.5"}`}>
           <Link href="/" className="group flex items-center gap-2.5">
-            <span className={`flex h-9 w-9 items-center justify-center rounded-xl ${BRAND_GRADIENT} text-white shadow-sm shadow-[#4588ba]/30 transition-transform group-hover:scale-105`}>
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-linear-to-br from-[#4588ba] to-[#316994] text-white shadow-sm shadow-[#4588ba]/30 transition-transform group-hover:scale-105">
               <Rocket className="h-5 w-5" />
             </span>
             <span className="text-xl font-extrabold tracking-tight text-slate-900">Websitero (BETA)</span>
@@ -75,15 +73,13 @@ const Header = () => {
             ))}
           </nav>
 
-          <Magnetic className="hidden md:inline-block">
-            <Link
-              href="#cta"
-              className={`inline-flex items-center gap-1.5 rounded-full ${BRAND_GRADIENT} px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-[#4588ba]/25 transition-all hover:shadow-lg hover:shadow-[#4588ba]/40`}
-            >
-              Start Your Website
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </Magnetic>
+          <Link
+            href="#cta"
+            className="hidden items-center gap-1.5 rounded-full bg-linear-to-br from-[#4588ba] to-[#316994] px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-[#4588ba]/25 transition-all hover:shadow-lg hover:shadow-[#4588ba]/40 md:inline-flex"
+          >
+            Start Your Website
+            <ArrowRight className="h-4 w-4" />
+          </Link>
 
           <button
             onClick={() => setIsOpen((v) => !v)}
@@ -123,7 +119,7 @@ const Header = () => {
                 <Link
                   href="#cta"
                   onClick={() => setIsOpen(false)}
-                  className={`flex items-center justify-center gap-1.5 rounded-full ${BRAND_GRADIENT} px-5 py-3 text-sm font-semibold text-white`}
+                  className="flex items-center justify-center gap-1.5 rounded-full bg-linear-to-br from-[#4588ba] to-[#316994] px-5 py-3 text-sm font-semibold text-white"
                 >
                   Start Your Website
                   <ArrowRight className="h-4 w-4" />

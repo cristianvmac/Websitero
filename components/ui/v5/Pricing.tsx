@@ -1,7 +1,5 @@
 import Link from "next/link";
 import { Check, Sparkles, ArrowRight } from "lucide-react";
-import { SectionHeading, BRAND_GRADIENT, AnimatedBorder } from "./_ui";
-import { Reveal } from "./motion";
 
 interface Plan {
   name: string;
@@ -87,7 +85,7 @@ function CardBody({ plan }: { plan: Plan }) {
     <div className="flex h-full flex-col rounded-2xl bg-white p-8">
       {(plan.popular || plan.badge) && (
         <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-          <span className={`rounded-full ${BRAND_GRADIENT} px-4 py-1 text-xs font-bold tracking-wide text-white shadow-md`}>
+          <span className="rounded-full bg-linear-to-br from-[#4588ba] to-[#316994] px-4 py-1 text-xs font-bold tracking-wide text-white shadow-md">
             {plan.badge ?? "MOST POPULAR"}
           </span>
         </div>
@@ -107,7 +105,7 @@ function CardBody({ plan }: { plan: Plan }) {
         href="/contact"
         className={`mb-8 inline-flex items-center justify-center gap-1.5 rounded-full px-6 py-3 text-sm font-semibold transition-all ${
           plan.popular
-            ? `${BRAND_GRADIENT} text-white shadow-md shadow-[#4588ba]/25 hover:shadow-lg hover:shadow-[#4588ba]/40`
+            ? "bg-linear-to-br from-[#4588ba] to-[#316994] text-white shadow-md shadow-[#4588ba]/25 hover:shadow-lg hover:shadow-[#4588ba]/40"
             : "border border-slate-300 bg-white text-slate-800 hover:bg-slate-50"
         }`}
       >
@@ -135,14 +133,19 @@ const Pricing = () => {
   return (
     <section id="pricing" className="bg-white px-6 py-24">
       <div className="mx-auto max-w-6xl">
-        <Reveal>
-          <SectionHeading
-            center
-            eyebrow="Save hours, ship fast, get profitable"
-            eyebrowIcon={Sparkles}
-            title="Simple & transparent pricing"
-            subtitle="One payment, both boilerplates, lifetime updates. No subscriptions, ever."
-          />
+        <div>
+          <div className="mx-auto max-w-3xl text-center">
+            <span className="inline-flex items-center gap-2 rounded-full border border-[#4588ba]/20 bg-[#4588ba]/10 px-3.5 py-1.5 text-sm font-semibold text-[#316994]">
+              <Sparkles className="h-4 w-4" />
+              Save hours, ship fast, get profitable
+            </span>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+              Simple &amp; transparent pricing
+            </h2>
+            <p className="mx-auto mt-4 text-lg leading-relaxed text-slate-600">
+              One payment, both boilerplates, lifetime updates. No subscriptions, ever.
+            </p>
+          </div>
           <div className="mt-6 flex justify-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm font-medium text-emerald-700">
               <span>$50 off for early adopters</span>
@@ -150,21 +153,33 @@ const Pricing = () => {
               <span className="opacity-80">10 spots left</span>
             </span>
           </div>
-        </Reveal>
+        </div>
 
         <div className="mt-14 grid items-start gap-8 md:grid-cols-3">
-          {plans.map((plan, idx) => (
-            <Reveal key={plan.name} delay={idx * 110}>
+          {plans.map((plan) => (
+            <div key={plan.name}>
               {plan.popular ? (
-                <AnimatedBorder className="shadow-2xl shadow-[#4588ba]/15 md:-translate-y-3">
-                  <CardBody plan={plan} />
-                </AnimatedBorder>
+                /* Rotating conic-gradient border (animated via globals keyframes). */
+                <div className="relative rounded-2xl p-px shadow-2xl shadow-[#4588ba]/15 md:-translate-y-3">
+                  <span aria-hidden className="absolute inset-0 overflow-hidden rounded-2xl">
+                    <span
+                      className="v5-spin absolute left-1/2 top-1/2 h-[220%] w-[220%]"
+                      style={{
+                        background:
+                          "conic-gradient(from 0deg, transparent 0deg, #4588ba 60deg, #8b5cf6 120deg, transparent 200deg)",
+                      }}
+                    />
+                  </span>
+                  <div className="relative h-full w-full rounded-2xl bg-white">
+                    <CardBody plan={plan} />
+                  </div>
+                </div>
               ) : (
                 <div className="relative h-full rounded-2xl border border-slate-200 bg-white shadow-sm">
                   <CardBody plan={plan} />
                 </div>
               )}
-            </Reveal>
+            </div>
           ))}
         </div>
       </div>

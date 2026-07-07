@@ -3,8 +3,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Sparkles, ArrowRight, Star, Zap, ShieldCheck } from "lucide-react";
-import { BRAND_GRADIENT, BRAND_TEXT, AnimatedAurora, GridBackdrop } from "./_ui";
-import { CountUp, Magnetic, Tilt } from "./motion";
 import { FRAMEWORKS, FRAMEWORK_ORDER, type FrameworkKey } from "./frameworks-data";
 
 const trust = [
@@ -32,8 +30,23 @@ const Hero = () => {
 
   return (
     <section id="hero" className="relative overflow-hidden bg-linear-to-b from-slate-50 to-white px-6 py-16 lg:py-24">
-      <AnimatedAurora />
-      <GridBackdrop />
+      {/* Slow-drifting aurora blobs (animated via globals keyframes). */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="v5-blob-a absolute -top-32 left-[8%] h-80 w-80 rounded-full bg-[#4588ba]/25 blur-3xl" />
+        <div className="v5-blob-b absolute top-8 right-[4%] h-72 w-72 rounded-full bg-[#8b5cf6]/18 blur-3xl" />
+        <div className="v5-blob-c absolute -bottom-24 left-1/3 h-72 w-72 rounded-full bg-[#316994]/18 blur-3xl" />
+      </div>
+
+      {/* Subtle dotted-grid backdrop. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage: "radial-gradient(circle, rgba(69,136,186,0.10) 1px, transparent 1px)",
+          backgroundSize: "22px 22px",
+          maskImage: "radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%)",
+        }}
+      />
 
       <div className="relative mx-auto flex max-w-7xl flex-col items-center gap-16 lg:flex-row lg:gap-20">
         {/* Left */}
@@ -46,7 +59,7 @@ const Hero = () => {
           <h1 className="text-4xl font-extrabold leading-[1.1] tracking-tight text-slate-900 sm:text-5xl lg:text-[4.25rem]">
             Launch your website in hours,{" "}
             <span className="relative whitespace-nowrap">
-              <span className={`relative z-10 ${BRAND_TEXT}`}>not days</span>
+              <span className="relative z-10 bg-linear-to-r from-[#4588ba] to-[#316994] bg-clip-text text-transparent">not days</span>
               <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 200 12" fill="none" preserveAspectRatio="none">
                 <path d="M2 9C50 3 150 3 198 9" stroke="#4588ba" strokeWidth="3" strokeLinecap="round" opacity="0.4" />
               </svg>
@@ -70,7 +83,9 @@ const Hero = () => {
                   onClick={() => setFw(key)}
                   aria-pressed={isActive}
                   className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-all ${
-                    isActive ? `${BRAND_GRADIENT} text-white shadow` : "text-slate-600 hover:text-slate-900"
+                    isActive
+                      ? "bg-linear-to-br from-[#4588ba] to-[#316994] text-white shadow"
+                      : "text-slate-600 hover:text-slate-900"
                   }`}
                 >
                   <Icon className="h-4 w-4" />
@@ -81,15 +96,13 @@ const Hero = () => {
           </div>
 
           <div className="flex flex-col items-center gap-3 sm:flex-row">
-            <Magnetic>
-              <Link
-                href="#cta"
-                className={`inline-flex items-center gap-2 rounded-full ${BRAND_GRADIENT} px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-[#4588ba]/30 transition-all hover:shadow-xl hover:shadow-[#4588ba]/40`}
-              >
-                Get Websitero
-                <ArrowRight className="h-5 w-5" />
-              </Link>
-            </Magnetic>
+            <Link
+              href="#cta"
+              className="inline-flex items-center gap-2 rounded-full bg-linear-to-br from-[#4588ba] to-[#316994] px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-[#4588ba]/30 transition-all hover:shadow-xl hover:shadow-[#4588ba]/40"
+            >
+              Get Websitero
+              <ArrowRight className="h-5 w-5" />
+            </Link>
             <Link
               href={active.docs}
               className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-7 py-3.5 text-base font-semibold text-slate-700 transition-colors hover:border-slate-400 hover:bg-slate-50"
@@ -128,7 +141,7 @@ const Hero = () => {
         <div className="relative w-full max-w-lg lg:w-1/2">
           <div className="absolute -inset-4 rounded-[2.5rem] bg-linear-to-br from-[#4588ba]/25 to-[#8b5cf6]/15 blur-2xl" />
 
-          <Tilt className="relative">
+          <div className="relative">
             <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl shadow-slate-900/10">
               <div className="flex items-center gap-2 border-b border-slate-100 bg-slate-50 px-4 py-3">
                 <span className="h-3 w-3 rounded-full bg-rose-400" />
@@ -140,7 +153,7 @@ const Hero = () => {
               </div>
 
               <div className="space-y-4 p-5">
-                <div className={`h-24 rounded-xl ${BRAND_GRADIENT} opacity-90`} />
+                <div className="h-24 rounded-xl bg-linear-to-br from-[#4588ba] to-[#316994] opacity-90" />
                 <div className="h-3 w-2/3 rounded-full bg-slate-200" />
                 <div className="h-3 w-5/6 rounded-full bg-slate-100" />
                 <div className="grid grid-cols-3 gap-3 pt-1">
@@ -154,7 +167,7 @@ const Hero = () => {
                 </div>
               </div>
             </div>
-          </Tilt>
+          </div>
 
           <div className="absolute -bottom-6 -left-4 right-8 rounded-xl bg-slate-900 p-4 font-mono text-xs text-slate-100 shadow-xl ring-1 ring-white/10">
             <div className="flex items-center gap-2 text-slate-200">
@@ -166,7 +179,7 @@ const Hero = () => {
 
           <div className="absolute -right-4 -top-4 hidden items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-xl sm:flex">
             <span className="flex h-11 w-11 items-center justify-center rounded-full border-4 border-emerald-500 text-sm font-bold text-emerald-700">
-              <CountUp to={100} />
+              100
             </span>
             <div className="text-left">
               <p className="text-sm font-bold leading-none text-slate-900">Lighthouse</p>

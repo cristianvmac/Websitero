@@ -2,9 +2,6 @@ import {
   Code2, Search, MapPin, Server, Globe, Smartphone, Headphones,
   ArrowUpRight, type LucideIcon,
 } from "lucide-react";
-import { SectionHeading, BRAND_GRADIENT } from "./_ui";
-import { Reveal, SpotlightCard } from "./motion";
-
 interface Cell {
   icon: LucideIcon;
   title: string;
@@ -35,21 +32,26 @@ const Features = () => {
   return (
     <section id="features" className="bg-white px-6 py-24">
       <div className="mx-auto max-w-6xl">
-        <Reveal>
-          <SectionHeading
-            eyebrow="Everything included"
-            title="Boost your business instantly — launch faster, earn sooner"
-            subtitle="Custom websites that convert, delivered without the headaches. We handle the code, design, and technical complexity so you can launch with confidence."
-          />
-        </Reveal>
+        <div className="max-w-3xl">
+          <span className="inline-flex items-center gap-2 rounded-full border border-[#4588ba]/20 bg-[#4588ba]/10 px-3.5 py-1.5 text-sm font-semibold text-[#316994]">
+            Everything included
+          </span>
+          <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+            Boost your business instantly — launch faster, earn sooner
+          </h2>
+          <p className="mt-4 text-lg leading-relaxed text-slate-600">
+            Custom websites that convert, delivered without the headaches. We handle the code,
+            design, and technical complexity so you can launch with confidence.
+          </p>
+        </div>
 
         <div className="mt-14 grid auto-rows-[1fr] grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {cells.map((cell, idx) => {
+          {cells.map((cell) => {
             const Icon = cell.icon;
             return (
-              <Reveal key={cell.title} delay={idx * 70} className={cell.span ?? ""}>
+              <div key={cell.title} className={cell.span ?? ""}>
                 {cell.featured ? (
-                  <article className={`group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl ${BRAND_GRADIENT} p-8 text-white shadow-lg shadow-[#4588ba]/25`}>
+                  <article className="group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl bg-linear-to-br from-[#4588ba] to-[#316994] p-8 text-white shadow-lg shadow-[#4588ba]/25">
                     <div aria-hidden className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/10 blur-2xl" />
                     <div className="relative">
                       <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/15 backdrop-blur">
@@ -65,7 +67,7 @@ const Features = () => {
                     )}
                   </article>
                 ) : (
-                  <SpotlightCard className="group h-full rounded-2xl border border-slate-200 bg-white shadow-sm transition-all hover:-translate-y-1 hover:border-[#4588ba]/40 hover:shadow-lg">
+                  <div className="group h-full rounded-2xl border border-slate-200 bg-white shadow-sm transition-all hover:-translate-y-1 hover:border-[#4588ba]/40 hover:shadow-lg">
                     <div className="flex h-full flex-col p-6">
                       <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#4588ba]/10 text-[#316994]">
                         <Icon className="h-5 w-5" />
@@ -81,9 +83,9 @@ const Features = () => {
                         </span>
                       )}
                     </div>
-                  </SpotlightCard>
+                  </div>
                 )}
-              </Reveal>
+              </div>
             );
           })}
         </div>

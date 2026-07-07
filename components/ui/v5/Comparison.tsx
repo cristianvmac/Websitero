@@ -1,6 +1,4 @@
 import { X, Check, AlertTriangle, Sparkles } from "lucide-react";
-import { SectionHeading } from "./_ui";
-import { Reveal } from "./motion";
 
 const problems = [
   { title: "Performance Issues", desc: "Bloated code tanks mobile performance, Core Web Vitals, and SEO rankings." },
@@ -20,22 +18,25 @@ const Comparison = () => {
   return (
     <section id="comparison" className="bg-slate-50 px-6 py-24">
       <div className="mx-auto max-w-5xl">
-        <Reveal>
-          <SectionHeading
-            center
-            eyebrow="The honest comparison"
-            title="Why not just use a page builder?"
-            subtitle="Page builders feel easy at first — then the costs and headaches pile up. Here's how Websitero compares."
-          />
-        </Reveal>
+        <div className="mx-auto max-w-3xl text-center">
+          <span className="inline-flex items-center gap-2 rounded-full border border-[#4588ba]/20 bg-[#4588ba]/10 px-3.5 py-1.5 text-sm font-semibold text-[#316994]">
+            The honest comparison
+          </span>
+          <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+            Why not just use a page builder?
+          </h2>
+          <p className="mx-auto mt-4 text-lg leading-relaxed text-slate-600">
+            Page builders feel easy at first — then the costs and headaches pile up. Here&apos;s how
+            Websitero compares.
+          </p>
+        </div>
 
         <div className="relative mt-14 grid gap-6 md:grid-cols-2">
           <span className="absolute left-1/2 top-1/2 z-10 hidden -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-4 border-white bg-slate-900 px-3 py-2 text-xs font-bold text-white shadow-lg md:flex">
             VS
           </span>
 
-          <Reveal>
-            <div className="h-full rounded-2xl border border-rose-200 bg-rose-50/60 p-6 sm:p-8">
+          <div className="h-full rounded-2xl border border-rose-200 bg-rose-50/60 p-6 sm:p-8">
               <header className="mb-6 flex items-center gap-3">
                 <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-rose-600 text-white">
                   <AlertTriangle className="h-5 w-5" />
@@ -55,11 +56,9 @@ const Comparison = () => {
                   </li>
                 ))}
               </ul>
-            </div>
-          </Reveal>
+          </div>
 
-          <Reveal delay={120}>
-            <div className="h-full rounded-2xl border border-emerald-200 bg-emerald-50/60 p-6 shadow-sm sm:p-8">
+          <div className="h-full rounded-2xl border border-emerald-200 bg-emerald-50/60 p-6 shadow-sm sm:p-8">
               <header className="mb-6 flex items-center gap-3">
                 <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-600 text-white">
                   <Sparkles className="h-5 w-5" />
@@ -79,8 +78,7 @@ const Comparison = () => {
                   </li>
                 ))}
               </ul>
-            </div>
-          </Reveal>
+          </div>
         </div>
       </div>
     </section>

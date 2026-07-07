@@ -1,6 +1,4 @@
 import { MousePointerClick, Paintbrush, Rocket, type LucideIcon } from "lucide-react";
-import { SectionHeading, BRAND_GRADIENT } from "./_ui";
-import { Reveal } from "./motion";
 
 interface Step {
   icon: LucideIcon;
@@ -30,14 +28,17 @@ const HowItWorks = () => {
   return (
     <section id="how-it-works" className="bg-white px-6 py-24">
       <div className="mx-auto max-w-5xl">
-        <Reveal>
-          <SectionHeading
-            center
-            eyebrow="How it works"
-            title="From zero to live in three steps"
-            subtitle="No agencies, no page-builder lock-in — just a fast path from idea to a website that ranks."
-          />
-        </Reveal>
+        <div className="mx-auto max-w-3xl text-center">
+          <span className="inline-flex items-center gap-2 rounded-full border border-[#4588ba]/20 bg-[#4588ba]/10 px-3.5 py-1.5 text-sm font-semibold text-[#316994]">
+            How it works
+          </span>
+          <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+            From zero to live in three steps
+          </h2>
+          <p className="mx-auto mt-4 text-lg leading-relaxed text-slate-600">
+            No agencies, no page-builder lock-in — just a fast path from idea to a website that ranks.
+          </p>
+        </div>
 
         <div className="relative mt-16">
           {/* connecting line */}
@@ -47,18 +48,16 @@ const HowItWorks = () => {
             {steps.map((step, idx) => {
               const Icon = step.icon;
               return (
-                <Reveal key={step.title} delay={idx * 130}>
-                  <div className="relative flex flex-col items-center text-center">
-                    <span className={`relative z-10 flex h-14 w-14 items-center justify-center rounded-2xl ${BRAND_GRADIENT} text-white shadow-lg shadow-[#4588ba]/30`}>
+                <div key={step.title} className="relative flex flex-col items-center text-center">
+                    <span className="relative z-10 flex h-14 w-14 items-center justify-center rounded-2xl bg-linear-to-br from-[#4588ba] to-[#316994] text-white shadow-lg shadow-[#4588ba]/30">
                       <Icon className="h-6 w-6" />
                       <span className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-slate-900 text-xs font-bold text-white">
                         {idx + 1}
                       </span>
                     </span>
                     <h3 className="mt-5 text-lg font-bold text-slate-900">{step.title}</h3>
-                    <p className="mt-2 max-w-xs text-sm leading-relaxed text-slate-600">{step.desc}</p>
-                  </div>
-                </Reveal>
+                  <p className="mt-2 max-w-xs text-sm leading-relaxed text-slate-600">{step.desc}</p>
+                </div>
               );
             })}
           </div>

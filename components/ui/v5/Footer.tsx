@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Rocket, Facebook, Linkedin, type LucideIcon } from "lucide-react";
-import { BRAND_GRADIENT } from "./_ui";
 
 const columns: { heading: string; links: { label: string; href: string }[] }[] = [
   {
@@ -43,7 +42,7 @@ const Footer = () => {
         <div className="grid gap-10 md:grid-cols-5">
           <div className="md:col-span-2">
             <Link href="/" className="flex items-center gap-2.5">
-              <span className={`flex h-9 w-9 items-center justify-center rounded-xl ${BRAND_GRADIENT} text-white`}>
+              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-linear-to-br from-[#4588ba] to-[#316994] text-white">
                 <Rocket className="h-5 w-5" />
               </span>
               <span className="text-xl font-extrabold tracking-tight text-slate-900">Websitero</span>
