@@ -1,0 +1,64 @@
+DO AS YOU WILL LIKE TO HAVE IT:
+
+
+!!! - Content changes:
+# finish Docs content
+# separate pages for Pricing ...
+# in deployment add info how to get domain from namecheap and how to buy your domain
+# review both Github clones and add some comment suggestions in code
+# and add in clones the images with lower size
+# fix both boilerplates: Eleventy and Astro and prepare the final Github repo clones, separate css from blog
+# in get-started add pictures about cloning process GitHub
+# add Sitemap: https://docs.astro.build/en/guides/integrations-guide/sitemap/
+# add scripts for removing ... 
+# in tutorials, do explicit videos/tutorials with the cloning and tell to use the components... 
+# in Features add calendar, booking or ... all kinds of services integrated etc
+# I think is better to keep components specific Astro, 
+otherwise what is the point of using it like Eleventy as
+# I was thinking to replace Icon with img or Picture component with picture
+# add metadata to each page
+# add link to each step or keep it like now
+# in Astro github clone use Picture component
+# add max min zoom icon like in NextUpKit
+# how to add an whatsapp button
+
+!!! - UI changes after done the content changes:
+# finish Docs UI
+# add icons to sidebar categories
+# add higher margin to the right of main content in docs check Additional Resources structure page
+# add Mobile Responsiveness
+# remove ChevronRight
+# perhaps add a badge or header for each page: Astro/Quick Setup/ Install Git for example
+# add See Demo in the nav bar like in supastarter and see the description of site demo and get inspired for clones
+
+!!! - To add after getting some feedback:
+# add Templates in the Header 
+# add different languages as: french, espanol, german ... 
+# add a video on landing page to explain how it works
+# make the pricing monthly and yearly more options: starter 29, normal 99 , ecommerce 199
+# check ListsKit boilerplate, buy once run it forever etc
+# in Pricing mention that you dont need credits, full control of the user,  NOT like in Base44 pricing plan
+
+# implement Stripe
+
+# re-watch Nevo David video, find the angle and remove boilerplate/website builder words; focus one the service received by the user/business owner
+# => sell the value, not the product
+
+# think about Wellcode model communication user <--> platform
+
+# add option something done by us for the user: add figma design or other for the user to specify how is site should look
+# and we will do it for him, like agency - client model but integrating in this app 
+
+# to take in consideration after getting some users: Migrating from Wordpress to Eleventy for example
+
+# makeawebsite.app - Tony Dinh: --> I want to make it possible for non-tech business owners to run their entire online presence with AI via a simple app.
+# Starting with helping them make a website, and then other stuff like geo SEO, posting updates on social media pages, managing their Google Maps / Google Business, etc
+# think about this: ecosystem where user can manage his online presence website, seo, social media etc from a dashboard or AI /
+# or us do it for him 
+
+
+# How to grow my Saas:
+-> validate the idea: Talk to 10 local businesses: Ask if they’d pay for this. Example script:
+"We’re building an AI tool that creates and manages your website, Google listing, and social media. Would you pay $30/month for that?"
+
+-> make multiple reddit accounts etc and comment on my community

@@ -1,0 +1,321 @@
+"use client";
+
+{/* CHECK Row by Row one more time*/}
+
+import Link from "next/link";
+import { Rocket, Copy, Check, GitFork, Download, Settings } from "lucide-react";
+import { Clock, ArrowRight} from "lucide-react";
+
+import { useState } from "react";
+
+function Row({ indent, connector, icon, name, nameClass, desc }: {
+  indent: number;
+  connector: string;
+  icon: "folder" | "file";
+  name: string;
+  nameClass: string;
+  desc?: string;
+}) {
+  return (
+    <div className="flex items-center gap-1.5" style={{ paddingLeft: `${indent * 1.25}rem` }}>
+      {connector && <span className="text-gray-600 select-none shrink-0 w-5">{connector}</span>}
+      {icon === "folder" ? (
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-yellow-400 shrink-0">
+          <path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z" />
+        </svg>
+      ) : (
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-500 shrink-0">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+          <polyline points="14 2 14 8 20 8" />
+        </svg>
+      )}
+      <span className={nameClass}>{name}</span>
+      {desc && <span className="text-gray-600 text-xs ml-1 hidden sm:inline">— {desc}</span>}
+    </div>
+  );
+}
+
+export default function GetStarted() {
+  const [copiedStep, setCopiedStep] = useState<number | null>(null);
+
+  const copyToClipboard = (text: string, stepIndex: number) => {
+    navigator.clipboard.writeText(text);
+    setCopiedStep(stepIndex);
+    setTimeout(() => setCopiedStep(null), 2000);
+  };
+
+  return (
+    <div className="max-w-5xl px-6 py-4">
+
+      {/* Hero Section */}
+      <div className="mb-12">
+        {/* Breadcrumb */}
+        <div className="flex items-center gap-3 mb-4 flex-wrap">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-linear-to-r from-orange-50 to-yellow-50 text-orange-700 rounded-full text-sm font-bold border-2 border-orange-200">
+            Astro
+          </div>
+          <span className="text-3xl font-semibold text-gray-400">/</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-linear-to-r from-blue-50 to-purple-50 text-blue-700 rounded-full text-sm font-bold border-2 border-blue-200">
+            Get Started
+          </div>
+          
+        </div>
+        <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm font-medium mb-4">
+          <Rocket className="w-4 h-4" />
+          Get started in 5 minutes
+        </div>
+        <h1 className="text-5xl font-bold text-gray-900 mb-4">
+          Get Started with Websitero
+        </h1>
+        <p className="text-xl text-gray-600 leading-relaxed">
+          Welcome to Websitero, the Astro + Decap CMS Starter kit to launch your website + blog fast!
+        </p>
+        <p className="text-xl text-gray-600 leading-relaxed">
+          Follow this guide to get your application up and running.
+        </p>
+      </div>
+
+      {/* Before You Start */}
+      <div className="mb-12 p-6 bg-yellow-50 border-2 border-yellow-200 rounded-xl">
+        <h3 className="text-lg font-bold text-yellow-900 mb-3 flex items-center gap-2">
+          <Clock className="w-5 h-5" />
+          Before You Start
+        </h3>
+        <p className="text-yellow-800 mb-4">
+          Make sure you&apos;ve read the initial setup guide.
+
+        </p>
+        <Link
+          href="/docs/astro/quick-setup"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-600 hover:bg-yellow-700 text-white font-semibold rounded-lg transition-colors"
+        >
+          <ArrowRight className="w-4 h-4" />
+          See Quick Setup
+        </Link>
+      </div>
+
+      {/* Setup Instructions */}
+      <div id="setup" className="bg-linear-to-br from-gray-50 to-gray-100 rounded-2xl p-8 mb-16 border border-gray-200">
+        <h2 className="text-3xl font-bold text-gray-900 mb-6">
+          Setup Your Project
+        </h2>
+
+        <div className="space-y-6">
+          {/* Step 1: Create from Template */}
+          <div className="bg-white rounded-xl p-6 border border-gray-200">
+            <div className="flex items-start gap-4">
+              <div className="shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
+                1
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
+                  <GitFork className="w-5 h-5" />
+                  Create from Template
+                </h3>
+                <p className="text-gray-600 mb-4">
+                  Bootstrap your project using the official Astro template, or clone the GitHub repository directly.
+                </p>
+
+                {/* Option A: GitHub template */}
+                <p className="text-sm font-semibold text-gray-700 mb-2">Option A — Use the GitHub template:</p>
+                <div className="mb-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                  <p className="text-sm text-blue-900">
+                    Go to{" "}
+                    <Link
+                      href="https://github.com/cristianvmac/Astro-Starter"
+                      className="font-medium underline"
+                      target="_blank"
+                    >
+                      cristianvmac/Astro-Starter
+                    </Link>
+                    , click <strong>Use this template</strong> → <strong>Create a new repository</strong>, then clone your new repo locally.
+                  </p>
+                </div>
+
+                {/* Option B: Clone directly */}
+                <p className="text-sm font-semibold text-gray-700 mb-2">Option B — Clone directly:</p>
+                <div className="bg-gray-900 rounded-lg p-4 font-mono text-sm text-gray-100 relative group">
+                  <code>git clone https://github.com/cristianvmac/Astro-Starter [YOUR_APP_NAME]</code>
+                  <Link
+                  href=""
+                    onClick={() => copyToClipboard("git clone https://github.com/cristianvmac/Astro-Starter [YOUR_APP_NAME]", 1)}
+                    className="absolute right-3 top-3 p-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors"
+                  >
+                    {copiedStep === 1 ? (
+                      <Check className="w-4 h-4 text-green-400" />
+                    ) : (
+                      <Copy className="w-4 h-4 text-gray-400" />
+                    )}
+                  </Link>
+                </div>
+                <div className="mt-3 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                  <p className="text-sm text-blue-900">
+                    <strong>💡 Pro tip:</strong> Replace <code className="bg-blue-100 px-2 py-0.5 rounded">[YOUR_APP_NAME]</code> with your project name
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Step 2: Install Dependencies */}
+          <div className="bg-white rounded-xl p-6 border border-gray-200">
+            <div className="flex items-start gap-4">
+              <div className="shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
+                2
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
+                  <Download className="w-5 h-5" />
+                  Install Dependencies
+                </h3>
+                <p className="text-gray-600 mb-4">
+                  Navigate to your project directory and install all required packages.
+                </p>
+                <div className="space-y-3">
+                  <div className="bg-gray-900 rounded-lg p-4 font-mono text-sm text-gray-100 relative group">
+                    <code>npm install</code>
+                    <button
+                      onClick={() => copyToClipboard("npm install", 2)}
+                      className="absolute right-3 top-3 p-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors"
+                    >
+                      {copiedStep === 2 ? (
+                        <Check className="w-4 h-4 text-green-400" />
+                      ) : (
+                        <Copy className="w-4 h-4 text-gray-400" />
+                      )}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Step 3: Configure Your Site */}
+          <div className="bg-white rounded-xl p-6 border border-gray-200">
+            <div className="flex items-start gap-4">
+              <div className="shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
+                3
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
+                  <Settings className="w-5 h-5" />
+                  Configure Your Site
+                </h3>
+                <p className="text-gray-600 mb-4">
+                  Edit the key files to set up your business info and CMS settings.
+                </p>
+                <ul className="space-y-2 text-sm text-gray-700">
+                  <li className="flex gap-2">
+                    <code className="bg-gray-100 px-2 py-0.5 rounded text-gray-800 font-mono shrink-0">src/data/client.ts</code>
+                    <span>— Site configuration and business info</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <code className="bg-gray-100 px-2 py-0.5 rounded text-gray-800 font-mono shrink-0">src/styles/root.css</code>
+                    <span>— Design tokens</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <code className="bg-gray-100 px-2 py-0.5 rounded text-gray-800 font-mono shrink-0">public/admin/config.yml</code>
+                    <span>— CMS configuration</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* Step 4: Start Development Server */}
+          <div className="bg-white rounded-xl p-6 border border-gray-200">
+            <div className="flex items-start gap-4">
+              <div className="shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
+                4
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
+                  <Rocket className="w-5 h-5" />
+                  Start the Development Server
+                </h3>
+                <p className="text-gray-600 mb-4">
+                  Launch your local development server and see your app in action!
+                </p>
+                <div className="bg-gray-900 rounded-lg p-4 font-mono text-sm text-gray-100 relative group">
+                  <code>npm run dev</code>
+                  <button
+                    onClick={() => copyToClipboard("npm run dev", 4)}
+                    className="absolute right-3 top-3 p-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors"
+                  >
+                    {copiedStep === 4 ? (
+                      <Check className="w-4 h-4 text-green-400" />
+                    ) : (
+                      <Copy className="w-4 h-4 text-gray-400" />
+                    )}
+                  </button>
+                </div>
+                <div className="mt-4 p-4 bg-green-50 rounded-lg border-2 border-green-200">
+                  <p className="text-green-900 font-medium mb-1">
+                    🚀 You&apos;re all set!
+                  </p>
+                  <p className="text-sm text-green-800">
+                    Your app is now running at{" "}
+                    <Link href="http://localhost:4321" className="font-mono font-bold underline" target="_blank">
+                      http://localhost:4321
+                    </Link>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Requirements Note */}
+        <div className="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+          <p className="text-sm text-yellow-900">
+            <strong>⚠️ Requirements:</strong> This kit requires Node.js 18.17 or greater. 
+            Run <code className="bg-yellow-100 px-2 py-0.5 rounded">node -v</code> in your terminal to check your version.
+          </p>
+        </div>
+      </div>
+
+      {/* Project Structure */}
+      {/* Need to check Astro Project structure one more time by myself */}
+      <div className="">
+        <h2 className="text-xl font-bold mb-2 text-gray-900">
+          Project Structure
+        </h2>
+        <p className="text-sm text-gray-500 mb-4">A standard Astro kit project looks like this:</p>
+
+        <div className="bg-[#0f1117] rounded-xl border border-gray-800 overflow-hidden font-mono text-sm">
+
+          <div className="p-5 space-y-0.5 leading-6 text-[13px]">
+            <Row indent={0} connector="" icon="folder" name="ASTRO-STARTER" nameClass="text-purple-300 font-semibold" />
+            <Row indent={1} connector="├─" icon="folder" name="/public" nameClass="text-purple-300" />
+            <Row indent={1} connector="├─" icon="folder" name="/scripts" nameClass="text-purple-300" desc="Build & setup utilities" />
+            <Row indent={1} connector="├─" icon="folder" name="/src" nameClass="text-purple-300" />
+          </div>
+        </div>
+      </div>
+
+      {/* Deployment Note */}
+      <div className="mt-10 p-5 bg-gray-50 border border-gray-200 rounded-xl">
+        <h3 className="font-bold text-gray-900 mb-2">Deploying</h3>
+        <p className="text-sm text-gray-700">
+          Push to GitHub → Deploy on Netlify → Configure{" "}
+          <Link href="https://decapbridge.com" className="underline" target="_blank">DecapBridge</Link>{" "}
+          to enable the CMS for your clients.
+        </p>
+      </div>
+      <div className="mt-12">
+        <p className="text-xl text-gray-600 leading-relaxed">
+          Once you&apos;re done, start with{" "}
+          <Link
+            href="./tutorials/build-in-5-minutes"
+            className="text-orange-400 underline p-2"
+          >
+            this tutorial
+          </Link>
+          {" "}to launch your project in 5 minutes.
+          Let&apos;s build that website FAST!
+        </p>
+      </div>
+
+    </div>
+  );
+}

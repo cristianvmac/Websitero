@@ -1,0 +1,920 @@
+"use client";
+
+import Link from "next/link";
+import {
+  Layout, FileCode, Copy, Check, Clock, Eye, Rocket, ArrowRight } from "lucide-react";
+import { useState } from "react";
+
+
+export default function LandingPage() {
+  const [copiedStep, setCopiedStep] = useState<number | null>(null);
+
+  const copyToClipboard = (text: string, stepIndex: number) => {
+    navigator.clipboard.writeText(text);
+    setCopiedStep(stepIndex);
+    setTimeout(() => setCopiedStep(null), 2000);
+  };
+
+  return (
+    <div className="max-w-5xl mx-auto px-4 py-12">
+      {/* Hero Section */}
+      <div className="mb-12">
+        {/* Breadcrumb */}
+        <div className="flex items-center gap-3 mb-4 flex-wrap">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-linear-to-r from-orange-50 to-yellow-50 text-orange-700 rounded-full text-sm font-bold border-2 border-orange-200">
+            Eleventy
+          </div>
+          <span className="text-3xl font-semibold text-gray-400">/</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-linear-to-r from-blue-50 to-purple-50 text-blue-700 rounded-full text-sm font-bold border-2 border-blue-200">
+            Tutorials
+          </div>
+          <span className="text-3xl font-semibold text-gray-400">/</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-linear-to-r from-blue-50 to-purple-50 text-blue-700 rounded-full text-sm font-bold border-2 border-blue-200">
+            Landing page
+          </div>
+        </div>
+
+        <h1 className="text-5xl font-bold text-gray-900 mb-4 leading-tight">
+          Build Landing Pages in Minutes
+        </h1>
+
+        <p className="text-xl text-gray-600 leading-relaxed mb-6">
+           Use the{" "}
+          <Link
+            href="https://github.com/cristianvmac/Eleventy-Starter"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 underline font-semibold"
+          >
+           Eleventy Starter Kit
+          </Link>{" "}
+           to spin up a fully responsive landing page from scratch.
+        </p>
+      </div>
+
+      {/* Quick Start */}
+      {/* Before You Start */}
+      <div className="mb-12 p-6 bg-yellow-50 border-2 border-yellow-200 rounded-xl">
+        <h3 className="text-lg font-bold text-yellow-900 mb-3 flex items-center gap-2">
+          <Clock className="w-5 h-5" />
+          Before You Start
+        </h3>
+        <p className="text-yellow-800 mb-4">
+          Make sure that you have you&apos;ve read the initial setup guide.
+        </p>
+        <Link
+          href="/docs/eleventy/quick-setup"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-600 hover:bg-yellow-700 text-white font-semibold rounded-lg transition-colors"
+        >
+          <ArrowRight className="w-4 h-4" />
+          See Quick Setup
+        </Link>
+      </div>
+
+      {/* Example Landing Page */}
+      <div id="example" className="mb-16 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
+        <div className="flex items-start gap-4 mb-6">
+          <div className="shrink-0 w-12 h-12 bg-purple-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+            <FileCode className="w-6 h-6" />
+          </div>
+          <div>
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">
+              Example Landing Page
+            </h2>
+            <p className="text-lg text-gray-600">
+              A complete page assembled from pre-built sections — the home page
+              lives at{" "}
+              <code className="bg-gray-100 px-2 py-1 rounded">
+                src/index.html
+              </code>
+            </p>
+          </div>
+        </div>
+
+        <div className="space-y-6">
+          <div>
+            <h3 className="text-lg font-bold text-gray-900 mb-3">
+              Create your landing page
+            </h3>
+            <p className="text-gray-600 mb-4">
+              Open{" "}
+              <code className="bg-gray-100 px-2 py-1 rounded">
+                src/index.html
+              </code>{" "}
+              and assemble the page by including the sections you need. The{" "}
+              <code className="bg-gray-100 px-2 py-1 rounded">base.html</code>{" "}
+              layout wires in the header and footer for you:
+            </p>
+            <div className="bg-gray-900 rounded-lg p-4 font-mono text-xs text-gray-100 relative group max-h-150 overflow-y-auto">
+              <pre className="whitespace-pre-wrap">
+                <code>{`---
+---
+title: "Eleventy Starter Template"
+description: "Meta description for the page"
+permalink: "/"
+tags: "sitemap" # content/content.json will make sure that all pages in content/ are marked with a "sitemap" tag, for automatic sitemap generation. As index.html is not in content/, we need to add it here to ensure the root page is included in the sitemap generation
+---
+
+{% extends "layouts/base.html" %}
+
+{% block head %}
+    <!-- Critical styles are loaded first -->
+    <link rel="stylesheet" href="/assets/css/critical.css"/>
+
+    <!-- If we're in production, defer the rest of the home page styles. In development, always load it. Otherwise the site will break when hot-reload is used. -->
+    {% if client.isProduction %}
+        <link rel="preload" href="/assets/css/local.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript>
+            <link rel="stylesheet" href="/assets/css/local.css">
+        </noscript>
+
+    {% else %}
+        <link rel="stylesheet" href="/assets/css/local.css"/>
+    {% endif %}
+
+    <!-- To ensure proper validation, prevent errors, and encourage developers to check, schema's are an opt-in feature. They're very bespoke and requires some customising  -->
+    <!-- Uncomment the code below to enable Structured Data, and test it when you deploy to Netlify - https://developers.google.com/search/docs/appearance/structured-data -->
+    <!-- {% include "components/home-schema.html" %} -->
+{% endblock %}
+
+{% block body %}
+
+<!-- ============================================ -->
+<!--                    Hero                      -->
+<!-- ============================================ -->
+
+<section id="hero">
+    <div class="cs-container">
+		<div class="cs-flex-group">
+			<span class="cs-topper">Sitevra presents</span>
+			<h1 class="cs-title">Eleventy Starter <br /> Template</h1>
+			<p class="cs-text">This starter kit gives you a ready-made website setup built with Astro, so you can reuse sections, manage your content in one place, and grow your site easily. It also includes a built-in blog with Decap CMS.</p>
+			<a href="/about/" class="cs-button-solid">Explore More</a>
+			<a href="/contact/" class="cs-button-transparent">
+          <img class="cs-img" decoding="async" src="https://csimg.nyc3.digitaloceanspaces.com/Hero/play.svg" alt="play icon" width="17" height="17" aria-hidden="true">
+				Get in Touch
+			</a>
+		</div>
+	</div>
+
+    <!-- Background Image -->
+    <picture class="cs-picture">
+        <source media="(max-width: 600px)" srcset="/assets/images/hero/hero3.jpg">
+        <source media="(min-width: 601px)" srcset="/assets/images/hero/hero3.jpg">
+        <img decoding="async" src="/assets/images/hero/hero3.jpg" alt="hero image" width="2250" height="1500" aria-hidden="true">
+    </picture>
+</section>
+
+    <!-- ============================================ -->
+    <!--                   Services                   -->
+    <!-- ============================================ -->
+
+<section id="services" class="services">
+  <div class="card">
+    <picture>
+        <img loading="lazy" decoding="async" src="/assets/svgs/service4.svg" alt="icon" width="48" height="48" aria-hidden="true">
+    </picture>
+    <h2>Service 1</h2>
+    <p>
+      Write a short description of the service using common search terms. Aim for 1–2 sentences.
+    </p>
+  </div>
+  <div class="card">
+    <picture>
+        <img loading="lazy" decoding="async" src="/assets/svgs/service5.svg" alt="icon" width="48" height="48" aria-hidden="true">
+    </picture>
+    <h2>Service 2</h2>
+    <p>
+      Write a short description of the service using common search terms. Aim for 1–2 sentences.
+    </p>
+  </div>
+  <div class="card">
+    <picture>
+      <img loading="lazy" decoding="async" src="/assets/svgs/service6.svg" alt="icon" width="48" height="48" aria-hidden="true">
+    </picture>
+    <h2>Service 3</h2>
+    <p>
+      Write a short description of the service using common search terms. Aim for 1–2 sentences.
+    </p>
+  </div>
+</section>
+
+                                
+
+<!-- ============================================ -->
+<!--                  Side By Side                -->
+<!-- ============================================ -->
+
+<section id="sbs">
+	<div class="cs-container">
+		<!-- Left Image Section -->
+		<div class="cs-left">
+			<picture class="cs-picture cs-picture1">
+          <source media="(max-width: 600px)" srcset="/assets/images/services/sbs.jpg">
+          <source media="(min-width: 601px)" srcset="/assets/images/services/sbs.jpg">
+          <img aria-hidden="true" loading="lazy" decoding="async" src="/assets/images/services/sbs.jpg" alt="commercial fit-out" width="275" height="132">
+      </picture>
+		</div>
+		<!-- Right Content Section-->
+		<div class="cs-right">
+			<span class="cs-topper">About Us</span>
+			<h2 class="cs-title">About Company Title</h2>
+			<p class="cs-text">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+			</p>
+			<p class="cs-text">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.			
+			</p>
+			<div class="cs-flex-group">
+				<p class="cs-flex-p">Successus clientium nostrorum successus noster est. Dediti sumus eventibus qui per se loquuntur.</p>
+				<span class="cs-name">John Doe</span>
+				<span class="cs-job">CEO & Founder</span>
+			</div>
+			<a href="/about/" class="cs-button-solid">More About Us</a>
+		</div>
+	</div>
+</section>
+
+<!-- ============================================ -->
+<!--                  Side By Side Reverse                -->
+<!-- ============================================ -->
+
+<section id="sbs-r">
+  <div class="cs-container">
+    <!-- Left Image Section -->
+    <div class="cs-left">
+      <picture class="cs-picture cs-picture1">
+          <source media="(max-width: 600px)" srcset="/assets/images/services/sbsreverse.jpg">
+          <source media="(min-width: 601px)" srcset="/assets/images/services/sbsreverse.jpg">
+          <img aria-hidden="true" loading="lazy" decoding="async" src="/assets/images/services/sbsreverse.jpg" alt="commercial fit-out" width="275" height="132">
+      </picture>
+    </div>
+    <!-- Right Content Section-->
+    <div class="cs-right">
+      <span class="cs-topper">SEO Ranking</span>
+      <h2 class="cs-title">Highlight a primary service keyword</h2>
+      <p class="cs-text">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+        Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. 
+        Curabitur blandit tempus porttitor. Donec id elit non mi porta gravida at eget metus.
+      </p>
+      <p class="cs-text">
+        Vestibulum id ligula porta felis euismod semper. Non tenetur,
+        iure nihil ipsam qui atque commodi id voluptatem nesciunt, quis animi
+        fuga cum doloribus! Eaque laboriosam, unde consectetur iure asperiores
+        ullam. Consequuntur debitis a voluptatibus vitae optio autem explicabo
+        quia neque est quas, in placeat. Lorem ipsum dolor sit amet
+        consectetur adipisicing elit. Doloribus modi laudantium voluptatibus
+        rem libero error minus quia eligendi sapiente eos.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!--                   Gallery                    -->
+<!-- ============================================ -->
+
+<section id="gallery">
+  <div class="cs-container">
+    <span class="cs-topper">Our Portfolio</span>
+    <h2 class="cs-title">
+      Expert Backup Generator Installation Services
+    </h2>
+    <div class="cs-image-group">
+      <!-- Row 1-->
+      <div class="cs-row cs-row-1">
+        <!-- To add more images, copy and paste this row's picture tags here in order from cs-picture-1 to cs-picture-3 and they will maintain the same layout-->
+        <picture class="cs-picture cs-picture1">
+          <source media="(max-width: 600px)" srcset="/assets/images/portfolio/port1.jpg">
+            <source media="(min-width: 601px)" srcset="/assets/images/portfolio/port1.jpg">
+            <img aria-hidden="true" loading="lazy" decoding="async" src="/assets/images/portfolio/port1.jpg" alt="commercial fit-out" width="275" height="132">
+        </picture>
+        <picture class="cs-picture cs-picture2">
+          <source media="(max-width: 600px)" srcset="/assets/images/portfolio/port4.jpg">
+            <source media="(min-width: 601px)" srcset="/assets/images/portfolio/port4.jpg">
+            <img aria-hidden="true" loading="lazy" decoding="async" src="/assets/images/gallery/port4.jpg" alt="commercial fit-out" width="275" height="132">
+        </picture>
+        <picture class="cs-picture cs-picture3">
+          <source media="(max-width: 600px)" srcset="/assets/images/portfolio/port7.jpg">
+            <source media="(min-width: 601px)" srcset="/assets/images/portfolio/port7.jpg">
+            <img aria-hidden="true" loading="lazy" decoding="async" src="/assets/images/portfolio/port7.jpg" alt="commercial fit-out" width="275" height="132">
+        </picture>
+      </div>
+      <!-- Row 2 -->
+      <div class="cs-row cs-row-2">
+        <!-- To add more images, copy and paste this row's picture tags here in order from cs-picture-1 to cs-picture-3 and they will maintain the same layout-->
+        <picture class="cs-picture cs-picture1">
+          <source media="(max-width: 600px)" srcset="/assets/images/portfolio/port2.jpg">
+            <source media="(min-width: 601px)" srcset="/assets/images/portfolio/port2.jpg">
+            <img aria-hidden="true" loading="lazy" decoding="async" src="/assets/images/portfolio/port2.jpg" alt="commercial fit-out" width="275" height="132">
+        </picture>
+        <picture class="cs-picture cs-picture2">
+          <source media="(max-width: 600px)" srcset="/assets/images/portfolio/port5.jpg">
+            <source media="(min-width: 601px)" srcset="/assets/images/portfolio/port5.jpg">
+            <img aria-hidden="true" loading="lazy" decoding="async" src="/assets/images/portfolio/port5.jpg" alt="commercial fit-out" width="275" height="132">
+        </picture>
+        <picture class="cs-picture cs-picture3">
+          <source media="(max-width: 600px)" srcset="/assets/images/portfolio/port8.jpg">
+            <source media="(min-width: 601px)" srcset="/assets/images/portfolio/port8.jpg">
+            <img aria-hidden="true" loading="lazy" decoding="async" src="/assets/images/portfolio/port8.jpg" alt="commercial fit-out" width="275" height="132">
+        </picture>
+      </div>
+      <!-- Row 3 -->
+      <div class="cs-row cs-row-3">
+        <!-- To add more images, copy and paste this row's picture tags here in order from cs-picture-1 to cs-picture-3 and they will maintain the same layout-->
+        <picture class="cs-picture cs-picture1">
+          <source media="(max-width: 600px)" srcset="/assets/images/portfolio/port3.jpg">
+            <source media="(min-width: 601px)" srcset="/assets/images/portfolio/port3.jpg">
+            <img aria-hidden="true" loading="lazy" decoding="async" src="/assets/images/portfolio/port3.jpg" alt="commercial fit-out" width="275" height="132">
+        </picture>
+        <picture class="cs-picture cs-picture2">
+          <source media="(max-width: 600px)" srcset="/assets/images/portfolio/port6.jpg">
+            <source media="(min-width: 601px)" srcset="/assets/images/portfolio/port6.jpg">
+            <img aria-hidden="true" loading="lazy" decoding="async" src="/assets/images/portfolio/port6.jpg" alt="commercial fit-out" width="275" height="132">
+        </picture>
+        <picture class="cs-picture cs-picture3">
+          <source media="(max-width: 600px)" srcset="/assets/images/portfolio/port9.jpg">
+            <source media="(min-width: 601px)" srcset="/assets/images/portfolio/port9.jpg">
+            <img aria-hidden="true" loading="lazy" decoding="async" src="/assets/images/portfolio/port9.jpg" alt="commercial fit-out" width="275" height="132">
+        </picture>
+      </div>
+    </div>
+    <a href="/projects/" class="cs-button-solid">View all projects</a>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!--                   Reviews                    -->
+<!-- ============================================ -->
+
+
+<section id="reviews">
+	<div class="cs-container">
+		<span class="cs-topper">Our Reviews</span>
+		<h2 class="cs-title">Words From Our Customers</h2>
+		<p class="cs-text">
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sit dolor volutpat porttitor sagittis nunc nisl. Sagittis sit pellentesque gravida viverra. Leo ut sed euismod tortor risus et. Ornare non neque, leo, ornare. Lorem ipsum dolor sit amet.
+		</p>
+		<ul class="cs-card-group">
+			<!-- Review 1 -->
+			<li class="cs-item">
+				<img class="cs-item-img" loading="lazy" decoding="async" src="/assets/images/testimonials/profile5.jpg" alt="icon" width="80" height="80" aria-hidden="true">
+        <p class="cs-item-p">
+					Dictum dolor, nullam morbi sem in auctor proin. Consequat dolor habitasse nam sed tempor. Viverra magna pharetra rhoncus, nec sed ullamcorper lectus et. Auctor velit diam fermentum consequat. Feugiat viverra massa urna, volutpat orci
+					imperdiet eget eget.
+				</p>
+				<span class="cs-reviewer">
+					John Doe
+					<span class="cs-desc">Homeowner</span>
+				</span>
+				<Icon name="stars-yellow" class="cs-item-stars" />
+			</li>
+			<!-- Review 2 -->
+			<li class="cs-item">
+				<img class="cs-item-img" loading="lazy" decoding="async" src="/assets/images/testimonials/profile-4.jpg" alt="icon" width="80" height="80" aria-hidden="true">
+				<p class="cs-item-p">
+					Dictum dolor, nullam morbi sem in auctor proin. Consequat dolor habitasse nam sed tempor. Viverra magna pharetra rhoncus, nec sed ullamcorper lectus et. Auctor velit diam fermentum consequat. Feugiat viverra massa urna, volutpat orci
+					imperdiet eget eget.
+				</p>
+				<span class="cs-reviewer">
+					Jane Doe
+					<span class="cs-desc">Homeowner</span>
+				</span>
+				<Icon name="stars-yellow" class="cs-item-stars" />
+			</li>
+		</ul>
+		<a aria-label="read more reviews" href="/reviews/" class="cs-button-solid">Our Reviews</a>
+	</div>
+</section>
+
+<!-- ============================================ -->
+<!--                    FAQ                       -->
+<!-- ============================================ -->
+
+<section id="faq">
+  <div class="cs-container">
+    <div class="cs-content">
+      <span class="cs-topper">Company Name Ltd.</span>
+      <h2 class="cs-title">Frequently Asked Questions</h2>
+      <p class="cs-text">Have some questions? Check out our FAQ, where we answer our most common questions.</p>
+    </div>
+
+    <div class="cs-flex-group">
+      <ul class="cs-faq-group">
+        <li class="cs-faq-item active">
+          <button class="cs-button">A euismod, tincidunt molestie suscipit?</button>
+          <p class="cs-item-p">
+            Dictumst lorem ullamcorper rutrum, dolor nam luctus, a viverra nulla ultricies suscipit interdum posuere.
+            Gravida rhoncus libero ultricies, bibendum ut ante rutrum neque.
+            Luctus felis vel velit, justo molestie quis, a cras integer porta orci arcu. 
+          </p>
+        </li>
+        <li class="cs-faq-item">
+          <button class="cs-button">Velit platea, ipsum curabitur leo?</button>
+          <p class="cs-item-p">
+            Dui sem condimentum, placerat velit, orci cubilia venenatis duis semper. 
+            Vehicula rutrum, amet curae varius.
+            Fermentum laoreet conubia, platea elit inceptos senectus posuere. 
+          </p>
+        </li>
+        <li class="cs-faq-item">
+          <button class="cs-button">Porta praesent id pharetra lacinia egestas dictumst? </button>
+          <p class="cs-item-p">
+            Nunc orci gravidus, nec tortor sed pharetra.
+            Nibh ac nulla non, mauris fusce facilisis, at etiam eget posuere dolor vitae. 
+            Etiam curae, curabitur inceptos nisl.
+          </p>
+        </li>
+        <li class="cs-faq-item">
+          <button class="cs-button">Erat elementum rutrum convallis, habitant massa ut fermentum imperdiet?</button>
+          <p class="cs-item-p">
+            Elit morbi curae litora, gravida aliquam tincidunt metus himenaeos. 
+            Neque curabitur quisque, sodales sapien, habitasse leo sem lectus torquent interdum eget. 
+          </p>
+        </li>
+        <li class="cs-faq-item">
+          <button class="cs-button">Faucibus sagittis turpis fames?</button>
+          <p class="cs-item-p">
+            Fringilla erat tristique, ac lobortis, sagittis sed viverra nec urna. 
+            Luctus porta donec augue, conubia sollicitudin himenaeos, eros non adipiscing commodo mauris molestie odio
+          </p>
+        </li>
+        <li class="cs-faq-item">
+          <button class="cs-button">Donec porttitor imperdiet, commodo turpis, quisque mi consectetur ut ligula?</button>
+          <p class="cs-item-p">
+              Quam cursus, id taciti consequat. 
+              Sociosqu vel, in porttitor suspendisse. Suscipit nisl nostra, magna ac odio nunc sit.
+          </p>
+        </li>
+        <li class="cs-faq-item">
+          <button class="cs-button">Aenean leo arcu, risus sem mauris libero?</button>
+          <p class="cs-item-p">
+            Taciti consectetur, donec consequat in aliquam.
+            Dapibus non suspendisse senectus, erat litora ultrices blandit elementum. 
+            Curae varius purus, quisque venenatis feugiat dictumst. 
+          </p>
+        </li>
+        <li class="cs-faq-item">
+          <button class="cs-button">Varius mauris aenean, eleifend quam?</button>
+          <p class="cs-item-p">
+             Sodales felis risus, fusce curae eget integer. 
+             Primis in facilisis, erat litora, quisque euismod hac proin fermentum praesent. 
+             Nibh phasellus et, varius cursus, nam accumsan euismod faucibus vel donec.
+          </p>
+        </li>
+      </ul>
+
+      <div class="cs-cta">
+        <h3 class="cs-h3">Don’t see the answer you need?</h3>
+        <p class="cs-cta-p">That’s ok. Just drop a message and we will get back to you ASAP.</p>
+        <a href="/contact/" class="cs-button-solid">Contact Us!</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+    {% include 'sections/cta.html' %}
+{% endblock %}
+`}</code>
+              </pre>
+              <button
+                onClick={() =>
+                  copyToClipboard(
+                    `---
+---
+title: "Eleventy Starter Template"
+description: "Meta description for the page"
+permalink: "/"
+tags: "sitemap" # content/content.json will make sure that all pages in content/ are marked with a "sitemap" tag, for automatic sitemap generation. As index.html is not in content/, we need to add it here to ensure the root page is included in the sitemap generation
+---
+
+{% extends "layouts/base.html" %}
+
+{% block head %}
+    <!-- Critical styles are loaded first -->
+    <link rel="stylesheet" href="/assets/css/critical.css"/>
+
+    <!-- If we're in production, defer the rest of the home page styles. In development, always load it. Otherwise the site will break when hot-reload is used. -->
+    {% if client.isProduction %}
+        <link rel="preload" href="/assets/css/local.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript>
+            <link rel="stylesheet" href="/assets/css/local.css">
+        </noscript>
+
+    {% else %}
+        <link rel="stylesheet" href="/assets/css/local.css"/>
+    {% endif %}
+
+    <!-- To ensure proper validation, prevent errors, and encourage developers to check, schema's are an opt-in feature. They're very bespoke and requires some customising  -->
+    <!-- Uncomment the code below to enable Structured Data, and test it when you deploy to Netlify - https://developers.google.com/search/docs/appearance/structured-data -->
+    <!-- {% include "components/home-schema.html" %} -->
+{% endblock %}
+
+{% block body %}
+
+<!-- ============================================ -->
+<!--                    Hero                      -->
+<!-- ============================================ -->
+
+<section id="hero">
+    <div class="cs-container">
+		<div class="cs-flex-group">
+			<span class="cs-topper">Sitevra presents</span>
+			<h1 class="cs-title">Eleventy Starter <br /> Template</h1>
+			<p class="cs-text">This starter kit gives you a ready-made website setup built with Astro, so you can reuse sections, manage your content in one place, and grow your site easily. It also includes a built-in blog with Decap CMS.</p>
+			<a href="/about/" class="cs-button-solid">Explore More</a>
+			<a href="/contact/" class="cs-button-transparent">
+          <img class="cs-img" decoding="async" src="https://csimg.nyc3.digitaloceanspaces.com/Hero/play.svg" alt="play icon" width="17" height="17" aria-hidden="true">
+				Get in Touch
+			</a>
+		</div>
+	</div>
+
+    <!-- Background Image -->
+    <picture class="cs-picture">
+        <source media="(max-width: 600px)" srcset="/assets/images/hero/hero3.jpg">
+        <source media="(min-width: 601px)" srcset="/assets/images/hero/hero3.jpg">
+        <img decoding="async" src="/assets/images/hero/hero3.jpg" alt="hero image" width="2250" height="1500" aria-hidden="true">
+    </picture>
+</section>
+
+    <!-- ============================================ -->
+    <!--                   Services                   -->
+    <!-- ============================================ -->
+
+<section id="services" class="services">
+  <div class="card">
+    <picture>
+        <img loading="lazy" decoding="async" src="/assets/svgs/service4.svg" alt="icon" width="48" height="48" aria-hidden="true">
+    </picture>
+    <h2>Service 1</h2>
+    <p>
+      Write a short description of the service using common search terms. Aim for 1–2 sentences.
+    </p>
+  </div>
+  <div class="card">
+    <picture>
+        <img loading="lazy" decoding="async" src="/assets/svgs/service5.svg" alt="icon" width="48" height="48" aria-hidden="true">
+    </picture>
+    <h2>Service 2</h2>
+    <p>
+      Write a short description of the service using common search terms. Aim for 1–2 sentences.
+    </p>
+  </div>
+  <div class="card">
+    <picture>
+      <img loading="lazy" decoding="async" src="/assets/svgs/service6.svg" alt="icon" width="48" height="48" aria-hidden="true">
+    </picture>
+    <h2>Service 3</h2>
+    <p>
+      Write a short description of the service using common search terms. Aim for 1–2 sentences.
+    </p>
+  </div>
+</section>
+
+                                
+
+<!-- ============================================ -->
+<!--                  Side By Side                -->
+<!-- ============================================ -->
+
+<section id="sbs">
+	<div class="cs-container">
+		<!-- Left Image Section -->
+		<div class="cs-left">
+			<picture class="cs-picture cs-picture1">
+          <source media="(max-width: 600px)" srcset="/assets/images/services/sbs.jpg">
+          <source media="(min-width: 601px)" srcset="/assets/images/services/sbs.jpg">
+          <img aria-hidden="true" loading="lazy" decoding="async" src="/assets/images/services/sbs.jpg" alt="commercial fit-out" width="275" height="132">
+      </picture>
+		</div>
+		<!-- Right Content Section-->
+		<div class="cs-right">
+			<span class="cs-topper">About Us</span>
+			<h2 class="cs-title">About Company Title</h2>
+			<p class="cs-text">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+			</p>
+			<p class="cs-text">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.			
+			</p>
+			<div class="cs-flex-group">
+				<p class="cs-flex-p">Successus clientium nostrorum successus noster est. Dediti sumus eventibus qui per se loquuntur.</p>
+				<span class="cs-name">John Doe</span>
+				<span class="cs-job">CEO & Founder</span>
+			</div>
+			<a href="/about/" class="cs-button-solid">More About Us</a>
+		</div>
+	</div>
+</section>
+
+<!-- ============================================ -->
+<!--                  Side By Side Reverse                -->
+<!-- ============================================ -->
+
+<section id="sbs-r">
+  <div class="cs-container">
+    <!-- Left Image Section -->
+    <div class="cs-left">
+      <picture class="cs-picture cs-picture1">
+          <source media="(max-width: 600px)" srcset="/assets/images/services/sbsreverse.jpg">
+          <source media="(min-width: 601px)" srcset="/assets/images/services/sbsreverse.jpg">
+          <img aria-hidden="true" loading="lazy" decoding="async" src="/assets/images/services/sbsreverse.jpg" alt="commercial fit-out" width="275" height="132">
+      </picture>
+    </div>
+    <!-- Right Content Section-->
+    <div class="cs-right">
+      <span class="cs-topper">SEO Ranking</span>
+      <h2 class="cs-title">Highlight a primary service keyword</h2>
+      <p class="cs-text">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+        Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. 
+        Curabitur blandit tempus porttitor. Donec id elit non mi porta gravida at eget metus.
+      </p>
+      <p class="cs-text">
+        Vestibulum id ligula porta felis euismod semper. Non tenetur,
+        iure nihil ipsam qui atque commodi id voluptatem nesciunt, quis animi
+        fuga cum doloribus! Eaque laboriosam, unde consectetur iure asperiores
+        ullam. Consequuntur debitis a voluptatibus vitae optio autem explicabo
+        quia neque est quas, in placeat. Lorem ipsum dolor sit amet
+        consectetur adipisicing elit. Doloribus modi laudantium voluptatibus
+        rem libero error minus quia eligendi sapiente eos.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!--                   Gallery                    -->
+<!-- ============================================ -->
+
+<section id="gallery">
+  <div class="cs-container">
+    <span class="cs-topper">Our Portfolio</span>
+    <h2 class="cs-title">
+      Expert Backup Generator Installation Services
+    </h2>
+    <div class="cs-image-group">
+      <!-- Row 1-->
+      <div class="cs-row cs-row-1">
+        <!-- To add more images, copy and paste this row's picture tags here in order from cs-picture-1 to cs-picture-3 and they will maintain the same layout-->
+        <picture class="cs-picture cs-picture1">
+          <source media="(max-width: 600px)" srcset="/assets/images/portfolio/port1.jpg">
+            <source media="(min-width: 601px)" srcset="/assets/images/portfolio/port1.jpg">
+            <img aria-hidden="true" loading="lazy" decoding="async" src="/assets/images/portfolio/port1.jpg" alt="commercial fit-out" width="275" height="132">
+        </picture>
+        <picture class="cs-picture cs-picture2">
+          <source media="(max-width: 600px)" srcset="/assets/images/portfolio/port4.jpg">
+            <source media="(min-width: 601px)" srcset="/assets/images/portfolio/port4.jpg">
+            <img aria-hidden="true" loading="lazy" decoding="async" src="/assets/images/gallery/port4.jpg" alt="commercial fit-out" width="275" height="132">
+        </picture>
+        <picture class="cs-picture cs-picture3">
+          <source media="(max-width: 600px)" srcset="/assets/images/portfolio/port7.jpg">
+            <source media="(min-width: 601px)" srcset="/assets/images/portfolio/port7.jpg">
+            <img aria-hidden="true" loading="lazy" decoding="async" src="/assets/images/portfolio/port7.jpg" alt="commercial fit-out" width="275" height="132">
+        </picture>
+      </div>
+      <!-- Row 2 -->
+      <div class="cs-row cs-row-2">
+        <!-- To add more images, copy and paste this row's picture tags here in order from cs-picture-1 to cs-picture-3 and they will maintain the same layout-->
+        <picture class="cs-picture cs-picture1">
+          <source media="(max-width: 600px)" srcset="/assets/images/portfolio/port2.jpg">
+            <source media="(min-width: 601px)" srcset="/assets/images/portfolio/port2.jpg">
+            <img aria-hidden="true" loading="lazy" decoding="async" src="/assets/images/portfolio/port2.jpg" alt="commercial fit-out" width="275" height="132">
+        </picture>
+        <picture class="cs-picture cs-picture2">
+          <source media="(max-width: 600px)" srcset="/assets/images/portfolio/port5.jpg">
+            <source media="(min-width: 601px)" srcset="/assets/images/portfolio/port5.jpg">
+            <img aria-hidden="true" loading="lazy" decoding="async" src="/assets/images/portfolio/port5.jpg" alt="commercial fit-out" width="275" height="132">
+        </picture>
+        <picture class="cs-picture cs-picture3">
+          <source media="(max-width: 600px)" srcset="/assets/images/portfolio/port8.jpg">
+            <source media="(min-width: 601px)" srcset="/assets/images/portfolio/port8.jpg">
+            <img aria-hidden="true" loading="lazy" decoding="async" src="/assets/images/portfolio/port8.jpg" alt="commercial fit-out" width="275" height="132">
+        </picture>
+      </div>
+      <!-- Row 3 -->
+      <div class="cs-row cs-row-3">
+        <!-- To add more images, copy and paste this row's picture tags here in order from cs-picture-1 to cs-picture-3 and they will maintain the same layout-->
+        <picture class="cs-picture cs-picture1">
+          <source media="(max-width: 600px)" srcset="/assets/images/portfolio/port3.jpg">
+            <source media="(min-width: 601px)" srcset="/assets/images/portfolio/port3.jpg">
+            <img aria-hidden="true" loading="lazy" decoding="async" src="/assets/images/portfolio/port3.jpg" alt="commercial fit-out" width="275" height="132">
+        </picture>
+        <picture class="cs-picture cs-picture2">
+          <source media="(max-width: 600px)" srcset="/assets/images/portfolio/port6.jpg">
+            <source media="(min-width: 601px)" srcset="/assets/images/portfolio/port6.jpg">
+            <img aria-hidden="true" loading="lazy" decoding="async" src="/assets/images/portfolio/port6.jpg" alt="commercial fit-out" width="275" height="132">
+        </picture>
+        <picture class="cs-picture cs-picture3">
+          <source media="(max-width: 600px)" srcset="/assets/images/portfolio/port9.jpg">
+            <source media="(min-width: 601px)" srcset="/assets/images/portfolio/port9.jpg">
+            <img aria-hidden="true" loading="lazy" decoding="async" src="/assets/images/portfolio/port9.jpg" alt="commercial fit-out" width="275" height="132">
+        </picture>
+      </div>
+    </div>
+    <a href="/projects/" class="cs-button-solid">View all projects</a>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!--                   Reviews                    -->
+<!-- ============================================ -->
+
+
+<section id="reviews">
+	<div class="cs-container">
+		<span class="cs-topper">Our Reviews</span>
+		<h2 class="cs-title">Words From Our Customers</h2>
+		<p class="cs-text">
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sit dolor volutpat porttitor sagittis nunc nisl. Sagittis sit pellentesque gravida viverra. Leo ut sed euismod tortor risus et. Ornare non neque, leo, ornare. Lorem ipsum dolor sit amet.
+		</p>
+		<ul class="cs-card-group">
+			<!-- Review 1 -->
+			<li class="cs-item">
+				<img class="cs-item-img" loading="lazy" decoding="async" src="/assets/images/testimonials/profile5.jpg" alt="icon" width="80" height="80" aria-hidden="true">
+        <p class="cs-item-p">
+					Dictum dolor, nullam morbi sem in auctor proin. Consequat dolor habitasse nam sed tempor. Viverra magna pharetra rhoncus, nec sed ullamcorper lectus et. Auctor velit diam fermentum consequat. Feugiat viverra massa urna, volutpat orci
+					imperdiet eget eget.
+				</p>
+				<span class="cs-reviewer">
+					John Doe
+					<span class="cs-desc">Homeowner</span>
+				</span>
+				<Icon name="stars-yellow" class="cs-item-stars" />
+			</li>
+			<!-- Review 2 -->
+			<li class="cs-item">
+				<img class="cs-item-img" loading="lazy" decoding="async" src="/assets/images/testimonials/profile-4.jpg" alt="icon" width="80" height="80" aria-hidden="true">
+				<p class="cs-item-p">
+					Dictum dolor, nullam morbi sem in auctor proin. Consequat dolor habitasse nam sed tempor. Viverra magna pharetra rhoncus, nec sed ullamcorper lectus et. Auctor velit diam fermentum consequat. Feugiat viverra massa urna, volutpat orci
+					imperdiet eget eget.
+				</p>
+				<span class="cs-reviewer">
+					Jane Doe
+					<span class="cs-desc">Homeowner</span>
+				</span>
+				<Icon name="stars-yellow" class="cs-item-stars" />
+			</li>
+		</ul>
+		<a aria-label="read more reviews" href="/reviews/" class="cs-button-solid">Our Reviews</a>
+	</div>
+</section>
+
+<!-- ============================================ -->
+<!--                    FAQ                       -->
+<!-- ============================================ -->
+
+<section id="faq">
+  <div class="cs-container">
+    <div class="cs-content">
+      <span class="cs-topper">Company Name Ltd.</span>
+      <h2 class="cs-title">Frequently Asked Questions</h2>
+      <p class="cs-text">Have some questions? Check out our FAQ, where we answer our most common questions.</p>
+    </div>
+
+    <div class="cs-flex-group">
+      <ul class="cs-faq-group">
+        <li class="cs-faq-item active">
+          <button class="cs-button">A euismod, tincidunt molestie suscipit?</button>
+          <p class="cs-item-p">
+            Dictumst lorem ullamcorper rutrum, dolor nam luctus, a viverra nulla ultricies suscipit interdum posuere.
+            Gravida rhoncus libero ultricies, bibendum ut ante rutrum neque.
+            Luctus felis vel velit, justo molestie quis, a cras integer porta orci arcu. 
+          </p>
+        </li>
+        <li class="cs-faq-item">
+          <button class="cs-button">Velit platea, ipsum curabitur leo?</button>
+          <p class="cs-item-p">
+            Dui sem condimentum, placerat velit, orci cubilia venenatis duis semper. 
+            Vehicula rutrum, amet curae varius.
+            Fermentum laoreet conubia, platea elit inceptos senectus posuere. 
+          </p>
+        </li>
+        <li class="cs-faq-item">
+          <button class="cs-button">Porta praesent id pharetra lacinia egestas dictumst? </button>
+          <p class="cs-item-p">
+            Nunc orci gravidus, nec tortor sed pharetra.
+            Nibh ac nulla non, mauris fusce facilisis, at etiam eget posuere dolor vitae. 
+            Etiam curae, curabitur inceptos nisl.
+          </p>
+        </li>
+        <li class="cs-faq-item">
+          <button class="cs-button">Erat elementum rutrum convallis, habitant massa ut fermentum imperdiet?</button>
+          <p class="cs-item-p">
+            Elit morbi curae litora, gravida aliquam tincidunt metus himenaeos. 
+            Neque curabitur quisque, sodales sapien, habitasse leo sem lectus torquent interdum eget. 
+          </p>
+        </li>
+        <li class="cs-faq-item">
+          <button class="cs-button">Faucibus sagittis turpis fames?</button>
+          <p class="cs-item-p">
+            Fringilla erat tristique, ac lobortis, sagittis sed viverra nec urna. 
+            Luctus porta donec augue, conubia sollicitudin himenaeos, eros non adipiscing commodo mauris molestie odio
+          </p>
+        </li>
+        <li class="cs-faq-item">
+          <button class="cs-button">Donec porttitor imperdiet, commodo turpis, quisque mi consectetur ut ligula?</button>
+          <p class="cs-item-p">
+              Quam cursus, id taciti consequat. 
+              Sociosqu vel, in porttitor suspendisse. Suscipit nisl nostra, magna ac odio nunc sit.
+          </p>
+        </li>
+        <li class="cs-faq-item">
+          <button class="cs-button">Aenean leo arcu, risus sem mauris libero?</button>
+          <p class="cs-item-p">
+            Taciti consectetur, donec consequat in aliquam.
+            Dapibus non suspendisse senectus, erat litora ultrices blandit elementum. 
+            Curae varius purus, quisque venenatis feugiat dictumst. 
+          </p>
+        </li>
+        <li class="cs-faq-item">
+          <button class="cs-button">Varius mauris aenean, eleifend quam?</button>
+          <p class="cs-item-p">
+             Sodales felis risus, fusce curae eget integer. 
+             Primis in facilisis, erat litora, quisque euismod hac proin fermentum praesent. 
+             Nibh phasellus et, varius cursus, nam accumsan euismod faucibus vel donec.
+          </p>
+        </li>
+      </ul>
+
+      <div class="cs-cta">
+        <h3 class="cs-h3">Don’t see the answer you need?</h3>
+        <p class="cs-cta-p">That’s ok. Just drop a message and we will get back to you ASAP.</p>
+        <a href="/contact/" class="cs-button-solid">Contact Us!</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+    {% include 'sections/cta.html' %}
+{% endblock %}
+`,
+                    3
+                  )
+                }
+                className="absolute right-3 top-3 p-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors"
+              >
+                {copiedStep === 3 ? (
+                  <Check className="w-4 h-4 text-green-400" />
+                ) : (
+                  <Copy className="w-4 h-4 text-gray-400" />
+                )}
+              </button>
+            </div>
+          </div>
+
+          <div className="p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
+            <p className="text-blue-900 font-medium mb-2 flex items-center gap-2">
+              <Eye className="w-5 h-5" />
+              Preview Your Landing Page
+            </p>
+            <p className="text-sm text-blue-800">
+              Start your dev server with{" "}
+              <code className="bg-blue-100 px-2 py-0.5 rounded">
+                npm start
+              </code>{" "}
+              and visit{" "}
+              <code className="bg-blue-100 px-2 py-0.5 rounded">
+                http://localhost:8080
+              </code>{" "}
+              to see your landing page live. The blog admin is at{" "}
+              <code className="bg-blue-100 px-2 py-0.5 rounded">
+                /admin
+              </code>
+              .
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Next Steps */}
+      <div className="bg-linear-to-br from-gray-900 to-gray-800 rounded-2xl p-4 text-white">
+        <h2 className="text-xl font-bold mb-4">
+          Ready to Build Something Amazing?
+        </h2>
+        <p className="text-lg text-gray-300 mb-6">
+          You now have everything you need to create fast, SEO-optimized landing
+          pages with the Eleventy Starter 
+        </p>
+        <div className="flex flex-wrap gap-4">
+          <Link
+            href="/docs/eleventy/tutorials/build-in-5-minutes"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-colors"
+          >
+            <Rocket className="w-5 h-5" />
+            Build in 5 Minutes
+          </Link>
+          <Link
+            href="/docs/eleventy/components"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-white hover:bg-gray-100 text-gray-900 font-bold rounded-lg transition-colors"
+          >
+            <Layout className="w-5 h-5" />
+            Explore All Components
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -1,0 +1,281 @@
+"use client";
+
+import { useState } from "react";
+import {
+  Image as ImageIcon,
+  Code2,
+  Copy,
+  Check,
+  Sparkles,
+  Feather,
+  Palette,
+  Maximize2,
+  Info,
+} from "lucide-react";
+
+// ─────────────────────────────────────────────────────────
+// Reusable code block with window chrome + copy-to-clipboard.
+// ─────────────────────────────────────────────────────────
+function CodeBlock({ code, filename }: { code: string; filename?: string }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch {
+      /* clipboard unavailable — ignore */
+    }
+  };
+
+  return (
+    <div className="group relative overflow-hidden rounded-xl border border-gray-800 bg-gray-900 shadow-lg shadow-gray-900/10">
+      {/* Window header */}
+      <div className="flex items-center justify-between border-b border-gray-700/60 bg-gray-800/50 px-4 py-2.5">
+        <div className="flex items-center gap-2">
+          <span className="h-3 w-3 rounded-full bg-red-400/80" />
+          <span className="h-3 w-3 rounded-full bg-yellow-400/80" />
+          <span className="h-3 w-3 rounded-full bg-green-400/80" />
+          {filename && (
+            <span className="ml-3 font-mono text-xs text-gray-400">{filename}</span>
+          )}
+        </div>
+        <button
+          onClick={handleCopy}
+          className="flex items-center gap-1.5 rounded-md px-2 py-1 text-xs font-medium text-gray-400 transition-colors hover:bg-gray-700/60 hover:text-gray-100"
+        >
+          {copied ? (
+            <Check className="h-3.5 w-3.5 text-green-400" />
+          ) : (
+            <Copy className="h-3.5 w-3.5" />
+          )}
+          {copied ? "Copied" : "Copy"}
+        </button>
+      </div>
+
+      <pre className="overflow-x-auto p-4 text-sm leading-relaxed text-gray-100">
+        <code>{code}</code>
+      </pre>
+    </div>
+  );
+}
+
+const WHY_SVG = [
+  {
+    icon: Maximize2,
+    title: "Infinitely scalable",
+    desc: "Crisp on every screen size and pixel density — no blur, ever.",
+  },
+  {
+    icon: Feather,
+    title: "Tiny file size",
+    desc: "Just markup, so logos stay lightweight and load instantly.",
+  },
+  {
+    icon: Palette,
+    title: "Styleable",
+    desc: "Recolor, theme, and restyle directly with CSS or Tailwind.",
+  },
+  {
+    icon: Sparkles,
+    title: "Animatable",
+    desc: "Bring marks to life with CSS or SMIL animations.",
+  },
+];
+
+export default function LogoSvg() {
+  return (
+    <section className="relative overflow-hidden bg-gray-50 py-20">
+        {/* Breadcrumb */}
+        <div className="flex items-center gap-3 mb-4 flex-wrap">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-linear-to-r from-orange-50 to-yellow-50 text-orange-700 rounded-full text-sm font-bold border-2 border-orange-200">
+            Astro
+          </div>
+          <span className="text-3xl font-semibold text-gray-400">/</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-linear-to-r from-blue-50 to-purple-50 text-blue-700 rounded-full text-sm font-bold border-2 border-blue-200">
+            Extras
+          </div>
+          <span className="text-3xl font-semibold text-gray-400">/</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-linear-to-r from-blue-50 to-purple-50 text-blue-700 rounded-full text-sm font-bold border-2 border-blue-200">
+            Logo SVG
+          </div>
+        </div>
+      <div className="pointer-events-none absolute -top-32 left-1/2 h-72 w-xl -translate-x-1/2 rounded-full bg-linear-to-br from-blue-200/40 to-purple-200/40 blur-3xl" />
+      <div className="relative mx-auto max-w-4xl px-6">      
+        <h1 className="mt-5 bg-linear-to-br from-gray-900 to-gray-600 bg-clip-text text-4xl font-bold tracking-tight text-transparent sm:text-5xl">
+          Adding an SVG Logo
+        </h1>
+
+        <p className="mt-5 max-w-2xl text-lg leading-relaxed text-gray-600">
+          SVG logos are scalable, lightweight, and perfect for modern websites. This
+          Astro starter already ships its logo through{" "}
+          <code className="rounded bg-gray-100 px-1.5 py-0.5 font-mono text-base text-gray-800">
+            astro-icon
+          </code>
+          , but you can also drop one straight into{" "}
+          <code className="rounded bg-gray-100 px-1.5 py-0.5 font-mono text-base text-gray-800">
+            public/
+          </code>
+          .
+        </p>
+
+        {/* ── Option 1 ── */}
+        <div className="mt-14 rounded-2xl border border-purple-200 bg-white p-7 shadow-sm transition-shadow hover:shadow-md">
+          <div className="flex flex-wrap items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-purple-500 to-fuchsia-600 text-white shadow-sm">
+              <Code2 className="h-5 w-5" />
+            </div>
+            <div>
+              <span className="text-xs font-semibold uppercase tracking-wider text-purple-600">
+                Option 1
+              </span>
+              <h2 className="text-xl font-semibold text-gray-900">
+                Use astro-icon (inline &amp; styleable)
+              </h2>
+            </div>
+            <span className="ml-auto rounded-full bg-purple-100 px-2.5 py-1 text-xs font-semibold text-purple-700">
+              How this starter does it
+            </span>
+          </div>
+
+          <p className="mt-5 text-gray-700">
+            Drop your SVG into the{" "}
+            <code className="rounded bg-gray-100 px-1.5 py-0.5 font-mono text-sm text-gray-800">
+              src/icons/
+            </code>{" "}
+            folder — the filename (without the extension) becomes the icon name.
+          </p>
+
+          {/* SVG file + live preview */}
+          <div className="mt-4 grid gap-4 md:grid-cols-[1fr_auto]">
+            <CodeBlock
+              filename="src/icons/logo-black.svg"
+              code={`<svg viewBox="0 0 100 100"
+     xmlns="http://www.w3.org/2000/svg">
+  <circle cx="50" cy="50" r="40" fill="currentColor" />
+</svg>`}
+            />
+
+            {/* Rendered preview */}
+            <div className="flex flex-col items-center justify-center gap-2 rounded-xl border border-gray-200 bg-[radial-gradient(circle,#e5e7eb_1px,transparent_1px)] bg-size-[12px_12px] p-6">
+              <svg
+                width="80"
+                viewBox="0 0 100 100"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-label="Example SVG logo"
+              >
+                <circle cx="50" cy="50" r="40" fill="black" />
+              </svg>
+              <span className="text-xs font-medium text-gray-500">Live preview</span>
+            </div>
+          </div>
+
+          <p className="mt-5 mb-3 text-gray-700">
+            Then render it with the{" "}
+            <code className="rounded bg-gray-100 px-1.5 py-0.5 font-mono text-sm text-gray-800">
+              {"<Icon>"}
+            </code>{" "}
+            component — exactly how{" "}
+            <code className="rounded bg-gray-100 px-1.5 py-0.5 font-mono text-sm text-gray-800">
+              Header
+            </code>{" "}
+            already does it:
+          </p>
+
+          <CodeBlock
+            filename="src/components/Header/StaticHeader.astro"
+            code={`---
+import { Icon } from "astro-icon/components";
+---
+<a href="/" class="cs-logo" aria-label="Return to home page">
+  <Icon name="logo-black" />
+</a>`}
+          />
+
+          <p className="mt-5 text-gray-700">
+            Because <code className="rounded bg-gray-100 px-1.5 py-0.5 font-mono text-sm text-gray-800">astro-icon</code>{" "}
+            inlines the SVG into the page, you can restyle it with CSS — use{" "}
+            <code className="rounded bg-gray-100 px-1.5 py-0.5 font-mono text-sm text-gray-800">
+              fill: currentColor
+            </code>{" "}
+            so the logo automatically follows your theme (handy with the dark-mode toggle).
+          </p>
+        </div>
+
+        {/* ── Option 2 ── */}
+        <div className="mt-8 rounded-2xl border border-gray-200 bg-white p-7 shadow-sm transition-shadow hover:shadow-md">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-blue-500 to-blue-600 text-white shadow-sm">
+              <ImageIcon className="h-5 w-5" />
+            </div>
+            <div>
+              <span className="text-xs font-semibold uppercase tracking-wider text-blue-600">
+                Option 2
+              </span>
+              <h2 className="text-xl font-semibold text-gray-900">
+                Drop it in <span className="font-mono">public/</span> as a static file
+              </h2>
+            </div>
+          </div>
+
+          <p className="mt-5 text-gray-700">
+            Place your logo inside{" "}
+            <code className="rounded bg-gray-100 px-1.5 py-0.5 font-mono text-sm text-gray-800">
+              public/assets/images/logo.svg
+            </code>{" "}
+            and reference it from the site root:
+          </p>
+
+          <div className="mt-4">
+            <CodeBlock
+              filename="src/layouts/BaseLayout.astro"
+              code={`<img src="/assets/images/logo.svg" alt="Site Logo" width="120" />`}
+            />
+          </div>
+
+          {/* Info callout */}
+          <div className="mt-5 flex gap-3 rounded-xl border border-blue-100 bg-blue-50 p-4">
+            <Info className="mt-0.5 h-5 w-5 shrink-0 text-blue-600" />
+            <p className="text-sm leading-relaxed text-blue-900">
+              Astro serves everything in{" "}
+              <code className="rounded bg-blue-100 px-1.5 py-0.5 font-mono text-xs">
+                public/
+              </code>{" "}
+              at the site root as-is — so{" "}
+              <code className="rounded bg-blue-100 px-1.5 py-0.5 font-mono text-xs">
+                public/assets/images/logo.svg
+              </code>{" "}
+              becomes{" "}
+              <code className="rounded bg-blue-100 px-1.5 py-0.5 font-mono text-xs">
+                /assets/images/logo.svg
+              </code>
+              . No copy or passthrough config is needed.
+            </p>
+          </div>
+        </div>
+
+        {/* ── Why SVG ── */}
+        <div className="mt-12">
+          <h2 className="text-2xl font-semibold text-gray-900">Why use SVG for logos?</h2>
+          <div className="mt-5 grid gap-4 sm:grid-cols-2">
+            {WHY_SVG.map(({ icon: Icon, title, desc }) => (
+              <div
+                key={title}
+                className="group flex gap-4 rounded-2xl border border-gray-200 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-md"
+              >
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
+                  <Icon className="h-5 w-5" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900">{title}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-gray-600">{desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

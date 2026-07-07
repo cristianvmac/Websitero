@@ -1,0 +1,153 @@
+/* Tailwind v4 + daisyUI v5. The Websitero brand palette is registered as a
+   daisyUI custom theme below (set as default) so daisyUI components render
+   with these colors. */
+@import "tailwindcss";
+@plugin "daisyui" {
+  exclude: properties;
+}
+@plugin "daisyui/theme" {
+  name: "websitero";
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+  --color-base-100: #ffffff;
+  --color-base-200: #f4f6f8;
+  --color-base-300: #e3e8ee;
+  --color-base-content: #1a1a1a;
+  --color-primary: #4588ba;
+  --color-primary-content: #ffffff;
+  --color-secondary: #316994;
+  --color-secondary-content: #ffffff;
+  --color-accent: #316994;
+  --color-accent-content: #ffffff;
+  --color-neutral: #4b4747;
+  --color-neutral-content: #fafbfc;
+
+  --color-info: #0ea5e9;
+  --color-info-content: #ffffff;
+  --color-success: #16a34a;
+  --color-success-content: #ffffff;
+  --color-warning: #f59e0b;
+  --color-warning-content: #1a1a1a;
+  --color-error: #dc2626;
+  --color-error-content: #ffffff;
+
+  --radius-selector: 0.5rem;
+  --radius-field: 0.5rem;
+  --radius-box: 1rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
+}
+
+:root {
+  /* Header bar tokens (dark bar with light text) consumed via
+     bg-background / text-foreground / *-accent utilities. */
+  --background: #082032;
+  --foreground: #fff;
+  --color-background: #082032;
+  --color-foreground: #fff;
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --color-primary-accent: #316994;
+  --color-foreground-accent: #a0aec0;
+}
+
+body {
+  background-color: var(--color-base-100);
+  color: var(--color-base-content);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Sidebar scrollbar */
+.sidebar-scroll::-webkit-scrollbar {
+  width: 14px;
+}
+
+.sidebar-scroll::-webkit-scrollbar-track {
+  background: #f9fafb;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+
+/* Main content scrollbar */
+.main-scroll::-webkit-scrollbar {
+  width: 12px;
+}
+
+.main-scroll::-webkit-scrollbar-track {
+  background: #f9fafb;
+}
+
+.main-scroll::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+
+/* ── v4 UI animations ───────────────────────────────────────── */
+@keyframes v4-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.v4-marquee {
+  animation: v4-marquee 32s linear infinite;
+}
+.group:hover .v4-marquee {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .v4-marquee {
+    animation: none;
+  }
+}
+
+/* ── v5 UI animations ───────────────────────────────────────── */
+@keyframes v5-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.v5-marquee {
+  animation: v5-marquee 40s linear infinite;
+}
+.v5-marquee-group:hover .v5-marquee {
+  animation-play-state: paused;
+}
+
+@keyframes v5-spin {
+  to { transform: translate(-50%, -50%) rotate(1turn); }
+}
+.v5-spin {
+  animation: v5-spin 6s linear infinite;
+}
+
+@keyframes v5-drift-a {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(36px, -28px) scale(1.12); }
+}
+@keyframes v5-drift-b {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-32px, 24px) scale(1.08); }
+}
+@keyframes v5-drift-c {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(24px, 30px) scale(1.15); }
+}
+.v5-blob-a { animation: v5-drift-a 16s ease-in-out infinite; }
+.v5-blob-b { animation: v5-drift-b 19s ease-in-out infinite; }
+.v5-blob-c { animation: v5-drift-c 22s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .v5-marquee,
+  .v5-spin,
+  .v5-blob-a,
+  .v5-blob-b,
+  .v5-blob-c {
+    animation: none;
+  }
+}

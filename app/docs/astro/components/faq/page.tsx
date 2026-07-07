@@ -1,0 +1,166 @@
+"use client";
+
+import { useState, useEffect } from "react";
+
+// Styles
+import { SCOPE, FONTS, COLORS, globalStyles } from "./styles/tokens";
+
+// Components
+import { Badge } from "./blocks/Badge";
+import { CodePreview } from "./blocks/CodePreview";
+
+// Data
+import { examples } from "./templates/faqTemplates";
+
+// ─────────────────────────────────────────────────────────
+// PAGE: Header
+// Assembles the full documentation page for the Navigation /
+// Header component. All sub-components and data live in their
+// own files; this file is a pure orchestrator.
+// ─────────────────────────────────────────────────────────
+export default function FAQ() {
+  const [mounted, setMounted] = useState(false);
+
+  // Trigger fade-up entrance animations after mount
+  // eslint-disable-next-line react-hooks/set-state-in-effect
+  useEffect(() => setMounted(true), []);
+
+  return (
+    <>
+      {/* Inject scoped CSS */}
+      <style>{globalStyles}</style>
+
+      {/* Root wrapper — carries the SCOPE class and all CSS variables */}
+      <div
+        className={SCOPE}
+        style={{
+          minHeight: "100vh",
+          background: "var(--bg)",
+          color: "var(--text)",
+          fontFamily: FONTS.body,
+        }}
+      >
+        {/* Decorative amber glow at the top */}
+        <div style={{
+          position: "fixed",
+          top: 0,
+          left: "50%",
+          transform: "translateX(-50%)",
+          width: 600,
+          height: 300,
+          background: "radial-gradient(ellipse, rgba(232,168,76,0.07) 0%, transparent 70%)",
+          pointerEvents: "none",
+          zIndex: 0,
+        }} />
+
+        {/* Scrollable content column */}
+        <div style={{
+          maxWidth: 900,
+          margin: "0 auto",
+          padding: "72px 24px 120px",
+          position: "relative",
+          zIndex: 1,
+        }}>
+
+          {/* ── Page heading ── */}
+          <div
+            className={`fade-up ${mounted ? "" : "opacity-0"}`}
+            style={{ marginBottom: 56 }}
+          >
+            {/* Badges */}
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
+              <Badge>Component</Badge>
+              <Badge color="#60a5fa">FAQ</Badge>
+            </div>
+
+            <h1 style={{
+              fontFamily: FONTS.display,
+              fontSize: "clamp(32px, 5vw, 48px)",
+              fontWeight: 700,
+              lineHeight: 1.1,
+              letterSpacing: "-0.02em",
+              color: "var(--text)",
+              marginBottom: 14,
+            }}>
+              FAQ
+            </h1>
+
+            <p style={{
+              fontSize: 20,
+              lineHeight: 1.5,
+              color: "var(--text-muted)",
+             // maxWidth: 520,
+              fontWeight: 300,
+            }}>
+              An interactive FAQ page showcasing common questions and answers with expandable items. 
+              Designed to be fully responsive, it adapts to various screen sizes and supports smooth reveal animations for an engaging user experience.
+            </p>
+
+            {/* Amber gradient divider */}
+            <div style={{
+              marginTop: 32,
+              height: 1,
+              background: "linear-gradient(90deg, var(--accent) 0%, var(--border) 40%, transparent 100%)",
+              opacity: 0.4,
+            }} />
+          </div>
+
+          {/* ── Examples loop ── */}
+          {examples.map((example, i) => (
+            <section
+              key={i}
+              className={`fade-up fade-up-${i + 2}`}
+              style={{ marginBottom: 52 }}
+            >
+              {/* Section number + title */}
+              <div style={{ display: "flex", alignItems: "baseline", gap: 10, marginBottom: 10 }}>
+                <span style={{
+                  fontFamily: FONTS.mono,
+                  fontSize: 10,
+                  color: COLORS.accent,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  opacity: 0.6,
+                }}>
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h2 style={{ fontSize: 15, fontWeight: 500, letterSpacing: "-0.01em" }}>
+                  {example.title}
+                </h2>
+              </div>
+
+              <p style={{
+                fontSize: 13,
+                color: "var(--text-muted)",
+                marginBottom: 14,
+                lineHeight: 1.6,
+                fontWeight: 300,
+              }}>
+                {example.description}
+              </p>
+
+              <CodePreview {...example.code} preview={example.preview} />
+            </section>
+          ))}
+
+          {/* ── Footer ── */}
+          <div style={{
+            borderTop: "1px solid var(--border-soft)",
+            paddingTop: 28,
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}>
+            <span style={{ fontSize: 11, color: "var(--text-dim)", fontFamily: FONTS.mono }}>
+              Navigation / Header
+            </span>
+            <span style={{ fontSize: 11, color: "var(--text-dim)", fontFamily: FONTS.mono }}>
+              v1.0.0
+            </span>
+          </div>
+
+        </div>
+      </div>
+    </>
+  );
+}
