@@ -12,7 +12,7 @@ import CTA from "@/components/ui/CTA";
 import Footer from "@/components/ui/Footer";
 
 export const metadata = {
-  title: "Websitero — UI v5 Preview",
+  title: "Websitero",
 };
 
 // Preview of the redesigned (v5) landing-page sections.
@@ -25,7 +25,6 @@ export default function Home() {
       <Hero />
       <LogoMarquee />
       <HowItWorks />
-      <Frameworks />
       <Features />
       <Stats />
       <Comparison />
