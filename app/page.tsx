@@ -1,15 +1,15 @@
-import Hero from "@/components/ui/v5/Hero";
-import LogoMarquee from "@/components/ui/v5/LogoMarquee";
-import HowItWorks from "@/components/ui/v5/HowItWorks";
-import Frameworks from "@/components/ui/v5/Frameworks";
-import Features from "@/components/ui/v5/Features";
-import Stats from "@/components/ui/v5/Stats";
-import Comparison from "@/components/ui/v5/Comparison";
-import Testimonials from "@/components/ui/v5/Testimonials";
-import Pricing from "@/components/ui/v5/Pricing";
-import FAQ from "@/components/ui/v5/FAQ";
-import CTA from "@/components/ui/v5/CTA";
-import Footer from "@/components/ui/v5/Footer";
+import Hero from "@/components/ui/Hero";
+import LogoMarquee from "@/components/ui/LogoMarquee";
+import HowItWorks from "@/components/ui/HowItWorks";
+import Frameworks from "@/components/ui/Frameworks";
+import Features from "@/components/ui/Features";
+import Stats from "@/components/ui/Stats";
+import Comparison from "@/components/ui/Comparison";
+import Testimonials from "@/components/ui/Testimonials";
+import Pricing from "@/components/ui/Pricing";
+import FAQ from "@/components/ui/FAQ";
+import CTA from "@/components/ui/CTA";
+import Footer from "@/components/ui/Footer";
 
 export const metadata = {
   title: "Websitero — UI v5 Preview",
