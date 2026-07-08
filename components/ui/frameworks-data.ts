@@ -5,7 +5,7 @@ export type FrameworkKey = "eleventy" | "astro";
 export interface Framework {
   key: FrameworkKey;
   name: string;
-  icon: LucideIcon;
+  icon: string;
   tagline: string;
   command: string;
   docs: string;
@@ -18,7 +18,7 @@ export const FRAMEWORKS: Record<FrameworkKey, Framework> = {
   eleventy: {
     key: "eleventy",
     name: "Eleventy",
-    icon: Zap,
+    icon: "/images/eleventy.png",
     tagline: "Simple, fast, zero-JS by default",
     command: "npx degit websitero/eleventy my-site",
     docs: "/docs/eleventy",
@@ -34,7 +34,7 @@ export const FRAMEWORKS: Record<FrameworkKey, Framework> = {
   astro: {
     key: "astro",
     name: "Astro",
-    icon: Rocket,
+    icon: "/images/astro.png",
     tagline: "Modern islands with a CMS-powered blog",
     command: "npm create websitero@latest",
     docs: "/docs/astro",
