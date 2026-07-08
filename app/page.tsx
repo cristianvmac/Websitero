@@ -1,9 +1,7 @@
 import Hero from "@/components/ui/Hero";
 import LogoMarquee from "@/components/ui/LogoMarquee";
 import HowItWorks from "@/components/ui/HowItWorks";
-import Frameworks from "@/components/ui/Frameworks";
 import Features from "@/components/ui/Features";
-import Stats from "@/components/ui/Stats";
 import Comparison from "@/components/ui/Comparison";
 import Testimonials from "@/components/ui/Testimonials";
 import Pricing from "@/components/ui/Pricing";
@@ -26,7 +24,6 @@ export default function Home() {
       <LogoMarquee />
       <HowItWorks />
       <Features />
-      <Stats />
       <Comparison />
       <Testimonials />
       <Pricing />
