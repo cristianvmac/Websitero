@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Check, ArrowRight, Layers } from "lucide-react";
 import { FRAMEWORKS, FRAMEWORK_ORDER } from "./frameworks-data";
 
@@ -23,7 +24,6 @@ const Frameworks = () => {
         <div className="mt-14 grid gap-6 md:grid-cols-2">
           {FRAMEWORK_ORDER.map((key) => {
             const f = FRAMEWORKS[key];
-            const Icon = f.icon;
             return (
               <div
                 key={key}
@@ -34,7 +34,7 @@ const Frameworks = () => {
 
                     <div className="flex items-center gap-3">
                       <span className="flex h-12 w-12 items-center justify-center rounded-xl text-white shadow-sm" style={{ backgroundColor: f.accent }}>
-                        <Icon className="h-6 w-6" />
+                        <Image src={f.icon} alt="" width={24} height={24} className="h-6 w-6" />
                       </span>
                       <div>
                         <h3 className="text-xl font-bold text-slate-900">{f.name}</h3>
