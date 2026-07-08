@@ -18,7 +18,7 @@ const testimonials: Testimonial[] = [
 function Card({ t }: { t: Testimonial }) {
   return (
     <figure className="flex w-80 shrink-0 flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-      <Quote className="h-7 w-7" style={{ color: t.color }} />
+      {/*<Quote className="h-7 w-7" style={{ color: t.color }} />*/}
       <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-slate-700">&ldquo;{t.quote}&rdquo;</blockquote>
       <div className="mt-5 flex">
         {[0, 1, 2, 3, 4].map((i) => (
@@ -38,9 +38,12 @@ function Card({ t }: { t: Testimonial }) {
   );
 }
 
-const Testimonials = () => {
-  const track = [...testimonials, ...testimonials];
+/* the Title and description need to be changed*/
 
+const Testimonials = () => {
+  
+  const track = [...testimonials, ...testimonials];
+  
   return (
     <section id="testimonials" className="bg-white py-24">
       <div className="mx-auto max-w-5xl px-6">
@@ -50,7 +53,7 @@ const Testimonials = () => {
             Social proof
           </span>
           <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
-            Builders ship faster with Websitero
+            Builders/Business owners ship faster with Websitero
           </h2>
           <p className="mx-auto mt-4 text-lg leading-relaxed text-slate-600">
             From solo founders to agencies — here&apos;s what people say after launching.
