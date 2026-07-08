@@ -19,9 +19,9 @@ export const metadata = {
 // The global <Header /> from app/layout.tsx still renders above this content.
 // To preview the v5 header (scroll progress + magnetic CTA), swap the import
 // in app/layout.tsx:  import Header from "@/components/ui/v5/Header";
-export default function PreviewV5Page() {
+export default function Home() {
   return (
-    <main className="pt-24 md:pt-28">
+    <main className="pt-20 md:pt-22">
       <Hero />
       <LogoMarquee />
       <HowItWorks />

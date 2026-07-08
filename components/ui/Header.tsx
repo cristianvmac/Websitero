@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { Transition } from "@headlessui/react";
-import { Menu, X, Rocket, ArrowRight, Sparkles } from "lucide-react";
+import { Menu, X, Rocket, ArrowRight, Sparkles, ExternalLink, ArrowUp,  ArrowUpRight } from "lucide-react";
+import { FaCode } from "react-icons/fa";
 
 const navLinks = [
   { label: "Features", href: "/#features" },
@@ -11,33 +12,16 @@ const navLinks = [
   { label: "Pricing", href: "/#pricing" },
   { label: "FAQ", href: "/#faq" },
   { label: "Docs", href: "/docs/eleventy" },
+  { label: "See Demo ", href: "/", highlight: true },
 ];
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    const onScroll = () => {
-      const top = window.scrollY;
-      const height = document.documentElement.scrollHeight - window.innerHeight;
-      setScrolled(top > 8);
-      setProgress(height > 0 ? (top / height) * 100 : 0);
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
-      <div className="absolute inset-x-0 top-0 z-10 h-0.5 bg-transparent">
-        <div className="h-full bg-linear-to-br from-[#4588ba] to-[#316994]" style={{ width: `${progress}%` }} />
-      </div>
-
       <div className="bg-linear-to-br from-[#4588ba] to-[#316994] text-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-center gap-2 px-6 py-2 text-center text-xs font-medium sm:text-sm">
+        <div className="mx-auto flex max-w-7xl items-center justify-center gap-2 px-6 py-1 text-center text-xs font-medium sm:text-sm">
           <Sparkles className="h-3.5 w-3.5 shrink-0" />
           <span>Early-adopter deal — $50 off, 10 spots left.</span>
           <Link href="#pricing" className="hidden items-center gap-1 underline underline-offset-2 hover:opacity-90 sm:inline-flex">
@@ -46,29 +30,28 @@ const Header = () => {
         </div>
       </div>
 
-      <div
-        className={`border-b transition-all duration-300 ${
-          scrolled
-            ? "border-slate-200/70 bg-white/85 shadow-sm backdrop-blur-xl"
-            : "border-transparent bg-white/60 backdrop-blur-md"
-        }`}
-      >
-        <div className={`mx-auto flex max-w-7xl items-center justify-between px-6 transition-all ${scrolled ? "py-2.5" : "py-3.5"}`}>
+      <div className="bg-gray-100">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
           <Link href="/" className="group flex items-center gap-2.5">
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-linear-to-br from-[#4588ba] to-[#316994] text-white shadow-sm shadow-[#4588ba]/30 transition-transform group-hover:scale-105">
-              <Rocket className="h-5 w-5" />
+            <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-linear-to-br from-[#4588ba] to-[#316994] text-white shadow-sm shadow-[#4588ba]/30 transition-transform group-hover:scale-105">
+              <FaCode className="h-6 w-5" />
             </span>
-            <span className="text-xl font-extrabold tracking-tight text-slate-900">Websitero (BETA)</span>
+            <span className="text-xl font-bold tracking-tight text-slate-900">Websitero (beta)</span>
           </Link>
 
-          <nav className="hidden items-center gap-1 md:flex">
+          <nav className="hidden items-center gap-3 md:flex">
             {navLinks.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
-                className="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900"
+                className={
+                  link.highlight
+                    ? "rounded-lg px-3.5 py-2 text-sm font-semibold text-[#316994]  hover:bg-[#4588ba]/10"
+                    : "rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900"
+                }
               >
                 {link.label}
+                {link.highlight && <ArrowUpRight className="inline h-4 w-4 align-text-bottom" />}
               </Link>
             ))}
           </nav>
@@ -109,9 +92,14 @@ const Header = () => {
                   <Link
                     href={link.href}
                     onClick={() => setIsOpen(false)}
-                    className="block rounded-lg px-3 py-2.5 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100"
+                    className={
+                      link.highlight
+                      ? "block rounded-lg px-3 py-2.5 text-sm font-semibold text-[#316994]  hover:bg-[#4588ba]/10"
+                      : "block rounded-lg px-3 py-2.5 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100"
+                    }
                   >
                     {link.label}
+                    {link.highlight && <ArrowUpRight className=" inline h-4 w-4 align-text-bottom" />}
                   </Link>
                 </li>
               ))}
