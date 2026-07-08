@@ -11,7 +11,7 @@ const navLinks = [
   { label: "Frameworks", href: "/#frameworks" },
   { label: "Pricing", href: "/#pricing" },
   { label: "FAQ", href: "/#faq" },
-  { label: "Docs", href: "/docs/eleventy" },
+  { label: "Docs", href: "/docs/" },
   { label: "See Demo ", href: "/", highlight: true },
 ];
 
