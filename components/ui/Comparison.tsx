@@ -1,10 +1,10 @@
 import { X, Check, AlertTriangle, Sparkles } from "lucide-react";
 
 const problems = [
-  { title: "Performance Issues", desc: "Bloated code tanks mobile performance, Core Web Vitals, and SEO rankings." },
-  { title: "Vendor Lock-in", desc: "Deactivating the builder breaks your site — migrating is nearly impossible." },
-  { title: "Maintenance Headaches", desc: "Constant updates and plugin conflicts make layouts break unexpectedly." },
-  { title: "Hidden Costs", desc: "Ongoing subscriptions with essential features locked behind paywalls." },
+  { title: "Performance Issues", desc: "Bloated, templated code tanks mobile performance, Core Web Vitals, and SEO rankings." },
+  { title: "Vendor Lock-in", desc: "Your site lives on their platform — you can never export it or move it elsewhere." },
+  { title: "Cookie-cutter Design", desc: "Rigid templates everyone else uses, with limited room to truly stand out." },
+  { title: "Hidden Costs", desc: "Monthly subscriptions that climb as essential features stay locked behind paywalls." },
 ];
 
 const advantages = [
@@ -23,10 +23,10 @@ const Comparison = () => {
             The honest comparison
           </span>
           <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
-            Why not just use a page builder?
+            Why not just use WordPress, Wix or Squarespace?
           </h2>
           <p className="mx-auto mt-4 text-lg leading-relaxed text-slate-600">
-            Page builders feel easy at first — then the costs and headaches pile up. Here&apos;s how
+            These builders feel easy at first — then the costs and limits pile up. Here&apos;s how
             Websitero compares.
           </p>
         </div>
@@ -41,7 +41,7 @@ const Comparison = () => {
                 <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-rose-600 text-white">
                   <AlertTriangle className="h-5 w-5" />
                 </span>
-                <h3 className="text-lg font-bold text-rose-950">WordPress Page Builders</h3>
+                <h3 className="text-lg font-bold text-rose-950">WordPress, Wix &amp; Squarespace</h3>
               </header>
               <ul className="space-y-4">
                 {problems.map((item) => (
@@ -63,7 +63,7 @@ const Comparison = () => {
                 <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-600 text-white">
                   <Sparkles className="h-5 w-5" />
                 </span>
-                <h3 className="text-lg font-bold text-emerald-950">Websitero Boilerplate</h3>
+                <h3 className="text-lg font-bold text-emerald-950">Websitero </h3>
               </header>
               <ul className="space-y-4">
                 {advantages.map((item) => (
