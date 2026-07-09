@@ -19,7 +19,7 @@ export const metadata = {
 // in app/layout.tsx:  import Header from "@/components/ui/v5/Header";
 export default function Home() {
   return (
-    <main className="pt-20 md:pt-22">
+    <main className="pt-16 md:pt-16">
       <Hero />
       <LogoMarquee />
       <HowItWorks />
