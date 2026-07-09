@@ -1,0 +1,126 @@
+// Stage 3 of the pipeline: Claude writes the site copy from the owner's brief.
+// Returns an object matching the kit's copy schema exactly (structured outputs
+// guarantee the shape), or null when generation isn't possible — the build
+// script then falls back to deterministic placeholder copy.
+
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import Anthropic from "@anthropic-ai/sdk";
+import { z } from "zod";
+import { zodOutputFormat } from "@anthropic-ai/sdk/helpers/zod";
+
+const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+
+// Mirrors the kit's src/_data/copy.js shape — keep the two in sync.
+const SiteCopy = z.object({
+  meta: z.object({
+    title: z.string().describe("SEO page title, under 60 chars: business | type in city"),
+    description: z.string().describe("Meta description, under 160 chars, plain and inviting"),
+  }),
+  hero: z.object({
+    topper: z.string().describe("Short eyebrow line above the headline"),
+    title: z.string().describe("Headline; may contain one <br /> for a line break"),
+    text: z.string().describe("1-2 sentence subheadline selling the outcome"),
+  }),
+  services: z
+    .array(z.object({ title: z.string(), text: z.string().describe("1-2 sentences") }))
+    .describe("Exactly 3 cards for the business's actual core services"),
+  about: z.object({
+    topper: z.string(),
+    title: z.string(),
+    paragraphs: z.array(z.string()).describe("Exactly 2 paragraphs, 2-3 sentences each"),
+    quote: z.string().describe("Short owner's-promise pull quote"),
+    name: z.string().describe("Signature line, e.g. 'The <business> Team'"),
+    job: z.string().describe("Signature subline, e.g. the location"),
+  }),
+  seo: z.object({
+    topper: z.string(),
+    title: z.string().describe("H2 targeting the main local search term"),
+    paragraphs: z.array(z.string()).describe("Exactly 2 paragraphs weaving in the city naturally"),
+  }),
+  gallery: z.object({ topper: z.string(), title: z.string() }),
+  reviews: z.object({
+    topper: z.string(),
+    title: z.string(),
+    text: z.string(),
+    items: z
+      .array(z.object({ text: z.string(), name: z.string(), desc: z.string() }))
+      .describe("Exactly 2 placeholder reviews"),
+  }),
+  faq: z.object({
+    topper: z.string(),
+    title: z.string(),
+    text: z.string(),
+    items: z
+      .array(z.object({ question: z.string(), answer: z.string() }))
+      .describe("3-4 questions a real customer of this business type would ask"),
+  }),
+});
+
+const SYSTEM = `You write website copy for local small businesses. The reader is a potential customer, not a marketer.
+
+Rules:
+- Plain, warm, concrete language. No jargon, no hype words ("unleash", "elevate", "solutions").
+- Local SEO aware: weave the city and business type into headings and text naturally — never keyword-stuff.
+- Match the requested tone/vibe throughout.
+- The owner's own description is the source of truth for what the business offers; build the services cards around it and the business type.
+- Reviews are illustrative placeholders the owner will replace with real ones: keep them plausible but generic, signed like "A happy customer" or "Local regular" — never invent real-sounding full names.
+- FAQ answers should be genuinely useful for this business type (service area, how to order/book, what makes them different, etc.).`;
+
+// The Next dev server loads .env.local itself; direct CLI runs of the build
+// script don't — so pick the key up from .env.local as a convenience.
+function resolveApiKey() {
+  if (process.env.ANTHROPIC_API_KEY) return process.env.ANTHROPIC_API_KEY;
+  try {
+    const env = fs.readFileSync(path.join(repoRoot, ".env.local"), "utf8");
+    const match = env.match(/^ANTHROPIC_API_KEY\s*=\s*"?([^"\r\n]+)"?\s*$/m);
+    return match?.[1];
+  } catch {
+    return undefined;
+  }
+}
+
+export async function generateCopy(brief) {
+  const apiKey = resolveApiKey();
+  if (!apiKey) {
+    console.warn("→ AI copy: skipped (no ANTHROPIC_API_KEY in env or .env.local)");
+    return null;
+  }
+
+  const client = new Anthropic({ apiKey });
+  const request = {
+    business: brief.business,
+    vibe: brief.style.vibe || "professional and friendly",
+    features: brief.features,
+    ownerDescription: brief.prompt || "(none provided)",
+  };
+
+  try {
+    const response = await client.messages.parse({
+      model: "claude-opus-4-8",
+      max_tokens: 16000,
+      thinking: { type: "adaptive" },
+      system: SYSTEM,
+      messages: [
+        {
+          role: "user",
+          content: `Write the complete home-page copy for this business:\n\n${JSON.stringify(request, null, 2)}`,
+        },
+      ],
+      output_config: { format: zodOutputFormat(SiteCopy, "site_copy") },
+    });
+
+    if (!response.parsed_output) {
+      console.warn(`→ AI copy: no parsed output (stop_reason: ${response.stop_reason})`);
+      return null;
+    }
+    console.log(
+      `→ AI copy: generated by ${response.model} (${response.usage.output_tokens} output tokens)`,
+    );
+    return response.parsed_output;
+  } catch (err) {
+    console.warn(`→ AI copy: failed (${err.message ?? err}) — using placeholder copy`);
+    return null;
+  }
+}
