@@ -55,3 +55,5 @@ otherwise what is the point of using it like Eleventy as
 -> make multiple reddit accounts etc and comment on my community
 
 # => sell the value, not the product; dont focus on website builder too much; to not ne another one
+
+# I Ranked an HVAC Company in ChatGPT Using Only Reddit: try to integrate this concept https://www.youtube.com/watch?v=MICruT4ckIE
