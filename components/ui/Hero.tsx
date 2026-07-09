@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Sparkles, Star, Zap, ShieldCheck, Wrench, CheckCircle2, BookOpen } from "lucide-react";
+import { Sparkles, Star, Zap, ShieldCheck, Rocket, Wrench, CheckCircle2, BookOpen } from "lucide-react";
 import { BiSupport } from "react-icons/bi";
 import { FRAMEWORKS, FRAMEWORK_ORDER, type FrameworkKey } from "./frameworks-data";
 
@@ -12,9 +12,9 @@ import { FRAMEWORKS, FRAMEWORK_ORDER, type FrameworkKey } from "./frameworks-dat
 // non-technical business owners.
 type Mode = "forme" | "diy";
 
-const MODES: { key: Mode; label: string; icon: typeof Sparkles }[] = [
-  { key: "forme", label: "Build it for me", icon: Sparkles },
-  { key: "diy", label: "I'll build it myself", icon: Wrench },
+const MODES: { key: Mode; label: string; icon: typeof Sparkles;}[] = [
+  { key: "forme", label: "Build it for me", icon: Rocket },
+  { key: "diy", label: "I'll build it myself", icon: Wrench},
 ];
 
 // Plain-English prompt typed in "build it for me" mode (same business as the
@@ -61,24 +61,6 @@ const Hero = () => {
 
   return (
     <section id="hero" className="relative overflow-hidden bg-linear-to-b from-slate-50 to-white px-6 py-16 lg:py-24">
-      {/* Slow-drifting aurora blobs (animated via globals keyframes). */}
-      {/*<div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="v5-blob-a absolute -top-32 left-[8%] h-80 w-80 rounded-full bg-[#4588ba]/25 blur-3xl" />
-        <div className="v5-blob-b absolute top-8 right-[4%] h-72 w-72 rounded-full bg-[#8b5cf6]/18 blur-3xl" />
-        <div className="v5-blob-c absolute -bottom-24 left-1/3 h-72 w-72 rounded-full bg-[#316994]/18 blur-3xl" />
-      </div>
-*/}
-      {/* Subtle dotted-grid backdrop. */}
- {/*     <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0"
-        style={{
-          backgroundImage: "radial-gradient(circle, rgba(69,136,186,0.10) 1px, transparent 1px)",
-          backgroundSize: "22px 22px",
-          maskImage: "radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%)",
-        }}
-      />
-*/}
       <div className="relative mx-auto flex max-w-7xl flex-col items-center gap-16 lg:flex-row lg:gap-20">
         {/* Left */}
         <div className="flex flex-col items-center gap-7 text-center lg:items-start lg:text-left">
@@ -153,12 +135,12 @@ const Hero = () => {
 
           <div className="flex flex-col items-center gap-3 sm:flex-row">
             <Link
-              href="#cta"
+              href="/forme"
               className="inline-flex items-center gap-2 rounded-full bg-linear-to-br from-[#4588ba] to-[#316994] px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-[#4588ba]/30 transition-all hover:shadow-xl hover:shadow-[#4588ba]/40"
             >
               {mode === "forme" ? "Build it for me" : "Get Started"}
             </Link>
-            {mode === "diy" ? (
+            {mode === "diy" ?  (
               <Link
                 href={active.docs}
                 className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-7 py-3.5 text-base font-semibold text-slate-700 transition-colors hover:border-slate-400 hover:bg-slate-50"

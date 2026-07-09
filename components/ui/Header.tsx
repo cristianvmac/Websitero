@@ -64,7 +64,7 @@ const Header = () => {
             </Link>
 
             <Link
-              href="#cta"
+              href="/startyourwebsite"
               className="items-center rounded-full bg-linear-to-br from-[#4588ba] to-[#316994] px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-[#4588ba]/25 transition-all hover:shadow-lg hover:shadow-[#4588ba]/40 inline-flex"
             >
               Start Your Website
