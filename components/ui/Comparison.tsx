@@ -5,13 +5,15 @@ const problems = [
   { title: "Vendor Lock-in", desc: "Your site lives on their platform — you can never export it or move it elsewhere." },
   { title: "Cookie-cutter Design", desc: "Rigid templates everyone else uses, with limited room to truly stand out." },
   { title: "Hidden Costs", desc: "Monthly subscriptions that climb as essential features stay locked behind paywalls." },
+  { title: "Fees Stack Up", desc: "Beyond the subscription, expect extra charges for plugins, integrations, and add-ons down the line." },
 ];
 
 const advantages = [
   { title: "Superior Performance", desc: "Optimized Core Web Vitals, fast on mobile, and better SEO rankings." },
   { title: "Complete Control", desc: "Full ownership and unlimited customization — easy to migrate or redesign." },
   { title: "Security & Stability", desc: "Minimal attack surface, no conflicts, and updates that never break your site." },
-  { title: "Real Cost Savings", desc: "No subscriptions, cheaper hosting, and lower long-term maintenance." },
+  { title: "Real Cost Savings", desc: "Predictable pricing, cheaper hosting, and lower long-term maintenance." },
+  { title: "One Simple Price", desc: "A single subscription or one-time fee — no surprise add-ons or hidden charges, ever." },
 ];
 
 const Comparison = () => {
