@@ -65,7 +65,7 @@ export default function BuildMinutes() {
           Build your website in 5 minutes
         </h1>
         <p className="text-xl text-gray-600 leading-relaxed">
-          This Eleventy starter ships pre-built CodeStitch sections, a Decap CMS-powered blog,
+          This Eleventy starter ships pre-built sections, a Decap CMS-powered blog,
           LESS styling, and automatic image optimization via the Sharp plugin — all organized inside
           src/ using the includes-and-sections pattern.
         </p>
