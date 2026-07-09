@@ -62,14 +62,14 @@ const Hero = () => {
   return (
     <section id="hero" className="relative overflow-hidden bg-linear-to-b from-slate-50 to-white px-6 py-16 lg:py-24">
       {/* Slow-drifting aurora blobs (animated via globals keyframes). */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+      {/*<div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="v5-blob-a absolute -top-32 left-[8%] h-80 w-80 rounded-full bg-[#4588ba]/25 blur-3xl" />
         <div className="v5-blob-b absolute top-8 right-[4%] h-72 w-72 rounded-full bg-[#8b5cf6]/18 blur-3xl" />
         <div className="v5-blob-c absolute -bottom-24 left-1/3 h-72 w-72 rounded-full bg-[#316994]/18 blur-3xl" />
       </div>
-
+*/}
       {/* Subtle dotted-grid backdrop. */}
-      <div
+ {/*     <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
         style={{
@@ -78,7 +78,7 @@ const Hero = () => {
           maskImage: "radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%)",
         }}
       />
-
+*/}
       <div className="relative mx-auto flex max-w-7xl flex-col items-center gap-16 lg:flex-row lg:gap-20">
         {/* Left */}
         <div className="flex flex-col items-center gap-7 text-center lg:items-start lg:text-left">
