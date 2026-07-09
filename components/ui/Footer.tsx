@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Rocket, Facebook, Linkedin, type LucideIcon } from "lucide-react";
+import { FaCode } from "react-icons/fa";
 
 const columns: { heading: string; links: { label: string; href: string }[] }[] = [
   {
@@ -42,8 +43,8 @@ const Footer = () => {
         <div className="grid gap-10 md:grid-cols-5">
           <div className="md:col-span-2">
             <Link href="/" className="flex items-center gap-2.5">
-              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-linear-to-br from-[#4588ba] to-[#316994] text-white">
-                <Rocket className="h-5 w-5" />
+              <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-linear-to-br from-[#4588ba] to-[#316994] text-white shadow-sm shadow-[#4588ba]/30 transition-transform group-hover:scale-105">
+                <FaCode className="h-6 w-5" />
               </span>
               <span className="text-xl font-extrabold tracking-tight text-slate-900">Websitero</span>
             </Link>
@@ -86,9 +87,9 @@ const Footer = () => {
         <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-slate-200 pt-6 sm:flex-row">
           <p className="text-sm text-slate-500">&copy; 2026 Websitero. All rights reserved.</p>
           <p className="text-sm text-slate-400">
-            Built with{" "}
-            <Link href="/" className="font-semibold text-slate-600 hover:text-[#316994]">
-              the Websitero boilerplate
+            Built by{" "}
+            <Link href="https://x.com/cristianvmac" className="font-semibold text-slate-600 hover:text-[#316994]">
+              Cristian Marinescu
             </Link>
           </p>
         </div>
