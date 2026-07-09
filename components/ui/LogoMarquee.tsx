@@ -1,18 +1,33 @@
+import type { ComponentType } from "react";
 import {
-  Code2, Palette, Zap, Rocket, Globe, Server, Search, Smartphone, MapPin,
-  type LucideIcon,
+  Code2, Palette, Zap, Rocket, Server, Smartphone, MapPin,
 } from "lucide-react";
+import { IoLogoJavascript } from "react-icons/io";
+import { TbSeo } from "react-icons/tb";
+import { RiVercelLine } from "react-icons/ri";
+import { RiJavascriptLine } from "react-icons/ri";
+import { IoLogoCss3 } from "react-icons/io";
+import { IoLogoHtml5 } from "react-icons/io";
+import { SiEleventy } from "react-icons/si";
+import { SiAstro } from "react-icons/si";
+import { TbBrandGoogleAnalytics } from "react-icons/tb";
 
-const items: { icon: LucideIcon; label: string }[] = [
-  { icon: Code2, label: "HTML" },
-  { icon: Palette, label: "CSS" },
-  { icon: Zap, label: "Eleventy" },
-  { icon: Rocket, label: "Astro" },
-  { icon: Globe, label: "Namecheap" },
-  { icon: Server, label: "Netlify" },
-  { icon: Search, label: "SEO" },
+
+
+type IconComponent = ComponentType<{ className?: string }>;
+
+const items: { icon: IconComponent; label: string }[] = [
+  { icon: IoLogoHtml5, label: "HTML" },
+  { icon: IoLogoCss3, label: "CSS" },
+  { icon: RiJavascriptLine, label: "JavaScript" },
+  { icon: SiEleventy, label: "Eleventy" },
+  { icon: SiAstro, label: "Astro" },
+  { icon: TbSeo, label: "SEO" },
   { icon: Smartphone, label: "Mobile First" },
   { icon: MapPin, label: "Google Business" },
+  { icon: TbBrandGoogleAnalytics, label: "Analytics" },
+  { icon: Server, label: "Netlify" },
+  { icon: RiVercelLine , label: "Vercel"},
 ];
 
 const LogoMarquee = () => {
