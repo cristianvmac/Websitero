@@ -8,7 +8,6 @@ import { FaCode } from "react-icons/fa";
 
 const navLinks = [
   { label: "Features", href: "/#features" },
-  { label: "Frameworks", href: "/#frameworks" },
   { label: "Pricing", href: "/#pricing" },
   { label: "FAQ", href: "/#faq" },
   { label: "Docs", href: "/docs/" },
@@ -20,7 +19,7 @@ const Header = () => {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
-      <div className="bg-linear-to-br from-[#4588ba] to-[#316994] text-white">
+      {/*<div className="bg-linear-to-br from-[#4588ba] to-[#316994] text-white">
         <div className="mx-auto flex max-w-7xl items-center justify-center gap-2 px-6 py-1 text-center text-xs font-medium sm:text-sm">
           <Sparkles className="h-3.5 w-3.5 shrink-0" />
           <span>Early-adopter deal — $50 off, 10 spots left.</span>
@@ -28,7 +27,7 @@ const Header = () => {
             Claim it <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </div>
-      </div>
+      </div>*/}
 
       <div className="bg-gray-100">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
