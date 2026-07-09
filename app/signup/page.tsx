@@ -2,10 +2,15 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Mail, Lock, Eye, EyeOff, LogIn } from "lucide-react";
+import { User, Mail, Lock, Eye, EyeOff, UserPlus } from "lucide-react";
 
-export default function Login() {
-    const [form, setForm] = useState({ email: "", password: "" });
+export default function Signup() {
+    const [form, setForm] = useState({
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+    });
     const [showPassword, setShowPassword] = useState(false);
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -13,22 +18,48 @@ export default function Login() {
         setForm((prev) => ({ ...prev, [name]: value }));
     }
 
+    const passwordsMismatch =
+        form.confirmPassword.length > 0 && form.password !== form.confirmPassword;
+
     function handleSubmit(e: React.SyntheticEvent) {
         e.preventDefault();
+        if (passwordsMismatch) return;
         // TODO: wire up to your auth provider / API route.
-        console.log("Login form submitted:", form);
+        console.log("Signup form submitted:", form);
     }
 
     return (
         <section className="flex min-h-screen items-center justify-center bg-base-200 px-4 py-16">
             <div className="card w-full max-w-md bg-base-100 shadow-xl">
                 <div className="card-body">
-                    <h1 className="text-3xl font-bold text-base-content">Welcome back</h1>
+                    <h1 className="text-3xl font-bold text-base-content">
+                        Create your account
+                    </h1>
                     <p className="mb-4 text-base-content/70">
-                        Sign in to your account to continue.
+                        Get started in less than a minute.
                     </p>
 
                     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                        <div className="form-control">
+                            <label htmlFor="name" className="label">
+                                <span className="label-text">Name</span>
+                            </label>
+                            <div className="input input-bordered flex items-center gap-2">
+                                <User className="h-4 w-4 opacity-60" />
+                                <input
+                                    id="name"
+                                    type="text"
+                                    name="name"
+                                    value={form.name}
+                                    onChange={handleChange}
+                                    placeholder="Your name"
+                                    className="grow"
+                                    autoComplete="name"
+                                    required
+                                />
+                            </div>
+                        </div>
+
                         <div className="form-control">
                             <label htmlFor="email" className="label">
                                 <span className="label-text">Email</span>
@@ -63,7 +94,8 @@ export default function Login() {
                                     onChange={handleChange}
                                     placeholder="••••••••"
                                     className="grow"
-                                    autoComplete="current-password"
+                                    autoComplete="new-password"
+                                    minLength={8}
                                     required
                                 />
                                 <button
@@ -81,29 +113,49 @@ export default function Login() {
                             </div>
                         </div>
 
-                        <div className="flex items-center justify-between">
-                            <label className="label cursor-pointer gap-2">
-                                <input type="checkbox" className="checkbox checkbox-sm" />
-                                <span className="label-text">Remember me</span>
+                        <div className="form-control">
+                            <label htmlFor="confirmPassword" className="label">
+                                <span className="label-text">Confirm password</span>
                             </label>
-                            <Link
-                                href="/forgot-password"
-                                className="link link-primary text-sm"
+                            <div
+                                className={`input input-bordered flex items-center gap-2 ${
+                                    passwordsMismatch ? "input-error" : ""
+                                }`}
                             >
-                                Forgot password?
-                            </Link>
+                                <Lock className="h-4 w-4 opacity-60" />
+                                <input
+                                    id="confirmPassword"
+                                    type={showPassword ? "text" : "password"}
+                                    name="confirmPassword"
+                                    value={form.confirmPassword}
+                                    onChange={handleChange}
+                                    placeholder="••••••••"
+                                    className="grow"
+                                    autoComplete="new-password"
+                                    required
+                                />
+                            </div>
+                            {passwordsMismatch && (
+                                <span className="mt-1 text-sm text-error">
+                                    Passwords do not match.
+                                </span>
+                            )}
                         </div>
 
-                        <button type="submit" className="btn btn-primary mt-2">
-                            <LogIn className="h-4 w-4" />
-                            Sign in
+                        <button
+                            type="submit"
+                            className="btn btn-primary mt-2"
+                            disabled={passwordsMismatch}
+                        >
+                            <UserPlus className="h-4 w-4" />
+                            Create account
                         </button>
                     </form>
 
                     <p className="mt-4 text-center text-sm text-base-content/70">
-                        Don&apos;t have an account?{" "}
-                        <Link href="/signup" className="link link-primary">
-                            Sign up
+                        Already have an account?{" "}
+                        <Link href="/login" className="link link-primary">
+                            Sign in
                         </Link>
                     </p>
                 </div>
