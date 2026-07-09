@@ -1,6 +1,6 @@
 <<<<<<< HEAD
 # Websitero
-Ship real custom-coded websites with Eleventy or Astro — with 24/7 expert support at every step.
+It gets local business owners a real, fast, custom-coded website live in hours — either built for you from a few plain-English prompts, or DIY from an Eleventy/Astro kit. Every site ships with Google Business Profile, SEO, and 24/7 expert support, with code you own.
 =======
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
