@@ -46,7 +46,7 @@ const SiteCopy = z.object({
     text: z.string(),
     items: z
       .array(z.object({ text: z.string(), name: z.string(), desc: z.string() }))
-      .describe("Exactly 2 placeholder reviews"),
+      .describe("Exactly 3 placeholder reviews"),
   }),
   faq: z.object({
     topper: z.string(),
