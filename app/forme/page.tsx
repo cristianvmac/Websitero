@@ -12,6 +12,9 @@ import {
   CheckCircle2,
   ChevronLeft,
   Pencil,
+  ImagePlus,
+  Wand2,
+  X,
 } from "lucide-react";
 import {
   type Brief,
@@ -37,9 +40,12 @@ const STEPS = [
 const inputCls =
   "w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-800 placeholder:text-slate-400 outline-none transition-shadow focus:border-[#4588ba]/40 focus:ring-2 focus:ring-[#4588ba]/10";
 
+const MAX_PHOTOS = 8;
+
 const Forme = () => {
   const [step, setStep] = useState(0);
   const [brief, setBrief] = useState<Brief>(EMPTY_BRIEF);
+  const [photos, setPhotos] = useState<File[]>([]);
   const [error, setError] = useState("");
   const [sending, setSending] = useState(false);
   const [done, setDone] = useState(false);
@@ -80,11 +86,21 @@ const Forme = () => {
     setSending(true);
     setError("");
     try {
-      const res = await fetch("/api/forme", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(brief),
-      });
+      // Photos ride along as multipart; without them plain JSON keeps the
+      // API's original contract.
+      let res: Response;
+      if (brief.images.mode === "upload" && photos.length > 0) {
+        const form = new FormData();
+        form.append("brief", JSON.stringify(brief));
+        for (const file of photos) form.append("photos", file);
+        res = await fetch("/api/forme", { method: "POST", body: form });
+      } else {
+        res = await fetch("/api/forme", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(brief),
+        });
+      }
       if (!res.ok) throw new Error(`Request failed (${res.status})`);
       setDone(true);
     } catch {
@@ -242,7 +258,7 @@ const Forme = () => {
                     aria-pressed={isActive}
                     className={`flex items-center gap-3 rounded-xl border p-4 text-left text-sm font-semibold transition-all ${
                       isActive
-                        ? "border-[#4588ba]/40 bg-[#4588ba]/[0.06] text-slate-900 shadow-sm"
+                        ? "border-[#4588ba]/40 bg-[#4588ba]/6 text-slate-900 shadow-sm"
                         : "border-slate-200 bg-white text-slate-600 hover:border-slate-300"
                     }`}
                   >
@@ -295,6 +311,105 @@ const Forme = () => {
                     </button>
                   ))}
                 </div>
+              </div>
+
+              {/* Photos: AI-sourced (default) or the owner's own uploads */}
+              <div>
+                <span className="text-sm font-medium text-slate-700">Photos for your site</span>
+                <div className="mt-2 grid gap-3 sm:grid-cols-2">
+                  {(
+                    [
+                      {
+                        mode: "ai",
+                        icon: Wand2,
+                        label: "Pick them for me",
+                        blurb: "We choose professional photos that fit your business.",
+                      },
+                      {
+                        mode: "upload",
+                        icon: ImagePlus,
+                        label: "Use my photos",
+                        blurb: "Upload your own — your shop, your work, your team.",
+                      },
+                    ] as const
+                  ).map(({ mode, icon: Icon, label, blurb }) => (
+                    <button
+                      key={mode}
+                      type="button"
+                      onClick={() => patch({ images: { ...brief.images, mode } })}
+                      aria-pressed={brief.images.mode === mode}
+                      className={`flex items-start gap-3 rounded-xl border p-4 text-left transition-all ${
+                        brief.images.mode === mode
+                          ? "border-[#4588ba]/40 bg-[#4588ba]/6 shadow-sm"
+                          : "border-slate-200 bg-white hover:border-slate-300"
+                      }`}
+                    >
+                      <Icon
+                        className={`mt-0.5 h-5 w-5 shrink-0 ${
+                          brief.images.mode === mode ? "text-[#4588ba]" : "text-slate-300"
+                        }`}
+                      />
+                      <span>
+                        <span className="block text-sm font-semibold text-slate-900">{label}</span>
+                        <span className="mt-0.5 block text-xs leading-relaxed text-slate-500">
+                          {blurb}
+                        </span>
+                      </span>
+                    </button>
+                  ))}
+                </div>
+
+                {brief.images.mode === "upload" && (
+                  <div className="mt-3">
+                    <label
+                      htmlFor="photo-upload"
+                      className="flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-dashed border-slate-300 bg-slate-50 px-4 py-5 text-sm font-medium text-slate-500 transition-colors hover:border-[#4588ba]/40 hover:text-slate-700"
+                    >
+                      <ImagePlus className="h-4 w-4" />
+                      {photos.length > 0
+                        ? `Add more (${photos.length}/${MAX_PHOTOS})`
+                        : "Add photos — hero, storefront, your best work"}
+                    </label>
+                    <input
+                      id="photo-upload"
+                      type="file"
+                      accept="image/*"
+                      multiple
+                      className="sr-only"
+                      onChange={(e) => {
+                        const picked = Array.from(e.target.files ?? []);
+                        setPhotos((prev) => [...prev, ...picked].slice(0, MAX_PHOTOS));
+                        e.target.value = "";
+                      }}
+                    />
+                    {photos.length > 0 && (
+                      <ul className="mt-3 grid grid-cols-4 gap-2">
+                        {photos.map((file, i) => (
+                          <li key={`${file.name}-${i}`} className="group relative">
+                            {/* eslint-disable-next-line @next/next/no-img-element -- local blob preview */}
+                            <img
+                              src={URL.createObjectURL(file)}
+                              alt={file.name}
+                              className="h-20 w-full rounded-lg object-cover"
+                            />
+                            <button
+                              type="button"
+                              aria-label={`Remove ${file.name}`}
+                              onClick={() => setPhotos((prev) => prev.filter((_, j) => j !== i))}
+                              className="absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-slate-900/80 text-white opacity-0 transition-opacity group-hover:opacity-100"
+                            >
+                              <X className="h-3 w-3" />
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                    <p className="mt-2 text-xs text-slate-400">
+                      Up to {MAX_PHOTOS} photos. Skip it and we&apos;ll fill in professional ones
+                      until yours are ready.
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
           )}
@@ -375,6 +490,14 @@ const Forme = () => {
                   {
                     label: "Style",
                     value: `${VIBES.find((v) => v.key === brief.style.vibe)?.label ?? "Your call"} · ${brief.style.brandColor}`,
+                    target: 2,
+                  },
+                  {
+                    label: "Photos",
+                    value:
+                      brief.images.mode === "upload"
+                        ? `${photos.length} of your own photo${photos.length === 1 ? "" : "s"}`
+                        : "Picked for you",
                     target: 2,
                   },
                   { label: "Your words", value: brief.prompt || "—", target: 3 },
