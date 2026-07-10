@@ -10,10 +10,28 @@ import type { Brief } from "@/app/forme/brief";
    TODO: swap the file write for a DB (e.g. Supabase) and notify the team
    (e.g. Resend email) when deploying to a serverless host. */
 
+const MAX_PHOTOS = 8;
+const MAX_PHOTO_BYTES = 8 * 1024 * 1024;
+
 export async function POST(req: Request) {
   let brief: Brief;
+  let photos: File[] = [];
   try {
-    brief = await req.json();
+    // "Use my photos" submissions arrive as multipart (brief JSON + files);
+    // everything else keeps the original plain-JSON contract.
+    if (req.headers.get("content-type")?.includes("multipart/form-data")) {
+      const form = await req.formData();
+      brief = JSON.parse(String(form.get("brief")));
+      photos = form
+        .getAll("photos")
+        .filter(
+          (f): f is File =>
+            f instanceof File && f.size > 0 && f.size <= MAX_PHOTO_BYTES && f.type.startsWith("image/"),
+        )
+        .slice(0, MAX_PHOTOS);
+    } else {
+      brief = await req.json();
+    }
   } catch {
     return NextResponse.json({ ok: false, error: "Invalid JSON" }, { status: 400 });
   }
@@ -32,6 +50,27 @@ export async function POST(req: Request) {
   }
 
   const id = crypto.randomUUID();
+
+  // Store the owner's photos where the build worker looks for them
+  // (briefs/uploads/<id>/), recording the stored names in the brief.
+  if (photos.length > 0) {
+    try {
+      const uploadDir = path.join(process.cwd(), "briefs", "uploads", id);
+      await fs.mkdir(uploadDir, { recursive: true });
+      const saved: string[] = [];
+      for (const [i, file] of photos.entries()) {
+        const ext = path.extname(file.name).toLowerCase() || ".jpg";
+        const name = `photo-${i + 1}${ext}`;
+        await fs.writeFile(path.join(uploadDir, name), Buffer.from(await file.arrayBuffer()));
+        saved.push(name);
+      }
+      brief.images = { mode: "upload", files: saved };
+    } catch (err) {
+      console.warn("[forme] could not persist photos:", err);
+      brief.images = { mode: "ai" }; // build falls back to stock imagery
+    }
+  }
+
   const record = { id, receivedAt: new Date().toISOString(), brief };
 
   console.log("[forme] new brief:", JSON.stringify(record));
