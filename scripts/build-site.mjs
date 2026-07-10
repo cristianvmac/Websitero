@@ -37,6 +37,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { generateCopy } from "./generate-copy.mjs";
+import { composeHome } from "./compose-home.mjs";
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const KIT_REPO =
@@ -150,6 +151,11 @@ function deriveCopy(brief) {
           name: "A local regular",
           desc: city,
         },
+        {
+          text: `Quick to respond, easy to work with, and the quality is consistently great. It's clear why they have such a loyal following in ${city}.`,
+          name: "A longtime customer",
+          desc: city,
+        },
       ],
     },
     faq: {
@@ -174,13 +180,9 @@ function deriveCopy(brief) {
   };
 }
 
-async function briefToTenant(brief, { ai = true } = {}) {
+function briefToTenant(brief, copy) {
   const [city = "", state = ""] = brief.business.location.split(",").map((s) => s.trim());
   const phone = brief.contact.phone?.trim();
-
-  // Claude writes the copy when possible; deriveCopy is the safety net so a
-  // build never fails just because the AI call couldn't run.
-  const copy = (ai ? await generateCopy(brief) : null) ?? deriveCopy(brief);
 
   return {
     client: {
@@ -294,6 +296,31 @@ function ensureWorkspace(slug, { fresh = false } = {}) {
   return dir;
 }
 
+// ---------- owner photos ------------------------------------------------------
+
+// The wizard stores uploaded photos in briefs/uploads/<id>/. When the owner
+// chose "use my photos", stage them into the workspace's assets and hand the
+// composer their site-absolute URLs so sections swap their demo imagery.
+// "ai" mode is the default: AI-sourced imagery will plug in here later — for
+// now those sites keep each component's professional stock photography.
+function stageUploads(id, brief, workDir) {
+  const mode = brief.images?.mode ?? "ai";
+  const srcDir = path.join(BRIEFS_DIR, "uploads", String(id));
+  if (mode !== "upload") return [];
+  if (!fs.existsSync(srcDir)) {
+    console.warn("⚠ images.mode=upload but no uploaded photos found — keeping stock imagery");
+    return [];
+  }
+  const destDir = path.join(workDir, "src", "assets", "images", "uploads");
+  fs.rmSync(destDir, { recursive: true, force: true });
+  fs.mkdirSync(destDir, { recursive: true });
+  const files = fs
+    .readdirSync(srcDir)
+    .filter((f) => /\.(jpe?g|png|webp|avif|gif)$/i.test(f));
+  for (const f of files) fs.copyFileSync(path.join(srcDir, f), path.join(destDir, f));
+  return files.map((f) => `/assets/images/uploads/${f}`);
+}
+
 // ---------- build -----------------------------------------------------------
 
 const args = process.argv.slice(2).filter((a) => !a.startsWith("--"));
@@ -313,10 +340,30 @@ ensureKitCache({ refresh: process.argv.includes("--refresh-kit") });
 const workDir = ensureWorkspace(slug, { fresh: process.argv.includes("--fresh") });
 console.log(`→ Workspace: ${workDir}`);
 
-// 2. Write the tenant file into the workspace
+// 2. Write the copy: Claude when an API key is available, deterministic
+//    placeholder text otherwise — a build never fails because AI couldn't run
+const copy = (useAi ? await generateCopy(brief) : null) ?? deriveCopy(brief);
 const tenantFile = path.join(workDir, "tenant.json");
-fs.writeFileSync(tenantFile, JSON.stringify(await briefToTenant(brief, { ai: useAi }), null, 2));
+fs.writeFileSync(tenantFile, JSON.stringify(briefToTenant(brief, copy), null, 2));
 console.log(`→ Tenant:  ${tenantFile}`);
+
+// 2b. Compose this customer's homepage from the docs component library:
+//     seeded by the slug, so every customer gets a different mix of section
+//     variants, filled with their copy (and their photos, if uploaded).
+//     If composition fails we keep the kit's stock homepage — never no site.
+const uploads = stageUploads(id, brief, workDir);
+try {
+  const home = composeHome({ brief, copy, seed: slug, uploads });
+  fs.writeFileSync(path.join(workDir, "src", "index.html"), home.html);
+  fs.writeFileSync(path.join(workDir, "src", "assets", "css", "sections.css"), home.css);
+  if (home.js) fs.writeFileSync(path.join(workDir, "src", "assets", "js", "sections.js"), home.js);
+  const summary = Object.entries(home.picks)
+    .map(([slot, id]) => `${slot}=${id.split("/")[1]}`)
+    .join(" ");
+  console.log(`→ Sections: ${summary}`);
+} catch (err) {
+  console.warn(`⚠ Homepage composition failed — keeping the kit's stock homepage: ${err.message}`);
+}
 
 // 3. Build the workspace with the tenant injected (clean its output first —
 //    Eleventy doesn't clear its own output dir between builds)
