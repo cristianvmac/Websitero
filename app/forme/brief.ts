@@ -16,6 +16,13 @@ export interface Brief {
   };
   /** Plain-English description, same spirit as the Hero's typed prompt. */
   prompt: string;
+  /** Where the site's photos come from: AI-sourced or the owner's uploads.
+      When mode is "upload", the wizard posts the files alongside the brief
+      and the API stores them in briefs/uploads/<id>/ (recorded in `files`). */
+  images: {
+    mode: "ai" | "upload";
+    files?: string[];
+  };
   contact: {
     email: string;
     phone: string;
@@ -27,6 +34,7 @@ export const EMPTY_BRIEF: Brief = {
   features: [],
   style: { brandColor: "#4588ba", vibe: "" },
   prompt: "",
+  images: { mode: "ai" },
   contact: { email: "", phone: "" },
 };
 
