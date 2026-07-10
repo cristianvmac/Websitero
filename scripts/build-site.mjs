@@ -36,8 +36,10 @@ import { execFileSync, execSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { generateCopy } from "./generate-copy.mjs";
-import { composeHome } from "./compose-home.mjs";
+import { generateCopy, generateBlogPosts } from "./generate-copy.mjs";
+import { generateImages } from "./generate-images.mjs";
+import { composeSite } from "./compose-home.mjs";
+import { applyBranding } from "./generate-brand.mjs";
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const KIT_REPO =
@@ -251,7 +253,7 @@ function ensureKitCache({ refresh = false } = {}) {
   if (intact && !refresh && !sourceChanged) return;
 
   console.log(`→ Cloning kit: ${KIT_REPO} @ ${KIT_REF}`);
-  fs.rmSync(KIT_SRC, { recursive: true, force: true });
+  fs.rmSync(KIT_SRC, { recursive: true, force: true, maxRetries: 10, retryDelay: 100 });
   fs.mkdirSync(KIT_CACHE, { recursive: true });
   execFileSync("git", ["clone", "--depth", "1", "--branch", KIT_REF, KIT_REPO, KIT_SRC], {
     stdio: "inherit",
@@ -269,7 +271,7 @@ function ensureKitCache({ refresh = false } = {}) {
 // Reused on rebuilds so per-customer modifications persist; --fresh resets it.
 function ensureWorkspace(slug, { fresh = false } = {}) {
   const dir = path.join(WORKSPACES_DIR, slug);
-  if (fresh) fs.rmSync(dir, { recursive: true, force: true });
+  if (fresh) fs.rmSync(dir, { recursive: true, force: true, maxRetries: 10, retryDelay: 100 });
   if (!fs.existsSync(dir)) {
     console.log(`→ Creating workspace from pristine kit…`);
     fs.cpSync(KIT_SRC, dir, {
@@ -296,6 +298,106 @@ function ensureWorkspace(slug, { fresh = false } = {}) {
   return dir;
 }
 
+// ---------- starter blog posts -------------------------------------------------
+
+// Deterministic fallback posts, same contract as generateBlogPosts().
+function deriveBlogPosts(brief) {
+  const { name, type, location } = brief.business;
+  const city = location.split(",")[0].trim();
+  const lowerType = type.toLowerCase();
+  return [
+    {
+      title: `Welcome to the new ${name} website`,
+      slug: "welcome",
+      description: `${name} is now online — here's what you'll find on our new site and how to reach us.`,
+      body: `We're excited to finally have a home on the web. Whether you found us through a neighbor's recommendation or a search for a ${lowerType} in ${city}, welcome!
+
+## What you'll find here
+
+Our new site has everything in one place: what we offer, photos of our work, answers to the questions we hear most, and an easy way to get in touch.
+
+## Stay in the loop
+
+We'll use this blog to share news, tips, and what's happening at ${name}. Have a question in the meantime? Head over to the contact page — we'd love to hear from you.`,
+    },
+    {
+      title: `How to choose a ${lowerType} in ${city}`,
+      slug: `choosing-a-${slugify(type)}`,
+      description: `Not sure what to look for in a ${lowerType}? A few practical things worth checking before you decide.`,
+      body: `Choosing a ${lowerType} shouldn't feel like a gamble. Here are the things we'd tell our own friends and family in ${city} to look for.
+
+## Ask around locally
+
+Word of mouth is still the best signal. Ask neighbors who they use and — just as important — who they'd avoid.
+
+## Look for clear communication
+
+A good ${lowerType} answers questions plainly, explains what you're getting, and doesn't make you chase them for a reply.
+
+## Trust your first impression
+
+How a business treats you before you're a customer says a lot about how they'll treat you after. We do our best to earn that trust from the first hello.`,
+    },
+    {
+      title: `What to expect when you work with ${name}`,
+      slug: "what-to-expect",
+      description: `From first contact to the finished result — here's how working with ${name} goes, step by step.`,
+      body: `New here? This is how it works when you get in touch with us.
+
+## Getting started
+
+Reach out through the contact page, by phone, or by email — whatever's easiest. Tell us what you need and we'll take it from there.
+
+## While we work together
+
+We keep things simple: honest recommendations, clear communication, and no surprises. If something changes, you'll hear it from us first.
+
+## After that
+
+We stand behind our work. If anything isn't right, tell us and we'll make it right — that's how ${name} has always done business in ${city}.`,
+    },
+  ];
+}
+
+// Replace the kit's lorem demo posts with the customer's starter posts.
+// One-shot per workspace: once real posts exist, rebuilds leave them alone
+// (so later per-customer edits persist) — --fresh resets and reseeds.
+function blogNeedsSeeding(workDir) {
+  const blogDir = path.join(workDir, "src", "content", "blog");
+  const existing = fs.readdirSync(blogDir).filter((f) => f.endsWith(".md"));
+  const DEMO_POSTS = ["acuti-modo.md", "canitiem-saxa.md", "sucos-creati.md"];
+  return existing.length === 0 || existing.some((f) => DEMO_POSTS.includes(f));
+}
+
+function writeBlogPosts(workDir, brief, posts, photos = []) {
+  const blogDir = path.join(workDir, "src", "content", "blog");
+  for (const f of fs.readdirSync(blogDir).filter((f) => f.endsWith(".md"))) {
+    fs.rmSync(path.join(blogDir, f));
+  }
+  const KIT_BLOG_IMAGES = ["/assets/images/blog/blog.jpg", "/assets/images/blog/blog2.jpg"];
+  posts.forEach((post, i) => {
+    const slug = slugify(post.slug || post.title) || `post-${i + 1}`;
+    const image = photos.length ? photos[i % photos.length] : KIT_BLOG_IMAGES[i % 2];
+    // Posts staggered a few days apart so the blog doesn't look bulk-filled.
+    const date = new Date(Date.now() - i * 6 * 86_400_000).toISOString();
+    // JSON.stringify => valid YAML double-quoted scalars, quotes/colons safe.
+    const frontMatter = [
+      "---",
+      `title: ${JSON.stringify(post.title)}`,
+      `url: ${slug}`,
+      `description: ${JSON.stringify(post.description)}`,
+      `author: ${JSON.stringify(brief.business.name)}`,
+      `date: ${date}`,
+      "tags:",
+      "    - post",
+      `image: ${image}`,
+      `imageAlt: ${JSON.stringify(post.title)}`,
+      "---",
+    ].join("\n");
+    fs.writeFileSync(path.join(blogDir, `${slug}.md`), `${frontMatter}\n\n${post.body.trim()}\n`);
+  });
+}
+
 // ---------- owner photos ------------------------------------------------------
 
 // The wizard stores uploaded photos in briefs/uploads/<id>/. When the owner
@@ -312,13 +414,28 @@ function stageUploads(id, brief, workDir) {
     return [];
   }
   const destDir = path.join(workDir, "src", "assets", "images", "uploads");
-  fs.rmSync(destDir, { recursive: true, force: true });
+  fs.rmSync(destDir, { recursive: true, force: true, maxRetries: 10, retryDelay: 100 });
   fs.mkdirSync(destDir, { recursive: true });
   const files = fs
     .readdirSync(srcDir)
     .filter((f) => /\.(jpe?g|png|webp|avif|gif)$/i.test(f));
   for (const f of files) fs.copyFileSync(path.join(srcDir, f), path.join(destDir, f));
   return files.map((f) => `/assets/images/uploads/${f}`);
+}
+
+// "Pick them for me" mode: AI-generated photos, cached per brief in
+// briefs/generated/<id>/ and staged into the workspace like uploads are.
+// Empty result (no provider key, provider errors, --no-ai) keeps stock photos.
+async function stageAiImages(id, brief, workDir, { ai }) {
+  if (!ai || (brief.images?.mode ?? "ai") !== "ai") return [];
+  const cacheDir = path.join(BRIEFS_DIR, "generated", String(id));
+  const files = await generateImages(brief, { cacheDir });
+  if (!files.length) return [];
+  const destDir = path.join(workDir, "src", "assets", "images", "generated");
+  fs.rmSync(destDir, { recursive: true, force: true, maxRetries: 10, retryDelay: 100 });
+  fs.mkdirSync(destDir, { recursive: true });
+  for (const f of files) fs.copyFileSync(f, path.join(destDir, path.basename(f)));
+  return files.map((f) => `/assets/images/generated/${path.basename(f)}`);
 }
 
 // ---------- build -----------------------------------------------------------
@@ -347,27 +464,47 @@ const tenantFile = path.join(workDir, "tenant.json");
 fs.writeFileSync(tenantFile, JSON.stringify(briefToTenant(brief, copy), null, 2));
 console.log(`→ Tenant:  ${tenantFile}`);
 
-// 2b. Compose this customer's homepage from the docs component library:
+// 2b. Compose this customer's pages from the docs component library:
 //     seeded by the slug, so every customer gets a different mix of section
-//     variants, filled with their copy (and their photos, if uploaded).
-//     If composition fails we keep the kit's stock homepage — never no site.
+//     variants — homepage and interior pages — filled with their copy (and
+//     their photos, if uploaded). If composition fails we keep the kit's
+//     stock pages — never no site.
 const uploads = stageUploads(id, brief, workDir);
+const photos = uploads.length ? uploads : await stageAiImages(id, brief, workDir, { ai: useAi });
 try {
-  const home = composeHome({ brief, copy, seed: slug, uploads });
-  fs.writeFileSync(path.join(workDir, "src", "index.html"), home.html);
-  fs.writeFileSync(path.join(workDir, "src", "assets", "css", "sections.css"), home.css);
-  if (home.js) fs.writeFileSync(path.join(workDir, "src", "assets", "js", "sections.js"), home.js);
-  const summary = Object.entries(home.picks)
+  const site = composeSite({ brief, copy, seed: slug, uploads: photos });
+  for (const [rel, content] of Object.entries(site.files)) {
+    fs.writeFileSync(path.join(workDir, "src", ...rel.split("/")), content);
+  }
+  const summary = Object.entries(site.picks)
+    .filter(([slot]) => !slot.startsWith("/")) // homepage slots only — pages log too much
     .map(([slot, id]) => `${slot}=${id.split("/")[1]}`)
     .join(" ");
-  console.log(`→ Sections: ${summary}`);
+  console.log(`→ Sections: ${summary} (+${Object.keys(site.files).length - 3} interior pages)`);
 } catch (err) {
-  console.warn(`⚠ Homepage composition failed — keeping the kit's stock homepage: ${err.message}`);
+  console.warn(`⚠ Site composition failed — keeping the kit's stock pages: ${err.message}`);
+}
+
+// 2c. Brand it: generated SVG logos (header/footer), favicon, web manifest,
+//     and the include patches that put the business's real names in the nav.
+try {
+  applyBranding(workDir, { brief, copy });
+  console.log(`→ Branding: logo + favicon generated for "${brief.business.name}"`);
+} catch (err) {
+  console.warn(`⚠ Branding failed — keeping the kit's stock logo/favicon: ${err.message}`);
+}
+
+// 2d. Starter blog posts replace the kit's lorem demos (first build only —
+//     rebuilds keep whatever posts the workspace already has)
+if (blogNeedsSeeding(workDir)) {
+  const posts = (useAi ? await generateBlogPosts(brief) : null) ?? deriveBlogPosts(brief);
+  writeBlogPosts(workDir, brief, posts, photos);
+  console.log(`→ Blog: ${posts.length} starter posts written`);
 }
 
 // 3. Build the workspace with the tenant injected (clean its output first —
 //    Eleventy doesn't clear its own output dir between builds)
-fs.rmSync(path.join(workDir, "public"), { recursive: true, force: true });
+fs.rmSync(path.join(workDir, "public"), { recursive: true, force: true, maxRetries: 10, retryDelay: 100 });
 execSync("npx eleventy", {
   cwd: workDir,
   stdio: "inherit",
@@ -376,7 +513,7 @@ execSync("npx eleventy", {
 
 // 4. Copy the output into previews/<slug>
 const previewDir = path.join(repoRoot, "previews", slug);
-fs.rmSync(previewDir, { recursive: true, force: true });
+fs.rmSync(previewDir, { recursive: true, force: true, maxRetries: 10, retryDelay: 100 });
 fs.cpSync(path.join(workDir, "public"), previewDir, { recursive: true });
 
 // 5. Rewrite URLs for subpath serving (unless building for a real domain)
