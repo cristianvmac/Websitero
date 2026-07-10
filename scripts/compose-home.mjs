@@ -13,8 +13,10 @@
 // tenant brand override already define) — that contract is what makes blind
 // mix-and-match safe.
 //
-// composeHome() returns { html, css, js } for the workspace to write as
-// src/index.html, src/assets/css/sections.css and src/assets/js/sections.js.
+// composeSite() returns { files, picks }: `files` maps workspace-relative
+// paths (under src/) to contents — the homepage, the interior pages (about,
+// faq, reviews, portfolio, the two service pages), and the shared
+// sections.css / sections.js bundles.
 
 import { parse } from "node-html-parser";
 import { loadVariants } from "./component-library.mjs";
@@ -249,22 +251,90 @@ const UPLOAD_SLOTS = new Set(["hero", "about", "seo", "gallery", "cta"]);
 
 // ---------- compose -----------------------------------------------------------
 
+// Interior pages reuse the kit's #banner (styled sitewide in root.css).
+function bannerHtml(title, image = "/assets/images/banner.webp") {
+  return `<div id="banner">
+    <div class="cs-container">
+        <span class="cs-int-title">${esc(title)}</span>
+    </div>
+    <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="${image}">
+        <source media="(min-width: 601px)" srcset="${image}">
+        <img aria-hidden="true" loading="lazy" decoding="async" src="${image}" alt="" width="1920" height="375">
+    </picture>
+</div>`;
+}
+
+function pageShell({ title, description, permalink, tags, body, needsJs }) {
+  const yaml = (s) => String(s).replace(/"/g, "'");
+  return `---
+title: "${yaml(title)}"
+description: "${yaml(description)}"
+permalink: "${permalink}"${tags ? `\ntags: "${tags}"` : ""}
+lang: en
+---
+
+{% extends "layouts/base.html" %}
+
+{% block head %}
+    <link rel="stylesheet" href="/assets/css/sections.css"/>${
+      needsJs ? `\n    <script defer src="/assets/js/sections.js"></script>` : ""
+    }
+{% endblock %}
+
+{% block body %}
+{% raw %}
+${body}
+{% endraw %}
+{% endblock %}
+`;
+}
+
 /**
- * Build the customer's homepage from the brief + generated copy.
- * @param {object} opts
- * @param {object} opts.brief   the /forme brief
- * @param {object} opts.copy    kit copy schema (generate-copy / deriveCopy)
- * @param {string} opts.seed    stable per-customer seed (the workspace slug)
- * @param {string[]} [opts.uploads] site-absolute URLs of the owner's photos
- * @returns {{ html: string, css: string, js: string, picks: Record<string,string> }}
+ * Build the customer's whole site — homepage plus interior pages — from the
+ * brief + generated copy. Every variant pick is seeded by `seed`, and pages
+ * avoid reusing the homepage's variant of the same category, so the site
+ * varies page to page as well as customer to customer.
+ *
+ * @returns {{ files: Record<string,string>, picks: Record<string,string> }}
+ *          `files` keys are workspace paths relative to src/.
  */
-export function composeHome({ brief, copy, seed, uploads = [] }) {
+export function composeSite({ brief, copy, seed, uploads = [] }) {
   const rand = seededRandom(seed);
   const pick = (pool, exclude = []) => {
     const options = pool.filter((id) => !exclude.includes(id));
-    return options[Math.floor(rand() * options.length)];
+    const from = options.length ? options : pool; // never exhaust a pool
+    return from[Math.floor(rand() * from.length)];
   };
 
+  const variantCache = new Map();
+  const getVariant = (id) => {
+    if (!variantCache.has(id)) variantCache.set(id, loadVariants([id])[0] ?? null);
+    return variantCache.get(id);
+  };
+
+  // CSS is bundled once for the whole site, deduped by variant.
+  const cssParts = new Map();
+  let needsAccordion = false;
+
+  // Render one library section: parse → trim companions → fill → photos.
+  function renderSection({ id, slot, fill, uploadsAllowed, keepCompanions = false, uploadState }) {
+    const variant = getVariant(id);
+    if (!variant) return ""; // library moved — skip the slot, never fail the build
+    const doc = parse(variant.html, { comment: true });
+    // Companion <section>s (SbsCombo's card strip, StandardCTA's extra CTA)
+    // would surface the docs' demo copy — only combo heroes keep theirs.
+    if (!keepCompanions) {
+      for (const extra of doc.querySelectorAll("section").slice(1)) extra.remove();
+    }
+    fill(doc, { copy, brief });
+    if (uploadsAllowed) applyUploads(doc, uploads, uploadState ?? { i: 0 });
+    cssParts.set(id, variant.css);
+    if (id.startsWith("faq/")) needsAccordion = true;
+    return `<!-- ==================== ${slot}: ${id} ==================== -->\n${doc.toString()}`;
+  }
+
+  // ----- homepage -----
   const features = new Set(brief.features ?? []);
   const slots = ["hero", "services", "about", "seo"];
   if (features.has("gallery")) slots.push("gallery");
@@ -283,36 +353,28 @@ export function composeHome({ brief, copy, seed, uploads = [] }) {
     slots.splice(slots.indexOf("services"), 1);
   }
 
-  const variants = new Map(loadVariants(Object.values(picks)).map((v) => [v.id, v]));
+  // Home photos cycle continuously across sections (hero gets the first).
   const uploadState = { i: 0 };
-  const htmlParts = [];
-  const cssParts = [];
-  let needsAccordion = false;
+  const homeBody = slots
+    .map((slot) =>
+      renderSection({
+        id: picks[slot],
+        slot,
+        fill: FILLERS[slot],
+        uploadsAllowed: UPLOAD_SLOTS.has(slot),
+        keepCompanions: slot === "hero",
+        uploadState,
+      }),
+    )
+    .filter(Boolean)
+    .join("\n\n");
 
-  for (const slot of slots) {
-    const variant = variants.get(picks[slot]);
-    if (!variant) continue; // library moved — skip the slot rather than fail the build
-    // Fill at fragment scope: some samples span multiple <section>s (combo
-    // heroes) and every fill helper is first-match/query-all safe on the root.
-    const doc = parse(variant.html, { comment: true });
-    // Only combo heroes keep their bundled companion sections — elsewhere
-    // (SbsCombo's card strip, StandardCTA's extra CTA) they'd surface the
-    // docs' demo copy, so trim each variant to its primary section.
-    if (slot !== "hero") {
-      for (const extra of doc.querySelectorAll("section").slice(1)) extra.remove();
-    }
-    FILLERS[slot](doc, { copy, brief });
-    if (UPLOAD_SLOTS.has(slot)) applyUploads(doc, uploads, uploadState);
-    htmlParts.push(
-      `<!-- ==================== ${slot}: ${variant.id} ==================== -->`,
-      doc.toString(),
-    );
-    cssParts.push(`/* ==== ${slot}: ${variant.id} ==== */`, variant.css);
-    if (slot === "faq") needsAccordion = true;
-  }
+  const files = {};
+  const name = brief.business.name;
+  const bannerImage = uploads[0] ?? "/assets/images/banner.webp";
 
-  const js = needsAccordion ? ACCORDION_JS : "";
-  const html = `---
+  // The homepage keeps its tenant-driven title/description via eleventyComputed.
+  files["index.html"] = `---
 permalink: "/"
 tags: "sitemap"
 eleventyComputed:
@@ -323,17 +385,123 @@ eleventyComputed:
 {% extends "layouts/base.html" %}
 
 {% block head %}
-    <link rel="stylesheet" href="/assets/css/sections.css"/>${
-      js ? `\n    <script defer src="/assets/js/sections.js"></script>` : ""
-    }
+    <link rel="stylesheet" href="/assets/css/sections.css"/>
+    <script defer src="/assets/js/sections.js"></script>
 {% endblock %}
 
 {% block body %}
 {% raw %}
-${htmlParts.join("\n\n")}
+${homeBody}
 {% endraw %}
 {% endblock %}
 `;
 
-  return { html, css: cssParts.join("\n\n"), js, picks };
+  // ----- interior pages -----
+  // Each page: banner + a different variant of its category than the
+  // homepage used + its own CTA. Replaces the kit's stock pages wholesale.
+  const pageCta = () => ({
+    id: pick(POOLS.cta, [picks.cta]),
+    slot: "cta",
+    fill: FILLERS.cta,
+    uploadsAllowed: true,
+  });
+
+  const pageSpecs = [
+    {
+      file: "content/pages/about.html",
+      permalink: "/about/",
+      banner: "About Us",
+      title: `About Us | ${name}`,
+      sections: [
+        {
+          // Avoid both side-by-side blocks the homepage already used.
+          id: pick(POOLS.about, [picks.about, picks.seo]),
+          slot: "about",
+          fill: FILLERS.about,
+          uploadsAllowed: true,
+        },
+        pageCta(),
+      ],
+    },
+    {
+      file: "content/pages/faq.html",
+      permalink: "/faq/",
+      banner: "FAQ",
+      title: `FAQ | ${name}`,
+      sections: [
+        { id: pick(POOLS.faq, [picks.faq]), slot: "faq", fill: FILLERS.faq },
+        pageCta(),
+      ],
+    },
+    {
+      file: "content/pages/reviews.html",
+      permalink: "/reviews/",
+      banner: "Reviews",
+      title: `Reviews | ${name}`,
+      sections: [
+        { id: pick(POOLS.reviews, [picks.reviews]), slot: "reviews", fill: FILLERS.reviews },
+        pageCta(),
+      ],
+    },
+    {
+      file: "content/pages/portfolio.html",
+      permalink: "/portfolio/",
+      banner: "Our Work",
+      title: `Our Work | ${name}`,
+      sections: [
+        { id: pick(POOLS.gallery, [picks.gallery]), slot: "gallery", fill: FILLERS.gallery, uploadsAllowed: true },
+        pageCta(),
+      ],
+    },
+  ];
+
+  // The kit's two service pages, one per lead service from the copy.
+  copy.services.slice(0, 2).forEach((service, i) => {
+    const fillService = (doc) => {
+      fillSbs(
+        doc,
+        {
+          topper: "Our Services",
+          title: service.title,
+          paragraphs: [service.text, copy.about.paragraphs?.[1]].filter(Boolean),
+          quote: copy.about.quote,
+        },
+        copy,
+      );
+      setButtons(doc, { href: "/contact/", label: "Get a Free Quote" });
+    };
+    pageSpecs.push({
+      file: `content/pages/services/service-${i + 1}.html`,
+      permalink: `/services/service-${i + 1}/`,
+      banner: service.title,
+      title: `${service.title} | ${name}`,
+      sections: [
+        { id: pick(POOLS.seo, [picks.about, picks.seo]), slot: `service-${i + 1}`, fill: fillService, uploadsAllowed: true },
+        pageCta(),
+      ],
+    });
+  });
+
+  for (const spec of pageSpecs) {
+    const body = [bannerHtml(spec.banner, bannerImage), ...spec.sections.map(renderSection)]
+      .filter(Boolean)
+      .join("\n\n");
+    files[spec.file] = pageShell({
+      title: spec.title,
+      description: copy.meta.description,
+      permalink: spec.permalink,
+      body,
+      needsJs: true,
+    });
+    // Record page picks for the build log.
+    for (const s of spec.sections) picks[`${spec.permalink}${s.slot}`] = s.id;
+  }
+
+  // ----- shared assets -----
+  files["assets/css/sections.css"] = [...cssParts.entries()]
+    .map(([id, css]) => `/* ==== ${id} ==== */\n${css}`)
+    .join("\n\n");
+  files["assets/js/sections.js"] = needsAccordion ? ACCORDION_JS : "// no interactive sections";
+
+  return { files, picks };
 }
