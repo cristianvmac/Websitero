@@ -17,6 +17,12 @@
 // paths (under src/) to contents — the homepage, the interior pages (about,
 // faq, reviews, portfolio, the two service pages), and the shared
 // sections.css / sections.js bundles.
+//
+// Works for both kits: `kit` ("eleventy" | "astro") selects the matching docs
+// library and the page shells the sections are emitted into (Nunjucks pages
+// for the Eleventy kit, .astro pages reusing the kit's BaseLayout/Banner for
+// the Astro kit). The section-filling logic is kit-agnostic — both libraries
+// follow the same CodeStitch class contract.
 
 import { parse } from "node-html-parser";
 import { loadVariants } from "./component-library.mjs";
@@ -32,6 +38,13 @@ const POOLS = {
   reviews: ["reviews/Main", "reviews/3Card", "reviews/3CardStars", "reviews/4Card"],
   faq: ["faq/Main", "faq/StandardCTA"],
   cta: ["cta/Main", "cta/Reverse"],
+};
+
+// Variants whose docs sample in a given set doesn't follow the contract
+// (e.g. the astro reviews/Main is an off-contract <Icon>-based block).
+const KIT_EXCLUDES = {
+  eleventy: new Set(),
+  astro: new Set(["reviews/Main"]),
 };
 
 // Heroes that bundle their own services card strip (multi-section samples).
@@ -249,6 +262,27 @@ function fillSbs(section, { topper, title, paragraphs, quote, name, job }, copy)
 // pictures are avatars and decorations, not business imagery).
 const UPLOAD_SLOTS = new Set(["hero", "about", "seo", "gallery", "cta"]);
 
+// Some astro docs samples embed Astro component syntax that only works with
+// the sample's own frontmatter imports. Rewrite <Picture …/> to a plain
+// <picture><img> (fed by the staged stock photos; applyUploads may swap it
+// again later) and drop <Icon …/> decorations before parsing.
+function transformAstroSyntax(html, nextPhoto) {
+  return html
+    .replace(/<Picture\b[^>]*?\/>/g, (tag) => {
+      const cls = tag.match(/pictureAttributes=\{\{\s*class:\s*"([^"]+)"/)?.[1] ?? "cs-picture";
+      const width = tag.match(/\bwidth=\{(\d+)\}/)?.[1];
+      const src = nextPhoto();
+      return `<picture class="${cls}"><img src="${src}" alt="" loading="lazy" decoding="async"${
+        width ? ` width="${width}"` : ""
+      }></picture>`;
+    })
+    .replace(/<Icon\b[^>]*?\/>/g, "");
+}
+
+// Astro treats {…} in markup as expressions — escape literal braces in the
+// injected HTML so copy text and leftover attributes can never break a build.
+const escBraces = (s) => s.replace(/\{/g, "&#123;").replace(/\}/g, "&#125;");
+
 // ---------- compose -----------------------------------------------------------
 
 // Interior pages reuse the kit's #banner (styled sitewide in root.css).
@@ -296,22 +330,33 @@ ${body}
  * avoid reusing the homepage's variant of the same category, so the site
  * varies page to page as well as customer to customer.
  *
+ * @param {object} opts
+ * @param {"eleventy"|"astro"} [opts.kit] which kit (and docs library) to compose for
+ * @param {string[]} [opts.stock] site-absolute URLs of staged stock photos —
+ *   astro only, used when rewriting the samples' <Picture> components
  * @returns {{ files: Record<string,string>, picks: Record<string,string> }}
  *          `files` keys are workspace paths relative to src/.
  */
-export function composeSite({ brief, copy, seed, uploads = [] }) {
+export function composeSite({ brief, copy, seed, uploads = [], kit = "eleventy", stock = [] }) {
   const rand = seededRandom(seed);
+  const excluded = KIT_EXCLUDES[kit] ?? new Set();
   const pick = (pool, exclude = []) => {
-    const options = pool.filter((id) => !exclude.includes(id));
-    const from = options.length ? options : pool; // never exhaust a pool
+    const usable = pool.filter((id) => !excluded.has(id));
+    const options = usable.filter((id) => !exclude.includes(id));
+    const from = options.length ? options : usable; // never exhaust a pool
     return from[Math.floor(rand() * from.length)];
   };
 
   const variantCache = new Map();
   const getVariant = (id) => {
-    if (!variantCache.has(id)) variantCache.set(id, loadVariants([id])[0] ?? null);
+    if (!variantCache.has(id)) variantCache.set(id, loadVariants([id], kit)[0] ?? null);
     return variantCache.get(id);
   };
+
+  // Rotation the astro <Picture> rewrites draw their photos from.
+  let stockIndex = 0;
+  const nextPhoto = () =>
+    stock.length ? stock[stockIndex++ % stock.length] : (uploads[0] ?? "");
 
   // CSS is bundled once for the whole site, deduped by variant.
   const cssParts = new Map();
@@ -321,7 +366,8 @@ export function composeSite({ brief, copy, seed, uploads = [] }) {
   function renderSection({ id, slot, fill, uploadsAllowed, keepCompanions = false, uploadState }) {
     const variant = getVariant(id);
     if (!variant) return ""; // library moved — skip the slot, never fail the build
-    const doc = parse(variant.html, { comment: true });
+    const html = kit === "astro" ? transformAstroSyntax(variant.html, nextPhoto) : variant.html;
+    const doc = parse(html, { comment: true });
     // Companion <section>s (SbsCombo's card strip, StandardCTA's extra CTA)
     // would surface the docs' demo copy — only combo heroes keep theirs.
     if (!keepCompanions) {
@@ -373,8 +419,142 @@ export function composeSite({ brief, copy, seed, uploads = [] }) {
   const name = brief.business.name;
   const bannerImage = uploads[0] ?? "/assets/images/banner.webp";
 
-  // The homepage keeps its tenant-driven title/description via eleventyComputed.
-  files["index.html"] = `---
+  // ----- interior pages -----
+  // Each page: banner + a different variant of its category than the
+  // homepage used + its own CTA. Replaces the kit's stock pages wholesale.
+  const pageCta = () => ({
+    id: pick(POOLS.cta, [picks.cta]),
+    slot: "cta",
+    fill: FILLERS.cta,
+    uploadsAllowed: true,
+  });
+
+  const pageSpecs = [
+    {
+      page: "about",
+      permalink: "/about/",
+      banner: "About Us",
+      title: `About Us | ${name}`,
+      sections: [
+        {
+          // Avoid both side-by-side blocks the homepage already used.
+          id: pick(POOLS.about, [picks.about, picks.seo]),
+          slot: "about",
+          fill: FILLERS.about,
+          uploadsAllowed: true,
+        },
+        pageCta(),
+      ],
+    },
+    {
+      page: "faq",
+      permalink: "/faq/",
+      banner: "FAQ",
+      title: `FAQ | ${name}`,
+      sections: [
+        { id: pick(POOLS.faq, [picks.faq]), slot: "faq", fill: FILLERS.faq },
+        pageCta(),
+      ],
+    },
+    {
+      page: "reviews",
+      permalink: "/reviews/",
+      banner: "Reviews",
+      title: `Reviews | ${name}`,
+      sections: [
+        { id: pick(POOLS.reviews, [picks.reviews]), slot: "reviews", fill: FILLERS.reviews },
+        pageCta(),
+      ],
+    },
+    {
+      page: "portfolio",
+      permalink: "/portfolio/",
+      banner: "Our Work",
+      title: `Our Work | ${name}`,
+      sections: [
+        { id: pick(POOLS.gallery, [picks.gallery]), slot: "gallery", fill: FILLERS.gallery, uploadsAllowed: true },
+        pageCta(),
+      ],
+    },
+  ];
+
+  // The astro kit also ships a services overview page — give it real content.
+  if (kit === "astro") {
+    pageSpecs.push({
+      page: "services",
+      permalink: "/services/",
+      banner: "Our Services",
+      title: `Services | ${name}`,
+      sections: [
+        { id: pick(POOLS.services, [picks.services]), slot: "services", fill: FILLERS.services },
+        pageCta(),
+      ],
+    });
+  }
+
+  // The kit's two service pages, one per lead service from the copy.
+  copy.services.slice(0, 2).forEach((service, i) => {
+    const fillService = (doc) => {
+      fillSbs(
+        doc,
+        {
+          topper: "Our Services",
+          title: service.title,
+          paragraphs: [service.text, copy.about.paragraphs?.[1]].filter(Boolean),
+          quote: copy.about.quote,
+        },
+        copy,
+      );
+      setButtons(doc, { href: "/contact/", label: "Get a Free Quote" });
+    };
+    pageSpecs.push({
+      page: `service-${i + 1}`,
+      permalink: `/services/service-${i + 1}/`,
+      banner: service.title,
+      title: `${service.title} | ${name}`,
+      sections: [
+        { id: pick(POOLS.seo, [picks.about, picks.seo]), slot: `service-${i + 1}`, fill: fillService, uploadsAllowed: true },
+        pageCta(),
+      ],
+    });
+  });
+
+  // Render all bodies before emitting files (needsAccordion settles here).
+  const pageBodies = new Map();
+  for (const spec of pageSpecs) {
+    pageBodies.set(spec, spec.sections.map(renderSection).filter(Boolean).join("\n\n"));
+    // Record page picks for the build log.
+    for (const s of spec.sections) picks[`${spec.permalink}${s.slot}`] = s.id;
+  }
+
+  // ----- emit: kit-specific page shells + shared assets -----
+  if (kit === "astro") {
+    // The astro kit's Meta component appends "| business (| city, ST)" itself,
+    // so strip the business name from the titles we pass to avoid doubling.
+    const shortTitle = (t) => {
+      if (t.endsWith(` | ${name}`)) return t.slice(0, -` | ${name}`.length);
+      if (t.startsWith(`${name} | `)) return t.slice(`${name} | `.length);
+      return t;
+    };
+    files["pages/index.astro"] = astroShell({
+      title: shortTitle(copy.meta.title),
+      description: copy.meta.description,
+      body: homeBody,
+    });
+    for (const spec of pageSpecs) {
+      files[ASTRO_PAGE_FILES[spec.page]] = astroShell({
+        title: shortTitle(spec.title),
+        description: copy.meta.description,
+        banner: spec.banner,
+        body: pageBodies.get(spec),
+      });
+    }
+    files["styles/sections.css"] = [...cssParts.entries()]
+      .map(([id, css]) => `/* ==== ${id} ==== */\n${css}`)
+      .join("\n\n");
+  } else {
+    // The homepage keeps its tenant-driven title/description via eleventyComputed.
+    files["index.html"] = `---
 permalink: "/"
 tags: "sitemap"
 eleventyComputed:
@@ -395,113 +575,69 @@ ${homeBody}
 {% endraw %}
 {% endblock %}
 `;
-
-  // ----- interior pages -----
-  // Each page: banner + a different variant of its category than the
-  // homepage used + its own CTA. Replaces the kit's stock pages wholesale.
-  const pageCta = () => ({
-    id: pick(POOLS.cta, [picks.cta]),
-    slot: "cta",
-    fill: FILLERS.cta,
-    uploadsAllowed: true,
-  });
-
-  const pageSpecs = [
-    {
-      file: "content/pages/about.html",
-      permalink: "/about/",
-      banner: "About Us",
-      title: `About Us | ${name}`,
-      sections: [
-        {
-          // Avoid both side-by-side blocks the homepage already used.
-          id: pick(POOLS.about, [picks.about, picks.seo]),
-          slot: "about",
-          fill: FILLERS.about,
-          uploadsAllowed: true,
-        },
-        pageCta(),
-      ],
-    },
-    {
-      file: "content/pages/faq.html",
-      permalink: "/faq/",
-      banner: "FAQ",
-      title: `FAQ | ${name}`,
-      sections: [
-        { id: pick(POOLS.faq, [picks.faq]), slot: "faq", fill: FILLERS.faq },
-        pageCta(),
-      ],
-    },
-    {
-      file: "content/pages/reviews.html",
-      permalink: "/reviews/",
-      banner: "Reviews",
-      title: `Reviews | ${name}`,
-      sections: [
-        { id: pick(POOLS.reviews, [picks.reviews]), slot: "reviews", fill: FILLERS.reviews },
-        pageCta(),
-      ],
-    },
-    {
-      file: "content/pages/portfolio.html",
-      permalink: "/portfolio/",
-      banner: "Our Work",
-      title: `Our Work | ${name}`,
-      sections: [
-        { id: pick(POOLS.gallery, [picks.gallery]), slot: "gallery", fill: FILLERS.gallery, uploadsAllowed: true },
-        pageCta(),
-      ],
-    },
-  ];
-
-  // The kit's two service pages, one per lead service from the copy.
-  copy.services.slice(0, 2).forEach((service, i) => {
-    const fillService = (doc) => {
-      fillSbs(
-        doc,
-        {
-          topper: "Our Services",
-          title: service.title,
-          paragraphs: [service.text, copy.about.paragraphs?.[1]].filter(Boolean),
-          quote: copy.about.quote,
-        },
-        copy,
-      );
-      setButtons(doc, { href: "/contact/", label: "Get a Free Quote" });
-    };
-    pageSpecs.push({
-      file: `content/pages/services/service-${i + 1}.html`,
-      permalink: `/services/service-${i + 1}/`,
-      banner: service.title,
-      title: `${service.title} | ${name}`,
-      sections: [
-        { id: pick(POOLS.seo, [picks.about, picks.seo]), slot: `service-${i + 1}`, fill: fillService, uploadsAllowed: true },
-        pageCta(),
-      ],
-    });
-  });
-
-  for (const spec of pageSpecs) {
-    const body = [bannerHtml(spec.banner, bannerImage), ...spec.sections.map(renderSection)]
-      .filter(Boolean)
+    for (const spec of pageSpecs) {
+      const body = [bannerHtml(spec.banner, bannerImage), pageBodies.get(spec)]
+        .filter(Boolean)
+        .join("\n\n");
+      files[ELEVENTY_PAGE_FILES[spec.page]] = pageShell({
+        title: spec.title,
+        description: copy.meta.description,
+        permalink: spec.permalink,
+        body,
+        needsJs: true,
+      });
+    }
+    files["assets/css/sections.css"] = [...cssParts.entries()]
+      .map(([id, css]) => `/* ==== ${id} ==== */\n${css}`)
       .join("\n\n");
-    files[spec.file] = pageShell({
-      title: spec.title,
-      description: copy.meta.description,
-      permalink: spec.permalink,
-      body,
-      needsJs: true,
-    });
-    // Record page picks for the build log.
-    for (const s of spec.sections) picks[`${spec.permalink}${s.slot}`] = s.id;
+    files["assets/js/sections.js"] = needsAccordion ? ACCORDION_JS : "// no interactive sections";
   }
 
-  // ----- shared assets -----
-  files["assets/css/sections.css"] = [...cssParts.entries()]
-    .map(([id, css]) => `/* ==== ${id} ==== */\n${css}`)
-    .join("\n\n");
-  files["assets/js/sections.js"] = needsAccordion ? ACCORDION_JS : "// no interactive sections";
-
   return { files, picks };
+}
+
+// Where each composed page lives in the workspace (relative to src/).
+const ELEVENTY_PAGE_FILES = {
+  about: "content/pages/about.html",
+  faq: "content/pages/faq.html",
+  reviews: "content/pages/reviews.html",
+  portfolio: "content/pages/portfolio.html",
+  "service-1": "content/pages/services/service-1.html",
+  "service-2": "content/pages/services/service-2.html",
+};
+const ASTRO_PAGE_FILES = {
+  about: "pages/about.astro",
+  faq: "pages/faq.astro",
+  reviews: "pages/reviews.astro",
+  portfolio: "pages/portfolio.astro",
+  services: "pages/services.astro",
+  "service-1": "pages/services/service-1.astro",
+  "service-2": "pages/services/service-2.astro",
+};
+
+// A composed .astro page: the kit's own BaseLayout (header/footer/meta) and
+// Banner, with the filled sections dropped in as plain HTML. The accordion
+// toggle ships inline on every page — it's a no-op without .cs-faq-item.
+function astroShell({ title, description, banner, body }) {
+  return `---
+// Composed by Websitero from the docs component library — regenerated each build.
+import { getImage } from "astro:assets";
+import BaseLayout from "@layouts/BaseLayout.astro";
+${banner ? `import Banner from "@components/Banner/Banner.astro";\n` : ""}import "@styles/sections.css";
+import landingImage from "@assets/images/${banner ? "banner.webp" : "hero/hero.webp"}";
+const optimizedImage = await getImage({ src: landingImage, format: "webp" });
+const pageTitle = ${JSON.stringify(title)};
+const pageDescription = ${JSON.stringify(description)};${
+    banner ? `\nconst bannerTitle = ${JSON.stringify(banner)};` : ""
+  }
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} heroImage={optimizedImage}>
+${banner ? `\t<Banner title={bannerTitle} image={optimizedImage} />\n\n` : ""}${escBraces(body)}
+
+\t<script is:inline>
+${ACCORDION_JS}
+\t</script>
+</BaseLayout>
+`;
 }
