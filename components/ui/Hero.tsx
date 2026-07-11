@@ -8,12 +8,12 @@ import { BiSupport } from "react-icons/bi";
 import { FRAMEWORKS, FRAMEWORK_ORDER, type FrameworkKey } from "./frameworks-data";
 
 // Two ways to launch: we build it from the owner's prompts, or they build it
-// themselves from a kit. "forme" is the default — the primary audience is
+// themselves from a kit. "builditforme" is the default — the primary audience is
 // non-technical business owners.
-type Mode = "forme" | "diy";
+type Mode = "builditforme" | "diy";
 
 const MODES: { key: Mode; label: string; icon: typeof Sparkles;}[] = [
-  { key: "forme", label: "Build it for me", icon: Rocket },
+  { key: "builditforme", label: "Build it for me", icon: Rocket },
   { key: "diy", label: "I'll build it myself", icon: Wrench},
 ];
 
@@ -38,7 +38,7 @@ const avatars: { src?: string; alt: string }[] = [
 ];
 
 const Hero = () => {
-  const [mode, setMode] = useState<Mode>("forme");
+  const [mode, setMode] = useState<Mode>("builditforme");
   const [fw, setFw] = useState<FrameworkKey>("eleventy");
   const [typed, setTyped] = useState("");
   const active = FRAMEWORKS[fw];
@@ -103,7 +103,7 @@ const Hero = () => {
               })}
             </div>
             <p className="max-w-xl text-sm leading-relaxed text-slate-600">
-              {mode === "forme"
+              {mode === "builditforme"
                 ? "Answer a few guided prompts — we hand-code your site, Google profile, and SEO for you."
                 : "Start from a complete kit with step-by-step docs. Pick the stack you love:"}
             </p>
@@ -135,10 +135,10 @@ const Hero = () => {
 
           <div className="flex flex-col items-center gap-3 sm:flex-row">
             <Link
-              href="/forme"
+              href="/builditforme"
               className="inline-flex items-center gap-2 rounded-full bg-linear-to-br from-[#4588ba] to-[#316994] px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-[#4588ba]/30 transition-all hover:shadow-xl hover:shadow-[#4588ba]/40"
             >
-              {mode === "forme" ? "Build it for me" : "Get Started"}
+              {mode === "builditforme" ? "Build it for me" : "Get Started"}
             </Link>
             {mode === "diy" ?  (
               <Link
@@ -239,7 +239,7 @@ const Hero = () => {
           </div>
 
           {/* Top-right float — what to expect from the chosen path */}
-          {mode === "forme" ? (
+          {mode === "builditforme" ? (
             <div className="absolute -right-4 -top-4 hidden w-56 rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-xl sm:block">
               <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
                 Set up for you
