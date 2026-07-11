@@ -4,8 +4,9 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Trash2, LoaderCircle } from "lucide-react";
 
-/* Deletes a brief — its JSON, uploads, and built preview — after a confirm,
-   then refreshes the server-rendered list so the card disappears. */
+/* Deletes a brief — its JSON, uploads, preview, and workspace — after a
+   confirm, then refreshes the server-rendered list so the card disappears.
+   The workspace holds any hand-written code, hence the explicit warning. */
 
 const DeleteButton = ({ briefId }: { briefId: string }) => {
   const router = useRouter();
@@ -13,7 +14,11 @@ const DeleteButton = ({ briefId }: { briefId: string }) => {
   const [error, setError] = useState("");
 
   const remove = async () => {
-    if (!window.confirm("Delete this brief, its uploads, and its preview? This can't be undone."))
+    if (
+      !window.confirm(
+        "Delete this brief, its uploads, its preview, and its workspace — including any code you hand-wrote for it? This can't be undone.",
+      )
+    )
       return;
     setDeleting(true);
     setError("");

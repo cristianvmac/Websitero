@@ -13,7 +13,6 @@ import {
   ChevronLeft,
   Pencil,
   ImagePlus,
-  Wand2,
   X,
 } from "lucide-react";
 import {
@@ -86,19 +85,24 @@ const Forme = () => {
     setSending(true);
     setError("");
     try {
-      // Photos ride along as multipart; without them plain JSON keeps the
-      // API's original contract.
+      // Adding photos is what selects "upload" — no separate mode toggle.
+      // They ride along as multipart; without them plain JSON keeps the
+      // API's original contract and the site uses stock imagery.
+      const briefToSend: Brief = {
+        ...brief,
+        images: { mode: photos.length > 0 ? "upload" : "stock" },
+      };
       let res: Response;
-      if (brief.images.mode === "upload" && photos.length > 0) {
+      if (photos.length > 0) {
         const form = new FormData();
-        form.append("brief", JSON.stringify(brief));
+        form.append("brief", JSON.stringify(briefToSend));
         for (const file of photos) form.append("photos", file);
         res = await fetch("/api/forme", { method: "POST", body: form });
       } else {
         res = await fetch("/api/forme", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(brief),
+          body: JSON.stringify(briefToSend),
         });
       }
       if (!res.ok) throw new Error(`Request failed (${res.status})`);
@@ -313,54 +317,12 @@ const Forme = () => {
                 </div>
               </div>
 
-              {/* Photos: AI-sourced (default) or the owner's own uploads */}
+              {/* Photos: the owner's own uploads, or the kit's stock imagery */}
               <div>
-                <span className="text-sm font-medium text-slate-700">Photos for your site</span>
-                <div className="mt-2 grid gap-3 sm:grid-cols-2">
-                  {(
-                    [
-                      {
-                        mode: "ai",
-                        icon: Wand2,
-                        label: "Pick them for me",
-                        blurb: "We choose professional photos that fit your business.",
-                      },
-                      {
-                        mode: "upload",
-                        icon: ImagePlus,
-                        label: "Use my photos",
-                        blurb: "Upload your own — your shop, your work, your team.",
-                      },
-                    ] as const
-                  ).map(({ mode, icon: Icon, label, blurb }) => (
-                    <button
-                      key={mode}
-                      type="button"
-                      onClick={() => patch({ images: { ...brief.images, mode } })}
-                      aria-pressed={brief.images.mode === mode}
-                      className={`flex items-start gap-3 rounded-xl border p-4 text-left transition-all ${
-                        brief.images.mode === mode
-                          ? "border-[#4588ba]/40 bg-[#4588ba]/6 shadow-sm"
-                          : "border-slate-200 bg-white hover:border-slate-300"
-                      }`}
-                    >
-                      <Icon
-                        className={`mt-0.5 h-5 w-5 shrink-0 ${
-                          brief.images.mode === mode ? "text-[#4588ba]" : "text-slate-300"
-                        }`}
-                      />
-                      <span>
-                        <span className="block text-sm font-semibold text-slate-900">{label}</span>
-                        <span className="mt-0.5 block text-xs leading-relaxed text-slate-500">
-                          {blurb}
-                        </span>
-                      </span>
-                    </button>
-                  ))}
-                </div>
-
-                {brief.images.mode === "upload" && (
-                  <div className="mt-3">
+                <span className="text-sm font-medium text-slate-700">
+                  Your photos <span className="font-normal text-slate-400">(optional)</span>
+                </span>
+                <div className="mt-2">
                     <label
                       htmlFor="photo-upload"
                       className="flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-dashed border-slate-300 bg-slate-50 px-4 py-5 text-sm font-medium text-slate-500 transition-colors hover:border-[#4588ba]/40 hover:text-slate-700"
@@ -405,11 +367,10 @@ const Forme = () => {
                       </ul>
                     )}
                     <p className="mt-2 text-xs text-slate-400">
-                      Up to {MAX_PHOTOS} photos. Skip it and we&apos;ll fill in professional ones
-                      until yours are ready.
+                      Up to {MAX_PHOTOS} photos — your shop, your work, your team. Skip it and
+                      we&apos;ll use professional stock photos until yours are ready.
                     </p>
-                  </div>
-                )}
+                </div>
               </div>
             </div>
           )}
@@ -495,9 +456,9 @@ const Forme = () => {
                   {
                     label: "Photos",
                     value:
-                      brief.images.mode === "upload"
+                      photos.length > 0
                         ? `${photos.length} of your own photo${photos.length === 1 ? "" : "s"}`
-                        : "Picked for you",
+                        : "Professional stock photos",
                     target: 2,
                   },
                   { label: "Your words", value: brief.prompt || "—", target: 3 },

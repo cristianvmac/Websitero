@@ -8,9 +8,9 @@ import { Sparkles, Star, Zap, ShieldCheck, Rocket, Wrench } from "lucide-react";
 import { BiSupport } from "react-icons/bi";
 import { FRAMEWORKS, FRAMEWORK_ORDER, type FrameworkKey } from "@/components/ui/frameworks-data";
 
-// Two ways to launch: we build it from the owner's prompts, or they build it
-// themselves from a kit. "forme" is the default — the primary audience is
-// non-technical business owners.
+// Two ways to launch: the owner sends us their info (a doc + photos) and we
+// hand-code the site from it, or they build it themselves from a kit. "forme"
+// is the default — the primary audience is non-technical business owners.
 type Mode = "forme" | "diy";
 
 const MODES: { key: Mode; label: string; icon: typeof Sparkles;}[] = [
@@ -18,8 +18,10 @@ const MODES: { key: Mode; label: string; icon: typeof Sparkles;}[] = [
   { key: "diy", label: "I'll build it myself", icon: Wrench},
 ];
 
-// Plain-English prompt typed in "build it for me" mode (same business as the
-// HowItWorks demo). DIY mode types the framework's real start command instead.
+// A line from the owner's info shown typing in "build it for me" mode (same
+// business as the HowItWorks demo) — their own words, not a form answer. The
+// real upload happens on /builditforme, never here. DIY mode types the
+// framework's real start command instead.
 const PROMPT = "A cozy bakery in Austin with a menu, photos, and online orders";
 
 const trust = [
@@ -85,8 +87,9 @@ const Startyourwebsite = () => {
             </span>
           </h1>
           <p className="max-w-xl text-lg leading-relaxed text-slate-600">
-            Answer a few simple questions and we&apos;ll build it for you — or start from a
-            complete kit and build it yourself. Either way, you own real, fast code.
+            Send us your business info and photos and we&apos;ll build your website from
+            them — or start from a complete kit and build it yourself. Either way, you
+            own real, fast code.
           </p>
         </div>
 
@@ -115,7 +118,7 @@ const Startyourwebsite = () => {
           </div>
           <p className="max-w-xl text-sm leading-relaxed text-slate-600">
             {mode === "forme"
-              ? "Answer a few guided prompts — we hand-code your site, Google profile, and SEO for you."
+              ? "No questions, no forms — send a doc about your business and your photos. We hand-code your site, Google profile, and SEO for you."
               : "Start from a complete kit with step-by-step docs. Pick the stack you love:"}
           </p>
           {mode === "diy" && (
@@ -152,7 +155,7 @@ const Startyourwebsite = () => {
               <span className="h-3 w-3 rounded-full bg-amber-400" />
               <span className="h-3 w-3 rounded-full bg-green-400" />
               <span className="ml-2 text-xs font-medium text-slate-400">
-                {mode === "forme" ? "Describe your business" : `${active.name} · terminal`}
+                {mode === "forme" ? "Your business info" : `${active.name} · terminal`}
               </span>
             </div>
             <div className="flex items-start gap-3 px-5 py-6 text-left">
@@ -172,7 +175,7 @@ const Startyourwebsite = () => {
         {/* CTAs */}
         <div className="flex flex-col items-center gap-3 sm:flex-row">
           <Link
-            href={mode === "diy" ? active.docs : "/forme"}
+            href={mode === "diy" ? active.docs : "/builditforme"}
             className="inline-flex items-center gap-2 rounded-full bg-linear-to-br from-[#4588ba] to-[#316994] px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-[#4588ba]/30 transition-all hover:shadow-xl hover:shadow-[#4588ba]/40"
           >
             {mode === "forme" ? "Build it for me" : "Get Started"}

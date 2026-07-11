@@ -16,13 +16,18 @@ export interface Brief {
   };
   /** Plain-English description, same spirit as the Hero's typed prompt. */
   prompt: string;
-  /** Where the site's photos come from: AI-sourced or the owner's uploads.
-      When mode is "upload", the wizard posts the files alongside the brief
-      and the API stores them in briefs/uploads/<id>/ (recorded in `files`). */
+  /** Where the site's photos come from: the kit's professional stock imagery
+      (default) or the owner's own uploads. When mode is "upload", the wizard
+      posts the files alongside the brief and the API stores them in
+      briefs/uploads/<id>/ (recorded in `files`). */
   images: {
-    mode: "ai" | "upload";
+    mode: "stock" | "upload";
     files?: string[];
   };
+  /** "Send us your info" flow (/builditforme): the owner's uploaded document
+      about their business, stored with the photos in briefs/uploads/<id>/.
+      Readable text (plain-text docs, pasted lines) also rides in `prompt`. */
+  doc?: { file: string };
   contact: {
     email: string;
     phone: string;
@@ -34,7 +39,7 @@ export const EMPTY_BRIEF: Brief = {
   features: [],
   style: { brandColor: "#4588ba", vibe: "" },
   prompt: "",
-  images: { mode: "ai" },
+  images: { mode: "stock" },
   contact: { email: "", phone: "" },
 };
 

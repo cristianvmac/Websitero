@@ -12,13 +12,16 @@ import type { Brief } from "@/app/forme/brief";
 
 const MAX_PHOTOS = 8;
 const MAX_PHOTO_BYTES = 8 * 1024 * 1024;
+const MAX_DOC_BYTES = 10 * 1024 * 1024;
+const DOC_EXTS = [".txt", ".md", ".pdf", ".doc", ".docx", ".rtf", ".odt"];
 
 export async function POST(req: Request) {
   let brief: Brief;
   let photos: File[] = [];
+  let doc: File | null = null;
   try {
-    // "Use my photos" submissions arrive as multipart (brief JSON + files);
-    // everything else keeps the original plain-JSON contract.
+    // Uploads (owner's photos, and the /builditforme doc) arrive as multipart
+    // (brief JSON + files); everything else keeps the plain-JSON contract.
     if (req.headers.get("content-type")?.includes("multipart/form-data")) {
       const form = await req.formData();
       brief = JSON.parse(String(form.get("brief")));
@@ -29,6 +32,16 @@ export async function POST(req: Request) {
             f instanceof File && f.size > 0 && f.size <= MAX_PHOTO_BYTES && f.type.startsWith("image/"),
         )
         .slice(0, MAX_PHOTOS);
+      const rawDoc = form.get("doc");
+      if (
+        rawDoc instanceof File &&
+        rawDoc.size > 0 &&
+        rawDoc.size <= MAX_DOC_BYTES &&
+        (rawDoc.type.startsWith("text/") ||
+          DOC_EXTS.some((ext) => rawDoc.name.toLowerCase().endsWith(ext)))
+      ) {
+        doc = rawDoc;
+      }
     } else {
       brief = await req.json();
     }
@@ -36,12 +49,16 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: "Invalid JSON" }, { status: 400 });
   }
 
-  // Minimal validation — mirror what the wizard hard-requires.
+  // Minimal validation. Wizard briefs hard-require the structured fields;
+  // materials briefs (a doc and/or pasted text from /builditforme) only need
+  // a way to reach the owner — the team derives the rest from the materials.
+  const hasMaterials = doc !== null || Boolean(brief?.prompt?.trim());
   if (
-    !brief?.business?.name?.trim() ||
-    !brief?.business?.type ||
-    !brief?.business?.location?.trim() ||
-    !/^\S+@\S+\.\S+$/.test(brief?.contact?.email ?? "")
+    !/^\S+@\S+\.\S+$/.test(brief?.contact?.email ?? "") ||
+    (!hasMaterials &&
+      (!brief?.business?.name?.trim() ||
+        !brief?.business?.type ||
+        !brief?.business?.location?.trim()))
   ) {
     return NextResponse.json(
       { ok: false, error: "Missing required fields" },
@@ -50,6 +67,20 @@ export async function POST(req: Request) {
   }
 
   const id = crypto.randomUUID();
+
+  // Store the owner's doc next to their photos (briefs/uploads/<id>/) and
+  // record it in the brief so the team and build worker can find it.
+  if (doc) {
+    try {
+      const uploadDir = path.join(process.cwd(), "briefs", "uploads", id);
+      await fs.mkdir(uploadDir, { recursive: true });
+      const name = `doc${path.extname(doc.name).toLowerCase() || ".txt"}`;
+      await fs.writeFile(path.join(uploadDir, name), Buffer.from(await doc.arrayBuffer()));
+      brief.doc = { file: name };
+    } catch (err) {
+      console.warn("[forme] could not persist doc:", err);
+    }
+  }
 
   // Store the owner's photos where the build worker looks for them
   // (briefs/uploads/<id>/), recording the stored names in the brief.
@@ -67,7 +98,7 @@ export async function POST(req: Request) {
       brief.images = { mode: "upload", files: saved };
     } catch (err) {
       console.warn("[forme] could not persist photos:", err);
-      brief.images = { mode: "ai" }; // build falls back to stock imagery
+      brief.images = { mode: "stock" }; // build keeps the kit's stock imagery
     }
   }
 
@@ -88,15 +119,26 @@ export async function POST(req: Request) {
   // Kick off the preview build in the background — the wizard response
   // shouldn't wait for it. Check /admin/briefs for the result.
   // (Dev / self-hosted; on serverless this becomes a queued job.)
-  execFile(
-    "node",
-    ["scripts/build-site.mjs", id],
-    { cwd: process.cwd(), timeout: 300_000 },
-    (err) => {
-      if (err) console.warn(`[forme] auto-build failed for ${id}:`, err.message);
-      else console.log(`[forme] preview built for ${id}`);
-    },
-  );
+  // Materials-only briefs skip this: the build scripts key off business
+  // name (slug, branding) and type/location (copy), so the team derives
+  // those from the doc/photos first.
+  const buildable =
+    brief.business?.name?.trim() &&
+    brief.business?.type?.trim() &&
+    brief.business?.location?.trim();
+  if (buildable) {
+    execFile(
+      "node",
+      ["scripts/build-site.mjs", id],
+      { cwd: process.cwd(), timeout: 300_000 },
+      (err) => {
+        if (err) console.warn(`[forme] auto-build failed for ${id}:`, err.message);
+        else console.log(`[forme] preview built for ${id}`);
+      },
+    );
+  } else {
+    console.log(`[forme] brief ${id} is materials-only — awaiting team triage, no auto-build`);
+  }
 
   return NextResponse.json({ ok: true, id });
 }

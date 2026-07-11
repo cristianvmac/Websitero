@@ -6,12 +6,15 @@ import { NextResponse } from "next/server";
 
 /* One-click (re)build: runs scripts/build-site.mjs for a brief and reports
    the preview URL. Dev / self-hosted only — on serverless this becomes a job
-   queued to a build worker. */
+   queued to a build worker.
+
+   POST { codeOnly: true } recompiles the developer's hand-edited workspace
+   instead of regenerating the site from the brief — see --code-only. */
 
 const execFileAsync = promisify(execFile);
 
 export async function POST(
-  _req: Request,
+  req: Request,
   { params }: { params: Promise<{ id: string }> },
 ) {
   const { id } = await params;
@@ -27,9 +30,19 @@ export async function POST(
     return NextResponse.json({ ok: false, error: "Brief not found" }, { status: 404 });
   }
 
+  // Body is optional — a bare POST is a full rebuild from the brief.
+  let codeOnly = false;
   try {
-    // Generous timeout — the build includes a Claude copywriting call.
-    await execFileAsync("node", ["scripts/build-site.mjs", id], {
+    codeOnly = (await req.json())?.codeOnly === true;
+  } catch {
+    /* no body */
+  }
+
+  try {
+    // Generous timeout — a full build includes a Claude copywriting call.
+    const args = ["scripts/build-site.mjs", id];
+    if (codeOnly) args.push("--code-only");
+    await execFileAsync("node", args, {
       cwd: process.cwd(),
       timeout: 300_000,
     });
