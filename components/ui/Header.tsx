@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Transition } from "@headlessui/react";
 import { Menu, X, Rocket, ArrowRight, Sparkles, ExternalLink, ArrowUp,  ArrowUpRight } from "lucide-react";
 import { FaCode } from "react-icons/fa";
@@ -16,6 +17,10 @@ const navLinks = [
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+
+  // The dashboard has its own chrome (sidebar + topbar).
+  if (pathname?.startsWith("/dashboard")) return null;
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
