@@ -52,17 +52,15 @@ otherwise what is the point of using it like Eleventy as
 # I Ranked an HVAC Company in ChatGPT Using Only Reddit: try to integrate this concept https://www.youtube.com/watch?v=MICruT4ckIE
 
 # HOW IT WORKS
-1. Build it for me 
-i want the approach to be like this: after user prompts, the kit is dowloaded
- from Github repo https://github.com/cristianvmac/Eleventy-Starter or 
- perhaps a better way that the standard kit to be store it and then to be customized based on 
- the prompts and the images submitted. 
- Also the components to be chose from docs/eleventy and add it to the kit based on the prompts to have 
- a better website and different from a user to another
-Or send to the user a google drive link/ or write in the prompts of the Websitero /forme to upload all info and pictures and then Websitero is doing it  
+1. Build it for me - keep it how it is in builditforme/ where user upload his text document and pictures
+ and from there Websitero is going to custom his website based on his info and pictures
 
-2. Build it for me based on prompts
+2. Build it myself - user builds it by himself using docs/ with our support by chat
 
-3. Build it myself
-User builds it by himself using docs/ with our support by chat
+3. Build it for me using a prompt system similar to https://launch-site.dev/. 
+However, the websites should be built using our internal documentation found at docs/
+and CodeStitch components (https://codestitch.app/app), 
+as I want the final pages constructed from pure HTML, CSS, and JS components.
 
+To help build better websites for 'Build it for me using prompts' I think its better to create templates for each industry 
+from CodeStitch components (https://codestitch.app/app) and internal documentation found at docs/
