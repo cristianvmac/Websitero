@@ -61,6 +61,6 @@ otherwise what is the point of using it like Eleventy as
 However, the websites should be built using our internal documentation found at docs/
 and CodeStitch components (https://codestitch.app/app), 
 as I want the final pages constructed from pure HTML, CSS, and JS components.
-
 To help build better websites for 'Build it for me using prompts' I think its better to create templates for each industry 
-from CodeStitch components (https://codestitch.app/app) and internal documentation found at docs/
+from CodeStitch components (https://codestitch.app/app) and internal documentation found at docs/ or
+better Store the composition as an ordered list of component ids, not as copied HTML
