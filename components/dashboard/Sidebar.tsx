@@ -1,36 +1,52 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   BarChart3,
+  BookOpen,
   ChevronRight,
+  Clock,
   ContactRound,
   FileText,
   Gift,
   Globe,
   Home,
+  Image as ImageIcon,
   Languages,
   LogOut,
+  MapPin,
   MessageSquare,
   PenLine,
   Palette,
   Receipt,
+  Scale,
   Search,
   Settings,
+  ShieldCheck,
   ShoppingBag,
+  Sparkles,
+  Type,
   UserRound,
+  UtensilsCrossed,
   Zap,
   type LucideIcon,
 } from "lucide-react";
 import type { DashboardData } from "@/src/data/dashboard";
 
+type NavChild = {
+  label: string;
+  href: string;
+  icon: LucideIcon;
+};
+
 type NavItem = {
   label: string;
   href: string;
   icon: LucideIcon;
-  /** Items that will get their own sub-pages later show a chevron. */
-  hasChildren?: boolean;
+  /** Groups expand in place; their sub-pages are added as routes later. */
+  children?: NavChild[];
 };
 
 export const homeItem: NavItem = { label: "Home", href: "/dashboard", icon: Home };
@@ -40,9 +56,42 @@ export const navSections: { label: string; items: NavItem[] }[] = [
     label: "My site",
     items: [
       { label: "My Site", href: "/dashboard/site", icon: Globe },
-      { label: "Content", href: "/dashboard/content", icon: FileText, hasChildren: true },
-      { label: "Appearance", href: "/dashboard/appearance", icon: Palette, hasChildren: true },
-      { label: "Settings", href: "/dashboard/settings", icon: Settings, hasChildren: true },
+      {
+        label: "Content",
+        href: "/dashboard/content",
+        icon: FileText,
+        children: [
+          { label: "Pages", href: "/dashboard/content/pages", icon: FileText },
+          { label: "Menu labels", href: "/dashboard/content/menu-labels", icon: Type },
+          { label: "Media", href: "/dashboard/content/media", icon: ImageIcon },
+          { label: "Menu", href: "/dashboard/content/menu", icon: UtensilsCrossed },
+          { label: "Our story", href: "/dashboard/content/our-story", icon: Clock },
+          { label: "Blog", href: "/dashboard/content/blog", icon: BookOpen },
+          { label: "My contact details", href: "/dashboard/content/contact-details", icon: MapPin },
+          { label: "Languages", href: "/dashboard/content/languages", icon: Globe },
+          { label: "Legal Pages", href: "/dashboard/content/legal", icon: Scale },
+        ],
+      },
+      {
+        label: "Appearance",
+        href: "/dashboard/appearance",
+        icon: Palette,
+        children: [
+          { label: "Mood", href: "/dashboard/appearance/mood", icon: Sparkles },
+          { label: "Logo", href: "/dashboard/appearance/logo", icon: ImageIcon },
+          { label: "Change Design", href: "/dashboard/appearance/design", icon: Globe },
+        ],
+      },
+      {
+        label: "Settings",
+        href: "/dashboard/settings",
+        icon: Settings,
+        children: [
+          { label: "Settings", href: "/dashboard/settings", icon: Settings },
+          { label: "Domain", href: "/dashboard/settings/domain", icon: Search },
+          { label: "Backups", href: "/dashboard/settings/backups", icon: ShieldCheck },
+        ],
+      },
     ],
   },
   {
@@ -65,28 +114,129 @@ export const navSections: { label: string; items: NavItem[] }[] = [
   },
 ];
 
-/** Topbar label for the current route, e.g. "/dashboard/content" -> "Content". */
-export function pageLabel(pathname: string): string {
-  const all = navSections.flatMap((s) => s.items);
-  const match = all.find((i) => pathname === i.href || pathname.startsWith(i.href + "/"));
-  return match?.label ?? homeItem.label;
+function matches(pathname: string, href: string): boolean {
+  return pathname === href || pathname.startsWith(href + "/");
 }
 
-function NavLink({ item, active }: { item: NavItem; active: boolean }) {
+/**
+ * Topbar label for the current route — the deepest matching entry wins, so
+ * "/dashboard/content/blog" shows "Blog" while "/dashboard/content" shows "Content".
+ */
+export function pageLabel(pathname: string): string {
+  let label = homeItem.label;
+  let len = -1;
+  for (const section of navSections) {
+    for (const item of section.items) {
+      if (matches(pathname, item.href) && item.href.length > len) {
+        label = item.label;
+        len = item.href.length;
+      }
+      for (const child of item.children ?? []) {
+        if (matches(pathname, child.href) && child.href.length > len) {
+          label = child.label;
+          len = child.href.length;
+        }
+      }
+    }
+  }
+  return label;
+}
+
+/** Label of the group that owns the current route, so it can start expanded. */
+function activeGroupLabel(pathname: string): string | null {
+  for (const section of navSections) {
+    for (const item of section.items) {
+      if (item.children && matches(pathname, item.href)) return item.label;
+    }
+  }
+  return null;
+}
+
+/**
+ * The one child considered active: the longest matching href. Needed because
+ * the "Settings" child shares its href with the group, and would otherwise
+ * light up together with "Domain" or "Backups".
+ */
+function activeChildHref(children: NavChild[], pathname: string): string | null {
+  let best: string | null = null;
+  for (const child of children) {
+    if (matches(pathname, child.href) && (!best || child.href.length > best.length)) {
+      best = child.href;
+    }
+  }
+  return best;
+}
+
+const rowClass = (active: boolean) =>
+  `flex w-full items-center gap-3 rounded-lg px-2.5 py-2 text-sm transition-colors ${
+    active
+      ? "bg-slate-100 font-semibold text-slate-900"
+      : "font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+  }`;
+
+function NavLink({ item, active }: { item: NavItem | NavChild; active: boolean }) {
   const Icon = item.icon;
   return (
-    <Link
-      href={item.href}
-      className={`flex items-center gap-3 rounded-lg px-2.5 py-2 text-sm transition-colors ${
-        active
-          ? "bg-slate-100 font-semibold text-slate-900"
-          : "font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900"
-      }`}
-    >
+    <Link href={item.href} className={rowClass(active)}>
       <Icon className="h-4.5 w-4.5 shrink-0" />
       <span className="truncate">{item.label}</span>
-      {item.hasChildren && <ChevronRight className="ml-auto h-4 w-4 text-slate-400" />}
     </Link>
+  );
+}
+
+function NavGroup({
+  item,
+  pathname,
+  open,
+  onToggle,
+}: {
+  item: NavItem;
+  pathname: string;
+  open: boolean;
+  onToggle: () => void;
+}) {
+  const Icon = item.icon;
+  const activeHref = activeChildHref(item.children ?? [], pathname);
+
+  return (
+    <div>
+      <button
+        type="button"
+        onClick={onToggle}
+        aria-expanded={open}
+        className={rowClass(!open && activeHref !== null)}
+      >
+        <Icon className="h-4.5 w-4.5 shrink-0" />
+        <span className="truncate">{item.label}</span>
+        <ChevronRight
+          className={`ml-auto h-4 w-4 shrink-0 text-slate-400 transition-transform ${
+            open ? "rotate-90" : ""
+          }`}
+        />
+      </button>
+      {open && (
+        <div className="mt-1 flex flex-col gap-1">
+          {(item.children ?? []).map((child) => {
+            const ChildIcon = child.icon;
+            const active = child.href === activeHref;
+            return (
+              <Link
+                key={child.label}
+                href={child.href}
+                className={`flex items-center gap-3 rounded-lg py-2 pl-8 pr-2.5 text-sm transition-colors ${
+                  active
+                    ? "bg-slate-100 font-semibold text-slate-900"
+                    : "font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+                }`}
+              >
+                <ChildIcon className="h-4 w-4 shrink-0" />
+                <span className="truncate">{child.label}</span>
+              </Link>
+            );
+          })}
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -98,6 +248,19 @@ type SidebarProps = {
 
 export default function Sidebar({ site, credits, locale }: SidebarProps) {
   const pathname = usePathname();
+  const [open, setOpen] = useState<Record<string, boolean>>(() => {
+    const group = activeGroupLabel(pathname);
+    return group ? { [group]: true } : {};
+  });
+
+  // Keep the group of the current page expanded when navigating from elsewhere
+  // (e.g. a checklist link), without collapsing groups the user opened manually.
+  useEffect(() => {
+    const group = activeGroupLabel(pathname);
+    if (group) setOpen((prev) => (prev[group] ? prev : { ...prev, [group]: true }));
+  }, [pathname]);
+
+  const toggle = (label: string) => setOpen((prev) => ({ ...prev, [label]: !prev[label] }));
 
   return (
     <div className="sidebar-scroll flex h-full w-full flex-col overflow-y-auto bg-white p-4">
@@ -150,13 +313,19 @@ export default function Sidebar({ site, credits, locale }: SidebarProps) {
           <p className="px-2.5 pb-1 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
             {section.label}
           </p>
-          {section.items.map((item) => (
-            <NavLink
-              key={item.href}
-              item={item}
-              active={pathname === item.href || pathname.startsWith(item.href + "/")}
-            />
-          ))}
+          {section.items.map((item) =>
+            item.children ? (
+              <NavGroup
+                key={item.label}
+                item={item}
+                pathname={pathname}
+                open={!!open[item.label]}
+                onToggle={() => toggle(item.label)}
+              />
+            ) : (
+              <NavLink key={item.label} item={item} active={matches(pathname, item.href)} />
+            ),
+          )}
         </nav>
       ))}
 
