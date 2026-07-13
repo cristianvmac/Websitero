@@ -170,7 +170,7 @@ const Startyourwebsite = () => {
 
         {/* The mock reflects the active mode. In "prompt" mode it's the real
             thing: the owner types here and we carry it to /generate. */}
-        <div className="w-full max-w-xl">
+       <div className="w-full max-w-xl">
           <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xl shadow-slate-300/40">
             <div className="flex items-center gap-2 border-b border-slate-100 bg-slate-50 px-4 py-3">
               <span className="h-3 w-3 rounded-full bg-red-400" />
