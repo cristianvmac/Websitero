@@ -4,25 +4,42 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Sparkles, Star, Zap, ShieldCheck, Rocket, Wrench } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Sparkles, Star, Zap, ShieldCheck, Rocket, Wrench, Wand2, ArrowRight } from "lucide-react";
 import { BiSupport } from "react-icons/bi";
 import { FRAMEWORKS, FRAMEWORK_ORDER, type FrameworkKey } from "@/components/ui/frameworks-data";
 
-// Two ways to launch: the owner sends us their info (a doc + photos) and we
-// hand-code the site from it, or they build it themselves from a kit. "forme"
-// is the default — the primary audience is non-technical business owners.
-type Mode = "forme" | "diy";
+// Three ways to launch:
+//   forme   — the owner sends us their info (a doc + photos) and we hand-code
+//             the site from it (/builditforme). Default: the primary audience
+//             is non-technical business owners.
+//   prompt  — the owner describes the site in one line and we generate it from
+//             our docs + CodeStitch components (/generate).
+//   diy     — the owner builds it themselves from a kit, with chat support.
+type Mode = "forme" | "prompt" | "diy";
 
-const MODES: { key: Mode; label: string; icon: typeof Sparkles;}[] = [
+const MODES: { key: Mode; label: string; icon: typeof Sparkles }[] = [
   { key: "forme", label: "Build it for me", icon: Rocket },
-  { key: "diy", label: "I'll build it myself", icon: Wrench},
+  { key: "prompt", label: "Build it from a prompt", icon: Wand2 },
+  { key: "diy", label: "I'll build it myself", icon: Wrench },
 ];
 
-// A line from the owner's info shown typing in "build it for me" mode (same
-// business as the HowItWorks demo) — their own words, not a form answer. The
-// real upload happens on /builditforme, never here. DIY mode types the
-// framework's real start command instead.
-const PROMPT = "A cozy bakery in Austin with a menu, photos, and online orders";
+const BLURB: Record<Mode, string> = {
+  forme:
+    "No questions, no forms — send a doc about your business and your photos. We hand-code your site, Google profile, and SEO for you.",
+  prompt:
+    "Describe your business in a sentence. We assemble your pages from our component library — pure HTML, CSS and JS you own.",
+  diy: "Start from a complete kit with step-by-step docs and chat support. Pick the stack you love:",
+};
+
+// The line that types itself in the mock. "forme" shows a line from the
+// owner's info (same business as the HowItWorks demo) — their own words, not
+// a form answer; the real upload happens on /builditforme, never here.
+// "prompt" shows an example prompt, and doubles as the placeholder of the real
+// input. DIY types the framework's actual start command.
+const DOC_LINE = "A cozy bakery in Austin with a menu, photos, and online orders";
+const PROMPT_LINE =
+  "A plumbing company in Denver — services, reviews, and a quote form";
 
 const trust = [
   { icon: Zap, label: "Live in hours" },
@@ -33,19 +50,21 @@ const trust = [
 // Social-proof avatars. Drop real image paths into `src` when you have them;
 // entries without a `src` render a soft gradient placeholder in the meantime.
 const avatars: { src?: string; alt: string }[] = [
-  { src: "", alt: "Jane"  },
-  { src: "", alt: "Marcus"  },
-  { src: "", alt: "Aisha"  },
-  { src: "", alt: "Diego"  },
-  { src: "", alt: "Priya"  },
+  { src: "", alt: "Jane" },
+  { src: "", alt: "Marcus" },
+  { src: "", alt: "Aisha" },
+  { src: "", alt: "Diego" },
+  { src: "", alt: "Priya" },
 ];
 
 const Startyourwebsite = () => {
+  const router = useRouter();
   const [mode, setMode] = useState<Mode>("forme");
   const [fw, setFw] = useState<FrameworkKey>("eleventy");
   const [typed, setTyped] = useState("");
+  const [prompt, setPrompt] = useState("");
   const active = FRAMEWORKS[fw];
-  const line = mode === "diy" ? active.command : PROMPT;
+  const line = mode === "diy" ? active.command : mode === "prompt" ? PROMPT_LINE : DOC_LINE;
 
   // Type the current line char by char. The first interval tick writes ""
   // (so no setState runs synchronously in the effect body), then it fills in.
@@ -61,6 +80,12 @@ const Startyourwebsite = () => {
     }, 40);
     return () => clearInterval(id);
   }, [line]);
+
+  // Hand the prompt to /generate, which runs the build.
+  const generate = () => {
+    const value = prompt.trim() || PROMPT_LINE;
+    router.push(`/generate?prompt=${encodeURIComponent(value)}`);
+  };
 
   return (
     <section
@@ -87,15 +112,15 @@ const Startyourwebsite = () => {
             </span>
           </h1>
           <p className="max-w-xl text-lg leading-relaxed text-slate-600">
-            Send us your business info and photos and we&apos;ll build your website from
-            them — or start from a complete kit and build it yourself. Either way, you
-            own real, fast code.
+            Send us your info and photos, describe your business in one line, or start
+            from a complete kit and build it yourself. Either way, you own real, fast
+            code.
           </p>
         </div>
 
-        {/* Mode toggle: we build it, or you build it */}
+        {/* Mode toggle: we build it, a prompt builds it, or you build it */}
         <div className="flex flex-col items-center gap-3">
-          <div className="inline-flex rounded-full border border-slate-200 bg-white p-1 shadow-sm">
+          <div className="inline-flex flex-wrap justify-center rounded-full border border-slate-200 bg-white p-1 shadow-sm">
             {MODES.map(({ key, label, icon: Icon }) => {
               const isActive = key === mode;
               return (
@@ -116,11 +141,7 @@ const Startyourwebsite = () => {
               );
             })}
           </div>
-          <p className="max-w-xl text-sm leading-relaxed text-slate-600">
-            {mode === "forme"
-              ? "No questions, no forms — send a doc about your business and your photos. We hand-code your site, Google profile, and SEO for you."
-              : "Start from a complete kit with step-by-step docs. Pick the stack you love:"}
-          </p>
+          <p className="max-w-xl text-sm leading-relaxed text-slate-600">{BLURB[mode]}</p>
           {mode === "diy" && (
             <div className="inline-flex flex-wrap justify-center rounded-full border border-slate-200 bg-white shadow-sm">
               {FRAMEWORK_ORDER.map((key) => {
@@ -147,7 +168,8 @@ const Startyourwebsite = () => {
           )}
         </div>
 
-        {/* Prompt / terminal mock — reflects the active mode and types itself out */}
+        {/* The mock reflects the active mode. In "prompt" mode it's the real
+            thing: the owner types here and we carry it to /generate. */}
         <div className="w-full max-w-xl">
           <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xl shadow-slate-300/40">
             <div className="flex items-center gap-2 border-b border-slate-100 bg-slate-50 px-4 py-3">
@@ -155,45 +177,111 @@ const Startyourwebsite = () => {
               <span className="h-3 w-3 rounded-full bg-amber-400" />
               <span className="h-3 w-3 rounded-full bg-green-400" />
               <span className="ml-2 text-xs font-medium text-slate-400">
-                {mode === "forme" ? "Your business info" : `${active.name} · terminal`}
+                {mode === "forme"
+                  ? "Your business info"
+                  : mode === "prompt"
+                    ? "Describe your website"
+                    : `${active.name} · terminal`}
               </span>
             </div>
-            <div className="flex items-start gap-3 px-5 py-6 text-left">
-              {mode === "forme" ? (
-                <Sparkles className="mt-0.5 h-5 w-5 shrink-0 text-[#4588ba]" />
-              ) : (
-                <span className="mt-px font-mono text-[#4588ba]">$</span>
-              )}
-              <p className={`leading-relaxed text-slate-700 ${mode === "diy" ? "font-mono text-sm" : "text-base"}`}>
-                {typed}
-                <span className="ml-0.5 inline-block h-4 w-px animate-pulse bg-[#4588ba] align-middle" />
-              </p>
-            </div>
+
+            {mode === "prompt" ? (
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  generate();
+                }}
+                className="flex flex-col gap-3 px-5 py-5 text-left"
+              >
+                <div className="flex items-start gap-3">
+                  <Wand2 className="mt-1 h-5 w-5 shrink-0 text-[#4588ba]" />
+                  <textarea
+                    value={prompt}
+                    onChange={(e) => setPrompt(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" && !e.shiftKey) {
+                        e.preventDefault();
+                        generate();
+                      }
+                    }}
+                    rows={2}
+                    placeholder={typed || " "}
+                    aria-label="Describe your website"
+                    className="w-full resize-none bg-transparent text-base leading-relaxed text-slate-700 outline-none placeholder:text-slate-400"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="inline-flex items-center justify-center gap-2 self-end rounded-full bg-linear-to-br from-[#4588ba] to-[#316994] px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-[#4588ba]/30 transition-all hover:shadow-lg hover:shadow-[#4588ba]/40"
+                >
+                  Generate my website
+                  <ArrowRight className="h-4 w-4" />
+                </button>
+              </form>
+            ) : (
+              <div className="flex items-start gap-3 px-5 py-6 text-left">
+                {mode === "forme" ? (
+                  <Sparkles className="mt-0.5 h-5 w-5 shrink-0 text-[#4588ba]" />
+                ) : (
+                  <span className="mt-px font-mono text-[#4588ba]">$</span>
+                )}
+                <p className={`leading-relaxed text-slate-700 ${mode === "diy" ? "font-mono text-sm" : "text-base"}`}>
+                  {typed}
+                  <span className="ml-0.5 inline-block h-4 w-px animate-pulse bg-[#4588ba] align-middle" />
+                </p>
+              </div>
+            )}
           </div>
         </div>
 
         {/* CTAs */}
         <div className="flex flex-col items-center gap-3 sm:flex-row">
-          <Link
-            href={mode === "diy" ? active.docs : "/builditforme"}
-            className="inline-flex items-center gap-2 rounded-full bg-linear-to-br from-[#4588ba] to-[#316994] px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-[#4588ba]/30 transition-all hover:shadow-xl hover:shadow-[#4588ba]/40"
-          >
-            {mode === "forme" ? "Build it for me" : "Get Started"}
-          </Link>
-          {mode === "diy" ?  (
-            <Link
-              href={active.docs}
-              className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-7 py-3.5 text-base font-semibold text-slate-700 transition-colors hover:border-slate-400 hover:bg-slate-50"
-            >
-              Read the {active.name} docs
-            </Link>
+          {mode === "diy" ? (
+            <>
+              <Link
+                href={active.docs}
+                className="inline-flex items-center gap-2 rounded-full bg-linear-to-br from-[#4588ba] to-[#316994] px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-[#4588ba]/30 transition-all hover:shadow-xl hover:shadow-[#4588ba]/40"
+              >
+                Get Started
+              </Link>
+              <Link
+                href={active.docs}
+                className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-7 py-3.5 text-base font-semibold text-slate-700 transition-colors hover:border-slate-400 hover:bg-slate-50"
+              >
+                Read the {active.name} docs
+              </Link>
+            </>
+          ) : mode === "prompt" ? (
+            <>
+              <button
+                type="button"
+                onClick={generate}
+                className="inline-flex items-center gap-2 rounded-full bg-linear-to-br from-[#4588ba] to-[#316994] px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-[#4588ba]/30 transition-all hover:shadow-xl hover:shadow-[#4588ba]/40"
+              >
+                Generate my website
+              </button>
+              <Link
+                href="#how-it-works"
+                className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-7 py-3.5 text-base font-semibold text-slate-700 transition-colors hover:border-slate-400 hover:bg-slate-50"
+              >
+                See how it works
+              </Link>
+            </>
           ) : (
-            <Link
-              href="#how-it-works"
-              className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-7 py-3.5 text-base font-semibold text-slate-700 transition-colors hover:border-slate-400 hover:bg-slate-50"
-            >
-              See how it works
-            </Link>
+            <>
+              <Link
+                href="/builditforme"
+                className="inline-flex items-center gap-2 rounded-full bg-linear-to-br from-[#4588ba] to-[#316994] px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-[#4588ba]/30 transition-all hover:shadow-xl hover:shadow-[#4588ba]/40"
+              >
+                Build it for me
+              </Link>
+              <Link
+                href="#how-it-works"
+                className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-7 py-3.5 text-base font-semibold text-slate-700 transition-colors hover:border-slate-400 hover:bg-slate-50"
+              >
+                See how it works
+              </Link>
+            </>
           )}
         </div>
 
