@@ -2,7 +2,6 @@ DO AS YOU WILL LIKE TO HAVE IT:
 
 
 !!! - Content changes:
-# finish Docs content
 # separate pages for Pricing ...
 # in deployment add info how to get domain from namecheap and how to buy your domain
 # review both Github clones and add some comment suggestions in code
@@ -11,11 +10,8 @@ DO AS YOU WILL LIKE TO HAVE IT:
 # add scripts for removing ... 
 # in tutorials, do explicit videos/tutorials with the cloning and tell to use the components... 
 # in Features add calendar, booking or ... all kinds of services integrated etc
-# I think is better to keep components specific Astro, 
-otherwise what is the point of using it like Eleventy as
 # I was thinking to replace Icon with img or Picture component with picture
 # add metadata to each page
-# add link to each step or keep it like now
 # add max min zoom icon like in NextUpKit
 # how to add an whatsapp button
 
@@ -24,8 +20,6 @@ otherwise what is the point of using it like Eleventy as
 # add icons to sidebar categories
 # add higher margin to the right of main content in docs check Additional Resources structure page
 # add Mobile Responsiveness
-# remove ChevronRight
-# perhaps add a badge or header for each page: Astro/Quick Setup/ Install Git for example
 # add See Demo in the nav bar like in supastarter and see the description of site demo and get inspired for clones
 
 !!! - To add after getting some feedback:
