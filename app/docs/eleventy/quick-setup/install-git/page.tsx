@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { LuChevronRight } from "react-icons/lu";
+import { FaWindows, FaApple } from "react-icons/fa";
 
 const CopyButton = ({ text }: { text: string }) => {
   const [copied, setCopied] = useState(false);
@@ -16,7 +17,7 @@ const CopyButton = ({ text }: { text: string }) => {
       onClick={handleCopy}
       className="text-xs px-3 py-1 rounded-full font-semibold transition-all"
       style={{
-        background: copied ? "#22c55e" : "rgba(255,255,255,0.15)",
+        background: copied ? "#2297c5" : "rgba(255,255,255,0.15)",
         color: "#fff",
         border: "1px solid rgba(255,255,255,0.2)",
         cursor: "pointer",
@@ -43,7 +44,7 @@ const CodeBlock = ({ code }: { code: string }) => (
       </div>
       <CopyButton text={code} />
     </div>
-    <pre className="p-4 text-sm overflow-x-auto" style={{ color: "#fb923c", margin: 0 }}>
+    <pre className="p-4 text-sm overflow-x-auto" style={{ color: "#fff", margin: 0 }}>
       <code>{code}</code>
     </pre>
   </div>
@@ -53,26 +54,13 @@ const Step = ({ number, title, children }: { number: number; title: string; chil
   <div className="flex gap-4 mb-6">
     <div
       className="shrink-0 w-9 h-9 rounded-full flex items-center justify-center font-bold text-white text-sm"
-      style={{ background: "linear-gradient(135deg, #ea580c, #dc2626)" }}
+      style={{ background: "#c3c5c7" }}
     >
       {number}
     </div>
     <div className="flex-1 pt-1">
       <p className="font-bold text-gray-800 mb-1">{title}</p>
       <div className="text-gray-600 text-sm leading-relaxed">{children}</div>
-    </div>
-  </div>
-);
-
-const TipBox = ({ icon, title, children }: { icon: string; title: string; children: React.ReactNode }) => (
-  <div
-    className="rounded-xl p-4 mb-4 flex gap-3"
-    style={{ background: "#fefce8", border: "1px solid #fde68a" }}
-  >
-    <span className="text-xl shrink-0">{icon}</span>
-    <div>
-      <p className="font-bold text-yellow-800 text-sm mb-1">{title}</p>
-      <p className="text-yellow-700 text-sm leading-relaxed">{children}</p>
     </div>
   </div>
 );
@@ -88,17 +76,13 @@ export default function InstallGit() {
     configured: false,
   });
 
-  const toggleCheck = (key: keyof typeof checklist) =>
-    setChecklist((prev) => ({ ...prev, [key]: !prev[key] }));
-
-  const allDone = Object.values(checklist).every(Boolean);
 
   return (
     <div className="min-h-full p-12">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl ml-6">
 
         {/* Header */}
-        <div className=" mb-10">
+        <div className="mb-10">
           {/* Breadcrumb */}
           <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-x-1 gap-y-1 text-base font-normal text-slate-900">
             <Link href="/docs/eleventy" className="rounded-full py-1 hover:text-slate-600 hover:underline">
@@ -120,7 +104,7 @@ export default function InstallGit() {
           </p>
           <div
             className="inline-flex items-center gap-2 mt-3 px-4 py-2 rounded-full text-sm font-medium"
-            style={{ background: "#ffedd5", color: "#c2410c" }}
+            style={{ background: "", color: "#0f172a" }}
           >
             ⏱ Takes about 10 minutes
           </div>
@@ -129,7 +113,7 @@ export default function InstallGit() {
         {/* What is Git */}
         <div
           className="rounded-2xl p-6 mb-6"
-          style={{ background: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.06)", border: "1px solid #fed7aa" }}
+          style={{ background: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.06)", border: "1px solid #e0e7ff" }}
         >
           <h2 className="font-bold text-lg text-gray-900 mb-2">
             🤔 What is Git, and why do I need it?
@@ -149,7 +133,7 @@ export default function InstallGit() {
         {/* OS Selector */}
         <div
           className="rounded-2xl p-6 mb-6"
-          style={{ background: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.06)", border: "1px solid #fed7aa" }}
+          style={{ background: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.06)", border: "1px solid #e0e7ff" }}
         >
           <h2 className="font-bold text-lg text-gray-900 mb-4">
             💻 What operating system are you using?
@@ -162,15 +146,17 @@ export default function InstallGit() {
                 className="flex-1 py-3 rounded-xl font-semibold text-sm transition-all"
                 style={{
                   background: activeOS === os
-                    ? "linear-gradient(135deg, #ea580c, #dc2626)"
+                    ? "#58afed"
                     : "#f8f9ff",
                   color: activeOS === os ? "white" : "#6b7280",
                   border: activeOS === os ? "none" : "1px solid #e5e7eb",
-                  boxShadow: activeOS === os ? "0 4px 14px rgba(234,88,12,0.35)" : "none",
+                  boxShadow: activeOS === os ? "0 4px 14px rgba(99,102,241,0.35)" : "none",
                   cursor: "pointer",
                 }}
               >
-                {os === "Windows" ? "🪟" : "🍎"} {os}
+                <span className="inline-flex items-center justify-center gap-2">
+                  {os === "Windows" ? <FaWindows /> : <FaApple />} {os}
+                </span>
               </button>
             ))}
           </div>
@@ -185,7 +171,7 @@ export default function InstallGit() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-semibold underline"
-                  style={{ color: "#ea580c" }}
+                  style={{ color: "#000" }}
                 >
                   git-scm.com/download/win
                 </Link>
@@ -197,12 +183,6 @@ export default function InstallGit() {
                 {" "}<strong>&quot;Click here to download manually&quot;</strong>. Choose the <strong>64-bit</strong> version
                 — this is correct for almost all modern Windows computers.
               </Step>
-
-              <TipBox icon="🖥️" title="64-bit or 32-bit — which do I have?">
-                Almost every computer made after 2010 is 64-bit. To check: click the Start menu,
-                search for <strong>&quot;About your PC&quot;</strong>, and look for &quot;System type&quot;. If you see
-                &quot;64-bit operating system&quot;, pick 64-bit.
-              </TipBox>
 
               <Step number={3} title="Run the installer file">
                 Open your <strong>Downloads folder</strong> and double-click the file
@@ -223,10 +203,10 @@ export default function InstallGit() {
 
               <div
                 className="rounded-xl p-4 mt-2"
-                style={{ background: "#f0fdf4", border: "1px solid #bbf7d0" }}
+                style={{ background: "", border: "" }}
               >
-                <p className="text-green-800 text-sm font-semibold mb-1">✅ What is &quot;Git Bash&quot;?</p>
-                <p className="text-green-700 text-sm leading-relaxed">
+                <p className="text-slate-900 text-sm font-semibold mb-1">✅ What is &quot;Git Bash&quot;?</p>
+                <p className="text-slate-800 text-sm leading-relaxed">
                   Git for Windows installs a program called <strong>Git Bash</strong> — a special terminal
                   window made for using Git. After installation, you can use either Git Bash or the
                   regular Command Prompt to run Git commands. Either works fine!
@@ -261,10 +241,10 @@ export default function InstallGit() {
 
               <div
                 className="rounded-xl p-4 mt-2 mb-6"
-                style={{ background: "#f0fdf4", border: "1px solid #bbf7d0" }}
+                style={{ background: "", border: "" }}
               >
-                <p className="text-green-800 text-sm font-semibold mb-1">✅ What are &quot;Xcode Command Line Tools&quot;?</p>
-                <p className="text-green-700 text-sm leading-relaxed">
+                <p className="text-slate-900 text-sm font-semibold mb-1">✅ What are &quot;Xcode Command Line Tools&quot;?</p>
+                <p className="text-slate-800 text-sm leading-relaxed">
                   This is a free package from Apple that includes Git and other useful developer tools.
                   It&apos;s the official, recommended way to get Git on a Mac — no third-party downloads needed!
                 </p>
@@ -276,7 +256,7 @@ export default function InstallGit() {
         {/* Verify Installation */}
         <div
           className="rounded-2xl p-6 mb-6"
-          style={{ background: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.06)", border: "1px solid #fed7aa" }}
+          style={{ background: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.06)", border: "1px solid #e0e7ff" }}
         >
           <h2 className="font-bold text-lg text-gray-900 mb-2">
             ✅ Check that it worked
@@ -287,12 +267,13 @@ export default function InstallGit() {
 
           <div
             className="rounded-xl p-4 mb-4"
-            style={{ background: "#fff7ed", border: "1px solid #fed7aa" }}
+            style={{ background: "", border: "" }}
           >
-            <p className="text-orange-800 text-sm font-semibold mb-1">
-              {activeOS === "Windows" ? "🪟 How to open Git Bash on Windows:" : "🍎 How to open the terminal on macOS:"}
+            <p className="text-slate-800 text-sm font-semibold mb-1 flex items-center gap-2">
+              {activeOS === "Windows" ? <FaWindows /> : <FaApple />}
+              {activeOS === "Windows" ? "How to open Git Bash on Windows:" : "How to open the terminal on macOS:"}
             </p>
-            <p className="text-orange-700 text-sm leading-relaxed">
+            <p className="text-slate-700 text-sm leading-relaxed">
               {activeOS === "Windows"
                 ? "Click the Start menu, search for \"Git Bash\", and click it. A dark window will open."
                 : "Press ⌘ + Space, type \"Terminal\", and press Enter."}
@@ -307,10 +288,10 @@ export default function InstallGit() {
 
           <div
             className="rounded-xl p-4 mt-4"
-            style={{ background: "#fef2f2", border: "1px solid #fecaca" }}
+            style={{ background: "", border: "" }}
           >
-            <p className="text-red-800 text-sm font-semibold mb-1">❌ Seeing an error instead?</p>
-            <p className="text-red-700 text-sm leading-relaxed">
+            <p className="text-slate-800 text-sm font-semibold mb-1">❌ Seeing an error instead?</p>
+            <p className="text-slate-700 text-sm leading-relaxed">
               Try <strong>closing and reopening</strong> the terminal, then run the command again.
               On Windows, make sure you&apos;re using <strong>Git Bash</strong> (not the regular Command Prompt) or try restarting your computer.
             </p>
@@ -320,7 +301,7 @@ export default function InstallGit() {
         {/* First-time Setup — this is what the original was completely missing */}
         <div
           className="rounded-2xl p-6 mb-6"
-          style={{ background: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.06)", border: "1px solid #fed7aa" }}
+          style={{ background: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.06)", border: "1px solid #e0e7ff" }}
         >
           <h2 className="font-bold text-lg text-gray-900 mb-2">
             👤 One-time setup — tell Git who you are
@@ -336,10 +317,10 @@ export default function InstallGit() {
           <CodeBlock code={`git config --global user.name "Your Name"\ngit config --global user.email "you@example.com"`} />
           <div
             className="rounded-xl p-4"
-            style={{ background: "#fff7ed", border: "1px solid #fed7aa" }}
+            style={{ background: "", border: "" }}
           >
-            <p className="text-orange-800 text-sm font-semibold mb-1">💡 What email should I use?</p>
-            <p className="text-orange-700 text-sm leading-relaxed">
+            <p className="text-slate-800 text-sm font-semibold mb-1">💡 What email should I use?</p>
+            <p className="text-slate-700 text-sm leading-relaxed">
               Use any email address you have. If you plan to use GitHub (a website for storing your code),
               use the same email you&apos;ll sign up with there.
             </p>

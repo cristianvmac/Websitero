@@ -45,10 +45,10 @@ export default function Setup() {
     ];
 
     return (
-        <div className="min-h-full p-12 ">
+        <div className="min-h-full p-12">
             <div className="max-w-3xl ml-6">
                 {/* Hero */}
-                <div className="mb-12">
+                <div className="mb-10">
                     {/* Breadcrumb */}
                         <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-x-1 gap-y-1 text-base font-normal text-slate-900">
                             <Link href="/docs/eleventy" className="rounded-full py-1 hover:text-slate-600 hover:underline">
@@ -58,13 +58,13 @@ export default function Setup() {
                             <span aria-current="page">Quick Setup</span>
                         </nav>
                 
-                <h1 className="text-4xl font-bold text-gray-900 mb-4">
-                    Quick Setup
-                </h1>
-                <p className="text-xl text-gray-600 leading-relaxed">
-                    Before you build anything with Websitero, make sure you have the right tools installed.
-                    This takes less than 5 minutes and you only need to do it once.
-                </p>
+                        <h1 className="text-4xl font-bold text-gray-900 mb-4">
+                            Quick Setup
+                        </h1>
+                        <p className="text-xl text-gray-600 leading-relaxed">
+                            Before you build anything with Websitero, make sure you have the right tools installed.
+                            This takes less than 5 minutes and you only need to do it once.
+                        </p>
                 </div>
 
             {/* What you need */}

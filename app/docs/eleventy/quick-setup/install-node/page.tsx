@@ -4,6 +4,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { LuChevronRight } from "react-icons/lu";
+import { FaWindows, FaApple } from "react-icons/fa";
 
 const CopyButton = ({ text }: { text: string }) => {
   const [copied, setCopied] = useState(false);
@@ -17,7 +18,7 @@ const CopyButton = ({ text }: { text: string }) => {
       onClick={handleCopy}
       className="text-xs px-3 py-1 rounded-full font-semibold transition-all"
       style={{
-        background: copied ? "#22c55e" : "rgba(255,255,255,0.15)",
+        background: copied ? "#2297c5" : "rgba(255,255,255,0.15)",
         color: "#fff",
         border: "1px solid rgba(255,255,255,0.2)",
         cursor: "pointer",
@@ -44,7 +45,7 @@ const CodeBlock = ({ code }: { code: string }) => (
       </div>
       <CopyButton text={code} />
     </div>
-    <pre className="p-4 text-sm overflow-x-auto" style={{ color: "#86efac", margin: 0 }}>
+    <pre className="p-4 text-sm overflow-x-auto" style={{ color: "#fff", margin: 0 }}>
       <code>{code}</code>
     </pre>
   </div>
@@ -54,7 +55,7 @@ const Step = ({ number, title, children }: { number: number; title: string; chil
   <div className="flex gap-4 mb-6">
     <div
       className="shrink-0 w-9 h-9 rounded-full flex items-center justify-center font-bold text-white text-sm"
-      style={{ background: "linear-gradient(135deg, #6366f1, #8b5cf6)" }}
+      style={{ background: "#c3c5c7" }}
     >
       {number}
     </div>
@@ -65,18 +66,6 @@ const Step = ({ number, title, children }: { number: number; title: string; chil
   </div>
 );
 
-const TipBox = ({ icon, title, children }: { icon: string; title: string; children: React.ReactNode }) => (
-  <div
-    className="rounded-xl p-4 mb-4 flex gap-3"
-    style={{ background: "#fefce8", border: "1px solid #fde68a" }}
-  >
-    <span className="text-xl shrink-0">{icon}</span>
-    <div>
-      <p className="font-bold text-yellow-800 text-sm mb-1">{title}</p>
-      <p className="text-yellow-700 text-sm leading-relaxed">{children}</p>
-    </div>
-  </div>
-);
 
 const OS_TABS = ["Windows", "macOS"];
 
@@ -85,7 +74,7 @@ export default function InstallNode() {
 
   return (
     <div className="min-h-full p-12">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl ml-6">
 
         {/* Header */}
         <div className="mb-10">
@@ -110,7 +99,7 @@ export default function InstallNode() {
           </p>
           <div
             className="inline-flex items-center gap-2 mt-3 px-4 py-2 rounded-full text-sm font-medium"
-            style={{ background: "#ede9fe", color: "#7c3aed" }}
+            style={{ background: "", color: "#0f172a" }}
           >
             ⏱ Takes about 5 minutes
           </div>
@@ -148,7 +137,7 @@ export default function InstallNode() {
                 className="flex-1 py-3 rounded-xl font-semibold text-sm transition-all"
                 style={{
                   background: activeOS === os
-                    ? "linear-gradient(135deg, #6366f1, #8b5cf6)"
+                    ? "#58afed"
                     : "#f8f9ff",
                   color: activeOS === os ? "white" : "#6b7280",
                   border: activeOS === os ? "none" : "1px solid #e5e7eb",
@@ -156,16 +145,12 @@ export default function InstallNode() {
                   cursor: "pointer",
                 }}
               >
-                {os === "Windows" ? "🪟" : "🍎"} {os}
+                <span className="inline-flex items-center justify-center gap-2">
+                  {os === "Windows" ? <FaWindows /> : <FaApple />} {os}
+                </span>
               </button>
             ))}
           </div>
-
-          {/*<TipBox icon="💡" title="Not sure which one you have?">
-            {activeOS === "Windows"
-              ? 'If your computer has a Start menu (the Windows logo button in the bottom-left corner), you\'re on Windows.'
-              : 'If your computer is a Mac (made by Apple), you\'re on macOS. Look for the  logo in the top-left corner of your screen.'}
-          </TipBox>*/}
 
           {/* Windows Steps */}
           {activeOS === "Windows" && (
@@ -177,7 +162,7 @@ export default function InstallNode() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-semibold underline"
-                  style={{ color: "#6366f1" }}
+                  style={{ color: "#000" }}
                 >
                   nodejs.org
                 </a>
@@ -208,10 +193,10 @@ export default function InstallNode() {
 
               <div
                 className="rounded-xl p-4 mt-2"
-                style={{ background: "#f0fdf4", border: "1px solid #bbf7d0" }}
+                style={{ background: "", border: "" }}
               >
-                <p className="text-green-800 text-sm font-semibold mb-1">✅ What is &quot;Add to PATH&quot;?</p>
-                <p className="text-green-700 text-sm leading-relaxed">
+                <p className="text-slate-900 text-sm font-semibold mb-1">✅ What is &quot;Add to PATH&quot;?</p>
+                <p className="text-slate-800 text-sm leading-relaxed">
                   PATH is a list your computer uses to find programs. If Node.js is added to PATH,
                   you can run it from anywhere in your terminal. If you skip this, Node.js won&apos;t
                   work properly — so always make sure it&apos;s checked!
@@ -261,10 +246,10 @@ export default function InstallNode() {
 
               <div
                 className="rounded-xl p-4 mt-2"
-                style={{ background: "#f0fdf4", border: "1px solid #bbf7d0" }}
+                style={{ background: "", border: "" }}
               >
-                <p className="text-green-800 text-sm font-semibold mb-1">🔐 Why does it ask for my password?</p>
-                <p className="text-green-700 text-sm leading-relaxed">
+                <p className="text-slate-900 text-sm font-semibold mb-1">🔐 Why does it ask for my password?</p>
+                <p className="text-slate-800 text-sm leading-relaxed">
                   macOS asks for your password any time software is being installed to protect your computer.
                   This is completely normal — enter your regular Mac login password and click OK.
                 </p>
@@ -279,7 +264,7 @@ export default function InstallNode() {
           style={{ background: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.06)", border: "1px solid #e0e7ff" }}
         >
           <h2 className="font-bold text-lg text-gray-900 mb-2">
-            ✅ Step 5 — Check that it worked
+            ✅ Check that it worked
           </h2>
           <p className="text-gray-600 text-sm leading-relaxed mb-4">
             Now let&apos;s make sure Node.js was installed correctly. We&apos;ll do this using the <strong>terminal</strong> — don&apos;t worry, it&apos;s just two short commands!
@@ -287,12 +272,13 @@ export default function InstallNode() {
 
           <div
             className="rounded-xl p-4 mb-4"
-            style={{ background: "#faf5ff", border: "1px solid #e9d5ff" }}
+            style={{ background: "", border: "" }}
           >
-            <p className="text-purple-800 text-sm font-semibold mb-1">
-              {activeOS === "Windows" ? "🪟 How to open the terminal on Windows:" : "🍎 How to open the terminal on macOS:"}
+            <p className="text-slate-800 text-sm font-semibold mb-1 flex items-center gap-2">
+              {activeOS === "Windows" ? <FaWindows /> : <FaApple />}
+              {activeOS === "Windows" ? "How to open the terminal on Windows:" : "How to open the terminal on macOS:"}
             </p>
-            <p className="text-purple-700 text-sm leading-relaxed">
+            <p className="text-slate-700 text-sm leading-relaxed">
               {activeOS === "Windows"
                 ? 'Press the Windows key + R, type "cmd", and press Enter. A black window will open — that\'s your terminal!'
                 : 'Press Command (⌘) + Space, type "Terminal", and press Enter. A white or black window will open — that\'s your terminal!'}
@@ -309,10 +295,10 @@ export default function InstallNode() {
 
           <div
             className="rounded-xl p-4 mt-4"
-            style={{ background: "#fef2f2", border: "1px solid #fecaca" }}
+            style={{ background: "", border: "" }}
           >
-            <p className="text-red-800 text-sm font-semibold mb-1">❌ Seeing an error instead?</p>
-            <p className="text-red-700 text-sm leading-relaxed">
+            <p className="text-slate-800 text-sm font-semibold mb-1">❌ Seeing an error instead?</p>
+            <p className="text-slate-700 text-sm leading-relaxed">
               If you see <em>&quot;command not found&quot;</em> or <em>&quot;not recognized&quot;</em>, try <strong>closing and reopening</strong> the terminal window, then try again.
               On Windows, you may need to restart your computer for PATH changes to take effect.
             </p>
