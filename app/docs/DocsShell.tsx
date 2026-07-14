@@ -311,7 +311,7 @@ export default function DocsShell({
   );
 
   return (
-    <div className="flex h-screen mt-20">
+    <div className="flex h-[calc(100vh-5rem)] mt-20">
       <aside className="sidebar-scroll sticky top-20 hidden h-[calc(100vh-5rem)] w-60 shrink-0 overflow-y-auto border-r border-gray-300 bg-gray-50 lg:block">
         {sidebarContent}
       </aside>
