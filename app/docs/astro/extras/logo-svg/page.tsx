@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import { LuChevronRight } from "react-icons/lu";
 import {
   Image as ImageIcon,
   Code2,
@@ -86,23 +88,22 @@ const WHY_SVG = [
 
 export default function LogoSvg() {
   return (
-    <section className="relative overflow-hidden bg-gray-50 py-20">
-        {/* Breadcrumb */}
-        <div className="flex items-center gap-3 mb-4 flex-wrap">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-linear-to-r from-orange-50 to-yellow-50 text-orange-700 rounded-full text-sm font-bold border-2 border-orange-200">
-            Astro
-          </div>
-          <span className="text-3xl font-semibold text-gray-400">/</span>
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-linear-to-r from-blue-50 to-purple-50 text-blue-700 rounded-full text-sm font-bold border-2 border-blue-200">
-            Extras
-          </div>
-          <span className="text-3xl font-semibold text-gray-400">/</span>
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-linear-to-r from-blue-50 to-purple-50 text-blue-700 rounded-full text-sm font-bold border-2 border-blue-200">
-            Logo SVG
-          </div>
-        </div>
+    <section className="relative overflow-hidden min-h-full p-12">
+      {/* Decorative background glow */}
       <div className="pointer-events-none absolute -top-32 left-1/2 h-72 w-xl -translate-x-1/2 rounded-full bg-linear-to-br from-blue-200/40 to-purple-200/40 blur-3xl" />
-      <div className="relative mx-auto max-w-4xl px-6">      
+      <div className="relative mx-auto max-w-3xl">
+        {/* Breadcrumb */}
+        <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-x-1 gap-y-1 text-base font-normal text-slate-900">
+          <Link href="/docs/astro" className="rounded-full py-1 hover:text-slate-600 hover:underline">
+            Astro
+          </Link>
+          <span><LuChevronRight /></span>
+          <Link href="/docs/astro/extras" className="rounded-full py-1 hover:text-slate-600 hover:underline">
+            Extras
+          </Link>
+          <span><LuChevronRight /></span>
+          <span aria-current="page">Logo SVG</span>
+        </nav>
         <h1 className="mt-5 bg-linear-to-br from-gray-900 to-gray-600 bg-clip-text text-4xl font-bold tracking-tight text-transparent sm:text-5xl">
           Adding an SVG Logo
         </h1>

@@ -8,7 +8,8 @@ import { SCOPE, FONTS, COLORS, globalStyles } from "./styles/tokens";
 // Components
 import { Badge }       from "./blocks/Badge";
 import { CodePreview } from "./blocks/CodePreview";
-
+import { LuChevronRight } from "react-icons/lu";
+import Link from "next/link";
 // Data
 import { examples } from "./templates/headerTemplates";
 
@@ -34,7 +35,7 @@ export default function Header() {
       <div
         className={SCOPE}
         style={{
-          minHeight: "100vh",
+          minHeight: "100%",
          /* background: "var(--bg)",*/
           color: "var(--text)",
           fontFamily: FONTS.body,
@@ -55,9 +56,9 @@ export default function Header() {
 
         {/* Scrollable content column */}
         <div style={{
-          maxWidth: 900,
+          maxWidth: 864,
           margin: "0 auto",
-          padding: "72px 24px 120px",
+          padding: "72px 48px 120px",
           position: "relative",
           zIndex: 1,
         }}>
@@ -67,6 +68,19 @@ export default function Header() {
             className={`fade-up ${mounted ? "" : "opacity-0"}`}
             style={{ marginBottom: 56 }}
           >
+          {/* Breadcrumb */}
+          <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-x-1 gap-y-1 text-base font-normal text-slate-900">
+            <Link href="/docs/astro" className="rounded-full py-1 hover:text-slate-600 hover:underline">
+              Astro
+            </Link>
+            <span><LuChevronRight /></span>
+            <Link href="/docs/astro/components" className="rounded-full py-1 hover:text-slate-600 hover:underline">
+              Components
+            </Link>
+            <span><LuChevronRight /></span>
+            <span aria-current="page">Navigation / Header</span>
+          </nav>
+
             {/* Badges */}
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
               <Badge color="black">Astro</Badge> {/* maybe, think about it */}

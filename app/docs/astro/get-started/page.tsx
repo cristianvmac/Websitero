@@ -3,6 +3,7 @@
 {/* CHECK Row by Row one more time*/}
 
 import Link from "next/link";
+import { LuChevronRight } from "react-icons/lu";
 import { Rocket, Copy, Check, GitFork, Download, Settings } from "lucide-react";
 import { Clock, ArrowRight} from "lucide-react";
 
@@ -45,21 +46,19 @@ export default function GetStarted() {
   };
 
   return (
-    <div className="max-w-5xl px-6 py-4">
+    <div className="min-h-full p-12">
+      <div className="max-w-3xl mx-auto">
 
       {/* Hero Section */}
       <div className="mb-12">
         {/* Breadcrumb */}
-        <div className="flex items-center gap-3 mb-4 flex-wrap">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-linear-to-r from-orange-50 to-yellow-50 text-orange-700 rounded-full text-sm font-bold border-2 border-orange-200">
+        <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-x-1 gap-y-1 text-base font-normal text-slate-900">
+          <Link href="/docs/astro" className="rounded-full py-1 hover:text-slate-600 hover:underline">
             Astro
-          </div>
-          <span className="text-3xl font-semibold text-gray-400">/</span>
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-linear-to-r from-blue-50 to-purple-50 text-blue-700 rounded-full text-sm font-bold border-2 border-blue-200">
-            Get Started
-          </div>
-          
-        </div>
+          </Link>
+          <span><LuChevronRight /></span>
+          <span aria-current="page">Get Started</span>
+        </nav>
         <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm font-medium mb-4">
           <Rocket className="w-4 h-4" />
           Get started in 5 minutes
@@ -316,6 +315,7 @@ export default function GetStarted() {
         </p>
       </div>
 
+      </div>
     </div>
   );
 }

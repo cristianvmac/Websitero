@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import { LuChevronRight } from "react-icons/lu";
 import { Sparkles, Wand2, FolderInput, Link2, Copy, Check, Info, RotateCcw } from "lucide-react";
 
 // ─────────────────────────────────────────────────────────
@@ -52,24 +54,23 @@ function CodeBlock({ code, filename }: { code: string; filename?: string }) {
 
 export default function Favicon() {
   return (
-    <section className="relative overflow-hidden bg-gray-50 py-20">
-     {/* Breadcrumb */}
-        <div className="flex items-center gap-3 mb-4 flex-wrap">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-linear-to-r from-orange-50 to-yellow-50 text-orange-700 rounded-full text-sm font-bold border-2 border-orange-200">
-            Astro
-          </div>
-          <span className="text-3xl font-semibold text-gray-400">/</span>
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-linear-to-r from-blue-50 to-purple-50 text-blue-700 rounded-full text-sm font-bold border-2 border-blue-200">
-            Extras
-          </div>
-          <span className="text-3xl font-semibold text-gray-400">/</span>
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-linear-to-r from-blue-50 to-purple-50 text-blue-700 rounded-full text-sm font-bold border-2 border-blue-200">
-            Favicon
-          </div>
-        </div>
+    <section className="relative overflow-hidden min-h-full p-12">
+      {/* Decorative background glow */}
       <div className="pointer-events-none absolute -top-32 left-1/2 h-72 w-xl -translate-x-1/2 rounded-full bg-linear-to-br from-amber-200/40 to-orange-200/40 blur-3xl" />
 
-      <div className="relative mx-auto max-w-4xl px-6">
+      <div className="relative mx-auto max-w-3xl">
+        {/* Breadcrumb */}
+        <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-x-1 gap-y-1 text-base font-normal text-slate-900">
+          <Link href="/docs/astro" className="rounded-full py-1 hover:text-slate-600 hover:underline">
+            Astro
+          </Link>
+          <span><LuChevronRight /></span>
+          <Link href="/docs/astro/extras" className="rounded-full py-1 hover:text-slate-600 hover:underline">
+            Extras
+          </Link>
+          <span><LuChevronRight /></span>
+          <span aria-current="page">Favicon</span>
+        </nav>
         {/* ── Header ── */}
 
         <h1 className="mt-5 bg-linear-to-br from-gray-900 to-gray-600 bg-clip-text text-4xl font-bold tracking-tight text-transparent sm:text-5xl">
@@ -176,7 +177,7 @@ export default function Favicon() {
             />
           </div>
 
-          {/* Info callout — the key Astro vs. Eleventy difference */}
+          {/* Info callout — how Astro serves static assets */}
           <div className="mt-5 flex gap-3 rounded-xl border border-blue-100 bg-blue-50 p-4">
             <Info className="mt-0.5 h-5 w-5 shrink-0 text-blue-600" />
             <p className="text-sm leading-relaxed text-blue-900">
@@ -192,11 +193,7 @@ export default function Favicon() {
               <code className="rounded bg-blue-100 px-1.5 py-0.5 font-mono text-xs">
                 /assets/favicons/favicon.svg
               </code>
-              . Unlike Eleventy, there is no{" "}
-              <code className="rounded bg-blue-100 px-1.5 py-0.5 font-mono text-xs">
-                addPassthroughCopy
-              </code>{" "}
-              step to configure.
+              . There is no passthrough-copy step to configure — it just works.
             </p>
           </div>
         </div>

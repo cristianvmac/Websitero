@@ -3,6 +3,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { LuChevronRight } from "react-icons/lu";
 
 const CopyButton = ({ text }: { text: string }) => {
   const [copied, setCopied] = useState(false);
@@ -83,28 +84,25 @@ export default function InstallNode() {
   const [activeOS, setActiveOS] = useState("Windows");
 
   return (
-    <div className="min-h-screen p-6 md:p-10">
-      <div className="max-w-5xl mx-auto">
-        {/* Breadcrumb */}
-        <div className="flex items-center gap-3 mb-4 flex-wrap">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-linear-to-r from-orange-50 to-yellow-50 text-orange-700 rounded-full text-sm font-bold border-2 border-orange-200">
-            Astro
-          </div>
-          <span className="text-3xl font-semibold text-gray-400">/</span>
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-linear-to-r from-blue-50 to-purple-50 text-blue-700 rounded-full text-sm font-bold border-2 border-blue-200">
-            Quick Setup
-          </div>
-          <span className="text-3xl font-semibold text-gray-400">/</span>
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-linear-to-r from-blue-50 to-purple-50 text-blue-700 rounded-full text-sm font-bold border-2 border-blue-200">
-            Installing Node.js
-          </div>
-        </div>
+    <div className="min-h-full p-12">
+      <div className="max-w-3xl mx-auto">
+
         {/* Header */}
         <div className="mb-10">
-          <h1
-            className="text-4xl font-bold mb-2"
-            style={{ color: "#1e1b4b", fontFamily: "'Georgia', serif" }}
-          >
+          {/* Breadcrumb */}
+          <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-x-1 gap-y-1 text-base font-normal text-slate-900">
+            <Link href="/docs/astro" className="rounded-full py-1 hover:text-slate-600 hover:underline">
+              Astro
+            </Link>
+            <span><LuChevronRight /></span>
+            <Link href="/docs/astro/quick-setup" className="rounded-full py-1 hover:text-slate-600 hover:underline">
+              Quick Setup
+            </Link>
+            <span><LuChevronRight /></span>
+            <span aria-current="page">Installing Node.js</span>
+          </nav>
+
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">
             Installing Node.js
           </h1>
           <p className="text-gray-500 text-lg">
@@ -127,7 +125,7 @@ export default function InstallNode() {
             🤔 What is Node.js, and why do I need it?
           </h2>
           <p className="text-gray-600 text-sm leading-relaxed mb-3">
-            Node.js lets your computer run JavaScript code — the same language used to build websites — outside of a web browser. Many popular tools and frameworks (like Astro, Eleventy, React, and others) <strong>require Node.js to be installed first</strong> before you can use them.
+            Node.js lets your computer run JavaScript code — the same language used to build websites — outside of a web browser. Many popular tools and frameworks (like Astro, React, and others) <strong>require Node.js to be installed first</strong> before you can use them.
           </p>
           <p className="text-gray-600 text-sm leading-relaxed">
             Think of it like installing a music player before you can listen to songs. Node.js is the player; your code is the music. 🎵

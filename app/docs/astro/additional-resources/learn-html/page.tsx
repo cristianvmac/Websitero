@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { LuChevronRight } from "react-icons/lu";
 import {
   FileCode2,
   ArrowUpRight,
@@ -46,26 +47,22 @@ const topics = [
 
 export default function LearnHtml() {
   return (
-    <div className="max-w-5xl px-6 py-4">
+    <div className="min-h-full p-12">
+      <div className="max-w-3xl mx-auto">
       {/* Hero */}
       <div className="mb-12">
         {/* Breadcrumb */}
-        <div className="flex items-center gap-3 mb-4 flex-wrap">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-linear-to-r from-orange-50 to-yellow-50 text-orange-700 rounded-full text-sm font-bold border-2 border-orange-200">
+        <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-x-1 gap-y-1 text-base font-normal text-slate-900">
+          <Link href="/docs/astro" className="rounded-full py-1 hover:text-slate-600 hover:underline">
             Astro
-          </div>
-          <span className="text-3xl font-semibold text-gray-400">/</span>
-          <Link
-            href="/docs/astro/additional-resources"
-            className="inline-flex items-center gap-2 px-3 py-1.5 bg-linear-to-r from-blue-50 to-purple-50 text-blue-700 rounded-full text-sm font-bold border-2 border-blue-200 hover:border-blue-300 transition-colors"
-          >
+          </Link>
+          <span><LuChevronRight /></span>
+          <Link href="/docs/astro/additional-resources" className="rounded-full py-1 hover:text-slate-600 hover:underline">
             Additional Resources
           </Link>
-          <span className="text-3xl font-semibold text-gray-400">/</span>
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-linear-to-r from-orange-50 to-red-50 text-orange-700 rounded-full text-sm font-bold border-2 border-orange-200">
-            Learn HTML
-          </div>
-        </div>
+          <span><LuChevronRight /></span>
+          <span aria-current="page">Learn HTML</span>
+        </nav>
 
         <h1 className="text-5xl font-bold text-gray-900 mb-4">Learn HTML</h1>
         <p className="text-xl text-gray-600 leading-relaxed">
@@ -137,6 +134,7 @@ export default function LearnHtml() {
           </Link>{" "}
           to style your content.
         </p>
+      </div>
       </div>
     </div>
   );

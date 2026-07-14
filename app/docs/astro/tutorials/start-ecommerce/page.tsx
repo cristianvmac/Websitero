@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { LuChevronRight } from "react-icons/lu";
 import { useState } from "react";
 import {
   ShoppingBag, Key, Database, Code2, CreditCard,
@@ -323,14 +324,19 @@ const PROJECT_STRUCTURE = `/
 
 export default function StartEcommerce() {
   return (
-    <div className="mx-auto max-w-4xl px-4 py-12 text-slate-700">
+    <div className="min-h-full p-12">
+      <div className="max-w-3xl mx-auto text-slate-700">
       {/* Breadcrumb */}
-      <nav className="mb-6 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm font-medium text-slate-400">
-        <span className="rounded-full bg-orange-50 px-2.5 py-1 text-orange-600">Astro</span>
-        <span>/</span>
-        <span className="rounded-full bg-blue-50 px-2.5 py-1 text-blue-600">Tutorials</span>
-        <span>/</span>
-        <span className="text-slate-600">Start an E-commerce Store</span>
+      <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-x-1 gap-y-1 text-base font-normal text-slate-900">
+        <Link href="/docs/astro" className="rounded-full py-1 hover:text-slate-600 hover:underline">
+          Astro
+        </Link>
+        <span><LuChevronRight /></span>
+        <Link href="/docs/astro/tutorials" className="rounded-full py-1 hover:text-slate-600 hover:underline">
+          Tutorials
+        </Link>
+        <span><LuChevronRight /></span>
+        <span aria-current="page">Start an E-commerce Store</span>
       </nav>
 
       {/* Hero */}
@@ -666,6 +672,7 @@ export default function StartEcommerce() {
           </Link>
         </div>
       </footer>
+      </div>
     </div>
   );
 }

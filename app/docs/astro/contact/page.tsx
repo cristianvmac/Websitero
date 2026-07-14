@@ -1,11 +1,19 @@
-
-
-
+import Link from "next/link";
+import { LuChevronRight } from "react-icons/lu";
 
 export default function Contact() {
   return (
-    <section className="bg-gray-50 py-20">
-      <div className="max-w-5xl mx-auto px-6">
+    <div className="min-h-full p-12">
+      <div className="max-w-3xl mx-auto">
+
+        {/* Breadcrumb */}
+        <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-x-1 gap-y-1 text-base font-normal text-slate-900">
+          <Link href="/docs/astro" className="rounded-full py-1 hover:text-slate-600 hover:underline">
+            Astro
+          </Link>
+          <span><LuChevronRight /></span>
+          <span aria-current="page">Contact</span>
+        </nav>
 
         <h1 className="text-4xl font-bold mb-6">
           Contact Me
@@ -71,6 +79,6 @@ export default function Contact() {
         </div>
 
       </div>
-    </section>
+    </div>
   );
 }

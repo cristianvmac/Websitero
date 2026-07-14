@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import { LuChevronRight } from "react-icons/lu";
 import {
-  Shield,
   ShieldCheck,
   Lock,
   KeyRound,
@@ -39,18 +39,16 @@ function CodeBlock({ code }: { code: string }) {
 
 export default function Security() {
   return (
-    <div className="max-w-5xl mx-auto px-4 py-12">
+    <div className="min-h-full p-12">
+      <div className="max-w-3xl mx-auto">
       {/* Breadcrumb */}
-      <div className="flex items-center gap-3 mb-4 flex-wrap">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-linear-to-r from-orange-50 to-yellow-50 text-orange-700 rounded-full text-sm font-bold border-2 border-orange-200">
-          <Link href="/docs/astro">Astro</Link>
-        </div>
-        <span className="text-3xl font-semibold text-gray-400">/</span>
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-linear-to-r from-green-50 to-emerald-50 text-green-700 rounded-full text-sm font-bold border-2 border-green-200">
-          <Shield className="w-4 h-4" />
-          Security
-        </div>
-      </div>
+      <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-x-1 gap-y-1 text-base font-normal text-slate-900">
+        <Link href="/docs/astro" className="rounded-full py-1 hover:text-slate-600 hover:underline">
+          Astro
+        </Link>
+        <span><LuChevronRight /></span>
+        <span aria-current="page">Security</span>
+      </nav>
 
       {/* Hero Section */}
       <div className="mb-12">
@@ -429,6 +427,7 @@ export const server = {
 npm audit fix        # apply safe, compatible fixes
 npx @astrojs/upgrade # bump Astro + official integrations together`}
         />
+      </div>
       </div>
     </div>
   );

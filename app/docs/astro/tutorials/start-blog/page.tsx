@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { LuChevronRight } from "react-icons/lu";
 import {
   Newspaper,
   Copy,
@@ -158,22 +159,21 @@ site_url: https://your-site.netlify.app`;
 }`;
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-12">
+    <div className="min-h-full p-12">
+      <div className="max-w-3xl mx-auto">
 
       {/* Breadcrumb */}
-      <div className="flex items-center gap-3 mb-4 flex-wrap">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-linear-to-r from-orange-50 to-yellow-50 text-orange-700 rounded-full text-sm font-bold border-2 border-orange-200">
+      <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-x-1 gap-y-1 text-base font-normal text-slate-900">
+        <Link href="/docs/astro" className="rounded-full py-1 hover:text-slate-600 hover:underline">
           Astro
-        </div>
-        <span className="text-3xl font-semibold text-gray-400">/</span>
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-linear-to-r from-blue-50 to-purple-50 text-blue-700 rounded-full text-sm font-bold border-2 border-blue-200">
+        </Link>
+        <span><LuChevronRight /></span>
+        <Link href="/docs/astro/tutorials" className="rounded-full py-1 hover:text-slate-600 hover:underline">
           Tutorials
-        </div>
-        <span className="text-3xl font-semibold text-gray-400">/</span>
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-linear-to-r from-blue-50 to-purple-50 text-blue-700 rounded-full text-sm font-bold border-2 border-blue-200">
-          Start a Blog
-        </div>
-      </div>
+        </Link>
+        <span><LuChevronRight /></span>
+        <span aria-current="page">Start a Blog</span>
+      </nav>
 
       {/* Hero */}
       <div className="mb-12">
@@ -1001,6 +1001,7 @@ npm install decap-server`}</pre>
             Deployment Guide
           </Link>
         </div>
+      </div>
       </div>
     </div>
   );
