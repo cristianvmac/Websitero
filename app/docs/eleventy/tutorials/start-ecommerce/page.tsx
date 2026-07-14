@@ -6,8 +6,10 @@ import {
   ShoppingBag, ShoppingCart, Store, Key, Database, CreditCard,
   Webhook, AlertTriangle, Info, Check, Copy, Layers, Package, Search,
   Heart, User, Star, Rocket, ArrowRight, Clock, MousePointerClick,
-  Zap, Settings2, X, ShieldCheck, type LucideIcon,
+  Zap, Settings2, X, ChevronRight, ShieldCheck, type LucideIcon,
 } from "lucide-react";
+import { LuChevronRight } from "react-icons/lu";
+
 
 /* ── Reusable primitives ─────────────────────────────────── */
 
@@ -325,12 +327,16 @@ export default function StartEcommerce() {
   return (
     <div className="mx-auto max-w-4xl px-4 py-12 text-slate-700">
       {/* Breadcrumb */}
-      <nav className="mb-6 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm font-medium text-slate-400">
-        <span className="rounded-full bg-red-50 px-2.5 py-1 text-red-600">Eleventy</span>
-        <span>/</span>
-        <span className="rounded-full bg-blue-50 px-2.5 py-1 text-blue-600">Tutorials</span>
-        <span>/</span>
-        <span className="text-slate-600">Start an E-commerce Store</span>
+      <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-x-1 gap-y-1 text-base font-normal text-slate-900">
+        <Link href="/docs/eleventy" className="rounded-full py-1 hover:text-slate-600 hover:underline">
+          Eleventy
+        </Link>
+        <span><LuChevronRight /></span>
+        <Link href="/docs/eleventy/tutorials" className="rounded-full py-1 hover:text-slate-600 hover:underline">
+          Tutorials
+        </Link>
+        <span><LuChevronRight /></span>
+        <span aria-current="page">Start an Ecommerce Store</span>
       </nav>
 
       {/* Hero */}
