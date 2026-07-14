@@ -8,7 +8,7 @@ import { SCOPE, FONTS, COLORS, globalStyles } from "./styles/tokens";
 // Components
 import { Badge }       from "./blocks/Badge";
 import { CodePreview } from "./blocks/CodePreview";
-import { ChevronRight } from 'lucide-react';
+import { LuChevronRight } from "react-icons/lu";
 import Link from "next/link";
 // Data
 import { examples } from "./templates/headerTemplates";
@@ -35,7 +35,7 @@ export default function Header() {
       <div
         className={SCOPE}
         style={{
-          minHeight: "100vh",
+          minHeight: "100%",
           background: "var(--bg)",
           color: "var(--text)",
           fontFamily: FONTS.body,
@@ -56,9 +56,9 @@ export default function Header() {
 
         {/* Scrollable content column */}
         <div style={{
-          maxWidth: 900,
+          maxWidth: 864,
           margin: "0 auto",
-          padding: "72px 24px 120px",
+          padding: "72px 48px 120px",
           position: "relative",
           zIndex: 1,
         }}>
@@ -69,17 +69,16 @@ export default function Header() {
             style={{ marginBottom: 56 }}
           >
           {/* Breadcrumb */}
-          <nav className="mb-6 flex flex-wrap items-center gap-x-2 gap-y-1 font-mediu">
-            <Link 
-              className="rounded-full hover:font-semibold lg:text-xl md:text-lg sm:text-base"
-              href="/docs/eleventy/"
-            >
+          <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-x-1 gap-y-1 text-base font-normal text-slate-900">
+            <Link href="/docs/eleventy" className="rounded-full py-1 hover:text-slate-600 hover:underline">
               Eleventy
             </Link>
-              <ChevronRight size={16} className="text-text-muted" />
-            <span className="rounded-full lg:text-xl md:text-lg sm:text-base">Components</span>
-              <ChevronRight size={16} className="text-text-muted" />
-            <span className="rounded-full text-red-400 lg:text-xl md:text-lg sm:text-base">Header</span>
+            <span><LuChevronRight /></span>
+            <Link href="/docs/eleventy/components" className="rounded-full py-1 hover:text-slate-600 hover:underline">
+              Components
+            </Link>
+            <span><LuChevronRight /></span>
+            <span aria-current="page">Navigation / Header</span>
           </nav>
 
             <h1 style={{

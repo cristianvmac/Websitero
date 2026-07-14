@@ -45,8 +45,8 @@ export default function Setup() {
     ];
 
     return (
-        <div className="min-h-full p-12">
-            <div className="max-w-3xl mx-auto">
+        <div className="min-h-full p-12 ">
+            <div className="max-w-3xl ml-6">
                 {/* Hero */}
                 <div className="mb-12">
                     {/* Breadcrumb */}

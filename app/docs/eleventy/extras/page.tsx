@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { LuChevronRight } from "react-icons/lu";
 import {
   Sparkles,
   Star,
@@ -123,19 +124,18 @@ function SectionHeader({ section }: { section: Section }) {
 
 export default function Extras() {
   return (
-    <div className="max-w-5xl px-6 py-4">
+    <div className="min-h-full p-12">
+      <div className="max-w-3xl mx-auto">
       {/* Hero */}
       <div className="mb-12">
         {/* Breadcrumb */}
-        <div className="mb-4 flex flex-wrap items-center gap-3">
-          <div className="inline-flex items-center gap-2 rounded-full border-2 border-orange-200 bg-linear-to-r from-orange-50 to-yellow-50 px-3 py-1.5 text-sm font-bold text-orange-700">
+        <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-x-1 gap-y-1 text-base font-normal text-slate-900">
+          <Link href="/docs/eleventy" className="rounded-full py-1 hover:text-slate-600 hover:underline">
             Eleventy
-          </div>
-          <span className="text-3xl font-semibold text-gray-400">/</span>
-          <div className="inline-flex items-center gap-2 rounded-full border-2 border-blue-200 bg-linear-to-r from-blue-50 to-purple-50 px-3 py-1.5 text-sm font-bold text-blue-700">
-            Extras
-          </div>
-        </div>
+          </Link>
+          <span><LuChevronRight /></span>
+          <span aria-current="page">Extras</span>
+        </nav>
 
         <h1 className="mb-4 text-5xl font-bold text-gray-900">
           Extra Tips for Your Eleventy Site
@@ -319,6 +319,7 @@ export default function Extras() {
             </div>
           ))}
         </div>
+      </div>
       </div>
     </div>
   );

@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import { LuChevronRight } from "react-icons/lu";
 import {
   Gauge,
   Zap,
@@ -250,26 +252,23 @@ const STATS = [
 
 export default function PageSpeed() {
   return (
-    <section className="relative overflow-hidden bg-linear-to-b from-white via-emerald-50/30 to-gray-50 py-20">
-        {/* Breadcrumb */}
-        <div className="flex items-center gap-3 mb-4 flex-wrap">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-linear-to-r from-orange-50 to-yellow-50 text-orange-700 rounded-full text-sm font-bold border-2 border-orange-200">
-            Eleventy
-          </div>
-          <span className="text-3xl font-semibold text-gray-400">/</span>
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-linear-to-r from-blue-50 to-purple-50 text-blue-700 rounded-full text-sm font-bold border-2 border-blue-200">
-            Extras
-          </div>
-          <span className="text-3xl font-semibold text-gray-400">/</span>
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-linear-to-r from-blue-50 to-purple-50 text-blue-700 rounded-full text-sm font-bold border-2 border-blue-200">
-            Page Speed test
-          </div>
-        </div>
-      
+    <section className="relative overflow-hidden min-h-full p-12">
       {/* Decorative background glow */}
       <div className="pointer-events-none absolute -top-32 left-1/2 h-72 w-xl -translate-x-1/2 rounded-full bg-linear-to-br from-emerald-200/50 to-teal-200/50 blur-3xl" />
 
-      <div className="relative mx-auto max-w-4xl px-6">
+      <div className="relative mx-auto max-w-3xl">
+        {/* Breadcrumb */}
+        <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-x-1 gap-y-1 text-base font-normal text-slate-900">
+          <Link href="/docs/eleventy" className="rounded-full py-1 hover:text-slate-600 hover:underline">
+            Eleventy
+          </Link>
+          <span><LuChevronRight /></span>
+          <Link href="/docs/eleventy/extras" className="rounded-full py-1 hover:text-slate-600 hover:underline">
+            Extras
+          </Link>
+          <span><LuChevronRight /></span>
+          <span aria-current="page">Page Speed Test</span>
+        </nav>
         {/* ── Header ── */}
       
 

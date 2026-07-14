@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { LuChevronRight } from "react-icons/lu";
 
 function SectionHeading({
   eyebrow,
@@ -47,20 +48,18 @@ const platforms = [
 
 export default function Deployment() {
   return (
-    <section className="bg-gray-50">
+    <section className="min-h-full p-12">
       {/* Hero */}
-      <div className="relative overflow-hidden bg-white border-b border-gray-200">
-        <div className="relative max-w-5xl mx-auto px-6 py-16 sm:py-20">
+      <div className="relative overflow-hidden">
+        <div className="relative max-w-3xl mx-auto">
           {/* Breadcrumb */}
-          <div className="flex items-center gap-2 mb-6 flex-wrap">
-            <span className="inline-flex items-center px-3 py-1 bg-orange-50 text-orange-700 rounded-full text-sm font-bold border border-orange-200">
+          <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-x-1 gap-y-1 text-base font-normal text-slate-900">
+            <Link href="/docs/eleventy" className="rounded-full py-1 hover:text-slate-600 hover:underline">
               Eleventy
-            </span>
-            <span className="text-xl font-semibold text-gray-300">/</span>
-            <span className="inline-flex items-center px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm font-bold border border-blue-200">
-              Deployment
-            </span>
-          </div>
+            </Link>
+            <span><LuChevronRight /></span>
+            <span aria-current="page">Deployment</span>
+          </nav>
 
           <h1 className="text-gray-900 text-4xl sm:text-5xl font-extrabold mb-5 tracking-tight">
             Deploy Your Eleventy Site
@@ -74,7 +73,7 @@ export default function Deployment() {
         </div>
       </div>
 
-      <div className="max-w-5xl mx-auto px-6 py-14">
+      <div className="max-w-3xl mx-auto">
         {/* Choose a platform */}
         <div className="mb-16">
           <SectionHeading eyebrow="Get started" title="Choose a platform" />

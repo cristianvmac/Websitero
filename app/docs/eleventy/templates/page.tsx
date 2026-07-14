@@ -1,10 +1,21 @@
 
 
 
+import Link from "next/link";
+import { LuChevronRight } from "react-icons/lu";
+
 export default function Templates() {
     return (
-        <section className="py-16 bg-gray-50">
-            <div className="max-w-5xl mx-auto px-6 text-center">
+        <div className="min-h-full p-12">
+            <div className="max-w-3xl mx-auto text-center">
+                {/* Breadcrumb */}
+                <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-x-1 gap-y-1 text-base font-normal text-slate-900 text-left">
+                    <Link href="/docs/eleventy" className="rounded-full py-1 hover:text-slate-600 hover:underline">
+                        Eleventy
+                    </Link>
+                    <span><LuChevronRight /></span>
+                    <span aria-current="page">Templates</span>
+                </nav>
                 <h2 className="text-3xl font-bold text-gray-900 mb-4">
                     Professional Templates
                 </h2>
@@ -19,6 +30,6 @@ export default function Templates() {
                     without unnecessary complexity.
                 </p>
             </div>
-        </section>
+        </div>
     );
 }

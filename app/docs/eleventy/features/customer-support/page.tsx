@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link";
+import { LuChevronRight } from "react-icons/lu";
 import { MessageCircle, Copy, Check, Zap, Mail, Clock, Users, Shield } from "lucide-react";
 import { useState } from "react";
 
@@ -14,25 +15,24 @@ export default function CustomerSupport() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-12">
-      
+    <div className="min-h-full p-12">
+      <div className="max-w-3xl mx-auto">
+
       {/* Hero Section */}
       <div className="mb-12">
         {/* Breadcrumb */}
-          <div className="flex items-center gap-3 mb-4 flex-wrap">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-linear-to-r from-orange-50 to-yellow-50 text-orange-700 rounded-full text-sm font-bold border-2 border-orange-200">
-               Eleventy
-            </div>
-            <span className="text-3xl font-semibold text-gray-400">/</span>
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-linear-to-r from-orange-50 to-yellow-50 text-orange-700 rounded-full text-sm font-bold border-2 border-orange-200">
-              <Link href="/docs/eleventy/features">Features</Link>
-            </div>
-            <span className="text-3xl font-semibold text-gray-400">/</span>
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-linear-to-r from-blue-50 to-purple-50 text-blue-700 rounded-full text-sm font-bold border-2 border-blue-200">
-              Customer Support
-            </div>
-          </div>
-    
+        <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-x-1 gap-y-1 text-base font-normal text-slate-900">
+          <Link href="/docs/eleventy" className="rounded-full py-1 hover:text-slate-600 hover:underline">
+            Eleventy
+          </Link>
+          <span><LuChevronRight /></span>
+          <Link href="/docs/eleventy/features" className="rounded-full py-1 hover:text-slate-600 hover:underline">
+            Features
+          </Link>
+          <span><LuChevronRight /></span>
+          <span aria-current="page">Customer Support</span>
+        </nav>
+
 
         <h1 className="text-5xl font-bold text-gray-900 mb-4">
           Add Live Chat Support
@@ -424,6 +424,7 @@ module.exports = {
         </div>
       </div>
 
+      </div>
     </div>
   );
 }

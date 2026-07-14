@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import { LuChevronRight } from "react-icons/lu";
 import {
   Image as ImageIcon,
   Code2,
@@ -86,11 +88,23 @@ const WHY_SVG = [
 
 export default function LogoSvg() {
   return (
-    <section className="relative overflow-hidden bg-gray-50 py-20">
+    <section className="relative overflow-hidden min-h-full p-12">
       {/* Decorative background glow */}
       <div className="pointer-events-none absolute -top-32 left-1/2 h-72 w-xl -translate-x-1/2 rounded-full bg-linear-to-br from-blue-200/40 to-purple-200/40 blur-3xl" />
 
-      <div className="relative mx-auto max-w-4xl px-6">
+      <div className="relative mx-auto max-w-3xl">
+        {/* Breadcrumb */}
+        <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-x-1 gap-y-1 text-base font-normal text-slate-900">
+          <Link href="/docs/eleventy" className="rounded-full py-1 hover:text-slate-600 hover:underline">
+            Eleventy
+          </Link>
+          <span><LuChevronRight /></span>
+          <Link href="/docs/eleventy/extras" className="rounded-full py-1 hover:text-slate-600 hover:underline">
+            Extras
+          </Link>
+          <span><LuChevronRight /></span>
+          <span aria-current="page">Logo SVG</span>
+        </nav>
         {/* ── Header ── */}
         <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-linear-to-r from-blue-50 to-purple-50 px-3 py-1.5 text-sm font-bold text-blue-700">
           <Sparkles className="h-4 w-4" />

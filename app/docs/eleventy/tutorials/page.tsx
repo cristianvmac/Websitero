@@ -1,9 +1,18 @@
 import Link from 'next/link';
+import { LuChevronRight } from "react-icons/lu";
 
 export default function Tutorials() {
     return (
-        <section className="bg-gray-50 py-32 px-12">
-            <div className="max-w-5xl mx-auto text-center">
+        <div className="min-h-full p-12">
+            <div className="max-w-3xl mx-auto text-center">
+                {/* Breadcrumb */}
+                <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-x-1 gap-y-1 text-base font-normal text-slate-900 text-left">
+                    <Link href="/docs/eleventy" className="rounded-full py-1 hover:text-slate-600 hover:underline">
+                        Eleventy
+                    </Link>
+                    <span><LuChevronRight /></span>
+                    <span aria-current="page">Tutorials</span>
+                </nav>
                 <span className="inline-flex items-center rounded-full bg-gray-200 px-4 py-1 text-sm font-medium text-gray-700 mb-6">
                     Step-by-Step Guides
                 </span>
@@ -28,6 +37,6 @@ export default function Tutorials() {
                     Get Started
                 </Link>
             </div>
-        </section>
+        </div>
     );
 }

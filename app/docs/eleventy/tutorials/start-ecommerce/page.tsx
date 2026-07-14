@@ -325,7 +325,8 @@ document.querySelectorAll(".buy").forEach((btn) =>
 
 export default function StartEcommerce() {
   return (
-    <div className="mx-auto max-w-4xl px-4 py-12 text-slate-700">
+    <div className="min-h-full p-12">
+      <div className="max-w-3xl mx-auto text-slate-700">
       {/* Breadcrumb */}
       <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-x-1 gap-y-1 text-base font-normal text-slate-900">
         <Link href="/docs/eleventy" className="rounded-full py-1 hover:text-slate-600 hover:underline">
@@ -611,6 +612,7 @@ export default function StartEcommerce() {
           </Link>
         </div>
       </footer>
+      </div>
     </div>
   );
 }

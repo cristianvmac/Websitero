@@ -96,7 +96,7 @@ export default function InstallVSCode() {
 
   return (
     <div className="min-h-full p-12">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl ml-6">
 
         {/* Header */}
         <div className="mb-10">
