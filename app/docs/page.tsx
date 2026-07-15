@@ -6,10 +6,10 @@ import { FRAMEWORKS, FRAMEWORK_ORDER } from "@/components/ui/frameworks-data";
 
 export default function DocsPage() {
   return (
-    <section id="frameworks" className="bg-slate-50 px-6 py-24">
+    <section id="frameworks" className="bg-white px-6 py-24">
       <div className="mx-auto max-w-5xl">
         <div className="mx-auto max-w-3xl text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-[#4588ba]/20 bg-[#4588ba]/10 px-3.5 py-1.5 text-sm font-semibold text-[#316994]">
+          <span className="inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-3.5 py-1.5 text-sm font-semibold text-blue-700">
             <Layers className="h-4 w-4" />
             Two ways to build
           </span>
@@ -58,7 +58,7 @@ export default function DocsPage() {
                       ))}
                     </ul>
 
-                    <Link href={f.docs} className="mt-8 inline-flex items-center gap-1.5 text-sm font-semibold text-slate-900 transition-colors hover:text-[#316994]">
+                    <Link href={f.docs} className="mt-8 inline-flex items-center gap-1.5 text-sm font-semibold text-slate-900 transition-colors hover:text-blue-700">
                       Read the {f.name} docs
                       <ArrowRight className="h-4 w-4" />
                     </Link>

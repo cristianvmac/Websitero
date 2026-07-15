@@ -214,17 +214,17 @@ export default function DocsShell({
     <div className="pl-3 py-5">
           <label className="relative mt-3 mb-3 block">
             <span className="sr-only">Search documentation</span>
-            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
             <input
               type="search"
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
               placeholder="Search docs..."
-              className="h-10 w-full rounded-lg border border-gray-300 bg-white pl-9 pr-3 text-sm text-gray-900 shadow-sm outline-none transition placeholder:text-gray-400 focus:border-gray-500 focus:ring-2 focus:ring-gray-200"
+              className="h-10 w-full rounded-lg border border-slate-300 bg-white pl-9 pr-3 text-sm text-slate-900 shadow-sm outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
             />
           </label>
 
-          <div className="mb-6 grid grid-cols-2 rounded-lg border border-gray-300 bg-white p-1 shadow-sm">
+          <div className="mb-6 grid grid-cols-2 rounded-lg border border-slate-300 bg-white p-1 shadow-sm">
             {frameworkOptions.map((option) => {
               const isActive = framework === option.value;
 
@@ -235,8 +235,8 @@ export default function DocsShell({
                   onClick={() => setIsMobileSidebarOpen(false)}
                   className={`flex min-h-9 items-center justify-center gap-2 rounded-md px-3 text-sm font-semibold transition ${
                     isActive
-                      ? "bg-gray-200 text-gray-900 shadow-sm"
-                      : "text-gray-600 hover:bg-gray-100 hover:text-gray-950"
+                      ? "bg-slate-200 text-slate-900 shadow-sm"
+                      : "text-slate-600 hover:bg-slate-100 hover:text-slate-950"
                   }`}
                   aria-current={isActive ? "page" : undefined}
                 >
@@ -258,10 +258,10 @@ export default function DocsShell({
               <Link
                 href={section.path}
                 onClick={() => setIsMobileSidebarOpen(false)}
-                className={`flex w-full items-center justify-between rounded px-1 py-1 text-left text-base font-bold uppercase tracking-wider transition hover:text-gray-700 ${
+                className={`flex w-full items-center justify-between rounded px-1 py-1 text-left text-base font-bold uppercase tracking-wider transition hover:text-slate-700 ${
                   pathname === section.path || pathname.startsWith(section.path + "/")
-                    ? "bg- text-gray-900"
-                    : "text-gray-500"
+                    ? "bg- text-slate-900"
+                    : "text-slate-500"
                 }`}
               >
                 <h3>{section.title}</h3>
@@ -269,7 +269,7 @@ export default function DocsShell({
                 {section.items.length > 0 && (
                   <span
                     onClick={(e) => toggleSection(section.title, e)}
-                    className="rounded hover:bg-gray-200"
+                    className="rounded hover:bg-slate-200"
                   >
                     {expandedSections[section.title] ? (
                       <ChevronDown className="h-4 w-4" />
@@ -290,7 +290,7 @@ export default function DocsShell({
                         className={`block w-full rounded-md px-2 py-1 text-left text-base transition ${
                           pathname === item.path
                             ? "bg-blue-50 font-medium text-black"
-                            : "text-gray-700 hover:bg-gray-100 hover:text-black"
+                            : "text-slate-700 hover:bg-slate-100 hover:text-black"
                         }`}
                       >
                         {item.name}
@@ -303,7 +303,7 @@ export default function DocsShell({
           ))}
 
           {visibleSections.length === 0 && (
-            <div className="rounded-lg border border-dashed border-gray-300 bg-white px-3 py-4 text-sm text-gray-500">
+            <div className="rounded-lg border border-dashed border-slate-300 bg-white px-3 py-4 text-sm text-slate-500">
               No docs found.
             </div>
           )}
@@ -312,7 +312,7 @@ export default function DocsShell({
 
   return (
     <div className="flex h-[calc(100vh-5rem)] mt-20">
-      <aside className="sidebar-scroll sticky top-20 hidden h-[calc(100vh-5rem)] w-60 shrink-0 overflow-y-auto border-r border-gray-300 bg-gray-50 lg:block">
+      <aside className="sidebar-scroll sticky top-20 hidden h-[calc(100vh-5rem)] w-60 shrink-0 overflow-y-auto border-r border-slate-200 bg-white lg:block">
         {sidebarContent}
       </aside>
 
@@ -321,17 +321,17 @@ export default function DocsShell({
           <button
             type="button"
             aria-label="Close docs menu"
-            className="absolute inset-0 bg-gray-950/40"
+            className="absolute inset-0 bg-slate-950/40"
             onClick={() => setIsMobileSidebarOpen(false)}
           />
-          <aside className="sidebar-scroll absolute left-0 top-0 h-full w-[min(15rem,75vw)] overflow-y-auto border-r border-gray-300 bg-gray-50 shadow-2xl">
-            <div className="flex items-center justify-between border-b border-gray-200 px-6 py-4">
-              <span className="text-sm font-semibold text-gray-900">Docs menu</span>
+          <aside className="sidebar-scroll absolute left-0 top-0 h-full w-[min(15rem,75vw)] overflow-y-auto border-r border-slate-200 bg-white shadow-2xl">
+            <div className="flex items-center justify-between border-b border-slate-200 px-6 py-4">
+              <span className="text-sm font-semibold text-slate-900">Docs menu</span>
               <button
                 type="button"
                 aria-label="Close docs menu"
                 onClick={() => setIsMobileSidebarOpen(false)}
-                className="flex h-9 w-9 items-center justify-center rounded-md text-gray-600 transition hover:bg-gray-100 hover:text-gray-950"
+                className="flex h-9 w-9 items-center justify-center rounded-md text-slate-600 transition hover:bg-slate-100 hover:text-slate-950"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -341,12 +341,12 @@ export default function DocsShell({
         </div>
       )}
 
-      <main className="main-scroll flex-1 overflow-y-auto border-r border-gray-300 bg-gray-50">
-        <div className="sticky top-0 z-30 border-b border-gray-200 bg-gray-50/95 px-4 py-3 backdrop-blur lg:hidden">
+      <main className="main-scroll flex-1 overflow-y-auto border-r border-slate-200 bg-white">
+        <div className="sticky top-0 z-30 border-b border-slate-200 bg-white/95 px-4 py-3 backdrop-blur lg:hidden">
           <button
             type="button"
             onClick={() => setIsMobileSidebarOpen(true)}
-            className="flex h-10 items-center gap-2 rounded-lg border border-gray-300 bg-white px-3 text-sm font-semibold text-gray-900 shadow-sm transition hover:bg-gray-100"
+            className="flex h-10 items-center gap-2 rounded-lg border border-slate-300 bg-white px-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-100"
             aria-expanded={isMobileSidebarOpen}
           >
             <Menu className="h-4 w-4" />
