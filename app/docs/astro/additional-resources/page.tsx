@@ -14,8 +14,8 @@ const resources = [
     icon: FileCode2,
     accent: {
       card: "hover:border-blue-300 hover:shadow-blue-100",
-      iconWrap: "bg-blue-50 text-gray-600 border-blue-200",
-      link: "text-gray-600 group-hover:text-gray-700",
+      iconWrap: "bg-blue-50 text-slate-600 border-blue-200",
+      link: "text-slate-600 group-hover:text-slate-700",
     },
   },
   {
@@ -27,8 +27,8 @@ const resources = [
     icon: Paintbrush2,
     accent: {
       card: "hover:border-blue-300 hover:shadow-blue-100",
-      iconWrap: "bg-blue-50 text-gray-600 border-blue-200",
-      link: "text-gray-600 group-hover:text-gray-700",
+      iconWrap: "bg-blue-50 text-slate-600 border-blue-200",
+      link: "text-slate-600 group-hover:text-slate-700",
     },
   },
   {
@@ -40,8 +40,8 @@ const resources = [
     icon: Braces,
     accent: {
       card: "hover:border-blue-300 hover:shadow-blue-100",
-      iconWrap: "bg-blue-50 text-gray-600 border-blue-200",
-      link: "text-gray-700 group-hover:text-gray-800",
+      iconWrap: "bg-blue-50 text-slate-600 border-blue-200",
+      link: "text-slate-700 group-hover:text-slate-800",
     },
   },
 ];
@@ -64,10 +64,10 @@ export default function AdditionalResources() {
         </nav>
 
 
-        <h1 className="text-5xl font-bold text-gray-900 mb-4">
+        <h1 className="text-5xl font-bold text-slate-900 mb-4">
           Additional Learning Resources
         </h1>
-        <p className="text-xl text-gray-600 leading-relaxed">
+        <p className="text-xl text-slate-600 leading-relaxed">
           If you&apos;re starting with web development, these resources will help you
           build a solid foundation in HTML, CSS, and JavaScript.
         </p>
@@ -83,17 +83,17 @@ export default function AdditionalResources() {
               href={resource.href}
               target="_blank"
               rel="noopener noreferrer"
-              className={`group flex flex-col bg-white rounded-2xl p-6 border border-gray-200 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg ${resource.accent.card}`}
+              className={`group flex flex-col bg-white rounded-2xl p-6 border border-slate-200 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg ${resource.accent.card}`}
             >
               <div
                 className={`w-12 h-12 rounded-xl border flex items-center justify-center mb-4 ${resource.accent.iconWrap}`}
               >
                 <Icon className="w-6 h-6" />
               </div>
-              <h2 className="text-xl font-bold text-gray-900 mb-2">
+              <h2 className="text-xl font-bold text-slate-900 mb-2">
                 {resource.title}
               </h2>
-              <p className="text-gray-600 text-sm leading-relaxed mb-5 flex-1">
+              <p className="text-slate-600 text-sm leading-relaxed mb-5 flex-1">
                 {resource.description}
               </p>
               <span
@@ -108,9 +108,9 @@ export default function AdditionalResources() {
       </div>
 
       {/* Quick Summary */}
-      <div className="bg-linear-to-br from-gray-50 to-gray-100 rounded-2xl p-8 border border-gray-200">
+      <div className="bg-slate-50 rounded-2xl p-8 border border-slate-200">
         <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
-          <p className="text-sm text-gray-900">
+          <p className="text-sm text-slate-900">
             Following all three guides will give you a strong foundation for web
             development and prepare you for more advanced frameworks like Next.js
             or Astro.

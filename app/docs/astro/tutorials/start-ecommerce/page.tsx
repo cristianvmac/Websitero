@@ -36,17 +36,17 @@ function CodeBlock({ code, copyText }: { code: string; copyText?: string }) {
         onClick={handleCopy}
         className="absolute right-3 top-3 rounded-lg bg-slate-800 p-2 text-slate-400 transition-colors hover:bg-slate-700 hover:text-slate-200"
       >
-        {copied ? <Check className="h-4 w-4 text-gray-400" /> : <Copy className="h-4 w-4" />}
+        {copied ? <Check className="h-4 w-4 text-slate-400" /> : <Copy className="h-4 w-4" />}
       </button>
     </div>
   );
 }
 
 const CALLOUT_TONES = {
-  amber: "bg-blue-50 border-blue-200 text-gray-900",
-  blue: "bg-blue-50 border-blue-200 text-gray-900",
-  green: "bg-blue-50 border-blue-200 text-gray-900",
-  red: "bg-blue-50 border-blue-200 text-gray-900",
+  amber: "bg-blue-50 border-blue-200 text-slate-900",
+  blue: "bg-blue-50 border-blue-200 text-slate-900",
+  green: "bg-blue-50 border-blue-200 text-slate-900",
+  red: "bg-blue-50 border-blue-200 text-slate-900",
 } as const;
 
 function Callout({
@@ -80,7 +80,7 @@ function SectionCard({
   return (
     <section className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">
       <header className="mb-6 flex items-start gap-4">
-        <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-gray-700 ${accent}`}>
+        <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-slate-700 ${accent}`}>
           <Icon className="h-5 w-5" />
         </div>
         <div>
@@ -95,7 +95,7 @@ function SectionCard({
 
 function Ext({ href, children }: { href: string; children: React.ReactNode }) {
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer" className="font-medium text-gray-600 underline underline-offset-2">
+    <a href={href} target="_blank" rel="noopener noreferrer" className="font-medium text-slate-600 underline underline-offset-2">
       {children}
     </a>
   );
@@ -105,22 +105,22 @@ function ProsCons({ pros, cons }: { pros: string[]; cons: string[] }) {
   return (
     <div className="grid gap-3 sm:grid-cols-2">
       <div className="rounded-xl border border-blue-200 bg-blue-50 p-4">
-        <p className="mb-2 text-sm font-bold text-gray-900">Pros</p>
+        <p className="mb-2 text-sm font-bold text-slate-900">Pros</p>
         <ul className="space-y-1.5">
           {pros.map((p) => (
-            <li key={p} className="flex items-start gap-2 text-sm text-gray-900">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-gray-600" />
+            <li key={p} className="flex items-start gap-2 text-sm text-slate-900">
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-slate-600" />
               {p}
             </li>
           ))}
         </ul>
       </div>
       <div className="rounded-xl border border-blue-200 bg-blue-50 p-4">
-        <p className="mb-2 text-sm font-bold text-gray-900">Cons</p>
+        <p className="mb-2 text-sm font-bold text-slate-900">Cons</p>
         <ul className="space-y-1.5">
           {cons.map((c) => (
-            <li key={c} className="flex items-start gap-2 text-sm text-gray-900">
-              <X className="mt-0.5 h-4 w-4 shrink-0 text-gray-600" />
+            <li key={c} className="flex items-start gap-2 text-sm text-slate-900">
+              <X className="mt-0.5 h-4 w-4 shrink-0 text-slate-600" />
               {c}
             </li>
           ))}
@@ -205,7 +205,7 @@ const APPROACHES = [
     icon: Zap,
     accent: "bg-blue-50",
     badge: "Easiest",
-    badgeClass: "bg-blue-100 text-gray-700",
+    badgeClass: "bg-blue-100 text-slate-700",
     title: "Shopify Buy Button",
     desc: "Drop an embeddable, Shopify-generated button onto any static page. Shopify owns the cart and checkout.",
     href: "#buy-button",
@@ -214,7 +214,7 @@ const APPROACHES = [
     icon: Settings2,
     accent: "bg-blue-50",
     badge: "Recommended",
-    badgeClass: "bg-blue-100 text-gray-700",
+    badgeClass: "bg-blue-100 text-slate-700",
     title: "Storefront API",
     desc: "A fully custom, headless storefront. Fetch products at build time and hand checkout off to Shopify.",
     href: "#storefront-api",
@@ -361,7 +361,7 @@ export default function StartEcommerce() {
           </p>
           <Link
             href="/docs/astro/tutorials/build-in-5-minutes"
-            className="inline-flex items-center gap-1.5 rounded-lg bg-blue-50 px-3.5 py-2 text-sm font-semibold text-gray-700 transition-colors hover:bg-blue-100"
+            className="inline-flex items-center gap-1.5 rounded-lg bg-blue-50 px-3.5 py-2 text-sm font-semibold text-slate-700 transition-colors hover:bg-blue-100"
           >
             Build in 5 minutes <ArrowRight className="h-4 w-4" />
           </Link>
@@ -383,7 +383,7 @@ export default function StartEcommerce() {
               className="group flex flex-col rounded-2xl border border-slate-200 bg-white p-5 transition-colors hover:border-slate-300 hover:bg-slate-50"
             >
               <div className="mb-3 flex items-center gap-3">
-                <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-gray-700 ${accent}`}>
+                <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-slate-700 ${accent}`}>
                   <Icon className="h-5 w-5" />
                 </div>
                 <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${badgeClass}`}>
@@ -419,7 +419,7 @@ export default function StartEcommerce() {
             <ol className="space-y-2">
               {BUY_BUTTON_STEPS.map((step, i) => (
                 <li key={step} className="flex items-start gap-3 text-sm">
-                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-100 text-xs font-bold text-gray-700">
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-100 text-xs font-bold text-slate-700">
                     {i + 1}
                   </span>
                   <span className="pt-0.5">{step}</span>
@@ -447,7 +447,7 @@ export default function StartEcommerce() {
       {/* Option 2 heading */}
       <div id="storefront-api" className="mb-12 mt-12 scroll-mt-6">
         <div className="mb-5 flex items-center gap-3">
-          <span className="rounded-full bg-blue-100 px-2.5 py-1 text-xs font-semibold text-gray-700">
+          <span className="rounded-full bg-blue-100 px-2.5 py-1 text-xs font-semibold text-slate-700">
             Recommended
           </span>
           <h2 className="text-2xl font-bold text-slate-900">Option 2: Storefront API</h2>
@@ -460,11 +460,11 @@ export default function StartEcommerce() {
         <ol className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {STEPS.map(({ icon: Icon, title, desc }, i) => (
             <li key={title} className="relative rounded-xl border border-slate-200 bg-white p-5">
-              <span className="absolute -left-2.5 -top-2.5 flex h-7 w-7 items-center justify-center rounded-full bg-blue-50 text-xs font-bold text-gray-700">
+              <span className="absolute -left-2.5 -top-2.5 flex h-7 w-7 items-center justify-center rounded-full bg-blue-50 text-xs font-bold text-slate-700">
                 {i + 1}
               </span>
               <div className="mb-3 inline-flex rounded-lg bg-blue-50 p-2">
-                <Icon className="h-4 w-4 text-gray-600" />
+                <Icon className="h-4 w-4 text-slate-600" />
               </div>
               <h3 className="text-sm font-bold text-slate-900">{title}</h3>
               <p className="mt-1 text-xs text-slate-500">{desc}</p>
@@ -518,7 +518,7 @@ export default function StartEcommerce() {
           <ol className="space-y-4">
             {SHOPIFY_SETUP_STEPS.map(({ title, body }, i) => (
               <li key={title} className="flex items-start gap-3">
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-100 text-xs font-bold text-gray-700">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-100 text-xs font-bold text-slate-700">
                   {i + 1}
                 </span>
                 <div className="pt-0.5">
@@ -552,7 +552,7 @@ export default function StartEcommerce() {
           <div className="grid gap-3 sm:grid-cols-3">
             {FEATURES.map(({ icon: Icon, title, body }) => (
               <div key={title} className="rounded-xl border border-slate-200 p-4">
-                <Icon className="mb-2 h-5 w-5 text-gray-600" />
+                <Icon className="mb-2 h-5 w-5 text-slate-600" />
                 <p className="mb-1 text-sm font-bold text-slate-900">{title}</p>
                 <p className="text-xs leading-relaxed text-slate-500">{body}</p>
               </div>
@@ -622,21 +622,21 @@ export default function StartEcommerce() {
           <CodeBlock code={PROJECT_STRUCTURE} />
           <ul className="space-y-2 text-sm">
             <li className="flex items-start gap-2">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-gray-600" />
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-slate-600" />
               <span>
                 Astro looks for <Code>.astro</Code> or <Code>.md</Code> files in{" "}
                 <Code>src/pages/</Code>. Each file is exposed as a route based on its name.
               </span>
             </li>
             <li className="flex items-start gap-2">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-gray-600" />
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-slate-600" />
               <span>
                 <Code>src/components/</Code> is where Astro/React/Vue/Svelte/Preact components live —
                 there&apos;s nothing special about it, it&apos;s just convention.
               </span>
             </li>
             <li className="flex items-start gap-2">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-gray-600" />
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-slate-600" />
               <span>
                 Static assets like images go in <Code>public/</Code>, and{" "}
                 <Code>src/utils/shopify.ts</Code> holds the Storefront API helpers and cart logic.
@@ -647,12 +647,12 @@ export default function StartEcommerce() {
       </div>
 
       {/* Next steps */}
-      <footer className="mt-12 rounded-2xl bg-linear-to-br from-gray-50 to-gray-100 border border-gray-200 p-4 text-gray-700">
+      <footer className="mt-12 rounded-2xl bg-slate-50 border border-slate-200 p-4 text-slate-700">
         <div className="mb-3 flex items-center gap-3">
           <ShoppingBag className="h-7 w-7" />
           <h2 className="text-xl font-bold">Your store is ready</h2>
         </div>
-        <p className="mb-6 text-gray-600">
+        <p className="mb-6 text-slate-600">
           A lightning-fast Shopify-powered storefront.
         </p>
         <div className="flex flex-wrap gap-3">
@@ -666,7 +666,7 @@ export default function StartEcommerce() {
           </Link>
           <Link
             href="/docs/astro/deployment"
-            className="inline-flex items-center gap-2 rounded-lg bg-white border border-gray-200 px-5 py-2.5 font-semibold text-slate-900 transition-colors hover:bg-slate-100"
+            className="inline-flex items-center gap-2 rounded-lg bg-white border border-slate-200 px-5 py-2.5 font-semibold text-slate-900 transition-colors hover:bg-slate-100"
           >
             <Rocket className="h-4 w-4" /> Deployment Guide
           </Link>

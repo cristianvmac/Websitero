@@ -88,9 +88,9 @@ export default function ComponentsIndex() {
         {/* Header */}
         <div className="mb-12"> 
           
-          <h1 className="text-5xl font-bold text-gray-900 mb-4">Components</h1>
+          <h1 className="text-5xl font-bold text-slate-900 mb-4">Components</h1>
         
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
             All components are built with Astro—styled, responsive, and ready to drop
             into your project. Pick a component below to see usage examples and
             customization options.
@@ -107,16 +107,16 @@ export default function ComponentsIndex() {
             return (
               <div
                 key={component.slug}
-                className="relative block bg-white rounded-2xl p-5 border-2 border-dashed border-gray-200 opacity-70"
+                className="relative block bg-white rounded-2xl p-5 border border-dashed border-slate-200 opacity-70"
               >
-                <span className="absolute top-3 right-3 px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 text-xs font-semibold">
+                <span className="absolute top-3 right-3 px-2 py-0.5 rounded-full bg-slate-100 text-slate-500 text-xs font-semibold">
                   Coming soon
                 </span>
-                <div className="w-11 h-11 bg-gray-100 rounded-xl flex items-center justify-center mb-4">
-                  <Icon className="w-5 h-5 text-gray-400" />
+                <div className="w-11 h-11 bg-slate-100 rounded-xl flex items-center justify-center mb-4">
+                  <Icon className="w-5 h-5 text-slate-400" />
                 </div>
-                <h2 className="text-lg font-bold text-gray-700 mb-1">{component.name}</h2>
-                <p className="text-sm text-gray-500">{component.description}</p>
+                <h2 className="text-lg font-bold text-slate-700 mb-1">{component.name}</h2>
+                <p className="text-sm text-slate-500">{component.description}</p>
               </div>
             );
           }
@@ -125,18 +125,18 @@ export default function ComponentsIndex() {
             <Link
               key={component.slug}
               href={href}
-              className="group block bg-white rounded-2xl p-5 border-2 border-gray-200 hover:border-blue-400 hover:shadow-xl transition-all"
+              className="group block bg-white rounded-2xl p-5 border border-slate-200 hover:border-blue-400 hover:shadow-xl transition-all"
             >
               <div className="flex items-start justify-between mb-4">
                 <div className="w-11 h-11 bg-blue-50 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Icon className="w-5 h-5 text-gray-600" />
+                  <Icon className="w-5 h-5 text-slate-600" />
                 </div>
-                <ArrowRight className="w-5 h-5 text-gray-300 group-hover:text-gray-600 group-hover:translate-x-1 transition-all shrink-0" />
+                <ArrowRight className="w-5 h-5 text-slate-300 group-hover:text-slate-600 group-hover:translate-x-1 transition-all shrink-0" />
               </div>
-              <h2 className="text-lg font-bold text-gray-900 group-hover:text-gray-600 transition-colors mb-1">
+              <h2 className="text-lg font-bold text-slate-900 group-hover:text-slate-600 transition-colors mb-1">
                 {component.name}
               </h2>
-              <p className="text-sm text-gray-600">{component.description}</p>
+              <p className="text-sm text-slate-600">{component.description}</p>
             </Link>
           );
         })}
@@ -144,8 +144,8 @@ export default function ComponentsIndex() {
 
       {/* Footer note */}
       <div className="text-center">
-        <p className="text-gray-700">
-          All components live in your project&apos;s components folder <code className="bg-gray-100 px-1.5 py-0.5 rounded">/src/components/</code>
+        <p className="text-slate-700">
+          All components live in your project&apos;s components folder <code className="bg-slate-100 px-1.5 py-0.5 rounded">/src/components/</code>
         </p>
       </div>
       </div>

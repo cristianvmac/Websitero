@@ -36,17 +36,17 @@ function CodeBlock({ code, filename }: { code: string; filename?: string }) {
   };
 
   return (
-    <div className="group relative overflow-hidden rounded-xl border border-gray-800 bg-gray-900 shadow-lg shadow-gray-900/20 ring-1 ring-black/5">
+    <div className="group relative overflow-hidden rounded-xl border border-slate-800 bg-slate-900 shadow-lg shadow-slate-900/20 ring-1 ring-black/5">
       {/* Window header */}
-      <div className="flex items-center justify-between border-b border-gray-700/60 bg-gray-800/50 px-4 py-2.5">
+      <div className="flex items-center justify-between border-b border-slate-700/60 bg-slate-800/50 px-4 py-2.5">
         <div className="flex items-center gap-2">
           {filename && (
-            <span className="ml-3 font-mono text-xs text-gray-400">{filename}</span>
+            <span className="ml-3 font-mono text-xs text-slate-400">{filename}</span>
           )}
         </div>
         <button
           onClick={handleCopy}
-          className="flex items-center gap-1.5 rounded-md px-2 py-1 text-xs font-medium text-gray-400 transition-colors hover:bg-gray-700/60 hover:text-gray-100"
+          className="flex items-center gap-1.5 rounded-md px-2 py-1 text-xs font-medium text-slate-400 transition-colors hover:bg-slate-700/60 hover:text-slate-100"
         >
           {copied ? (
             <Check className="h-3.5 w-3.5 text-green-400" />
@@ -57,7 +57,7 @@ function CodeBlock({ code, filename }: { code: string; filename?: string }) {
         </button>
       </div>
 
-      <pre className="overflow-x-auto p-4 text-sm leading-relaxed text-gray-100">
+      <pre className="overflow-x-auto p-4 text-sm leading-relaxed text-slate-100">
         <code>{code}</code>
       </pre>
     </div>
@@ -67,7 +67,7 @@ function CodeBlock({ code, filename }: { code: string; filename?: string }) {
 // Inline code chip — black text on a soft grey pill.
 function Code({ children }: { children: React.ReactNode }) {
   return (
-    <code className="rounded-md bg-gray-100 px-1.5 py-0.5 font-mono text-[0.9em] text-gray-900 ring-1 ring-gray-200">
+    <code className="rounded-md bg-slate-100 px-1.5 py-0.5 font-mono text-[0.9em] text-slate-900 ring-1 ring-slate-200">
       {children}
     </code>
   );
@@ -110,7 +110,7 @@ function ScoreRing({ label, score }: { label: string; score: number }) {
           {score}
         </span>
       </div>
-      <span className="text-xs font-semibold text-gray-900">{label}</span>
+      <span className="text-xs font-semibold text-slate-900">{label}</span>
     </div>
   );
 }
@@ -138,11 +138,11 @@ function LighthousePreview() {
   return (
     <div>
       {/* Toggle */}
-      <div className="mb-4 inline-flex rounded-xl border border-gray-200 bg-white p-1 shadow-sm">
+      <div className="mb-4 inline-flex rounded-xl border border-slate-200 bg-white p-1 shadow-sm">
         <button
           onClick={() => setMode("spa")}
           className={`rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-colors ${
-            mode === "spa" ? "bg-blue-100 text-gray-900" : "text-gray-900 hover:bg-gray-50"
+            mode === "spa" ? "bg-blue-100 text-slate-900" : "text-slate-900 hover:bg-slate-50"
           }`}
         >
           Heavy SPA
@@ -150,7 +150,7 @@ function LighthousePreview() {
         <button
           onClick={() => setMode("astro")}
           className={`rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-colors ${
-            mode === "astro" ? "bg-blue-100 text-gray-900" : "text-gray-900 hover:bg-gray-50"
+            mode === "astro" ? "bg-blue-100 text-slate-900" : "text-slate-900 hover:bg-slate-50"
           }`}
         >
           Astro static
@@ -158,16 +158,16 @@ function LighthousePreview() {
       </div>
 
       {/* Scores */}
-      <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+      <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
         <div className="flex flex-wrap justify-around gap-4">
           {Object.entries(active.scores).map(([label, score]) => (
             <ScoreRing key={label} label={label} score={score} />
           ))}
         </div>
-        <p className="mt-4 text-center text-sm font-medium text-gray-900">{active.label}</p>
+        <p className="mt-4 text-center text-sm font-medium text-slate-900">{active.label}</p>
       </div>
 
-      <p className="mt-2 text-xs text-gray-900">
+      <p className="mt-2 text-xs text-slate-900">
         Illustrative scores — but the gap is real: less JavaScript on the wire means a
         faster Largest Contentful Paint and a higher Performance score.
       </p>
@@ -202,18 +202,18 @@ function StepHeader({
   return (
     <div className="flex flex-wrap items-center gap-4">
       <div
-        className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-linear-to-br ${TONE[tone].tile} text-gray-700 shadow-md ring-4 ${TONE[tone].ring}`}
+        className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-linear-to-br ${TONE[tone].tile} text-slate-700 shadow-md ring-4 ${TONE[tone].ring}`}
       >
         <Icon className="h-6 w-6" />
       </div>
       <div className="min-w-0">
-        <span className="text-xs font-bold uppercase tracking-widest text-gray-900">
+        <span className="text-xs font-bold uppercase tracking-widest text-slate-900">
           Step {step}
         </span>
-        <h2 className="text-xl font-bold text-gray-900">{title}</h2>
+        <h2 className="text-xl font-bold text-slate-900">{title}</h2>
       </div>
       {badge && (
-        <span className="ml-auto rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-gray-700">
+        <span className="ml-auto rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-slate-700">
           {badge}
         </span>
       )}
@@ -231,7 +231,7 @@ function Card({
   return (
     <div
       className={`mt-8 rounded-3xl border bg-white p-7 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg ${
-        highlight ? "border-blue-200 bg-linear-to-b from-blue-50/40 to-white" : "border-gray-200"
+        highlight ? "border-blue-200 bg-blue-50/40" : "border-slate-200"
       }`}
     >
       {children}
@@ -250,7 +250,6 @@ export default function PageSpeed() {
   return (
     <section className="relative overflow-hidden min-h-full p-12">
       {/* Decorative background glow */}
-      <div className="pointer-events-none absolute -top-32 left-1/2 h-72 w-xl -translate-x-1/2 rounded-full bg-linear-to-br from-blue-50/50 to-blue-50/50 blur-3xl" />
 
       <div className="relative max-w-3xl ml-6">
         {/* Breadcrumb */}
@@ -265,11 +264,11 @@ export default function PageSpeed() {
           <span><LuChevronRight /></span>
           <span aria-current="page">Page Speed Test</span>
         </nav>
-        <h1 className="mt-5 text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
+        <h1 className="mt-5 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
           Optimizing Page Speed
         </h1>
 
-        <p className="mt-5 max-w-2xl text-lg leading-relaxed text-gray-900">
+        <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-900">
           Astro ships your pages as pre-rendered static HTML with{" "}
           <span className="font-bold">zero JavaScript by default</span>, so this starter is
           fast before you do anything. These are the levers that move your Lighthouse{" "}
@@ -281,9 +280,9 @@ export default function PageSpeed() {
           {STATS.map(({ icon: Icon, label }) => (
             <span
               key={label}
-              className="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-3.5 py-2 text-sm font-semibold text-gray-900 shadow-sm"
+              className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-sm font-semibold text-slate-900 shadow-sm"
             >
-              <Icon className="h-4 w-4 text-gray-600" />
+              <Icon className="h-4 w-4 text-slate-600" />
               {label}
             </span>
           ))}
@@ -293,7 +292,7 @@ export default function PageSpeed() {
         <Card highlight>
           <StepHeader step={1} icon={Zap} tone="emerald" title="Ship as little JavaScript as possible" badge="Biggest win" />
 
-          <p className="mt-5 text-gray-900">
+          <p className="mt-5 text-slate-900">
             Every <Code>.astro</Code> component renders to plain HTML at build time and
             sends <span className="font-bold">no client-side JavaScript</span>. You only opt
             into hydration where you genuinely need interactivity, using a{" "}
@@ -316,7 +315,7 @@ import Counter from "../components/Counter.jsx";
           </div>
 
           {/* Live, interactive Lighthouse preview */}
-          <p className="mt-6 mb-3 font-medium text-gray-900">
+          <p className="mt-6 mb-3 font-medium text-slate-900">
             The less you hydrate, the higher your Lighthouse Performance score — toggle to
             compare:
           </p>
@@ -333,7 +332,7 @@ import Counter from "../components/Counter.jsx";
             badge="Fewer bytes"
           />
 
-          <p className="mt-5 text-gray-900">
+          <p className="mt-5 text-slate-900">
             Images are usually the heaviest thing on a page, so this is where the
             Performance score is won or lost. Astro optimizes any image you store in{" "}
             <Code>src/assets/</Code> and render with the built-in <Code>{"<Image />"}</Code>{" "}
@@ -341,7 +340,7 @@ import Counter from "../components/Counter.jsx";
             <Code>public/</Code> are served untouched.
           </p>
 
-          <p className="mt-5 text-gray-900">
+          <p className="mt-5 text-slate-900">
             The starter sets <Code>layout: &apos;constrained&apos;</Code> as the default in{" "}
             <Code>astro.config.mjs</Code>, so every image is responsive with no per-image
             work:
@@ -358,9 +357,9 @@ import Counter from "../components/Counter.jsx";
             />
           </div>
 
-          <ul className="mt-5 space-y-2.5 text-sm text-gray-900">
+          <ul className="mt-5 space-y-2.5 text-sm text-slate-900">
             <li className="flex gap-2.5">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-gray-600" />
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-slate-600" />
               <span>
                 <Code>srcset</Code> and <Code>sizes</Code> are generated automatically from
                 each image&apos;s dimensions, so the browser downloads a right-sized file
@@ -368,7 +367,7 @@ import Counter from "../components/Counter.jsx";
               </span>
             </li>
             <li className="flex gap-2.5">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-gray-600" />
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-slate-600" />
               <span>
                 <Code>width</Code> / <Code>height</Code> are optional for images in{" "}
                 <Code>src/</Code> (Astro infers them) and reserve the space up front, so the
@@ -378,7 +377,7 @@ import Counter from "../components/Counter.jsx";
             </li>
           </ul>
 
-          <p className="mt-6 text-gray-900">
+          <p className="mt-6 text-slate-900">
             Reach for <Code>{"<Picture />"}</Code> when you want modern formats with a
             fallback — it emits a real <Code>{"<picture>"}</Code> element so the browser
             picks the smallest format it supports:
@@ -403,10 +402,10 @@ import heroImage from "@assets/images/hero.jpg";
             />
           </div>
 
-          <p className="mt-6 mb-3 font-medium text-gray-900">Key properties</p>
-          <ul className="space-y-2.5 text-sm text-gray-900">
+          <p className="mt-6 mb-3 font-medium text-slate-900">Key properties</p>
+          <ul className="space-y-2.5 text-sm text-slate-900">
             <li className="flex gap-2.5">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-gray-600" />
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-slate-600" />
               <span>
                 <Code>formats</Code> — output formats, e.g.{" "}
                 <Code>{"['avif', 'webp']"}</Code>. AVIF and WebP are far smaller than
@@ -414,7 +413,7 @@ import heroImage from "@assets/images/hero.jpg";
               </span>
             </li>
             <li className="flex gap-2.5">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-gray-600" />
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-slate-600" />
               <span>
                 <Code>priority</Code> — automatically sets the optimal <Code>loading</Code>,{" "}
                 <Code>decoding</Code>, and <Code>fetchpriority</Code> for above-the-fold
@@ -422,13 +421,13 @@ import heroImage from "@assets/images/hero.jpg";
               </span>
             </li>
             <li className="flex gap-2.5">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-gray-600" />
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-slate-600" />
               <span>
                 <Code>width</Code> / <Code>height</Code> — the dimensions to render at.
               </span>
             </li>
             <li className="flex gap-2.5">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-gray-600" />
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-slate-600" />
               <span>
                 <Code>layout</Code> — defaults to <Code>&apos;constrained&apos;</Code>{" "}
                 (responsive); other options are <Code>&apos;fixed&apos;</Code> and{" "}
@@ -438,12 +437,12 @@ import heroImage from "@assets/images/hero.jpg";
           </ul>
 
           {/* CSPicture subsection — art direction */}
-          <div className="mt-7 rounded-2xl border border-gray-200 bg-gray-50/60 p-5">
-            <h3 className="flex flex-wrap items-center gap-2 font-bold text-gray-900">
-              <Layers className="h-5 w-5 shrink-0 text-gray-600" />
+          <div className="mt-7 rounded-2xl border border-slate-200 bg-slate-50/60 p-5">
+            <h3 className="flex flex-wrap items-center gap-2 font-bold text-slate-900">
+              <Layers className="h-5 w-5 shrink-0 text-slate-600" />
               Art-direct with <span className="font-mono">{"<CSPicture />"}</span>
             </h3>
-            <p className="mt-2 text-sm leading-relaxed text-gray-900">
+            <p className="mt-2 text-sm leading-relaxed text-slate-900">
               Many CodeStitch blocks use a <Code>{"<picture>"}</Code> with multiple{" "}
               <Code>srcset</Code> sources to swap a different crop — or a different image —
               between mobile and desktop. The kit&apos;s custom{" "}
@@ -475,7 +474,7 @@ import fallbackImage from "@assets/images/cabinets2.jpg";
               />
             </div>
 
-            <p className="mt-4 text-sm leading-relaxed text-gray-900">
+            <p className="mt-4 text-sm leading-relaxed text-slate-900">
               It accepts three images — mobile, desktop, and a fallback — which can be
               different sizes, crops, or completely different assets, plus optional{" "}
               <Code>mobileMediaWidth</Code> / <Code>desktopMediaWidth</Code> to tune the
@@ -485,8 +484,8 @@ import fallbackImage from "@assets/images/cabinets2.jpg";
 
           {/* Native picture vs. Astro Picture callout */}
           <div className="mt-5 flex gap-3 rounded-2xl border border-blue-200 bg-blue-50 p-4">
-            <Info className="mt-0.5 h-5 w-5 shrink-0 text-gray-600" />
-            <p className="text-sm leading-relaxed text-gray-900">
+            <Info className="mt-0.5 h-5 w-5 shrink-0 text-slate-600" />
+            <p className="text-sm leading-relaxed text-slate-900">
               Not every native <Code>{"<picture>"}</Code> from a CodeStitch block is swapped
               for Astro&apos;s component — it&apos;s your call. The stock markup already
               performs well but means resizing and reformatting assets by hand;{" "}
@@ -496,7 +495,7 @@ import fallbackImage from "@assets/images/cabinets2.jpg";
                 href="https://docs.astro.build/en/guides/images/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-bold text-gray-700 underline decoration-blue-400 underline-offset-2 hover:text-gray-900"
+                className="font-bold text-slate-700 underline decoration-blue-400 underline-offset-2 hover:text-slate-900"
               >
                 Astro images docs
               </a>
@@ -514,7 +513,7 @@ import fallbackImage from "@assets/images/cabinets2.jpg";
             title="Preload your hero (LCP) image"
           />
 
-          <p className="mt-5 text-gray-900">
+          <p className="mt-5 text-slate-900">
             The big image above the fold is almost always your{" "}
             <span className="font-bold">Largest Contentful Paint</span> element — the metric
             that weighs most on the Performance score. Pass a <Code>heroImage</Code> to{" "}
@@ -539,7 +538,7 @@ const optimizedImage = await getImage({ src: heroImage, format: "webp" });
             />
           </div>
 
-          <p className="mt-5 text-gray-900">
+          <p className="mt-5 text-slate-900">
             …which produces this in the rendered <Code>{"<head>"}</Code>:
           </p>
 
@@ -558,20 +557,20 @@ const optimizedImage = await getImage({ src: heroImage, format: "webp" });
           {/* Do / don't preload */}
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             <div className="rounded-2xl border border-blue-200 bg-blue-50 p-4">
-              <p className="mb-3 flex items-center gap-2 text-sm font-bold text-gray-800">
+              <p className="mb-3 flex items-center gap-2 text-sm font-bold text-slate-800">
                 <Check className="h-4 w-4" /> Preload these
               </p>
-              <ul className="space-y-2 text-sm text-gray-900">
+              <ul className="space-y-2 text-sm text-slate-900">
                 <li>Hero / banner images visible immediately on load.</li>
                 <li>Critical brand assets (logos, etc.).</li>
                 <li>Above-the-fold content.</li>
               </ul>
             </div>
             <div className="rounded-2xl border border-blue-200 bg-blue-50 p-4">
-              <p className="mb-3 flex items-center gap-2 text-sm font-bold text-gray-800">
+              <p className="mb-3 flex items-center gap-2 text-sm font-bold text-slate-800">
                 <X className="h-4 w-4" /> Don&apos;t preload
               </p>
-              <ul className="space-y-2 text-sm text-gray-900">
+              <ul className="space-y-2 text-sm text-slate-900">
                 <li>Below-the-fold images — lazy-load them instead.</li>
                 <li>Many images — keep it to 1–2 critical resources per page.</li>
                 <li>Small icons or decorative images.</li>
@@ -584,7 +583,7 @@ const optimizedImage = await getImage({ src: heroImage, format: "webp" });
         <Card>
           <StepHeader step={4} icon={Type} tone="purple" title="Self-host your fonts" />
 
-          <p className="mt-5 text-gray-900">
+          <p className="mt-5 text-slate-900">
             Loading fonts from Google&apos;s servers adds a render-blocking, third-party
             round-trip on every visit. This starter avoids it by{" "}
             <span className="font-bold">self-hosting Roboto</span> — the font files live in{" "}
@@ -608,7 +607,7 @@ const optimizedImage = await getImage({ src: heroImage, format: "webp" });
             />
           </div>
 
-          <p className="mt-5 text-gray-900">
+          <p className="mt-5 text-slate-900">
             Base elements then use it, falling back to a system font while it loads:
           </p>
 
@@ -623,9 +622,9 @@ html {
           </div>
 
           {/* Why this approach is fast */}
-          <ul className="mt-6 space-y-2.5 text-sm text-gray-900">
+          <ul className="mt-6 space-y-2.5 text-sm text-slate-900">
             <li className="flex gap-2.5">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-gray-600" />
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-slate-600" />
               <span>
                 <span className="font-semibold">No third-party request</span> — fonts ship
                 from your own domain, so there&apos;s no extra DNS lookup and connection to
@@ -633,21 +632,21 @@ html {
               </span>
             </li>
             <li className="flex gap-2.5">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-gray-600" />
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-slate-600" />
               <span>
                 <Code>.woff2</Code> first with a <Code>.woff</Code> fallback — woff2 is the
                 smallest modern format and is supported almost everywhere.
               </span>
             </li>
             <li className="flex gap-2.5">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-gray-600" />
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-slate-600" />
               <span>
                 <Code>font-display: swap</Code> shows your text immediately in the fallback
                 font, then swaps in Roboto once it arrives — no invisible text (FOIT).
               </span>
             </li>
             <li className="flex gap-2.5">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-gray-600" />
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-slate-600" />
               <span>
                 Only the weights you actually use ship — <Code>400</Code>, <Code>700</Code>,
                 and <Code>900</Code> — three files, not the whole Roboto family.
@@ -655,7 +654,7 @@ html {
             </li>
           </ul>
 
-          <p className="mt-5 text-gray-900">
+          <p className="mt-5 text-slate-900">
             To swap in a different font, drop its <Code>.woff2</Code> / <Code>.woff</Code>{" "}
             files into <Code>public/assets/fonts/</Code>, add a matching{" "}
             <Code>@font-face</Code> block, and update the <Code>font-family</Code> — keeping
@@ -665,16 +664,16 @@ html {
 
         {/* ── Audit callout — measure after each change ── */}
         <div className="mt-8 flex gap-3 rounded-3xl border border-blue-200 bg-blue-50 p-5">
-          <Gauge className="mt-0.5 h-5 w-5 shrink-0 text-gray-600" />
+          <Gauge className="mt-0.5 h-5 w-5 shrink-0 text-slate-600" />
           <div>
-            <h3 className="font-bold text-gray-900">Measure, don&apos;t guess</h3>
-            <p className="mt-1 text-sm leading-relaxed text-gray-900">
+            <h3 className="font-bold text-slate-900">Measure, don&apos;t guess</h3>
+            <p className="mt-1 text-sm leading-relaxed text-slate-900">
               After each change, audit the deployed URL with{" "}
               <a
                 href="https://pagespeed.web.dev"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-bold text-gray-700 underline decoration-blue-400 underline-offset-2 hover:text-gray-900"
+                className="font-bold text-slate-700 underline decoration-blue-400 underline-offset-2 hover:text-slate-900"
               >
                 Google PageSpeed Insights
               </a>{" "}
@@ -685,8 +684,8 @@ html {
         </div>
 
         {/* Subtle footer flourish */}
-        <p className="mt-10 flex items-center justify-center gap-2 text-sm font-medium text-gray-900">
-          <Feather className="h-4 w-4 text-gray-500" />
+        <p className="mt-10 flex items-center justify-center gap-2 text-sm font-medium text-slate-900">
+          <Feather className="h-4 w-4 text-slate-500" />
           Light pages, happy users.
         </p>
       </div>

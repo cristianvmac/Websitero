@@ -14,7 +14,7 @@ export default function Setup() {
             iconColor: "text-[#5FA04E]",
             iconBg: "bg-[#5FA04E]/10",
             badge: "Required",
-            badgeColor: "bg-blue-100 text-gray-700",
+            badgeColor: "bg-blue-100 text-slate-700",
         },
         {
             name: "Git",
@@ -24,7 +24,7 @@ export default function Setup() {
             iconColor: "text-[#F05032]",
             iconBg: "bg-[#F05032]/10",
             badge: "Required",
-            badgeColor: "bg-blue-100 text-gray-700",
+            badgeColor: "bg-blue-100 text-slate-700",
         },
         {
             name: "VS Code",
@@ -34,7 +34,7 @@ export default function Setup() {
             iconColor: "text-[#0098FF]",
             iconBg: "bg-[#0098FF]/10",
             badge: "Optional",
-            badgeColor: "bg-gray-100 text-gray-600",
+            badgeColor: "bg-slate-100 text-slate-600",
         },
     ];
 
@@ -58,10 +58,10 @@ export default function Setup() {
                             <span aria-current="page">Quick Setup</span>
                         </nav>
                 
-                        <h1 className="text-4xl font-bold text-gray-900 mb-4">
+                        <h1 className="text-4xl font-bold text-slate-900 mb-4">
                             Quick Setup
                         </h1>
-                        <p className="text-xl text-gray-600 leading-relaxed">
+                        <p className="text-xl text-slate-600 leading-relaxed">
                             Before you build anything with Websitero, make sure you have the right tools installed.
                             This takes less than 5 minutes and you only need to do it once.
                         </p>
@@ -69,10 +69,10 @@ export default function Setup() {
 
             {/* What you need */}
             <div className="mb-10">
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                <h2 className="text-2xl font-bold text-slate-900 mb-2">
                     What You Need
                 </h2>
-                <p className="text-gray-600 mb-6">
+                <p className="text-slate-600 mb-6">
                      Three tools — two required, one recommended. Click any card to go to the official download page.
                 </p>
 
@@ -83,7 +83,7 @@ export default function Setup() {
                             <Link
                                 key={prereq.name}
                                 href={prereq.href}
-                                className="group flex items-center justify-between p-5 rounded-xl border-2 border-gray-200 hover:border-blue-400 hover:shadow-md transition-all bg-white"
+                                className="group flex items-center justify-between p-5 rounded-xl border border-slate-200 hover:border-blue-400 hover:shadow-md transition-all bg-white"
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
@@ -93,19 +93,19 @@ export default function Setup() {
                                     </div>
                                     <div>
                                         <div className="flex items-center gap-2 mb-0.5">
-                                            <span className="font-semibold text-gray-900 group-hover:text-gray-600 transition-colors">
+                                            <span className="font-semibold text-slate-900 group-hover:text-slate-600 transition-colors">
                                                 {prereq.name}
                                             </span>
                                             <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${prereq.badgeColor}`}>
                                                 {prereq.badge}
                                             </span>
                                         </div>
-                                        <p className="text-sm text-gray-500">
+                                        <p className="text-sm text-slate-500">
                                             {prereq.description}
                                         </p>
                                     </div>
                                 </div>
-                                <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-gray-600 shrink-0 ml-4 transition-colors" />
+                                <ExternalLink className="w-4 h-4 text-slate-400 group-hover:text-slate-600 shrink-0 ml-4 transition-colors" />
                             </Link>
                         );
                     })}
@@ -113,7 +113,7 @@ export default function Setup() {
             </div>
 
             {/* Already have everything? */}
-            <div className="mb-10 p-5 bg-gray-100 border-0.5 rounded-xl flex items-start gap-3">
+            <div className="mb-10 p-5 bg-slate-100 border-0.5 rounded-xl flex items-start gap-3">
                 <CheckCircle2 className="w-5 h-5 text-slate-600 shrink-0 mt-0.5" />
                 <div>
                     <p className="font-semibold text-slate-900 mb-0.5">Already have everything installed?</p>
@@ -122,7 +122,7 @@ export default function Setup() {
                     </p>
                     <Link
                         href="/docs/astro/get-started"
-                        className="inline-flex items-center gap-2 mt-3 px-4 py-2 bg-blue-50 text-gray-700 font-semibold rounded-lg transition-colors text-sm"
+                        className="inline-flex items-center gap-2 mt-3 px-4 py-2 bg-blue-50 text-slate-700 font-semibold rounded-lg transition-colors text-sm"
                     >
                       {/*  <ArrowRight className="w-4 h-4" />*/}
                         Get Started
@@ -131,11 +131,11 @@ export default function Setup() {
             </div>
 
             {/* Step-by-step install guides */}
-            <div className="bg-gray-100 border-0.5 rounded-xl p-8  border border-blue-100">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">
+            <div className="bg-slate-100 border-0.5 rounded-xl p-8  border border-blue-100">
+                <h3 className="text-2xl font-bold text-slate-900 mb-2">
                     Need help installing?
                 </h3>
-                <p className="text-gray-600 mb-6">
+                <p className="text-slate-600 mb-6">
                     Follow these step-by-step guides — each one walks you through the install from scratch.
                 </p>
 
@@ -144,17 +144,17 @@ export default function Setup() {
                         <Link
                             key={guide.href}
                             href={guide.href}
-                            className="flex items-center gap-4 p-4 rounded-xl bg-white hover:bg-blue-50 border-2 border-transparent hover:border-blue-200 transition-all group"
+                            className="flex items-center gap-4 p-4 rounded-xl bg-white hover:bg-blue-50 border border-transparent hover:border-blue-200 transition-all group"
                         >
                             <div className="w-9 h-9 rounded-full bg-blue-100 group-hover:bg-blue-100 flex items-center justify-center transition-colors shrink-0">
-                                <span className="text-sm font-bold text-gray-600 group-hover:text-gray-700 transition-colors">
+                                <span className="text-sm font-bold text-slate-600 group-hover:text-slate-700 transition-colors">
                                     {guide.step}
                                 </span>
                             </div>
-                            <span className="font-medium text-gray-900 group-hover:text-gray-600 transition-colors flex-1">
+                            <span className="font-medium text-slate-900 group-hover:text-slate-600 transition-colors flex-1">
                                 {guide.label}
                             </span>
-                            <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-colors" />
+                            <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-slate-600 transition-colors" />
                         </Link>
                     ))}
                 </div>

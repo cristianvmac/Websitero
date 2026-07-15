@@ -54,14 +54,14 @@ const CodeBlock = ({ code }: { code: string }) => (
 const Step = ({ number, title, children }: { number: number; title: string; children: React.ReactNode }) => (
   <div className="flex gap-4 mb-6">
     <div
-      className="shrink-0 w-9 h-9 rounded-full flex items-center justify-center font-bold text-gray-700 text-sm"
+      className="shrink-0 w-9 h-9 rounded-full flex items-center justify-center font-bold text-slate-700 text-sm"
       style={{ background: "#c3c5c7" }}
     >
       {number}
     </div>
     <div className="flex-1 pt-1">
-      <p className="font-bold text-gray-800 mb-1">{title}</p>
-      <div className="text-gray-600 text-sm leading-relaxed">{children}</div>
+      <p className="font-bold text-slate-800 mb-1">{title}</p>
+      <div className="text-slate-600 text-sm leading-relaxed">{children}</div>
     </div>
   </div>
 );
@@ -91,10 +91,10 @@ export default function InstallNode() {
             <span aria-current="page">Installing Node.js</span>
           </nav>
 
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">
+          <h1 className="text-4xl font-bold text-slate-900 mb-2">
             Installing Node.js
           </h1>
-          <p className="text-gray-500 text-lg">
+          <p className="text-slate-500 text-lg">
             A step-by-step guide for absolute beginners
           </p>
           <div
@@ -110,13 +110,13 @@ export default function InstallNode() {
           className="rounded-2xl p-6 mb-6"
           style={{ background: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.06)", border: "1px solid #e0e7ff" }}
         >
-          <h2 className="font-bold text-lg text-gray-900 mb-2">
+          <h2 className="font-bold text-lg text-slate-900 mb-2">
             🤔 What is Node.js, and why do I need it?
           </h2>
-          <p className="text-gray-600 text-sm leading-relaxed mb-3">
+          <p className="text-slate-600 text-sm leading-relaxed mb-3">
             Node.js lets your computer run JavaScript code — the same language used to build websites — outside of a web browser. Many popular tools and frameworks (like Eleventy, Astro, React, and others) <strong>require Node.js to be installed first</strong> before you can use them.
           </p>
-          <p className="text-gray-600 text-sm leading-relaxed">
+          <p className="text-slate-600 text-sm leading-relaxed">
             Think of it like installing a music player before you can listen to songs. Node.js is the player; your code is the music. 🎵
           </p>
         </div>
@@ -126,7 +126,7 @@ export default function InstallNode() {
           className="rounded-2xl p-6 mb-6"
           style={{ background: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.06)", border: "1px solid #e0e7ff" }}
         >
-          <h2 className="font-bold text-lg text-gray-900 mb-4">
+          <h2 className="font-bold text-lg text-slate-900 mb-4">
             💻 What operating system are you using?
           </h2>
           <div className="flex gap-3 mb-12">
@@ -177,7 +177,7 @@ export default function InstallNode() {
 
               <Step number={3} title="Run the installer file">
                 Once the download finishes, open your <strong>Downloads folder</strong> and double-click the file
-                (it will be named something like <code className="bg-gray-100 px-1 rounded">node-v22.x.x-x64.msi</code>).
+                (it will be named something like <code className="bg-slate-100 px-1 rounded">node-v22.x.x-x64.msi</code>).
                 A setup wizard will open.
               </Step>
 
@@ -230,8 +230,8 @@ export default function InstallNode() {
 
               <Step number={3} title="Open the downloaded file">
                 Go to your <strong>Downloads folder</strong> (or check the bottom of your browser window)
-                and double-click the file that ends in <code className="bg-gray-100 px-1 rounded">.pkg</code>.
-                It will be named something like <code className="bg-gray-100 px-1 rounded">node-v22.x.x.pkg</code>.
+                and double-click the file that ends in <code className="bg-slate-100 px-1 rounded">.pkg</code>.
+                It will be named something like <code className="bg-slate-100 px-1 rounded">node-v22.x.x.pkg</code>.
               </Step>
 
               <Step number={4} title="Follow the installer steps">
@@ -263,10 +263,10 @@ export default function InstallNode() {
           className="rounded-2xl p-6 mb-6"
           style={{ background: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.06)", border: "1px solid #e0e7ff" }}
         >
-          <h2 className="font-bold text-lg text-gray-900 mb-2">
+          <h2 className="font-bold text-lg text-slate-900 mb-2">
             ✅ Check that it worked
           </h2>
-          <p className="text-gray-600 text-sm leading-relaxed mb-4">
+          <p className="text-slate-600 text-sm leading-relaxed mb-4">
             Now let&apos;s make sure Node.js was installed correctly. We&apos;ll do this using the <strong>terminal</strong> — don&apos;t worry, it&apos;s just two short commands!
           </p>
 
@@ -285,12 +285,12 @@ export default function InstallNode() {
             </p>
           </div>
 
-          <p className="text-gray-600 text-sm mb-1">
-            Type (or paste) these commands one at a time, pressing <kbd className="bg-gray-100 border border-gray-300 px-1.5 py-0.5 rounded text-xs font-mono">Enter</kbd> after each:
+          <p className="text-slate-600 text-sm mb-1">
+            Type (or paste) these commands one at a time, pressing <kbd className="bg-slate-100 border border-slate-300 px-1.5 py-0.5 rounded text-xs font-mono">Enter</kbd> after each:
           </p>
           <CodeBlock code={`node --version\nnpm --version`} />
-          <p className="text-gray-500 text-sm">
-            If it worked, you&apos;ll see version numbers printed, like <code className="bg-gray-100 px-1 rounded">v22.13.1</code> and <code className="bg-gray-100 px-1 rounded">11.3.0</code>. The exact numbers don&apos;t matter — any numbers mean success! 🎉
+          <p className="text-slate-500 text-sm">
+            If it worked, you&apos;ll see version numbers printed, like <code className="bg-slate-100 px-1 rounded">v22.13.1</code> and <code className="bg-slate-100 px-1 rounded">11.3.0</code>. The exact numbers don&apos;t matter — any numbers mean success! 🎉
           </p>
 
           <div
@@ -305,7 +305,7 @@ export default function InstallNode() {
           </div>
         </div>
 
-        <p className="text-center text-gray-600 text-sm font-medium mt-8">
+        <p className="text-center text-slate-600 text-sm font-medium mt-8">
           Always download Node.js from the official site:{" "}
           <Link
             href="https://nodejs.org"
