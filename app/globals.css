@@ -6,15 +6,20 @@
   themes: false; /* disable built-in light/dark themes; only "websitero" below exists */
   exclude: properties;
 }
+/* daisyUI theme — used by the daisyUI-built pages (login, signup,
+   forgot-password, contact: card / input / btn-primary / bg-base-*).
+   Values mirror the THEME CONTROL PANEL below: base-200 = slate-50,
+   base-300 = slate-200, base-content = slate-900, primary/secondary =
+   blue-500/blue-700. If you edit the panel, mirror the change here. */
 @plugin "daisyui/theme" {
   name: "websitero";
   default: true;
   prefersdark: false;
   color-scheme: light;
   --color-base-100: #ffffff;
-  --color-base-200: #f4f6f8;
-  --color-base-300: #e3e8ee;
-  --color-base-content: #1a1a1a;
+  --color-base-200: #f8fafc;
+  --color-base-300: #e2e8f0;
+  --color-base-content: #0f172a;
   --color-primary: #4588ba;
   --color-primary-content: #ffffff;
   --color-secondary: #316994;
@@ -43,6 +48,50 @@
   --noise: 0;
 }
 
+/* ════════════════════════════════════════════════════════════════════
+   THEME CONTROL PANEL
+   Every background and text color in the app (docs included) resolves to
+   the tokens below. Edit a hex here and every page follows — no component
+   changes needed.
+   ════════════════════════════════════════════════════════════════════ */
+@theme {
+  /* ── Accent: brand blue ─────────────────────────────────────────────
+     Tailwind's `blue` palette is remapped to the Websitero brand color,
+     so every bg-blue-* / text-blue-* class renders on-brand. */
+  --color-blue-50: #f2f7fa; /* docs callout boxes, faint chips */
+  --color-blue-100: #e3edf4; /* docs highlight fills */
+  --color-blue-200: #c7dcea; /* accent borders */
+  --color-blue-300: #a3c5da; /* icons on dark surfaces */
+  --color-blue-400: #74a7c8; /* secondary accent icons */
+  --color-blue-500: #4588ba; /* PRIMARY — buttons, links, tints (/10 etc.) */
+  --color-blue-600: #3a78a7;
+  --color-blue-700: #316994; /* SECONDARY — button hover, accent text */
+  --color-blue-800: #2a5679;
+  --color-blue-900: #244861;
+  --color-blue-950: #1a3549;
+
+  /* ── Neutrals: slate ────────────────────────────────────────────────
+     All text, borders, and soft backgrounds. Currently Tailwind's
+     default slate values — tweak here to retheme every page. */
+  --color-slate-50: #f8fafc; /* soft page/section bg, hover fills */
+  --color-slate-100: #f1f5f9; /* chips, subtle fills, scroll tracks */
+  --color-slate-200: #e2e8f0; /* borders, dividers */
+  --color-slate-300: #cbd5e1; /* stronger borders, disabled states */
+  --color-slate-400: #94a3b8; /* placeholders, muted icons */
+  --color-slate-500: #64748b; /* secondary/caption text */
+  --color-slate-600: #475569; /* body text */
+  --color-slate-700: #334155; /* emphasized body text */
+  --color-slate-800: #1e293b; /* dark panels, strong text */
+  --color-slate-900: #0f172a; /* headings, terminals, dark sections */
+  --color-slate-950: #020617;
+
+  /* ── Base surface ───────────────────────────────────────────────────
+     bg-white cards/pages and the <body> background follow this.
+     CAUTION: text-white (button labels) follows it too, so keep it at
+     or near white; use slate-50 for overall page tinting instead. */
+  --color-white: #ffffff;
+}
+
 :root {
   /* Header bar tokens (dark bar with light text) consumed via
      bg-background / text-foreground / *-accent utilities. */
@@ -59,8 +108,9 @@
 }
 
 body {
-  background-color: var(--color-base-100);
-  color: var(--color-base-content);
+  /* Driven by the THEME CONTROL PANEL above */
+  background-color: var(--color-white);
+  color: var(--color-slate-900);
   font-family: Arial, Helvetica, sans-serif;
 }
 
