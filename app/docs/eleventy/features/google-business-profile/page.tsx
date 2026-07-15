@@ -79,9 +79,9 @@ export default function GoogleBProfile() {
   ];
 
   const colorClasses = {
-    blue: { bg: "bg-blue-100", text: "text-gray-700", icon: "bg-blue-50" },
-    yellow: { bg: "bg-blue-100", text: "text-gray-700", icon: "bg-blue-50" },
-    green: { bg: "bg-blue-100", text: "text-gray-700", icon: "bg-blue-50" }
+    blue: { bg: "bg-blue-100", text: "text-slate-700", icon: "bg-blue-50" },
+    yellow: { bg: "bg-blue-100", text: "text-slate-700", icon: "bg-blue-50" },
+    green: { bg: "bg-blue-100", text: "text-slate-700", icon: "bg-blue-50" }
   };
 
   return (
@@ -103,26 +103,26 @@ export default function GoogleBProfile() {
           <span aria-current="page">Google Business Profile</span>
         </nav>
         
-        <h1 className="text-6xl font-bold text-gray-900 mb-6 leading-tight">
-          Get Found on <span className="text-gray-600">Google Maps</span>
+        <h1 className="text-6xl font-bold text-slate-900 mb-6 leading-tight">
+          Get Found on <span className="text-slate-600">Google Maps</span>
         </h1>
         
-        <p className="text-2xl text-gray-600 leading-relaxed mb-4 max-w-4xl mx-auto">
+        <p className="text-2xl text-slate-600 leading-relaxed mb-4 max-w-4xl mx-auto">
           Your customers are searching for local businesses right now. If you&apos;re not in the top results, you&apos;re invisible.
         </p>
         
-        <p className="text-xl text-gray-700 mb-8 max-w-3xl mx-auto">
+        <p className="text-xl text-slate-700 mb-8 max-w-3xl mx-auto">
           We optimize your profile to make you a top choice in your town.
         </p>
 
         {/* On This Page Summary */}
-        <div className="max-w-4xl mx-auto mb-10 bg-linear-to-br from-gray-50 to-blue-50/50 rounded-3xl p-6 md:p-8 border-2 border-gray-200 shadow-sm text-left">
+        <div className="max-w-4xl mx-auto mb-10 bg-slate-50 rounded-3xl p-6 md:p-8 border border-slate-200 shadow-sm text-left">
           <div className="flex items-center justify-center gap-2 mb-6">
-            <div className="h-px w-8 bg-gray-300"></div>
-            <span className="text-xs font-bold uppercase tracking-widest text-gray-500">
+            <div className="h-px w-8 bg-slate-300"></div>
+            <span className="text-xs font-bold uppercase tracking-widest text-slate-500">
               What&apos;s on this page
             </span>
-            <div className="h-px w-8 bg-gray-300"></div>
+            <div className="h-px w-8 bg-slate-300"></div>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
@@ -138,18 +138,18 @@ export default function GoogleBProfile() {
                 <Link
                   key={index}
                   href={topic.href}
-                  className="group flex items-center gap-4 bg-white rounded-2xl p-4 border-2 border-gray-200 hover:border-blue-400 hover:shadow-lg hover:-translate-y-0.5 transition-all"
+                  className="group flex items-center gap-4 bg-white rounded-2xl p-4 border border-slate-200 hover:border-blue-400 hover:shadow-lg hover:-translate-y-0.5 transition-all"
                 >
-                  <div className="shrink-0 w-11 h-11 bg-blue-50 text-gray-600 rounded-xl flex items-center justify-center group-hover:text-gray-700 transition-all">
+                  <div className="shrink-0 w-11 h-11 bg-blue-50 text-slate-600 rounded-xl flex items-center justify-center group-hover:text-slate-700 transition-all">
                     <Icon className="w-5 h-5" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="font-bold text-gray-900 group-hover:text-gray-600 transition-colors leading-snug">
+                    <div className="font-bold text-slate-900 group-hover:text-slate-600 transition-colors leading-snug">
                       {topic.label}
                     </div>
-                    <div className="text-sm text-gray-500 truncate">{topic.desc}</div>
+                    <div className="text-sm text-slate-500 truncate">{topic.desc}</div>
                   </div>
-                  <ArrowRight className="w-4 h-4 text-gray-300 shrink-0 group-hover:text-gray-500 group-hover:translate-x-0.5 transition-all" />
+                  <ArrowRight className="w-4 h-4 text-slate-300 shrink-0 group-hover:text-slate-500 group-hover:translate-x-0.5 transition-all" />
                 </Link>
               );
             })}
@@ -158,29 +158,29 @@ export default function GoogleBProfile() {
       </div>
 
       {/* Why It Matters */}
-      <div id="why" className="mb-16 scroll-mt-24 bg-blue-50 rounded-3xl p-8 md:p-12 border-2 border-blue-200">
+      <div id="why" className="mb-16 scroll-mt-24 bg-blue-50 rounded-3xl p-8 md:p-12 border border-blue-200">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-bold text-gray-900 mb-6 text-center">
+          <h2 className="text-4xl font-bold text-slate-900 mb-6 text-center">
             Why Your Google Profile Matters More Than Your Website
           </h2>
           
-          <div className="bg-white rounded-2xl p-8 mb-8 border-2 border-blue-200 shadow-lg">
+          <div className="bg-white rounded-2xl p-8 mb-8 border border-blue-200 shadow-lg">
             <div className="flex items-start gap-4 mb-6">
-              <div className="shrink-0 w-16 h-16 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center text-2xl font-bold">
+              <div className="shrink-0 w-16 h-16 bg-blue-50 text-slate-700 rounded-xl flex items-center justify-center text-2xl font-bold">
                 80%
               </div>
               <div>
-                <p className="text-xl text-gray-800 leading-relaxed">
-                  For local service businesses, <strong className="text-gray-600">80% of customer interactions</strong> happen directly on Google Search results pages.
+                <p className="text-xl text-slate-800 leading-relaxed">
+                  For local service businesses, <strong className="text-slate-600">80% of customer interactions</strong> happen directly on Google Search results pages.
                 </p>
               </div>
             </div>
-            <p className="text-lg text-gray-700 leading-relaxed">
+            <p className="text-lg text-slate-700 leading-relaxed">
               Customers look at your reviews, photos, and location <strong>without ever clicking through to your website</strong>.
             </p>
           </div>
 
-          <div className="bg-blue-50 rounded-2xl p-8 text-gray-700 text-center">
+          <div className="bg-blue-50 rounded-2xl p-8 text-slate-700 text-center">
             <p className="text-2xl font-bold mb-3">
               An unoptimized profile is a leaky bucket.
             </p>
@@ -193,10 +193,10 @@ export default function GoogleBProfile() {
 
       {/* Key Benefits */}
       <div id="how-we-optimize" className="mb-16 scroll-mt-24">
-        <h2 className="text-4xl font-bold text-gray-900 mb-4 text-center">
+        <h2 className="text-4xl font-bold text-slate-900 mb-4 text-center">
           How We Optimize Your Profile
         </h2>
-        <p className="text-xl text-gray-600 mb-12 text-center max-w-3xl mx-auto">
+        <p className="text-xl text-slate-600 mb-12 text-center max-w-3xl mx-auto">
           Our proven system gets you ranking higher and converting more local searches into customers
         </p>
 
@@ -207,15 +207,15 @@ export default function GoogleBProfile() {
             return (
               <div
                 key={index}
-                className="bg-white rounded-2xl p-8 border-2 border-gray-200 hover:border-gray-300 hover:shadow-xl transition-all"
+                className="bg-white rounded-2xl p-8 border border-slate-200 hover:border-slate-300 hover:shadow-xl transition-all"
               >
                 <div className={`w-16 h-16 ${colors.icon} rounded-xl flex items-center justify-center mb-6 shadow-lg`}>
-                  <Icon className="w-8 h-8 text-gray-700" />
+                  <Icon className="w-8 h-8 text-slate-700" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                <h3 className="text-2xl font-bold text-slate-900 mb-4">
                   {benefit.title}
                 </h3>
-                <p className="text-gray-700 leading-relaxed text-lg">
+                <p className="text-slate-700 leading-relaxed text-lg">
                   {benefit.description}
                 </p>
               </div>
@@ -225,7 +225,7 @@ export default function GoogleBProfile() {
       </div>
 
       {/* Stats Section */}
-      <div id="results" className="mb-16 scroll-mt-24 bg-blue-50 rounded-3xl p-8 md:p-12 text-gray-700">
+      <div id="results" className="mb-16 scroll-mt-24 bg-blue-50 rounded-3xl p-8 md:p-12 text-slate-700">
         <h2 className="text-4xl font-bold mb-12 text-center">
           Real Results for Local Businesses
         </h2>
@@ -236,11 +236,11 @@ export default function GoogleBProfile() {
             return (
               <div key={index} className="text-center">
                 <div className="w-16 h-16 bg-white border border-blue-200 rounded-xl flex items-center justify-center mx-auto mb-4">
-                  <Icon className="w-8 h-8 text-gray-700" />
+                  <Icon className="w-8 h-8 text-slate-700" />
                 </div>
                 <div className="text-5xl font-bold mb-2">{feature.stat}</div>
                 <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
+                <p className="text-slate-600">{feature.description}</p>
               </div>
             );
           })}
@@ -249,10 +249,10 @@ export default function GoogleBProfile() {
 
       {/* How It Works */}
       <div id="process" className="mb-16 scroll-mt-24">
-        <h2 className="text-4xl font-bold text-gray-900 mb-4 text-center">
+        <h2 className="text-4xl font-bold text-slate-900 mb-4 text-center">
           Our Optimization Process
         </h2>
-        <p className="text-xl text-gray-600 mb-12 text-center max-w-3xl mx-auto">
+        <p className="text-xl text-slate-600 mb-12 text-center max-w-3xl mx-auto">
           From audit to ongoing optimization, we handle everything to keep you ranking #1 locally
         </p>
 
@@ -260,23 +260,23 @@ export default function GoogleBProfile() {
           {steps.map((step, index) => (
             <div
               key={index}
-              className="bg-white rounded-2xl p-8 border-2 border-gray-200 hover:border-blue-400 hover:shadow-lg transition-all"
+              className="bg-white rounded-2xl p-8 border border-slate-200 hover:border-blue-400 hover:shadow-lg transition-all"
             >
               <div className="flex items-start gap-6">
-                <div className="shrink-0 w-16 h-16 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center text-2xl font-bold shadow-lg">
+                <div className="shrink-0 w-16 h-16 bg-blue-50 text-slate-700 rounded-xl flex items-center justify-center text-2xl font-bold shadow-lg">
                   {step.number}
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-2xl font-bold text-gray-900">
+                    <h3 className="text-2xl font-bold text-slate-900">
                       {step.title}
                     </h3>
-                    <span className="text-sm font-semibold text-gray-600 bg-blue-50 px-3 py-1 rounded-full">
+                    <span className="text-sm font-semibold text-slate-600 bg-blue-50 px-3 py-1 rounded-full">
                       <Clock className="w-4 h-4 inline mr-1" />
                       {step.duration}
                     </span>
                   </div>
-                  <p className="text-lg text-gray-700 leading-relaxed">
+                  <p className="text-lg text-slate-700 leading-relaxed">
                     {step.description}
                   </p>
                 </div>
@@ -288,18 +288,18 @@ export default function GoogleBProfile() {
 
       {/* Comparison */}
       <div className="mb-16">
-        <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">
+        <h2 className="text-4xl font-bold text-slate-900 mb-12 text-center">
           Before vs. After Optimization
         </h2>
 
         <div className="grid md:grid-cols-2 gap-8">
           {/* Before */}
-          <div className="bg-blue-50 rounded-2xl p-8 border-2 border-blue-200">
+          <div className="bg-blue-50 rounded-2xl p-8 border border-blue-200">
             <div className="text-center mb-6">
-              <div className="inline-block px-4 py-2 bg-blue-50 text-gray-700 font-bold rounded-lg mb-4">
+              <div className="inline-block px-4 py-2 bg-blue-50 text-slate-700 font-bold rounded-lg mb-4">
                 ❌ Before
               </div>
-              <h3 className="text-2xl font-bold text-gray-900">
+              <h3 className="text-2xl font-bold text-slate-900">
                 Unoptimized Profile
               </h3>
             </div>
@@ -314,8 +314,8 @@ export default function GoogleBProfile() {
                 "Low customer engagement",
                 "Missing important attributes"
               ].map((item, index) => (
-                <li key={index} className="flex items-start gap-3 text-gray-700">
-                  <span className="text-gray-600 font-bold shrink-0">✗</span>
+                <li key={index} className="flex items-start gap-3 text-slate-700">
+                  <span className="text-slate-600 font-bold shrink-0">✗</span>
                   <span>{item}</span>
                 </li>
               ))}
@@ -323,12 +323,12 @@ export default function GoogleBProfile() {
           </div>
 
           {/* After */}
-          <div className="bg-blue-50 rounded-2xl p-8 border-2 border-blue-200">
+          <div className="bg-blue-50 rounded-2xl p-8 border border-blue-200">
             <div className="text-center mb-6">
-              <div className="inline-block px-4 py-2 bg-blue-50 text-gray-700 font-bold rounded-lg mb-4">
+              <div className="inline-block px-4 py-2 bg-blue-50 text-slate-700 font-bold rounded-lg mb-4">
                 ✓ After
               </div>
-              <h3 className="text-2xl font-bold text-gray-900">
+              <h3 className="text-2xl font-bold text-slate-900">
                 Fully Optimized Profile
               </h3>
             </div>
@@ -343,8 +343,8 @@ export default function GoogleBProfile() {
                 "Daily customer calls and messages",
                 "All relevant attributes filled"
               ].map((item, index) => (
-                <li key={index} className="flex items-start gap-3 text-gray-700">
-                  <CheckCircle className="w-5 h-5 text-gray-600 shrink-0 mt-0.5" />
+                <li key={index} className="flex items-start gap-3 text-slate-700">
+                  <CheckCircle className="w-5 h-5 text-slate-600 shrink-0 mt-0.5" />
                   <span className="font-medium">{item}</span>
                 </li>
               ))}
@@ -354,12 +354,12 @@ export default function GoogleBProfile() {
       </div>
 
       {/* DIY Quick Guide */}
-      <div id="setup-guide" className="mb-16 scroll-mt-24 bg-white rounded-3xl p-8 md:p-12 border-2 border-gray-200 shadow-sm">
+      <div id="setup-guide" className="mb-16 scroll-mt-24 bg-white rounded-3xl p-8 md:p-12 border border-slate-200 shadow-sm">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl font-bold text-slate-900 mb-4">
             How to Set Up Your Google Business Profile
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
             Want to get started yourself? Follow these steps to claim and optimize your profile in under 30 minutes.
           </p>
         </div>
@@ -398,16 +398,16 @@ export default function GoogleBProfile() {
           ].map((step, index) => (
             <div
               key={index}
-              className="flex items-start gap-5 p-6 bg-gray-50 rounded-2xl border-2 border-gray-100 hover:border-blue-300 hover:bg-blue-100/40 transition-all"
+              className="flex items-start gap-5 p-6 bg-slate-50 rounded-2xl border border-slate-100 hover:border-blue-300 hover:bg-blue-100/40 transition-all"
             >
-              <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center text-xl font-bold shadow-md">
+              <div className="shrink-0 w-12 h-12 bg-blue-50 text-slate-700 rounded-xl flex items-center justify-center text-xl font-bold shadow-md">
                 {index + 1}
               </div>
               <div className="flex-1">
-                <h3 className="text-xl font-bold text-gray-900 mb-2">
+                <h3 className="text-xl font-bold text-slate-900 mb-2">
                   {step.title}
                 </h3>
-                <p className="text-gray-700 leading-relaxed mb-2">
+                <p className="text-slate-700 leading-relaxed mb-2">
                   {step.description}
                 </p>
                 {step.link && (
@@ -415,7 +415,7 @@ export default function GoogleBProfile() {
                     href={step.link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-gray-600 font-semibold hover:gap-2.5 transition-all"
+                    className="inline-flex items-center gap-1.5 text-slate-600 font-semibold hover:gap-2.5 transition-all"
                   >
                     {step.link.label}
                     <ExternalLink className="w-4 h-4" />
@@ -426,26 +426,26 @@ export default function GoogleBProfile() {
           ))}
         </div>
 
-        <div className="max-w-3xl mx-auto mt-8 flex items-start gap-3 p-5 bg-blue-50 rounded-xl border-2 border-blue-200">
-          <Zap className="w-6 h-6 text-gray-600 shrink-0 mt-0.5" />
-          <p className="text-gray-700">
-            <strong className="text-gray-900">Short on time?</strong> We handle all of this for you — from verification to ongoing posts and review management. Request a free audit below to get started.
+        <div className="max-w-3xl mx-auto mt-8 flex items-start gap-3 p-5 bg-blue-50 rounded-xl border border-blue-200">
+          <Zap className="w-6 h-6 text-slate-600 shrink-0 mt-0.5" />
+          <p className="text-slate-700">
+            <strong className="text-slate-900">Short on time?</strong> We handle all of this for you — from verification to ongoing posts and review management. Request a free audit below to get started.
           </p>
         </div>
       </div>
 
       {/* Free Audit CTA */}
-      <div id="audit" className="scroll-mt-24 bg-white border-2 border-gray-200 shadow-sm rounded-3xl p-4 md:p-4 text-gray-700 text-center">
+      <div id="audit" className="scroll-mt-24 bg-white border border-slate-200 shadow-sm rounded-3xl p-4 md:p-4 text-slate-700 text-center">
         <div className="max-w-2xl mx-auto">
           <div className="text-4xl mb-4">🎯</div>
           <h2 className="text-3xl font-bold mb-3">
             Get Your Free Profile Audit
           </h2>
-          <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+          <p className="text-lg text-slate-600 mb-6 leading-relaxed">
             Find out exactly what&apos;s holding your Google Business Profile back — and how to fix it.
           </p>
 
-          <div className="bg-white border border-gray-200 rounded-2xl p-4 mb-6 text-left">
+          <div className="bg-white border border-slate-200 rounded-2xl p-4 mb-6 text-left">
             <div className="grid sm:grid-cols-2 gap-3">
               {[
                 "Complete profile health score",
@@ -463,7 +463,7 @@ export default function GoogleBProfile() {
 
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 px-7 py-3.5 bg-blue-50 text-gray-700 font-bold rounded-xl transition-all shadow-lg hover:-translate-y-0.5"
+            className="inline-flex items-center gap-2 px-7 py-3.5 bg-blue-50 text-slate-700 font-bold rounded-xl transition-all shadow-lg hover:-translate-y-0.5"
           >
             <Zap className="w-5 h-5" />
             Request Your Free Audit

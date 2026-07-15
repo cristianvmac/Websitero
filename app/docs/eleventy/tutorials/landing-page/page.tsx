@@ -34,17 +34,17 @@ export default function LandingPage() {
           <span aria-current="page">Landing page</span>
         </nav>
 
-        <h1 className="text-5xl font-bold text-gray-900 mb-4 leading-tight">
+        <h1 className="text-5xl font-bold text-slate-900 mb-4 leading-tight">
           Build Landing Pages in Minutes
         </h1>
 
-        <p className="text-xl text-gray-600 leading-relaxed mb-6">
+        <p className="text-xl text-slate-600 leading-relaxed mb-6">
            Use the{" "}
           <Link
             href="https://github.com/cristianvmac/Eleventy-Starter"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-600 underline font-semibold"
+            className="text-slate-600 underline font-semibold"
           >
            Eleventy Starter Kit
           </Link>{" "}
@@ -54,8 +54,8 @@ export default function LandingPage() {
 
       {/* Quick Start */}
       {/* Before You Start */}
-      <div className="mb-12 p-6 bg-blue-50 border-2 border-blue-200 rounded-xl">
-        <h3 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
+      <div className="mb-12 p-6 bg-blue-50 border border-blue-200 rounded-xl">
+        <h3 className="text-lg font-bold text-slate-900 mb-3 flex items-center gap-2">
           <Clock className="w-5 h-5" />
           Before You Start
         </h3>
@@ -64,7 +64,7 @@ export default function LandingPage() {
         </p>
         <Link
           href="/docs/eleventy/quick-setup"
-          className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 hover:bg-blue-100 text-gray-700 font-semibold rounded-lg transition-colors"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 hover:bg-blue-100 text-slate-700 font-semibold rounded-lg transition-colors"
         >
           <ArrowRight className="w-4 h-4" />
           See Quick Setup
@@ -72,19 +72,19 @@ export default function LandingPage() {
       </div>
 
       {/* Example Landing Page */}
-      <div id="example" className="mb-16 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
+      <div id="example" className="mb-16 bg-white rounded-2xl p-8 border border-slate-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-slate-700 rounded-xl flex items-center justify-center shadow-lg">
             <FileCode className="w-6 h-6" />
           </div>
           <div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">
+            <h2 className="text-3xl font-bold text-slate-900 mb-2">
               Example Landing Page
             </h2>
-            <p className="text-lg text-gray-600">
+            <p className="text-lg text-slate-600">
               A complete page assembled from pre-built sections — the home page
               lives at{" "}
-              <code className="bg-gray-100 px-2 py-1 rounded">
+              <code className="bg-slate-100 px-2 py-1 rounded">
                 src/index.html
               </code>
             </p>
@@ -93,19 +93,19 @@ export default function LandingPage() {
 
         <div className="space-y-6">
           <div>
-            <h3 className="text-lg font-bold text-gray-900 mb-3">
+            <h3 className="text-lg font-bold text-slate-900 mb-3">
               Create your landing page
             </h3>
-            <p className="text-gray-600 mb-4">
+            <p className="text-slate-600 mb-4">
               Open{" "}
-              <code className="bg-gray-100 px-2 py-1 rounded">
+              <code className="bg-slate-100 px-2 py-1 rounded">
                 src/index.html
               </code>{" "}
               and assemble the page by including the sections you need. The{" "}
-              <code className="bg-gray-100 px-2 py-1 rounded">base.html</code>{" "}
+              <code className="bg-slate-100 px-2 py-1 rounded">base.html</code>{" "}
               layout wires in the header and footer for you:
             </p>
-            <div className="bg-gray-900 rounded-lg p-4 font-mono text-xs text-gray-100 relative group max-h-150 overflow-y-auto">
+            <div className="bg-slate-900 rounded-lg p-4 font-mono text-xs text-slate-100 relative group max-h-150 overflow-y-auto">
               <pre className="whitespace-pre-wrap">
                 <code>{`---
 ---
@@ -854,23 +854,23 @@ tags: "sitemap" # content/content.json will make sure that all pages in content/
                     3
                   )
                 }
-                className="absolute right-3 top-3 p-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors"
+                className="absolute right-3 top-3 p-2 bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors"
               >
                 {copiedStep === 3 ? (
                   <Check className="w-4 h-4 text-green-400" />
                 ) : (
-                  <Copy className="w-4 h-4 text-gray-400" />
+                  <Copy className="w-4 h-4 text-slate-400" />
                 )}
               </button>
             </div>
           </div>
 
-          <div className="p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
-            <p className="text-gray-900 font-medium mb-2 flex items-center gap-2">
+          <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+            <p className="text-slate-900 font-medium mb-2 flex items-center gap-2">
               <Eye className="w-5 h-5" />
               Preview Your Landing Page
             </p>
-            <p className="text-sm text-gray-800">
+            <p className="text-sm text-slate-800">
               Start your dev server with{" "}
               <code className="bg-blue-100 px-2 py-0.5 rounded">
                 npm start
@@ -890,25 +890,25 @@ tags: "sitemap" # content/content.json will make sure that all pages in content/
       </div>
 
       {/* Next Steps */}
-      <div className="bg-gray-100 rounded-2xl p-4 text-gray-900">
+      <div className="bg-slate-100 rounded-2xl p-4 text-slate-900">
         <h2 className="text-xl font-bold mb-4">
           Ready to Build Something Amazing?
         </h2>
-        <p className="text-lg text-gray-900 mb-6">
+        <p className="text-lg text-slate-900 mb-6">
           You now have everything you need to create fast, SEO-optimized landing
           pages with the Eleventy Starter 
         </p>
         <div className="flex flex-wrap gap-4">
           <Link
             href="/docs/eleventy/tutorials/build-in-5-minutes"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-50 hover:bg-blue-100 text-gray-700 font-bold rounded-lg transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-50 hover:bg-blue-100 text-slate-700 font-bold rounded-lg transition-colors"
           >
             <Rocket className="w-5 h-5" />
             Build in 5 Minutes
           </Link>
           <Link
             href="/docs/eleventy/components"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-white hover:bg-gray-100 text-gray-900 font-bold rounded-lg transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-white hover:bg-slate-100 text-slate-900 font-bold rounded-lg transition-colors"
           >
             <Layout className="w-5 h-5" />
             Explore All Components

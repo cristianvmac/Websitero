@@ -39,18 +39,18 @@ function CodeBlock({ code, filename }: { code: string; filename?: string }) {
   };
 
   return (
-    <div className="group relative overflow-hidden rounded-xl border border-gray-800 bg-gray-900 shadow-lg shadow-gray-900/20 ring-1 ring-black/5">
+    <div className="group relative overflow-hidden rounded-xl border border-slate-800 bg-slate-900 shadow-lg shadow-slate-900/20 ring-1 ring-black/5">
       {/* Window header */}
-      <div className="flex items-center justify-between border-b border-gray-700/60 bg-gray-800/50 px-4 py-2.5">
+      <div className="flex items-center justify-between border-b border-slate-700/60 bg-slate-800/50 px-4 py-2.5">
         <div className="flex items-center gap-2">
          
           {filename && (
-            <span className="ml-3 font-mono text-xs text-gray-400">{filename}</span>
+            <span className="ml-3 font-mono text-xs text-slate-400">{filename}</span>
           )}
         </div>
         <button
           onClick={handleCopy}
-          className="flex items-center gap-1.5 rounded-md px-2 py-1 text-xs font-medium text-gray-400 transition-colors hover:bg-gray-700/60 hover:text-gray-100"
+          className="flex items-center gap-1.5 rounded-md px-2 py-1 text-xs font-medium text-slate-400 transition-colors hover:bg-slate-700/60 hover:text-slate-100"
         >
           {copied ? (
             <Check className="h-3.5 w-3.5 text-green-400" />
@@ -61,7 +61,7 @@ function CodeBlock({ code, filename }: { code: string; filename?: string }) {
         </button>
       </div>
 
-      <pre className="overflow-x-auto p-4 text-sm leading-relaxed text-gray-100">
+      <pre className="overflow-x-auto p-4 text-sm leading-relaxed text-slate-100">
         <code>{code}</code>
       </pre>
     </div>
@@ -71,7 +71,7 @@ function CodeBlock({ code, filename }: { code: string; filename?: string }) {
 // Inline code chip — black text on a soft grey pill.
 function Code({ children }: { children: React.ReactNode }) {
   return (
-    <code className="rounded-md bg-gray-100 px-1.5 py-0.5 font-mono text-[0.9em] text-gray-900 ring-1 ring-gray-200">
+    <code className="rounded-md bg-slate-100 px-1.5 py-0.5 font-mono text-[0.9em] text-slate-900 ring-1 ring-slate-200">
       {children}
     </code>
   );
@@ -114,7 +114,7 @@ function ScoreRing({ label, score }: { label: string; score: number }) {
           {score}
         </span>
       </div>
-      <span className="text-xs font-semibold text-gray-900">{label}</span>
+      <span className="text-xs font-semibold text-slate-900">{label}</span>
     </div>
   );
 }
@@ -142,11 +142,11 @@ function LighthousePreview() {
   return (
     <div>
       {/* Toggle */}
-      <div className="mb-4 inline-flex rounded-xl border border-gray-200 bg-white p-1 shadow-sm">
+      <div className="mb-4 inline-flex rounded-xl border border-slate-200 bg-white p-1 shadow-sm">
         <button
           onClick={() => setMode("spa")}
           className={`rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-colors ${
-            mode === "spa" ? "bg-blue-100 text-gray-900" : "text-gray-900 hover:bg-gray-50"
+            mode === "spa" ? "bg-blue-100 text-slate-900" : "text-slate-900 hover:bg-slate-50"
           }`}
         >
           Heavy SPA
@@ -154,7 +154,7 @@ function LighthousePreview() {
         <button
           onClick={() => setMode("eleventy")}
           className={`rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-colors ${
-            mode === "eleventy" ? "bg-blue-100 text-gray-900" : "text-gray-900 hover:bg-gray-50"
+            mode === "eleventy" ? "bg-blue-100 text-slate-900" : "text-slate-900 hover:bg-slate-50"
           }`}
         >
           Eleventy static
@@ -162,16 +162,16 @@ function LighthousePreview() {
       </div>
 
       {/* Scores */}
-      <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+      <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
         <div className="flex flex-wrap justify-around gap-4">
           {Object.entries(active.scores).map(([label, score]) => (
             <ScoreRing key={label} label={label} score={score} />
           ))}
         </div>
-        <p className="mt-4 text-center text-sm font-medium text-gray-900">{active.label}</p>
+        <p className="mt-4 text-center text-sm font-medium text-slate-900">{active.label}</p>
       </div>
 
-      <p className="mt-2 text-xs text-gray-900">
+      <p className="mt-2 text-xs text-slate-900">
         Illustrative scores — but the gap is real: less JavaScript on the wire means a
         faster Largest Contentful Paint and a higher Performance score.
       </p>
@@ -206,18 +206,18 @@ function StepHeader({
   return (
     <div className="flex flex-wrap items-center gap-4">
       <div
-        className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-linear-to-br ${TONE[tone].tile} text-gray-700 shadow-md ring-4 ${TONE[tone].ring}`}
+        className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-linear-to-br ${TONE[tone].tile} text-slate-700 shadow-md ring-4 ${TONE[tone].ring}`}
       >
         <Icon className="h-6 w-6" />
       </div>
       <div className="min-w-0">
-        <span className="text-xs font-bold uppercase tracking-widest text-gray-900">
+        <span className="text-xs font-bold uppercase tracking-widest text-slate-900">
           Step {step}
         </span>
-        <h2 className="text-xl font-bold text-gray-900">{title}</h2>
+        <h2 className="text-xl font-bold text-slate-900">{title}</h2>
       </div>
       {badge && (
-        <span className="ml-auto rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-gray-700">
+        <span className="ml-auto rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-slate-700">
           {badge}
         </span>
       )}
@@ -235,7 +235,7 @@ function Card({
   return (
     <div
       className={`mt-8 rounded-3xl border bg-white p-7 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg ${
-        highlight ? "border-blue-200 bg-linear-to-b from-blue-50/40 to-white" : "border-gray-200"
+        highlight ? "border-blue-200 bg-blue-50/40" : "border-slate-200"
       }`}
     >
       {children}
@@ -254,7 +254,6 @@ export default function PageSpeed() {
   return (
     <section className="relative overflow-hidden min-h-full p-12">
       {/* Decorative background glow */}
-      <div className="pointer-events-none absolute -top-32 left-1/2 h-72 w-xl -translate-x-1/2 rounded-full bg-linear-to-br from-blue-50/50 to-blue-50/50 blur-3xl" />
 
       <div className="relative max-w-3xl ml-6">
         {/* Breadcrumb */}
@@ -272,11 +271,11 @@ export default function PageSpeed() {
         {/* ── Header ── */}
       
 
-        <h1 className="mt-5 text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
+        <h1 className="mt-5 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
           Optimizing Page Speed
         </h1>
 
-        <p className="mt-5 max-w-2xl text-lg leading-relaxed text-gray-900">
+        <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-900">
           Eleventy renders your pages to pre-built static HTML with{" "}
           <span className="font-bold">no client-side JavaScript by default</span>, so this
           starter is fast before you do anything. The tips below cover how to keep it that
@@ -288,9 +287,9 @@ export default function PageSpeed() {
           {STATS.map(({ icon: Icon, label }) => (
             <span
               key={label}
-              className="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-3.5 py-2 text-sm font-semibold text-gray-900 shadow-sm"
+              className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-sm font-semibold text-slate-900 shadow-sm"
             >
-              <Icon className="h-4 w-4 text-gray-600" />
+              <Icon className="h-4 w-4 text-slate-600" />
               {label}
             </span>
           ))}
@@ -302,7 +301,7 @@ export default function PageSpeed() {
         <Card highlight>
           <StepHeader step={1} icon={Zap} tone="emerald" title="Ship as little JavaScript as possible" badge="Biggest win" />
 
-          <p className="mt-5 text-gray-900">
+          <p className="mt-5 text-slate-900">
             Eleventy compiles every template to plain HTML at build time and ships{" "}
             <span className="font-bold">no client-side JavaScript</span> on its own. There&apos;s
             no framework runtime to hydrate — so only add a{" "}
@@ -324,7 +323,7 @@ export default function PageSpeed() {
           </div>
 
           {/* Live, interactive Lighthouse preview */}
-          <p className="mt-6 mb-3 font-medium text-gray-900">
+          <p className="mt-6 mb-3 font-medium text-slate-900">
             The less you put on the wire, the higher your Lighthouse Performance score —
             toggle to compare:
           </p>
@@ -340,7 +339,7 @@ export default function PageSpeed() {
             title={<>Use the built-in <span className="font-mono">{"{% image %}"}</span> shortcode</>}
           />
 
-          <p className="mt-5 text-gray-900">
+          <p className="mt-5 text-slate-900">
             This starter already wires up <Code>@11ty/eleventy-img</Code> in{" "}
             <Code>.eleventy.js</Code> as a Nunjucks shortcode — you don&apos;t need to install
             or configure anything. It generates responsive <Code>WebP</Code> + <Code>JPEG</Code>{" "}
@@ -348,7 +347,7 @@ export default function PageSpeed() {
             <Code>height</Code> so the layout never shifts (great for CLS).
           </p>
 
-          <p className="mt-5 text-gray-900">
+          <p className="mt-5 text-slate-900">
             Pass the source path, <Code>alt</Code> text, a CSS class, the{" "}
             <Code>loading</Code> attribute, and an optional <Code>sizes</Code> string:
           </p>
@@ -364,7 +363,7 @@ export default function PageSpeed() {
             />
           </div>
 
-          <p className="mt-5 text-gray-900">
+          <p className="mt-5 text-slate-900">
             The shortcode is defined for you — this is what&apos;s already in{" "}
             <Code>.eleventy.js</Code>, so you only tweak it if you want different widths or
             output formats:
@@ -387,8 +386,8 @@ eleventyConfig.addNunjucksAsyncShortcode("image", imageShortcode);`}
 
           {/* Info callout — the key Eleventy detail */}
           <div className="mt-5 flex gap-3 rounded-2xl border border-blue-200 bg-blue-50 p-4">
-            <Info className="mt-0.5 h-5 w-5 shrink-0 text-gray-600" />
-            <p className="text-sm leading-relaxed text-gray-900">
+            <Info className="mt-0.5 h-5 w-5 shrink-0 text-slate-600" />
+            <p className="text-sm leading-relaxed text-slate-900">
               Always route images through <Code>{"{% image %}"}</Code> rather than a raw{" "}
               <Code>{"<img>"}</Code> — every call emits responsive WebP with dimensions baked
               in. The first <Code>loading</Code> argument lets you mark above-the-fold images{" "}
@@ -401,7 +400,7 @@ eleventyConfig.addNunjucksAsyncShortcode("image", imageShortcode);`}
         <Card>
           <StepHeader step={3} icon={Type} tone="purple" title="Keep fonts self-hosted" />
 
-          <p className="mt-5 text-gray-900">
+          <p className="mt-5 text-slate-900">
             Third-party font requests add a render-blocking round-trip. This starter already
             ships Roboto locally in <Code>src/assets/fonts</Code> (as <Code>.woff2</Code> /{" "}
             <Code>.woff</Code>), and <Code>addPassthroughCopy(&quot;./src/assets&quot;)</Code>{" "}
@@ -428,7 +427,7 @@ eleventyConfig.addNunjucksAsyncShortcode("image", imageShortcode);`}
         <Card>
           <StepHeader step={4} icon={Paintbrush} tone="pink" title="Let the LESS → PostCSS pipeline minify your CSS" />
 
-          <p className="mt-5 text-gray-900">
+          <p className="mt-5 text-slate-900">
             This starter compiles your styles itself. Write LESS in{" "}
             <Code>src/assets/less</Code>; the processor in{" "}
             <Code>src/config/processors/less.js</Code> renders it through PostCSS — running{" "}
@@ -454,16 +453,16 @@ const processor = postcss([
 
         {/* ── Audit callout ── */}
         <div className="mt-8 flex gap-3 rounded-3xl border border-blue-200 bg-blue-50 p-5">
-          <Gauge className="mt-0.5 h-5 w-5 shrink-0 text-gray-600" />
+          <Gauge className="mt-0.5 h-5 w-5 shrink-0 text-slate-600" />
           <div>
-            <h3 className="font-bold text-gray-900">Measure, don&apos;t guess</h3>
-            <p className="mt-1 text-sm leading-relaxed text-gray-900">
+            <h3 className="font-bold text-slate-900">Measure, don&apos;t guess</h3>
+            <p className="mt-1 text-sm leading-relaxed text-slate-900">
               After each change, audit the deployed URL with{" "}
               <a
                 href="https://pagespeed.web.dev"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-bold text-gray-700 underline decoration-blue-400 underline-offset-2 hover:text-gray-900"
+                className="font-bold text-slate-700 underline decoration-blue-400 underline-offset-2 hover:text-slate-900"
               >
                 Google PageSpeed Insights
               </a>{" "}
@@ -474,8 +473,8 @@ const processor = postcss([
         </div>
 
         {/* Subtle footer flourish */}
-        <p className="mt-10 flex items-center justify-center gap-2 text-sm font-medium text-gray-900">
-          <Feather className="h-4 w-4 text-gray-500" />
+        <p className="mt-10 flex items-center justify-center gap-2 text-sm font-medium text-slate-900">
+          <Feather className="h-4 w-4 text-slate-500" />
           Light pages, happy users.
         </p>
       </div>

@@ -22,7 +22,7 @@ type Section = {
 
 function InlineCode({ children }: { children: React.ReactNode }) {
   return (
-    <code className="rounded-md border border-gray-200 bg-gray-100 px-1.5 py-0.5 font-mono text-[0.85em] text-gray-800">
+    <code className="rounded-md border border-slate-200 bg-slate-100 px-1.5 py-0.5 font-mono text-[0.85em] text-slate-800">
       {children}
     </code>
   );
@@ -30,16 +30,16 @@ function InlineCode({ children }: { children: React.ReactNode }) {
 
 function CodeBlock({ label, code }: { label?: string; code: string }) {
   return (
-    <div className="overflow-hidden rounded-xl border border-gray-800 bg-gray-900 shadow-sm">
-      <div className="flex items-center gap-2 border-b border-gray-800 bg-gray-950/40 px-4 py-2.5">
+    <div className="overflow-hidden rounded-xl border border-slate-800 bg-slate-900 shadow-sm">
+      <div className="flex items-center gap-2 border-b border-slate-800 bg-slate-950/40 px-4 py-2.5">
         <span className="h-3 w-3 rounded-full bg-blue-50/80" />
         <span className="h-3 w-3 rounded-full bg-blue-50/80" />
         <span className="h-3 w-3 rounded-full bg-blue-50/80" />
         {label && (
-          <span className="ml-2 font-mono text-xs text-gray-400">{label}</span>
+          <span className="ml-2 font-mono text-xs text-slate-400">{label}</span>
         )}
       </div>
-      <pre className="overflow-x-auto p-4 text-sm leading-relaxed text-gray-100">
+      <pre className="overflow-x-auto p-4 text-sm leading-relaxed text-slate-100">
         <code>{code}</code>
       </pre>
     </div>
@@ -71,7 +71,7 @@ const favicon: Section = {
   title: "Favicon",
   icon: Star,
   accent: {
-    iconWrap: "bg-blue-50 text-gray-600 border-blue-200",
+    iconWrap: "bg-blue-50 text-slate-600 border-blue-200",
     rule: "bg-blue-50",
   },
 };
@@ -81,7 +81,7 @@ const logo: Section = {
   title: "SVG Logo",
   icon: PenTool,
   accent: {
-    iconWrap: "bg-blue-50 text-gray-600 border-blue-200",
+    iconWrap: "bg-blue-50 text-slate-600 border-blue-200",
     rule: "bg-blue-50",
   },
 };
@@ -91,7 +91,7 @@ const speed: Section = {
   title: "Page Speed",
   icon: Gauge,
   accent: {
-    iconWrap: "bg-blue-50 text-gray-600 border-blue-200",
+    iconWrap: "bg-blue-50 text-slate-600 border-blue-200",
     rule: "bg-blue-50",
   },
 };
@@ -113,10 +113,10 @@ function SectionHeader({ section }: { section: Section }) {
         <Icon className="h-6 w-6" />
       </div>
       <div>
-        <div className="text-xs font-semibold uppercase tracking-wider text-gray-400">
+        <div className="text-xs font-semibold uppercase tracking-wider text-slate-400">
           Step {section.step}
         </div>
-        <h2 className="text-2xl font-bold text-gray-900">{section.title}</h2>
+        <h2 className="text-2xl font-bold text-slate-900">{section.title}</h2>
       </div>
     </div>
   );
@@ -137,10 +137,10 @@ export default function Extras() {
           <span aria-current="page">Extras</span>
         </nav>
 
-        <h1 className="mb-4 text-5xl font-bold text-gray-900">
+        <h1 className="mb-4 text-5xl font-bold text-slate-900">
           Extra Tips for Your Eleventy Site
         </h1>
-        <p className="text-xl leading-relaxed text-gray-600">
+        <p className="text-xl leading-relaxed text-slate-600">
           Small but important touches that make this CodeStitch starter look
           professional, perform well, and feel polished. Each section links to a
           full step-by-step guide.
@@ -149,19 +149,19 @@ export default function Extras() {
 
       <div className="space-y-6">
         {/* Favicon */}
-        <section className="relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+        <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
           <span
             className={`absolute inset-y-0 left-0 w-1 ${favicon.accent.rule}`}
           />
           <SectionHeader section={favicon} />
-          <p className="mb-4 text-gray-700">
+          <p className="mb-4 text-slate-700">
             A favicon is the small icon in browser tabs, bookmarks, and
             home-screen shortcuts. This starter already ships a full favicon set
             in <InlineCode>src/assets/favicons/</InlineCode> and links it in{" "}
             <InlineCode>base.html</InlineCode> — so making it yours is mostly
             just swapping files:
           </p>
-          <ul className="mb-5 space-y-2 pl-1 text-gray-700">
+          <ul className="mb-5 space-y-2 pl-1 text-slate-700">
             <li className="flex gap-2">
               <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-50" />
               <span>
@@ -196,7 +196,7 @@ export default function Extras() {
 <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png" />
 <link rel="manifest" href="/assets/favicons/site.webmanifest" />`}
           />
-          <p className="mt-4 text-gray-700">
+          <p className="mt-4 text-slate-700">
             Because{" "}
             <InlineCode>addPassthroughCopy(&quot;./src/assets&quot;)</InlineCode>{" "}
             copies the folder with its path intact,{" "}
@@ -208,18 +208,18 @@ export default function Extras() {
           <SectionLink
             href="/docs/eleventy/extras/favicon"
             label="Read the full favicon guide"
-            className="text-gray-700 hover:text-gray-800"
+            className="text-slate-700 hover:text-slate-800"
           />
         </section>
 
         {/* Logo SVG */}
-        <section className="relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+        <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
           <span className={`absolute inset-y-0 left-0 w-1 ${logo.accent.rule}`} />
           <SectionHeader section={logo} />
-          <p className="mb-4 text-gray-700">
+          <p className="mb-4 text-slate-700">
             SVG logos are scalable and lightweight. You can:
           </p>
-          <ul className="mb-5 space-y-2 pl-1 text-gray-700">
+          <ul className="mb-5 space-y-2 pl-1 text-slate-700">
             <li className="flex gap-2">
               <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-50" />
               <span>
@@ -232,7 +232,7 @@ export default function Extras() {
             label="layout"
             code={`<img src="/assets/logo.svg" alt="Site Logo" width="120">`}
           />
-          <p className="my-4 text-gray-700">
+          <p className="my-4 text-slate-700">
             Or inline the SVG directly in your layout for styling and animations:
           </p>
           <CodeBlock
@@ -244,20 +244,20 @@ export default function Extras() {
           <SectionLink
             href="/docs/eleventy/extras/logo-svg"
             label="Read the full SVG logo guide"
-            className="text-gray-700 hover:text-gray-800"
+            className="text-slate-700 hover:text-slate-800"
           />
         </section>
 
         {/* PageSpeed */}
-        <section className="relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+        <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
           <span className={`absolute inset-y-0 left-0 w-1 ${speed.accent.rule}`} />
           <SectionHeader section={speed} />
-          <p className="mb-4 text-gray-700">
+          <p className="mb-4 text-slate-700">
             Eleventy renders your pages to static HTML with no client-side
             JavaScript by default, so this starter is fast before you touch
             anything. The kit also pre-wires the pieces that keep it that way:
           </p>
-          <ul className="mb-5 space-y-2 pl-1 text-gray-700">
+          <ul className="mb-5 space-y-2 pl-1 text-slate-700">
             {[
               <>
                 Ships <InlineCode>0 KB</InlineCode> of JavaScript by default —
@@ -287,7 +287,7 @@ export default function Extras() {
               </li>
             ))}
           </ul>
-          <p className="text-gray-700">
+          <p className="text-slate-700">
             Audit the production build with Google PageSpeed Insights or the
             Lighthouse tab in Chrome DevTools — the dev server is unoptimized and
             always looks slower.
@@ -295,27 +295,27 @@ export default function Extras() {
           <SectionLink
             href="/docs/eleventy/extras/page-speed-test"
             label="Read the full page speed guide"
-            className="text-gray-700 hover:text-gray-800"
+            className="text-slate-700 hover:text-slate-800"
           />
         </section>
       </div>
 
       {/* Quick Tips */}
-      <div className="mt-12 rounded-2xl border border-gray-200 bg-linear-to-br from-gray-50 to-gray-100 p-8">
-        <h2 className="mb-6 flex items-center gap-2 text-2xl font-bold text-gray-900">
-          <Lightbulb className="h-6 w-6 text-gray-500" />
+      <div className="mt-12 rounded-2xl border border-slate-200 bg-slate-50 p-8">
+        <h2 className="mb-6 flex items-center gap-2 text-2xl font-bold text-slate-900">
+          <Lightbulb className="h-6 w-6 text-slate-500" />
           Quick Tips
         </h2>
         <div className="grid gap-4 sm:grid-cols-2">
           {quickTips.map((tip) => (
             <div
               key={tip}
-              className="flex items-start gap-3 rounded-xl border border-gray-200 bg-white p-4"
+              className="flex items-start gap-3 rounded-xl border border-slate-200 bg-white p-4"
             >
-              <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-100 text-gray-600">
+              <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-100 text-slate-600">
                 <Check className="h-3.5 w-3.5" />
               </span>
-              <p className="text-sm text-gray-700">{tip}</p>
+              <p className="text-sm text-slate-700">{tip}</p>
             </div>
           ))}
         </div>

@@ -19,7 +19,7 @@ export default function Contact() {
           Contact Me
         </h1>
 
-        <p className="text-lg text-gray-600 mb-12">
+        <p className="text-lg text-slate-600 mb-12">
           Have questions, feedback, or want to chat? You can reach me through any of the following ways:
         </p>
 
@@ -28,13 +28,13 @@ export default function Contact() {
           <h2 className="text-2xl font-semibold mb-3">
             Discord
           </h2>
-          <p className="text-gray-700">
+          <p className="text-slate-700">
             Join my Discord server to chat in real-time or send a direct message.  
             <a 
               href="https://discord.com/invite/your-invite-code" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-gray-600 hover:underline"
+              className="text-slate-600 hover:underline"
             >
               Click here to join
             </a>
@@ -46,11 +46,11 @@ export default function Contact() {
           <h2 className="text-2xl font-semibold mb-3">
             Email
           </h2>
-          <p className="text-gray-700">
+          <p className="text-slate-700">
             Send me a detailed message at:  
             <a 
               href="mailto:your-email@example.com" 
-              className="text-gray-600 hover:underline"
+              className="text-slate-600 hover:underline"
             >
               your-email@example.com
             </a>
@@ -62,7 +62,7 @@ export default function Contact() {
           <h2 className="text-2xl font-semibold mb-3">
             Chatbot
           </h2>
-          <p className="text-gray-700">
+          <p className="text-slate-700">
             Use the chatbot on this site to get instant answers or guidance.  
             Just click the chat icon at the bottom corner and start typing.
           </p>
@@ -72,7 +72,7 @@ export default function Contact() {
           <h2 className="text-xl font-semibold mb-3">
             Quick Reminder
           </h2>
-          <p className="text-gray-700">
+          <p className="text-slate-700">
             Whether it’s Discord, email, or the chatbot, I aim to respond as quickly as possible.
             Don’t hesitate to reach out!
           </p>

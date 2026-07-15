@@ -54,14 +54,14 @@ const CodeBlock = ({ code }: { code: string }) => (
 const Step = ({ number, title, children }: { number: number; title: string; children: React.ReactNode }) => (
   <div className="flex gap-4 mb-6">
     <div
-      className="shrink-0 w-9 h-9 rounded-full flex items-center justify-center font-bold text-gray-700 text-sm"
+      className="shrink-0 w-9 h-9 rounded-full flex items-center justify-center font-bold text-slate-700 text-sm"
       style={{ background: "#c3c5c7" }}
     >
       {number}
     </div>
     <div className="flex-1 pt-1">
-      <p className="font-bold text-gray-800 mb-1">{title}</p>
-      <div className="text-gray-600 text-sm leading-relaxed">{children}</div>
+      <p className="font-bold text-slate-800 mb-1">{title}</p>
+      <div className="text-slate-600 text-sm leading-relaxed">{children}</div>
     </div>
   </div>
 );
@@ -73,8 +73,8 @@ const TipBox = ({ icon, title, children }: { icon: React.ReactNode; title: strin
   >
     <span className="text-xl shrink-0">{icon}</span>
     <div>
-      <p className="font-bold text-gray-800 text-sm mb-1">{title}</p>
-      <p className="text-gray-700 text-sm leading-relaxed">{children}</p>
+      <p className="font-bold text-slate-800 text-sm mb-1">{title}</p>
+      <p className="text-slate-700 text-sm leading-relaxed">{children}</p>
     </div>
   </div>
 );
@@ -114,10 +114,10 @@ export default function InstallVSCode() {
             <span aria-current="page">Installing VS Code</span>
           </nav>
 
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">
+          <h1 className="text-4xl font-bold text-slate-900 mb-2">
             Installing VS Code
           </h1>
-          <p className="text-gray-500 text-lg">
+          <p className="text-slate-500 text-lg">
             A step-by-step guide for absolute beginners
           </p>
           <div
@@ -133,15 +133,15 @@ export default function InstallVSCode() {
           className="rounded-2xl p-6 mb-6"
           style={{ background: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.06)", border: "1px solid #e0e7ff" }}
         >
-          <h2 className="font-bold text-lg text-gray-900 mb-2">
+          <h2 className="font-bold text-lg text-slate-900 mb-2">
             🤔 What is VS Code, and why do I need it?
           </h2>
-          <p className="text-gray-600 text-sm leading-relaxed mb-3">
+          <p className="text-slate-600 text-sm leading-relaxed mb-3">
             VS Code (short for Visual Studio Code) is a free program for writing code. Think of it like
             Microsoft Word, but instead of writing essays, you write code — and it helps you by
             <strong> highlighting your code in colors</strong>, catching typos, and suggesting what to type next.
           </p>
-          <p className="text-gray-600 text-sm leading-relaxed">
+          <p className="text-slate-600 text-sm leading-relaxed">
             It&apos;s made by Microsoft, works on Windows and Mac, and is the most popular code editor in the
             world. The best part? It&apos;s completely free. 🎉
           </p>
@@ -152,7 +152,7 @@ export default function InstallVSCode() {
           className="rounded-2xl p-6 mb-6"
           style={{ background: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.06)", border: "1px solid #e0e7ff" }}
         >
-          <h2 className="font-bold text-lg text-gray-900 mb-4">
+          <h2 className="font-bold text-lg text-slate-900 mb-4">
             💻 What operating system are you using?
           </h2>
           <div className="flex gap-3 mb-12">
@@ -198,7 +198,7 @@ export default function InstallVSCode() {
               <Step number={2} title='Click the big blue "Download for Windows" button'>
                 The website will automatically detect you&apos;re on Windows and show you the right button.
                 Click it and the download will start. The file will be named something like{" "}
-                <code className="bg-gray-100 px-1 rounded">VSCodeSetup-x64-1.x.x.exe</code>.
+                <code className="bg-slate-100 px-1 rounded">VSCodeSetup-x64-1.x.x.exe</code>.
               </Step>
 
               <Step number={3} title="Run the installer file">
@@ -229,7 +229,7 @@ export default function InstallVSCode() {
                 <p className="text-slate-800 text-sm leading-relaxed">
                   <strong>&quot;Open with Code&quot;</strong> lets you right-click any folder or file and open it
                   directly in VS Code — super handy! <strong>&quot;Add to PATH&quot;</strong> lets you type{" "}
-                  <code className="bg-gray-100 px-1 rounded">code .</code> in the terminal to open VS Code
+                  <code className="bg-slate-100 px-1 rounded">code .</code> in the terminal to open VS Code
                   from anywhere. Both will save you a lot of time.
                 </p>
               </div>
@@ -255,7 +255,7 @@ export default function InstallVSCode() {
 
               <Step number={2} title='Click "Download for Mac"'>
                 The website detects you&apos;re on a Mac and shows the right button. Click it — a{" "}
-                <code className="bg-gray-100 px-1 rounded">.zip</code> file will download to your
+                <code className="bg-slate-100 px-1 rounded">.zip</code> file will download to your
                 Downloads folder.
               </Step>
 
@@ -268,7 +268,7 @@ export default function InstallVSCode() {
 
               <Step number={3} title="Unzip and move VS Code to your Applications folder">
                 Go to your <strong>Downloads folder</strong> and double-click the{" "}
-                <code className="bg-gray-100 px-1 rounded">.zip</code> file to unzip it. You&apos;ll see a
+                <code className="bg-slate-100 px-1 rounded">.zip</code> file to unzip it. You&apos;ll see a
                 file called <strong>Visual Studio Code.app</strong> appear. Drag this file into
                 your <strong>Applications folder</strong> — the same place as your other apps like
                 Safari and Mail.
@@ -301,14 +301,14 @@ export default function InstallVSCode() {
           className="rounded-2xl p-6 mb-6"
           style={{ background: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.06)", border: "1px solid #e0e7ff" }}
         >
-          <h2 className="font-bold text-lg text-gray-900 mb-2">
+          <h2 className="font-bold text-lg text-slate-900 mb-2">
             ✅ Check that it worked
           </h2>
-          <p className="text-gray-600 text-sm leading-relaxed mb-4">
+          <p className="text-slate-600 text-sm leading-relaxed mb-4">
             The easiest check: just look for VS Code in your apps and open it! You should see a
             welcome screen with a dark or light background and a sidebar on the left.
           </p>
-          <p className="text-gray-600 text-sm leading-relaxed mb-2">
+          <p className="text-slate-600 text-sm leading-relaxed mb-2">
             You can also verify it from the terminal. Open your terminal and run:
           </p>
 
@@ -328,8 +328,8 @@ export default function InstallVSCode() {
           </div>
 
           <CodeBlock code="code --version" />
-          <p className="text-gray-500 text-sm">
-            You&apos;ll see something like <code className="bg-gray-100 px-1 rounded">1.89.0</code> printed —
+          <p className="text-slate-500 text-sm">
+            You&apos;ll see something like <code className="bg-slate-100 px-1 rounded">1.89.0</code> printed —
             that means VS Code is installed and ready to use!
           </p>
 
@@ -341,15 +341,15 @@ export default function InstallVSCode() {
             <p className="text-slate-700 text-sm leading-relaxed">
               On <strong>Windows</strong>: restart your computer so the PATH change takes effect, then try again.
               On <strong>macOS</strong>: open VS Code, press{" "}
-              <kbd className="bg-gray-100 border border-gray-300 px-1.5 py-0.5 rounded text-xs font-mono">⌘ Cmd</kbd> +{" "}
-              <kbd className="bg-gray-100 border border-gray-300 px-1.5 py-0.5 rounded text-xs font-mono">Shift</kbd> +{" "}
-              <kbd className="bg-gray-100 border border-gray-300 px-1.5 py-0.5 rounded text-xs font-mono">P</kbd>,
+              <kbd className="bg-slate-100 border border-slate-300 px-1.5 py-0.5 rounded text-xs font-mono">⌘ Cmd</kbd> +{" "}
+              <kbd className="bg-slate-100 border border-slate-300 px-1.5 py-0.5 rounded text-xs font-mono">Shift</kbd> +{" "}
+              <kbd className="bg-slate-100 border border-slate-300 px-1.5 py-0.5 rounded text-xs font-mono">P</kbd>,
               type <strong>&quot;Shell Command&quot;</strong>, and select <em>&quot;Install &apos;code&apos; command in PATH&quot;</em>.
             </p>
           </div>
         </div>   
 
-        <p className="text-center text-gray-600 text-sm font-medium mt-8">
+        <p className="text-center text-slate-600 text-sm font-medium mt-8">
           Always download VS Code from the official site:{" "}
           <Link
             href="https://code.visualstudio.com"

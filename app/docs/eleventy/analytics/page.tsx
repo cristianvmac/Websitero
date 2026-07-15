@@ -20,8 +20,8 @@ const providers = [
     icon: BarChart3,
     accent: {
       card: "hover:border-blue-300 hover:shadow-blue-100",
-      iconWrap: "bg-blue-50 text-gray-600 border-blue-200",
-      link: "text-gray-600 group-hover:text-gray-700",
+      iconWrap: "bg-blue-50 text-slate-600 border-blue-200",
+      link: "text-slate-600 group-hover:text-slate-700",
     },
   },
   {
@@ -32,9 +32,9 @@ const providers = [
     cta: "Set up Vercel Analytics",
     icon: Triangle,
     accent: {
-      card: "hover:border-gray-400 hover:shadow-gray-100",
-      iconWrap: "bg-gray-100 text-gray-900 border-gray-300",
-      link: "text-gray-900 group-hover:text-gray-700",
+      card: "hover:border-slate-400 hover:shadow-slate-100",
+      iconWrap: "bg-slate-100 text-slate-900 border-slate-300",
+      link: "text-slate-900 group-hover:text-slate-700",
     },
   },
 ];
@@ -49,7 +49,7 @@ const comparison = [
   {
     label: "Vercel Analytics",
     icon: ShieldCheck,
-    color: "bg-gray-900",
+    color: "bg-slate-900",
     text: "Cookieless and privacy-friendly. Zero config when hosted on Vercel.",
   },
   {
@@ -75,10 +75,10 @@ export default function Analytics() {
           <span aria-current="page">Analytics</span>
         </nav>
 
-        <h1 className="text-5xl font-bold text-gray-900 mb-4">
+        <h1 className="text-5xl font-bold text-slate-900 mb-4">
           Add Analytics to Your Site
         </h1>
-        <p className="text-xl text-gray-600 leading-relaxed">
+        <p className="text-xl text-slate-600 leading-relaxed">
           Track visitors, page views, and conversions to learn what&apos;s
           working. The Eleventy Starter Template supports two great options — pick
           the one that fits your needs, or run both together.
@@ -93,17 +93,17 @@ export default function Analytics() {
             <Link
               key={provider.title}
               href={provider.href}
-              className={`group flex flex-col bg-white rounded-2xl p-6 border border-gray-200 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg ${provider.accent.card}`}
+              className={`group flex flex-col bg-white rounded-2xl p-6 border border-slate-200 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg ${provider.accent.card}`}
             >
               <div
                 className={`w-12 h-12 rounded-xl border flex items-center justify-center mb-4 ${provider.accent.iconWrap}`}
               >
                 <Icon className="w-6 h-6" />
               </div>
-              <h2 className="text-xl font-bold text-gray-900 mb-2">
+              <h2 className="text-xl font-bold text-slate-900 mb-2">
                 {provider.title}
               </h2>
-              <p className="text-gray-600 text-sm leading-relaxed mb-5 flex-1">
+              <p className="text-slate-600 text-sm leading-relaxed mb-5 flex-1">
                 {provider.description}
               </p>
               <span
@@ -118,9 +118,9 @@ export default function Analytics() {
       </div>
 
       {/* Quick comparison */}
-      <div className="bg-linear-to-br from-gray-50 to-gray-100 rounded-2xl p-8 border border-gray-200">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-          <Sparkles className="w-6 h-6 text-gray-600" />
+      <div className="bg-slate-50 rounded-2xl p-8 border border-slate-200">
+        <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+          <Sparkles className="w-6 h-6 text-slate-600" />
           Which Should You Choose?
         </h2>
 
@@ -130,24 +130,24 @@ export default function Analytics() {
             return (
               <div
                 key={item.label}
-                className="bg-white rounded-xl p-5 border border-gray-200"
+                className="bg-white rounded-xl p-5 border border-slate-200"
               >
                 <div className="flex items-center gap-2 mb-2">
                   <span
-                    className={`w-7 h-7 rounded-lg ${item.color} text-gray-700 flex items-center justify-center`}
+                    className={`w-7 h-7 rounded-lg ${item.color} text-slate-700 flex items-center justify-center`}
                   >
                     <Icon className="w-4 h-4" />
                   </span>
-                  <span className="font-bold text-gray-900">{item.label}</span>
+                  <span className="font-bold text-slate-900">{item.label}</span>
                 </div>
-                <p className="text-sm text-gray-600">{item.text}</p>
+                <p className="text-sm text-slate-600">{item.text}</p>
               </div>
             );
           })}
         </div>
 
         <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
-          <p className="text-sm text-gray-900">
+          <p className="text-sm text-slate-900">
             Not sure? Start with <span className="font-semibold">Vercel Analytics</span> if
             your site is on Vercel — it&apos;s the fastest, most private setup.
             Reach for <span className="font-semibold">Google Analytics</span> when you need

@@ -32,20 +32,20 @@ function CodeBlock({ code, filename }: { code: string; filename?: string }) {
   };
 
   return (
-    <div className="group relative overflow-hidden rounded-xl border border-gray-800 bg-gray-900 shadow-lg shadow-gray-900/10">
+    <div className="group relative overflow-hidden rounded-xl border border-slate-800 bg-slate-900 shadow-lg shadow-slate-900/10">
       {/* Window header */}
-      <div className="flex items-center justify-between border-b border-gray-700/60 bg-gray-800/50 px-4 py-2.5">
+      <div className="flex items-center justify-between border-b border-slate-700/60 bg-slate-800/50 px-4 py-2.5">
         <div className="flex items-center gap-2">
           <span className="h-3 w-3 rounded-full bg-blue-50/80" />
           <span className="h-3 w-3 rounded-full bg-blue-50/80" />
           <span className="h-3 w-3 rounded-full bg-blue-50/80" />
           {filename && (
-            <span className="ml-3 font-mono text-xs text-gray-400">{filename}</span>
+            <span className="ml-3 font-mono text-xs text-slate-400">{filename}</span>
           )}
         </div>
         <button
           onClick={handleCopy}
-          className="flex items-center gap-1.5 rounded-md px-2 py-1 text-xs font-medium text-gray-400 transition-colors hover:bg-gray-700/60 hover:text-gray-100"
+          className="flex items-center gap-1.5 rounded-md px-2 py-1 text-xs font-medium text-slate-400 transition-colors hover:bg-slate-700/60 hover:text-slate-100"
         >
           {copied ? (
             <Check className="h-3.5 w-3.5 text-green-400" />
@@ -56,7 +56,7 @@ function CodeBlock({ code, filename }: { code: string; filename?: string }) {
         </button>
       </div>
 
-      <pre className="overflow-x-auto p-4 text-sm leading-relaxed text-gray-100">
+      <pre className="overflow-x-auto p-4 text-sm leading-relaxed text-slate-100">
         <code>{code}</code>
       </pre>
     </div>
@@ -90,7 +90,6 @@ export default function LogoSvg() {
   return (
     <section className="relative overflow-hidden min-h-full p-12">
       {/* Decorative background glow */}
-      <div className="pointer-events-none absolute -top-32 left-1/2 h-72 w-xl -translate-x-1/2 rounded-full bg-linear-to-br from-blue-50/40 to-blue-50/40 blur-3xl" />
 
       <div className="relative mx-auto max-w-3xl">
         {/* Breadcrumb */}
@@ -106,24 +105,24 @@ export default function LogoSvg() {
           <span aria-current="page">Logo SVG</span>
         </nav>
         {/* ── Header ── */}
-        <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1.5 text-sm font-bold text-gray-700">
+        <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1.5 text-sm font-bold text-slate-700">
           <Sparkles className="h-4 w-4" />
           Extras · Branding
         </div>
 
-        <h1 className="mt-5 bg-linear-to-br from-gray-900 to-gray-600 bg-clip-text text-4xl font-bold tracking-tight text-transparent sm:text-5xl">
+        <h1 className="mt-5 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
           Adding an SVG Logo
         </h1>
 
-        <p className="mt-5 max-w-2xl text-lg leading-relaxed text-gray-600">
+        <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-600">
           SVG logos are scalable, lightweight, and perfect for modern websites. In
           Eleventy you can inline the SVG straight into your{" "}
-          <code className="rounded bg-gray-100 px-1.5 py-0.5 font-mono text-base text-gray-800">
+          <code className="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-base text-slate-800">
             .njk
           </code>{" "}
           template for full CSS control, or drop it into your assets folder and serve it
           as a static file with{" "}
-          <code className="rounded bg-gray-100 px-1.5 py-0.5 font-mono text-base text-gray-800">
+          <code className="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-base text-slate-800">
             addPassthroughCopy
           </code>
           .
@@ -132,33 +131,33 @@ export default function LogoSvg() {
         {/* ── Option 1 ── */}
         <div className="mt-14 rounded-2xl border border-blue-200 bg-white p-7 shadow-sm transition-shadow hover:shadow-md">
           <div className="flex flex-wrap items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-gray-700 shadow-sm">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-slate-700 shadow-sm">
               <Code2 className="h-5 w-5" />
             </div>
             <div>
-              <span className="text-xs font-semibold uppercase tracking-wider text-gray-600">
+              <span className="text-xs font-semibold uppercase tracking-wider text-slate-600">
                 Option 1
               </span>
-              <h2 className="text-xl font-semibold text-gray-900">
+              <h2 className="text-xl font-semibold text-slate-900">
                 Inline the SVG (styleable)
               </h2>
             </div>
-            <span className="ml-auto rounded-full bg-blue-100 px-2.5 py-1 text-xs font-semibold text-gray-700">
+            <span className="ml-auto rounded-full bg-blue-100 px-2.5 py-1 text-xs font-semibold text-slate-700">
               Best for styling
             </span>
           </div>
 
-          <p className="mt-5 text-gray-700">
+          <p className="mt-5 text-slate-700">
             Open your SVG file, copy the full{" "}
-            <code className="rounded bg-gray-100 px-1.5 py-0.5 font-mono text-sm text-gray-800">
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-slate-800">
               {"<svg>"}
             </code>{" "}
             markup, and paste it directly into your layout (for example{" "}
-            <code className="rounded bg-gray-100 px-1.5 py-0.5 font-mono text-sm text-gray-800">
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-slate-800">
               base.njk
             </code>
             ). Use{" "}
-            <code className="rounded bg-gray-100 px-1.5 py-0.5 font-mono text-sm text-gray-800">
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-slate-800">
               fill="currentColor"
             </code>{" "}
             so the mark follows your text color.
@@ -177,7 +176,7 @@ export default function LogoSvg() {
             />
 
             {/* Rendered preview */}
-            <div className="flex flex-col items-center justify-center gap-2 rounded-xl border border-gray-200 bg-[radial-gradient(circle,#e5e7eb_1px,transparent_1px)] bg-size-[12px_12px] p-6">
+            <div className="flex flex-col items-center justify-center gap-2 rounded-xl border border-slate-200 bg-[radial-gradient(circle,#e5e7eb_1px,transparent_1px)] bg-size-[12px_12px] p-6">
               <svg
                 width="80"
                 viewBox="0 0 100 100"
@@ -186,14 +185,14 @@ export default function LogoSvg() {
               >
                 <circle cx="50" cy="50" r="40" fill="black" />
               </svg>
-              <span className="text-xs font-medium text-gray-500">Live preview</span>
+              <span className="text-xs font-medium text-slate-500">Live preview</span>
             </div>
           </div>
 
-          <p className="mt-5 text-gray-700">
+          <p className="mt-5 text-slate-700">
             Because the SVG lives in the page markup, you can restyle it with CSS or
             Tailwind — recolor it on hover, or let{" "}
-            <code className="rounded bg-gray-100 px-1.5 py-0.5 font-mono text-sm text-gray-800">
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-slate-800">
               currentColor
             </code>{" "}
             track your theme so the logo flips automatically with a dark-mode toggle.
@@ -201,28 +200,28 @@ export default function LogoSvg() {
         </div>
 
         {/* ── Option 2 ── */}
-        <div className="mt-8 rounded-2xl border border-gray-200 bg-white p-7 shadow-sm transition-shadow hover:shadow-md">
+        <div className="mt-8 rounded-2xl border border-slate-200 bg-white p-7 shadow-sm transition-shadow hover:shadow-md">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-gray-700 shadow-sm">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-slate-700 shadow-sm">
               <ImageIcon className="h-5 w-5" />
             </div>
             <div>
-              <span className="text-xs font-semibold uppercase tracking-wider text-gray-600">
+              <span className="text-xs font-semibold uppercase tracking-wider text-slate-600">
                 Option 2
               </span>
-              <h2 className="text-xl font-semibold text-gray-900">
+              <h2 className="text-xl font-semibold text-slate-900">
                 Serve it as a static <span className="font-mono">{"<img>"}</span> file
               </h2>
             </div>
           </div>
 
-          <p className="mt-5 text-gray-700">
+          <p className="mt-5 text-slate-700">
             Place your logo inside your input folder, for example{" "}
-            <code className="rounded bg-gray-100 px-1.5 py-0.5 font-mono text-sm text-gray-800">
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-slate-800">
               src/assets/logo.svg
             </code>
             , then tell Eleventy to copy the assets folder to the output in{" "}
-            <code className="rounded bg-gray-100 px-1.5 py-0.5 font-mono text-sm text-gray-800">
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-slate-800">
               .eleventy.js
             </code>
             :
@@ -242,7 +241,7 @@ export default function LogoSvg() {
             />
           </div>
 
-          <p className="mt-5 text-gray-700">
+          <p className="mt-5 text-slate-700">
             Now reference it from the site root in your layout:
           </p>
 
@@ -255,8 +254,8 @@ export default function LogoSvg() {
 
           {/* Info callout — the key Eleventy passthrough difference */}
           <div className="mt-5 flex gap-3 rounded-xl border border-blue-100 bg-blue-50 p-4">
-            <Info className="mt-0.5 h-5 w-5 shrink-0 text-gray-600" />
-            <p className="text-sm leading-relaxed text-gray-900">
+            <Info className="mt-0.5 h-5 w-5 shrink-0 text-slate-600" />
+            <p className="text-sm leading-relaxed text-slate-900">
               Eleventy doesn&apos;t copy static files automatically — without{" "}
               <code className="rounded bg-blue-100 px-1.5 py-0.5 font-mono text-xs">
                 addPassthroughCopy
@@ -284,19 +283,19 @@ export default function LogoSvg() {
 
         {/* ── Why SVG ── */}
         <div className="mt-12">
-          <h2 className="text-2xl font-semibold text-gray-900">Why use SVG for logos?</h2>
+          <h2 className="text-2xl font-semibold text-slate-900">Why use SVG for logos?</h2>
           <div className="mt-5 grid gap-4 sm:grid-cols-2">
             {WHY_SVG.map(({ icon: Icon, title, desc }) => (
               <div
                 key={title}
-                className="group flex gap-4 rounded-2xl border border-gray-200 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-md"
+                className="group flex gap-4 rounded-2xl border border-slate-200 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-md"
               >
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-gray-600 transition-colors group-hover:bg-blue-100 group-hover:text-gray-700">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-slate-600 transition-colors group-hover:bg-blue-100 group-hover:text-slate-700">
                   <Icon className="h-5 w-5" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900">{title}</h3>
-                  <p className="mt-1 text-sm leading-relaxed text-gray-600">{desc}</p>
+                  <h3 className="font-semibold text-slate-900">{title}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-slate-600">{desc}</p>
                 </div>
               </div>
             ))}

@@ -67,11 +67,11 @@ export default function Features() {
           <span aria-current="page">Features</span>
         </nav>
         
-        <h1 className="text-5xl font-bold text-gray-900 mb-4">
+        <h1 className="text-5xl font-bold text-slate-900 mb-4">
           Everything You Need to Launch Fast
         </h1>
         
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+        <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-8">
           Websitero comes with powerful features to help you build, optimize, and grow your business.
           No complex setup—just powerful tools that work out of the box.
         </p>
@@ -87,31 +87,31 @@ export default function Features() {
             <Link
               key={index}
               href={feature.href}
-              className={`block bg-white rounded-2xl p-6 md:p-8 border-2 ${colors.border} ${colors.hover} hover:shadow-xl transition-all group`}
+              className={`block bg-white rounded-2xl p-6 md:p-8 border ${colors.border} ${colors.hover} hover:shadow-xl transition-all group`}
             >
               <div className="flex flex-col md:flex-row gap-6">
                 {/* Icon */}
                 <div className={`shrink-0 w-16 h-16 ${colors.icon} rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform`}>
-                  <Icon className="w-8 h-8 text-gray-700" />
+                  <Icon className="w-8 h-8 text-slate-700" />
                 </div>
 
                 {/* Content */}
                 <div className="flex-1">
                   <div className="flex items-start justify-between mb-3">
-                    <h2 className="text-2xl font-bold text-gray-900 group-hover:text-gray-600 transition-colors">
+                    <h2 className="text-2xl font-bold text-slate-900 group-hover:text-slate-600 transition-colors">
                       {feature.title}
                     </h2>
-                    <ArrowRight className="w-6 h-6 text-gray-400 group-hover:text-gray-600 group-hover:translate-x-1 transition-all shrink-0" />
+                    <ArrowRight className="w-6 h-6 text-slate-400 group-hover:text-slate-600 group-hover:translate-x-1 transition-all shrink-0" />
                   </div>
                   
-                  <p className="text-gray-600 mb-4">
+                  <p className="text-slate-600 mb-4">
                     {feature.description}
                   </p>
 
                   {/* Highlights */}
                   <div className="grid grid-cols-2 gap-2">
                     {feature.highlights.map((highlight, idx) => (
-                      <div key={idx} className="flex items-center gap-2 text-sm text-gray-700">
+                      <div key={idx} className="flex items-center gap-2 text-sm text-slate-700">
                         <CheckCircle className={`w-4 h-4 ${colors.icon.replace('bg-', 'text-')} shrink-0`} />
                         <span>{highlight}</span>
                       </div>
@@ -126,44 +126,44 @@ export default function Features() {
 
       {/* Quick Stats */}
       <div className="grid md:grid-cols-3 gap-6 mb-12">
-        <div className="bg-blue-50 rounded-xl p-6 border-2 border-blue-200 text-center">
-          <div className="text-4xl font-bold text-gray-600 mb-2">4</div>
-          <div className="text-gray-700 font-medium">Core Features</div>
-          <div className="text-sm text-gray-600">Everything you need</div>
+        <div className="bg-blue-50 rounded-xl p-6 border border-blue-200 text-center">
+          <div className="text-4xl font-bold text-slate-600 mb-2">4</div>
+          <div className="text-slate-700 font-medium">Core Features</div>
+          <div className="text-sm text-slate-600">Everything you need</div>
         </div>
 
-        <div className="bg-blue-50 rounded-xl p-6 border-2 border-blue-200 text-center">
-          <div className="text-4xl font-bold text-gray-600 mb-2">5min</div>
-          <div className="text-gray-700 font-medium">Setup Time</div>
-          <div className="text-sm text-gray-600">Quick & easy</div>
+        <div className="bg-blue-50 rounded-xl p-6 border border-blue-200 text-center">
+          <div className="text-4xl font-bold text-slate-600 mb-2">5min</div>
+          <div className="text-slate-700 font-medium">Setup Time</div>
+          <div className="text-sm text-slate-600">Quick & easy</div>
         </div>
 
-        <div className="bg-blue-50 rounded-xl p-6 border-2 border-blue-200 text-center">
-          <div className="text-4xl font-bold text-gray-600 mb-2">0</div>
-          <div className="text-gray-700 font-medium">Complex Config</div>
-          <div className="text-sm text-gray-600">Just works</div>
+        <div className="bg-blue-50 rounded-xl p-6 border border-blue-200 text-center">
+          <div className="text-4xl font-bold text-slate-600 mb-2">0</div>
+          <div className="text-slate-700 font-medium">Complex Config</div>
+          <div className="text-sm text-slate-600">Just works</div>
         </div>
       </div>
 
       {/* CTA */}
-      <div className="bg-white border-2 border-gray-200 shadow-sm rounded-2xl p-4 text-gray-700 text-center">
+      <div className="bg-white border border-slate-200 shadow-sm rounded-2xl p-4 text-slate-700 text-center">
         <h2 className="text-xl font-bold mb-4">
           Ready to Get Started?
         </h2>
-        <p className="text-lg text-gray-600 mb-8">
+        <p className="text-lg text-slate-600 mb-8">
           All features are ready to use. Just follow the quick setup guides.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <Link
             href="/docs/get-started"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-blue-50 hover:bg-blue-100 text-gray-700 font-bold rounded-lg transition-colors text-lg shadow-lg"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-blue-50 hover:bg-blue-100 text-slate-700 font-bold rounded-lg transition-colors text-lg shadow-lg"
           >
             <Zap className="w-5 h-5" />
             Get Started Now
           </Link>
           <Link
             href="/docs/build-in-5-minutes"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-white hover:bg-gray-100 text-gray-900 border border-gray-200 font-bold rounded-lg transition-colors text-lg"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-white hover:bg-slate-100 text-slate-900 border border-slate-200 font-bold rounded-lg transition-colors text-lg"
           >
             Build in 5 Minutes
             <ArrowRight className="w-5 h-5" />

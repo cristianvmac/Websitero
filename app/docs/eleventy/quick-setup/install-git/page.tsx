@@ -53,14 +53,14 @@ const CodeBlock = ({ code }: { code: string }) => (
 const Step = ({ number, title, children }: { number: number; title: string; children: React.ReactNode }) => (
   <div className="flex gap-4 mb-6">
     <div
-      className="shrink-0 w-9 h-9 rounded-full flex items-center justify-center font-bold text-gray-700 text-sm"
+      className="shrink-0 w-9 h-9 rounded-full flex items-center justify-center font-bold text-slate-700 text-sm"
       style={{ background: "#c3c5c7" }}
     >
       {number}
     </div>
     <div className="flex-1 pt-1">
-      <p className="font-bold text-gray-800 mb-1">{title}</p>
-      <div className="text-gray-600 text-sm leading-relaxed">{children}</div>
+      <p className="font-bold text-slate-800 mb-1">{title}</p>
+      <div className="text-slate-600 text-sm leading-relaxed">{children}</div>
     </div>
   </div>
 );
@@ -96,10 +96,10 @@ export default function InstallGit() {
             <span aria-current="page">Installing Git</span>
           </nav>
 
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">
+          <h1 className="text-4xl font-bold text-slate-900 mb-2">
             Installing Git
           </h1>
-          <p className="text-gray-500 text-lg">
+          <p className="text-slate-500 text-lg">
             A step-by-step guide for absolute beginners
           </p>
           <div
@@ -115,16 +115,16 @@ export default function InstallGit() {
           className="rounded-2xl p-6 mb-6"
           style={{ background: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.06)", border: "1px solid #e0e7ff" }}
         >
-          <h2 className="font-bold text-lg text-gray-900 mb-2">
+          <h2 className="font-bold text-lg text-slate-900 mb-2">
             🤔 What is Git, and why do I need it?
           </h2>
-          <p className="text-gray-600 text-sm leading-relaxed mb-3">
+          <p className="text-slate-600 text-sm leading-relaxed mb-3">
             Imagine you&apos;re writing an essay and you save a copy every time you make big changes —
             <em> essay_v1.doc, essay_v2.doc, essay_FINAL.doc</em>. Git does this automatically for your code,
             but in a much smarter way. It remembers <strong>every change you ever made</strong>, lets you go
             back to any earlier version, and makes it easy to work on projects with other people.
           </p>
-          <p className="text-gray-600 text-sm leading-relaxed">
+          <p className="text-slate-600 text-sm leading-relaxed">
             Almost every coding job, tutorial, and project uses Git. It&apos;s one of the first things
             developers install on a new computer. 💾
           </p>
@@ -135,7 +135,7 @@ export default function InstallGit() {
           className="rounded-2xl p-6 mb-6"
           style={{ background: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.06)", border: "1px solid #e0e7ff" }}
         >
-          <h2 className="font-bold text-lg text-gray-900 mb-4">
+          <h2 className="font-bold text-lg text-slate-900 mb-4">
             💻 What operating system are you using?
           </h2>
           <div className="flex gap-3 mb-12">
@@ -186,7 +186,7 @@ export default function InstallGit() {
 
               <Step number={3} title="Run the installer file">
                 Open your <strong>Downloads folder</strong> and double-click the file
-                (named something like <code className="bg-gray-100 px-1 rounded">Git-2.x.x-64-bit.exe</code>).
+                (named something like <code className="bg-slate-100 px-1 rounded">Git-2.x.x-64-bit.exe</code>).
                 A setup wizard will open.
               </Step>
 
@@ -219,15 +219,15 @@ export default function InstallGit() {
           {activeOS === "macOS" && (
             <div>
               <Step number={1} title="Open the Terminal">
-                Press <kbd className="bg-gray-100 border border-gray-300 px-1.5 py-0.5 rounded text-xs font-mono">⌘ Command</kbd> +{" "}
-                <kbd className="bg-gray-100 border border-gray-300 px-1.5 py-0.5 rounded text-xs font-mono">Space</kbd>, type{" "}
+                Press <kbd className="bg-slate-100 border border-slate-300 px-1.5 py-0.5 rounded text-xs font-mono">⌘ Command</kbd> +{" "}
+                <kbd className="bg-slate-100 border border-slate-300 px-1.5 py-0.5 rounded text-xs font-mono">Space</kbd>, type{" "}
                 <strong>Terminal</strong>, and press Enter. A window with a text prompt will open — that&apos;s your terminal.
               </Step>
 
               <Step number={2} title="Check if Git is already installed">
                 Type this command in the terminal and press Enter:
                 <CodeBlock code="git --version" />
-                If you see a version number like <code className="bg-gray-100 px-1 rounded">git version 2.39.0</code>, Git is
+                If you see a version number like <code className="bg-slate-100 px-1 rounded">git version 2.39.0</code>, Git is
                 already on your Mac and <strong>you&apos;re done!</strong> If you see a popup or an error, continue to the next step.
               </Step>
 
@@ -258,10 +258,10 @@ export default function InstallGit() {
           className="rounded-2xl p-6 mb-6"
           style={{ background: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.06)", border: "1px solid #e0e7ff" }}
         >
-          <h2 className="font-bold text-lg text-gray-900 mb-2">
+          <h2 className="font-bold text-lg text-slate-900 mb-2">
             ✅ Check that it worked
           </h2>
-          <p className="text-gray-600 text-sm leading-relaxed mb-4">
+          <p className="text-slate-600 text-sm leading-relaxed mb-4">
             Let&apos;s confirm Git is installed. Open your terminal (or Git Bash on Windows) and run:
           </p>
 
@@ -281,8 +281,8 @@ export default function InstallGit() {
           </div>
 
           <CodeBlock code="git --version" />
-          <p className="text-gray-500 text-sm">
-            You should see something like <code className="bg-gray-100 px-1 rounded">git version 2.43.0</code>.
+          <p className="text-slate-500 text-sm">
+            You should see something like <code className="bg-slate-100 px-1 rounded">git version 2.43.0</code>.
             The exact number doesn&apos;t matter — any version number means it worked! 🎉
           </p>
 
@@ -303,15 +303,15 @@ export default function InstallGit() {
           className="rounded-2xl p-6 mb-6"
           style={{ background: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.06)", border: "1px solid #e0e7ff" }}
         >
-          <h2 className="font-bold text-lg text-gray-900 mb-2">
+          <h2 className="font-bold text-lg text-slate-900 mb-2">
             👤 One-time setup — tell Git who you are
           </h2>
-          <p className="text-gray-600 text-sm leading-relaxed mb-4">
+          <p className="text-slate-600 text-sm leading-relaxed mb-4">
             Before you can use Git, you need to give it your name and email address. Git uses this to
             label every change you make, so others (and your future self!) can see who did what.
             You only need to do this <strong>once per computer</strong>.
           </p>
-          <p className="text-gray-600 text-sm mb-1">
+          <p className="text-slate-600 text-sm mb-1">
             Run these two commands in your terminal, replacing the example text with your own name and email:
           </p>
           <CodeBlock code={`git config --global user.name "Your Name"\ngit config --global user.email "you@example.com"`} />
@@ -329,7 +329,7 @@ export default function InstallGit() {
 
 
 
-         <p className="text-center text-gray-600 text-sm font-medium mt-8">
+         <p className="text-center text-slate-600 text-sm font-medium mt-8">
           Always download Git from the official site:{" "}
           <Link
             href="https://git-scm.com/install/"
