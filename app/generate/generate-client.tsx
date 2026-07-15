@@ -29,7 +29,7 @@ import {
    in previews/<slug>/. We poll that URL and open it when it's up. */
 
 const inputCls =
-  "w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-800 placeholder:text-slate-400 outline-none transition-shadow focus:border-[#4588ba]/40 focus:ring-2 focus:ring-[#4588ba]/10";
+  "w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-800 placeholder:text-slate-400 outline-none transition-shadow focus:border-blue-500/40 focus:ring-2 focus:ring-blue-500/10";
 
 // Same rule as scripts/build-site.mjs, so we can predict the preview URL.
 const slugify = (text: string) =>
@@ -167,18 +167,17 @@ const GenerateClient = ({ initialPrompt }: { initialPrompt: string }) => {
   };
 
   return (
-    <section className="relative isolate min-h-screen overflow-hidden bg-linear-to-b from-slate-50 to-white px-6 py-20">
-      <div aria-hidden className="pointer-events-none absolute -top-32 left-1/2 -z-10 h-144 w-xl -translate-x-1/2 rounded-full bg-[#4588ba]/10 blur-3xl" />
+    <section className="relative isolate min-h-screen overflow-hidden bg-white px-6 py-20">
 
       <div className="mx-auto flex w-full max-w-2xl flex-col gap-8">
         <div className="flex flex-col items-center gap-4 text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-[#4588ba]/20 bg-[#4588ba]/5 px-4 py-1.5 text-sm font-medium text-[#316994]">
+          <span className="inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/5 px-4 py-1.5 text-sm font-medium text-blue-700">
             <Wand2 className="h-4 w-4" />
             Build it from a prompt
           </span>
           <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
             Describe your business.{" "}
-            <span className="bg-linear-to-br from-[#4588ba] to-[#316994] bg-clip-text text-transparent">
+            <span className="text-blue-700">
               We&apos;ll build the site.
             </span>
           </h1>
@@ -200,7 +199,7 @@ const GenerateClient = ({ initialPrompt }: { initialPrompt: string }) => {
                 </p>
                 <Link
                   href={preview}
-                  className="inline-flex items-center gap-2 rounded-full bg-linear-to-br from-[#4588ba] to-[#316994] px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-[#4588ba]/30 transition-all hover:shadow-xl hover:shadow-[#4588ba]/40"
+                  className="inline-flex items-center gap-2 rounded-full bg-blue-500 hover:bg-blue-700 px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-blue-500/30 transition-all hover:shadow-xl hover:shadow-blue-500/40"
                 >
                   Open my website
                   <ArrowRight className="h-4 w-4" />
@@ -224,7 +223,7 @@ const GenerateClient = ({ initialPrompt }: { initialPrompt: string }) => {
                       {done ? (
                         <CheckCircle2 className="h-5 w-5 shrink-0 text-emerald-500" />
                       ) : current ? (
-                        <Loader2 className="h-5 w-5 shrink-0 animate-spin text-[#4588ba]" />
+                        <Loader2 className="h-5 w-5 shrink-0 animate-spin text-blue-500" />
                       ) : (
                         <Icon className="h-5 w-5 shrink-0" />
                       )}
@@ -278,7 +277,7 @@ const GenerateClient = ({ initialPrompt }: { initialPrompt: string }) => {
                       aria-pressed={on}
                       className={`rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors ${
                         on
-                          ? "border-[#4588ba] bg-[#4588ba]/10 text-[#316994]"
+                          ? "border-blue-500 bg-blue-500/10 text-blue-700"
                           : "border-slate-200 text-slate-600 hover:border-slate-300"
                       }`}
                     >
@@ -366,7 +365,7 @@ const GenerateClient = ({ initialPrompt }: { initialPrompt: string }) => {
 
             <button
               type="submit"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-linear-to-br from-[#4588ba] to-[#316994] px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-[#4588ba]/30 transition-all hover:shadow-xl hover:shadow-[#4588ba]/40"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-blue-500 hover:bg-blue-700 px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-blue-500/30 transition-all hover:shadow-xl hover:shadow-blue-500/40"
             >
               Generate my website
               <ArrowRight className="h-4 w-4" />
@@ -374,11 +373,11 @@ const GenerateClient = ({ initialPrompt }: { initialPrompt: string }) => {
 
             <p className="text-center text-xs text-slate-500">
               Want us to work from your own document and photos instead?{" "}
-              <Link href="/builditforme" className="font-medium text-[#316994] underline">
+              <Link href="/builditforme" className="font-medium text-blue-700 underline">
                 Send us your info
               </Link>{" "}
               — or{" "}
-              <Link href="/docs" className="font-medium text-[#316994] underline">
+              <Link href="/docs" className="font-medium text-blue-700 underline">
                 build it yourself
               </Link>{" "}
               from the docs.

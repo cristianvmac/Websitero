@@ -37,7 +37,7 @@ const STEPS = [
 ];
 
 const inputCls =
-  "w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-800 placeholder:text-slate-400 outline-none transition-shadow focus:border-[#4588ba]/40 focus:ring-2 focus:ring-[#4588ba]/10";
+  "w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-800 placeholder:text-slate-400 outline-none transition-shadow focus:border-blue-500/40 focus:ring-2 focus:ring-blue-500/10";
 
 const MAX_PHOTOS = 8;
 
@@ -118,13 +118,13 @@ const Forme = () => {
   const pill = (isActive: boolean) =>
     `rounded-full border px-4 py-2 text-sm font-semibold transition-all ${
       isActive
-        ? "border-transparent bg-linear-to-br from-[#4588ba] to-[#316994] text-white shadow"
+        ? "border-transparent bg-blue-500 text-white shadow"
         : "border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900"
     }`;
 
   if (done) {
     return (
-      <section className="flex min-h-screen items-center justify-center bg-linear-to-b from-slate-50 to-white px-6 py-24">
+      <section className="flex min-h-screen items-center justify-center bg-white px-6 py-24">
         <div className="mx-auto flex w-full max-w-xl flex-col items-center gap-6 text-center">
           <span className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100">
             <CheckCircle2 className="h-8 w-8 text-emerald-600" />
@@ -160,11 +160,11 @@ const Forme = () => {
   const StepIcon = STEPS[step].icon;
 
   return (
-    <section className="min-h-screen bg-linear-to-b from-slate-50 to-white px-6 pb-24 pt-28">
+    <section className="min-h-screen bg-white px-6 pb-24 pt-28">
       <div className="mx-auto w-full max-w-2xl">
         {/* Eyebrow */}
         <div className="flex justify-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-[#4588ba]/20 bg-[#4588ba]/5 px-4 py-1.5 text-sm font-medium text-[#316994]">
+          <span className="inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/5 px-4 py-1.5 text-sm font-medium text-blue-700">
             <Sparkles className="h-4 w-4" />
             Build it for me
           </span>
@@ -181,7 +181,7 @@ const Forme = () => {
             <span
               key={i}
               className={`h-1.5 rounded-full transition-all duration-500 ${
-                i === step ? "w-8 bg-[#4588ba]" : i < step ? "w-4 bg-[#4588ba]/40" : "w-4 bg-slate-200"
+                i === step ? "w-8 bg-blue-500" : i < step ? "w-4 bg-blue-500/40" : "w-4 bg-slate-200"
               }`}
             />
           ))}
@@ -193,7 +193,7 @@ const Forme = () => {
         {/* Card */}
         <div className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-300/30 sm:p-8">
           <div className="mb-6 flex items-center gap-3">
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-[#4588ba] to-[#316994] text-white shadow-lg shadow-[#4588ba]/30">
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-500 text-white shadow-lg shadow-blue-500/30">
               <StepIcon className="h-5 w-5" />
             </span>
             <div className="h-px flex-1 bg-slate-100" />
@@ -262,7 +262,7 @@ const Forme = () => {
                     aria-pressed={isActive}
                     className={`flex items-center gap-3 rounded-xl border p-4 text-left text-sm font-semibold transition-all ${
                       isActive
-                        ? "border-[#4588ba]/40 bg-[#4588ba]/6 text-slate-900 shadow-sm"
+                        ? "border-blue-500/40 bg-blue-500/6 text-slate-900 shadow-sm"
                         : "border-slate-200 bg-white text-slate-600 hover:border-slate-300"
                     }`}
                   >
@@ -325,7 +325,7 @@ const Forme = () => {
                 <div className="mt-2">
                     <label
                       htmlFor="photo-upload"
-                      className="flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-dashed border-slate-300 bg-slate-50 px-4 py-5 text-sm font-medium text-slate-500 transition-colors hover:border-[#4588ba]/40 hover:text-slate-700"
+                      className="flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-dashed border-slate-300 bg-slate-50 px-4 py-5 text-sm font-medium text-slate-500 transition-colors hover:border-blue-500/40 hover:text-slate-700"
                     >
                       <ImagePlus className="h-4 w-4" />
                       {photos.length > 0
@@ -472,7 +472,7 @@ const Forme = () => {
                       type="button"
                       onClick={() => setStep(target)}
                       aria-label={`Edit ${label}`}
-                      className="text-slate-400 transition-colors hover:text-[#4588ba]"
+                      className="text-slate-400 transition-colors hover:text-blue-500"
                     >
                       <Pencil className="h-4 w-4" />
                     </button>
@@ -506,7 +506,7 @@ const Forme = () => {
               <button
                 type="button"
                 onClick={next}
-                className="inline-flex items-center gap-2 rounded-full bg-linear-to-br from-[#4588ba] to-[#316994] px-7 py-3 text-sm font-semibold text-white shadow-lg shadow-[#4588ba]/30 transition-all hover:shadow-xl hover:shadow-[#4588ba]/40"
+                className="inline-flex items-center gap-2 rounded-full bg-blue-500 hover:bg-blue-700 px-7 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-500/30 transition-all hover:shadow-xl hover:shadow-blue-500/40"
               >
                 Continue
               </button>
@@ -515,7 +515,7 @@ const Forme = () => {
                 type="button"
                 onClick={submit}
                 disabled={sending}
-                className="inline-flex items-center gap-2 rounded-full bg-linear-to-br from-[#4588ba] to-[#316994] px-7 py-3 text-sm font-semibold text-white shadow-lg shadow-[#4588ba]/30 transition-all hover:shadow-xl hover:shadow-[#4588ba]/40 disabled:opacity-60"
+                className="inline-flex items-center gap-2 rounded-full bg-blue-500 hover:bg-blue-700 px-7 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-500/30 transition-all hover:shadow-xl hover:shadow-blue-500/40 disabled:opacity-60"
               >
                 <Send className="h-4 w-4" />
                 {sending ? "Sending…" : "Build it for me"}

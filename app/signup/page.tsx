@@ -29,7 +29,7 @@ export default function Signup() {
     }
 
     return (
-        <section className="flex min-h-screen items-center justify-center bg-base-200 px-4 py-16">
+        <section className="flex min-h-screen items-center justify-center bg-base-100 px-4 py-16">
             <div className="card w-full max-w-md bg-base-100 shadow-xl">
                 <div className="card-body">
                     <h1 className="text-3xl font-bold text-base-content">

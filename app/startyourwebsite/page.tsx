@@ -90,15 +90,13 @@ const Startyourwebsite = () => {
   return (
     <section
       id="hero"
-      className="relative isolate flex min-h-screen items-center justify-center overflow-hidden bg-linear-to-b from-slate-50 to-white px-6 py-24"
+      className="relative isolate flex min-h-screen items-center justify-center overflow-hidden bg-white px-6 py-24"
     >
       {/* Soft decorative glows */}
-      <div aria-hidden className="pointer-events-none absolute -top-32 left-1/2 -z-10 h-144 w-xl -translate-x-1/2 rounded-full bg-[#4588ba]/10 blur-3xl" />
-      <div aria-hidden className="pointer-events-none absolute -bottom-24 right-0 -z-10 h-96 w-96 translate-x-1/3 rounded-full bg-[#316994]/10 blur-3xl" />
 
       <div className="mx-auto flex w-full max-w-2xl flex-col items-center gap-8 text-center">
         {/* Eyebrow */}
-        <span className="inline-flex items-center gap-2 rounded-full border border-[#4588ba]/20 bg-[#4588ba]/5 px-4 py-1.5 text-sm font-medium text-[#316994]">
+        <span className="inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/5 px-4 py-1.5 text-sm font-medium text-blue-700">
           <Sparkles className="h-4 w-4" />
           Your website, live in hours
         </span>
@@ -107,7 +105,7 @@ const Startyourwebsite = () => {
         <div className="flex flex-col items-center gap-4">
           <h1 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
             Start your website,{" "}
-            <span className="bg-linear-to-br from-[#4588ba] to-[#316994] bg-clip-text text-transparent">
+            <span className="text-blue-700">
               built your way
             </span>
           </h1>
@@ -131,7 +129,7 @@ const Startyourwebsite = () => {
                   aria-pressed={isActive}
                   className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-all ${
                     isActive
-                      ? "bg-linear-to-br from-[#4588ba] to-[#316994] text-white shadow"
+                      ? "bg-blue-500 text-white shadow"
                       : "text-slate-600 hover:text-slate-900"
                   }`}
                 >
@@ -155,7 +153,7 @@ const Startyourwebsite = () => {
                     aria-pressed={isActive}
                     className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-all ${
                       isActive
-                        ? "bg-linear-to-br from-[#4588ba] to-[#316994] text-white shadow"
+                        ? "bg-blue-500 text-white shadow"
                         : "text-slate-600 hover:text-slate-900"
                     }`}
                   >
@@ -194,7 +192,7 @@ const Startyourwebsite = () => {
                 className="flex flex-col gap-3 px-5 py-5 text-left"
               >
                 <div className="flex items-start gap-3">
-                  <Wand2 className="mt-1 h-5 w-5 shrink-0 text-[#4588ba]" />
+                  <Wand2 className="mt-1 h-5 w-5 shrink-0 text-blue-500" />
                   <textarea
                     value={prompt}
                     onChange={(e) => setPrompt(e.target.value)}
@@ -212,7 +210,7 @@ const Startyourwebsite = () => {
                 </div>
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center gap-2 self-end rounded-full bg-linear-to-br from-[#4588ba] to-[#316994] px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-[#4588ba]/30 transition-all hover:shadow-lg hover:shadow-[#4588ba]/40"
+                  className="inline-flex items-center justify-center gap-2 self-end rounded-full bg-blue-500 hover:bg-blue-700 px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-blue-500/30 transition-all hover:shadow-lg hover:shadow-blue-500/40"
                 >
                   Generate my website
                   <ArrowRight className="h-4 w-4" />
@@ -221,13 +219,13 @@ const Startyourwebsite = () => {
             ) : (
               <div className="flex items-start gap-3 px-5 py-6 text-left">
                 {mode === "forme" ? (
-                  <Sparkles className="mt-0.5 h-5 w-5 shrink-0 text-[#4588ba]" />
+                  <Sparkles className="mt-0.5 h-5 w-5 shrink-0 text-blue-500" />
                 ) : (
-                  <span className="mt-px font-mono text-[#4588ba]">$</span>
+                  <span className="mt-px font-mono text-blue-500">$</span>
                 )}
                 <p className={`leading-relaxed text-slate-700 ${mode === "diy" ? "font-mono text-sm" : "text-base"}`}>
                   {typed}
-                  <span className="ml-0.5 inline-block h-4 w-px animate-pulse bg-[#4588ba] align-middle" />
+                  <span className="ml-0.5 inline-block h-4 w-px animate-pulse bg-blue-500 align-middle" />
                 </p>
               </div>
             )}
@@ -240,7 +238,7 @@ const Startyourwebsite = () => {
             <>
               <Link
                 href={active.docs}
-                className="inline-flex items-center gap-2 rounded-full bg-linear-to-br from-[#4588ba] to-[#316994] px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-[#4588ba]/30 transition-all hover:shadow-xl hover:shadow-[#4588ba]/40"
+                className="inline-flex items-center gap-2 rounded-full bg-blue-500 hover:bg-blue-700 px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-blue-500/30 transition-all hover:shadow-xl hover:shadow-blue-500/40"
               >
                 Get Started
               </Link>
@@ -256,7 +254,7 @@ const Startyourwebsite = () => {
               <button
                 type="button"
                 onClick={generate}
-                className="inline-flex items-center gap-2 rounded-full bg-linear-to-br from-[#4588ba] to-[#316994] px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-[#4588ba]/30 transition-all hover:shadow-xl hover:shadow-[#4588ba]/40"
+                className="inline-flex items-center gap-2 rounded-full bg-blue-500 hover:bg-blue-700 px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-blue-500/30 transition-all hover:shadow-xl hover:shadow-blue-500/40"
               >
                 Generate my website
               </button>
@@ -271,7 +269,7 @@ const Startyourwebsite = () => {
             <>
               <Link
                 href="/builditforme"
-                className="inline-flex items-center gap-2 rounded-full bg-linear-to-br from-[#4588ba] to-[#316994] px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-[#4588ba]/30 transition-all hover:shadow-xl hover:shadow-[#4588ba]/40"
+                className="inline-flex items-center gap-2 rounded-full bg-blue-500 hover:bg-blue-700 px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-blue-500/30 transition-all hover:shadow-xl hover:shadow-blue-500/40"
               >
                 Build it for me
               </Link>
@@ -289,7 +287,7 @@ const Startyourwebsite = () => {
         <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
           {trust.map(({ icon: Icon, label }) => (
             <div key={label} className="inline-flex items-center gap-2 text-sm font-medium text-slate-600">
-              <Icon className="h-4 w-4 text-[#4588ba]" />
+              <Icon className="h-4 w-4 text-blue-500" />
               {label}
             </div>
           ))}
@@ -301,7 +299,7 @@ const Startyourwebsite = () => {
             {avatars.map((a, i) => (
               <span
                 key={i}
-                className="inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border-2 border-white bg-linear-to-br from-[#4588ba] to-[#316994] text-[10px] font-semibold text-white shadow-sm"
+                className="inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border-2 border-white bg-linear-to-br from-blue-500 to-blue-700 text-[10px] font-semibold text-white shadow-sm"
               >
                 {a.src ? (
                   <Image src={a.src} alt={a.alt} width={36} height={36} className="h-full w-full object-cover" />

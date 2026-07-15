@@ -61,16 +61,16 @@ const NEXT_STEPS = [
 ];
 
 const inputCls =
-  "w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-800 placeholder:text-slate-400 outline-none transition-shadow focus:border-[#4588ba]/40 focus:ring-2 focus:ring-[#4588ba]/10";
+  "w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-800 placeholder:text-slate-400 outline-none transition-shadow focus:border-blue-500/40 focus:ring-2 focus:ring-blue-500/10";
 
 const ctaCls =
-  "inline-flex items-center gap-2 rounded-full bg-linear-to-br from-[#4588ba] to-[#316994] px-7 py-3 text-sm font-semibold text-white shadow-lg shadow-[#4588ba]/30 transition-all hover:shadow-xl hover:shadow-[#4588ba]/40 disabled:opacity-60";
+  "inline-flex items-center gap-2 rounded-full bg-blue-500 hover:bg-blue-700 px-7 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-500/30 transition-all hover:shadow-xl hover:shadow-blue-500/40 disabled:opacity-60";
 
 const zoneCls = (active: boolean) =>
   `flex w-full cursor-pointer flex-col items-center gap-1.5 rounded-xl border-2 border-dashed px-6 py-8 text-center transition-colors ${
     active
-      ? "border-[#4588ba] bg-[#4588ba]/10"
-      : "border-slate-200 bg-slate-50/50 hover:border-[#4588ba]/40 hover:bg-[#4588ba]/5"
+      ? "border-blue-500 bg-blue-500/10"
+      : "border-slate-200 bg-slate-50/50 hover:border-blue-500/40 hover:bg-blue-500/5"
   }`;
 
 const BuildItForMe = () => {
@@ -168,7 +168,7 @@ const BuildItForMe = () => {
 
   if (done) {
     return (
-      <section className="flex min-h-screen items-center justify-center bg-linear-to-b from-slate-50 to-white px-6 py-24">
+      <section className="flex min-h-screen items-center justify-center bg-white px-6 py-24">
         <div className="mx-auto flex w-full max-w-xl flex-col items-center gap-6 text-center">
           <span className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100">
             <CheckCircle2 className="h-8 w-8 text-emerald-600" />
@@ -206,11 +206,11 @@ const BuildItForMe = () => {
   }
 
   return (
-    <section className="min-h-screen bg-linear-to-b from-slate-50 to-white px-6 pb-24 pt-28">
+    <section className="min-h-screen bg-white px-6 pb-24 pt-28">
       <div className="mx-auto w-full max-w-2xl">
         {/* Eyebrow */}
         <div className="flex justify-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-[#4588ba]/20 bg-[#4588ba]/5 px-4 py-1.5 text-sm font-medium text-[#316994]">
+          <span className="inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/5 px-4 py-1.5 text-sm font-medium text-blue-700">
             <Sparkles className="h-4 w-4" />
             Build it for me
           </span>
@@ -231,7 +231,7 @@ const BuildItForMe = () => {
         <div className="mt-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
           {TRUST.map(({ icon: Icon, label }) => (
             <span key={label} className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500">
-              <Icon className="h-3.5 w-3.5 text-[#4588ba]" />
+              <Icon className="h-3.5 w-3.5 text-blue-500" />
               {label}
             </span>
           ))}
@@ -246,7 +246,7 @@ const BuildItForMe = () => {
             </p>
             {doc ? (
               <div className="mt-3 flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
-                <FileText className="h-5 w-5 shrink-0 text-[#4588ba]" />
+                <FileText className="h-5 w-5 shrink-0 text-blue-500" />
                 <span className="min-w-0 flex-1 truncate text-sm font-semibold text-slate-800">
                   {doc.name}
                 </span>
@@ -285,9 +285,9 @@ const BuildItForMe = () => {
                 }}
                 className={`mt-3 ${zoneCls(dragging === "doc")}`}
               >
-                <Upload className="h-6 w-6 text-[#4588ba]" />
+                <Upload className="h-6 w-6 text-blue-500" />
                 <p className="text-sm text-slate-600">
-                  <span className="font-semibold text-[#316994]">Upload your document</span> — or
+                  <span className="font-semibold text-blue-700">Upload your document</span> — or
                   drag it here
                 </p>
                 <p className="text-xs text-slate-400">
@@ -310,7 +310,7 @@ const BuildItForMe = () => {
             <button
               type="button"
               onClick={() => setPasteOpen((v) => !v)}
-              className="mt-3 text-xs font-semibold text-[#316994] underline-offset-2 hover:underline"
+              className="mt-3 text-xs font-semibold text-blue-700 underline-offset-2 hover:underline"
             >
               {pasteOpen ? "Hide the text box" : "No document handy? Paste or type your info instead"}
             </button>
@@ -357,9 +357,9 @@ const BuildItForMe = () => {
                 }}
                 className={`mt-3 ${zoneCls(dragging === "photos")}`}
               >
-                <ImagePlus className="h-6 w-6 text-[#4588ba]" />
+                <ImagePlus className="h-6 w-6 text-blue-500" />
                 <p className="text-sm text-slate-600">
-                  <span className="font-semibold text-[#316994]">Upload your photos</span> — or
+                  <span className="font-semibold text-blue-700">Upload your photos</span> — or
                   drag them here
                 </p>
                 <p className="text-xs text-slate-400">
@@ -477,7 +477,7 @@ const BuildItForMe = () => {
         <div className="mt-12 grid gap-6 sm:grid-cols-3">
           {NEXT_STEPS.map(({ title, blurb }, i) => (
             <div key={title} className="flex flex-col gap-2">
-              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#4588ba]/10 text-xs font-bold text-[#316994]">
+              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-blue-500/10 text-xs font-bold text-blue-700">
                 {i + 1}
               </span>
               <h2 className="text-sm font-semibold text-slate-900">{title}</h2>
