@@ -48,7 +48,7 @@ const Testimonials = () => {
     <section id="testimonials" className="bg-white py-24">
       <div className="mx-auto max-w-5xl px-6">
         <div className="mx-auto max-w-3xl text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-[#4588ba]/20 bg-[#4588ba]/10 px-3.5 py-1.5 text-sm font-semibold text-[#316994]">
+          <span className="inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-3.5 py-1.5 text-sm font-semibold text-blue-700">
             <Star className="h-4 w-4" />
             Social proof
           </span>

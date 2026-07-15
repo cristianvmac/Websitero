@@ -52,10 +52,10 @@ const FAQ = () => {
   const toggle = (i: number) => setActiveIndex(activeIndex === i ? null : i);
 
   return (
-    <section id="faq" className="bg-slate-50 px-6 py-24">
+    <section id="faq" className="bg-white px-6 py-24">
       <div className="mx-auto max-w-6xl">
         <div className="max-w-3xl">
-          <span className="inline-flex items-center gap-2 rounded-full border border-[#4588ba]/20 bg-[#4588ba]/10 px-3.5 py-1.5 text-sm font-semibold text-[#316994]">
+          <span className="inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-3.5 py-1.5 text-sm font-semibold text-blue-700">
             FAQ
           </span>
           <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
@@ -74,7 +74,7 @@ const FAQ = () => {
                 <li
                   key={faq.question}
                   className={`overflow-hidden rounded-2xl border bg-white transition-colors ${
-                    open ? "border-[#4588ba]/40 shadow-sm" : "border-slate-200"
+                    open ? "border-blue-500/40 shadow-sm" : "border-slate-200"
                   }`}
                 >
                   <button
@@ -85,7 +85,7 @@ const FAQ = () => {
                     <span className="font-semibold text-slate-900">{faq.question}</span>
                     <span
                       className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full transition-all ${
-                        open ? "rotate-45 bg-[#4588ba] text-white" : "bg-slate-100 text-slate-500"
+                        open ? "rotate-45 bg-blue-500 text-white" : "bg-slate-100 text-slate-500"
                       }`}
                     >
                       <Plus className="h-4 w-4" />
@@ -116,7 +116,7 @@ const FAQ = () => {
               </p>
               <Link
                 href="/contact"
-                className="mt-6 inline-flex w-full items-center justify-center gap-1.5 rounded-full bg-linear-to-br from-[#4588ba] to-[#316994] px-6 py-3 text-sm font-semibold text-white transition-all hover:shadow-lg hover:shadow-[#4588ba]/30"
+                className="mt-6 inline-flex w-full items-center justify-center gap-1.5 rounded-full bg-blue-500 hover:bg-blue-700 px-6 py-3 text-sm font-semibold text-white transition-all hover:shadow-lg hover:shadow-blue-500/30"
               >
                 Contact Us
                 <ArrowRight className="h-4 w-4" />

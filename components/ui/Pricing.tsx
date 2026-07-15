@@ -85,7 +85,7 @@ function CardBody({ plan }: { plan: Plan }) {
     <div className="flex h-full flex-col rounded-2xl bg-white p-8">
       {(plan.popular || plan.badge) && (
         <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-          <span className="rounded-full bg-linear-to-br from-[#4588ba] to-[#316994] px-4 py-1 text-xs font-bold tracking-wide text-white shadow-md">
+          <span className="rounded-full bg-blue-700 px-4 py-1 text-xs font-bold tracking-wide text-white shadow-md">
             {plan.badge ?? "MOST POPULAR"}
           </span>
         </div>
@@ -105,7 +105,7 @@ function CardBody({ plan }: { plan: Plan }) {
         href="/contact"
         className={`mb-8 inline-flex items-center justify-center gap-1.5 rounded-full px-6 py-3 text-sm font-semibold transition-all ${
           plan.popular
-            ? "bg-linear-to-br from-[#4588ba] to-[#316994] text-white shadow-md shadow-[#4588ba]/25 hover:shadow-lg hover:shadow-[#4588ba]/40"
+            ? "bg-linear-to-br from-blue-500 to-blue-700 text-white shadow-md shadow-blue-500/25 hover:shadow-lg hover:shadow-blue-500/40"
             : "border border-slate-300 bg-white text-slate-800 hover:bg-slate-50"
         }`}
       >
@@ -135,7 +135,7 @@ const Pricing = () => {
       <div className="mx-auto max-w-6xl">
         <div>
           <div className="mx-auto max-w-3xl text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-[#4588ba]/20 bg-[#4588ba]/10 px-3.5 py-1.5 text-sm font-semibold text-[#316994]">
+            <span className="inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-3.5 py-1.5 text-sm font-semibold text-blue-700">
               <Sparkles className="h-4 w-4" />
               Save hours, ship fast, get profitable
             </span>
@@ -160,13 +160,13 @@ const Pricing = () => {
             <div key={plan.name}>
               {plan.popular ? (
                 /* Rotating conic-gradient border (animated via globals keyframes). */
-                <div className="relative rounded-2xl p-px shadow-2xl shadow-[#4588ba]/15 md:-translate-y-3">
+                <div className="relative rounded-2xl p-px shadow-2xl shadow-blue-500/15 md:-translate-y-3">
                   <span aria-hidden className="absolute inset-0 overflow-hidden rounded-2xl">
                     <span
                       className="v5-spin absolute left-1/2 top-1/2 h-[220%] w-[220%]"
                       style={{
                         background:
-                          "conic-gradient(from 0deg, transparent 0deg, #4588ba 60deg, #8b5cf6 120deg, transparent 200deg)",
+                          "conic-gradient(from 0deg, transparent 0deg, #4588ba 60deg, #316994 120deg, transparent 200deg)",
                       }}
                     />
                   </span>

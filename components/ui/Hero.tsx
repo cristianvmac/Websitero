@@ -60,14 +60,14 @@ const Hero = () => {
   }, [line]);
 
   return (
-    <section id="hero" className="relative overflow-hidden bg-linear-to-b from-slate-50 to-white px-6 py-16 lg:py-24">
+    <section id="hero" className="relative overflow-hidden bg-white px-6 py-16 lg:py-24">
       <div className="relative mx-auto flex max-w-7xl flex-col items-center gap-16 lg:flex-row lg:gap-20">
         {/* Left */}
         <div className="flex flex-col items-center gap-7 text-center lg:items-start lg:text-left">
           <h1 className="text-4xl font-extrabold leading-[1.1] tracking-tight text-slate-900 sm:text-5xl lg:text-[4.25rem]">
             Launch your website in hours,{" "}
             <span className="relative whitespace-nowrap">
-              <span className="relative z-10 bg-linear-to-r from-[#4588ba] to-[#316994] bg-clip-text text-transparent">not days</span>
+              <span className="relative z-10 bg-linear-to-r from-blue-500 to-blue-700 bg-clip-text text-transparent">not days</span>
               <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 200 12" fill="none" preserveAspectRatio="none">
                 <path d="M2 9C50 3 150 3 198 9" stroke="#4588ba" strokeWidth="3" strokeLinecap="round" opacity="0.4" />
               </svg>
@@ -92,7 +92,7 @@ const Hero = () => {
                     aria-pressed={isActive}
                     className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-all ${
                       isActive
-                        ? "bg-linear-to-br from-[#4588ba] to-[#316994] text-white shadow"
+                        ? "bg-blue-500 text-white shadow"
                         : "text-slate-600 hover:text-slate-900"
                     }`}
                   >
@@ -120,7 +120,7 @@ const Hero = () => {
                       aria-pressed={isActive}
                       className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-all ${
                         isActive
-                          ? "bg-linear-to-br from-[#4588ba] to-[#316994] text-white shadow"
+                          ? "bg-blue-500 text-white shadow"
                           : "text-slate-600 hover:text-slate-900"
                       }`}
                     >
@@ -136,7 +136,7 @@ const Hero = () => {
           <div className="flex flex-col items-center gap-3 sm:flex-row">
             <Link
               href="/builditforme"
-              className="inline-flex items-center gap-2 rounded-full bg-linear-to-br from-[#4588ba] to-[#316994] px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-[#4588ba]/30 transition-all hover:shadow-xl hover:shadow-[#4588ba]/40"
+              className="inline-flex items-center gap-2 rounded-full bg-linear-to-br from-blue-500 to-blue-700 px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-blue-500/30 transition-all hover:shadow-xl hover:shadow-blue-500/40"
             >
               {mode === "builditforme" ? "Build it for me" : "Get Started"}
             </Link>
@@ -162,7 +162,7 @@ const Hero = () => {
               {avatars.map((a, i) => (
                 <span
                   key={i}
-                  className="relative inline-block h-9 w-9 overflow-hidden rounded-full border-2 border-white bg-linear-to-br from-[#4588ba]/70 to-[#8b5cf6]/70 shadow-sm ring-1 ring-black/5"
+                  className="relative inline-block h-9 w-9 overflow-hidden rounded-full border-2 border-white bg-linear-to-br from-blue-500/70 to-blue-700/70 shadow-sm ring-1 ring-black/5"
                   title={a.alt}
                 >
                   {a.src && (
@@ -193,7 +193,7 @@ const Hero = () => {
 
         {/* Right — tilt browser + prompt/terminal mock */}
         <div className="relative w-full max-w-lg lg:w-1/2">
-          <div className="absolute -inset-4 rounded-[2.5rem] bg-linear-to-br from-[#4588ba]/25 to-[#8b5cf6]/15 blur-2xl" />
+          <div className="absolute -inset-4 rounded-[2.5rem] bg-linear-to-br from-blue-500/25 to-blue-700/15 blur-2xl" />
           <div className="relative">
             <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl shadow-slate-900/10">
               <div className="flex items-center gap-2 border-b border-slate-100 bg-slate-50 px-4 py-3">
@@ -206,13 +206,13 @@ const Hero = () => {
               </div>
 
               <div className="space-y-4 p-5">
-                <div className="h-24 rounded-xl bg-linear-to-br from-[#4588ba] to-[#316994] opacity-90" />
+                <div className="h-24 rounded-xl bg-linear-to-br from-blue-500 to-blue-700 opacity-90" />
                 <div className="h-3 w-2/3 rounded-full bg-slate-200" />
                 <div className="h-3 w-5/6 rounded-full bg-slate-100" />
                 <div className="grid grid-cols-3 gap-3 pt-1">
                   {[0, 1, 2].map((i) => (
                     <div key={i} className="space-y-2 rounded-lg border border-slate-100 p-3">
-                      <div className="h-6 w-6 rounded-md bg-[#4588ba]/15" />
+                      <div className="h-6 w-6 rounded-md bg-blue-500/15" />
                       <div className="h-2 w-full rounded-full bg-slate-100" />
                       <div className="h-2 w-3/4 rounded-full bg-slate-100" />
                     </div>
@@ -269,12 +269,12 @@ const Hero = () => {
           {mode === "diy" && (
             <div className="absolute -left-4 top-24 hidden w-48 rounded-xl border border-slate-200 bg-white p-3 shadow-xl sm:block">
               <div className="flex items-center gap-2">
-                <BookOpen className="h-4 w-4 shrink-0 text-[#4588ba]" />
+                <BookOpen className="h-4 w-4 shrink-0 text-blue-500" />
                 <p className="text-xs font-semibold text-slate-800">Docs guide you</p>
               </div>
               <p className="mt-1 text-[11px] text-slate-500">Step 3 of 8 — Add your content</p>
               <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-slate-100">
-                <div className="h-full w-[38%] rounded-full bg-linear-to-r from-[#4588ba] to-[#316994]" />
+                <div className="h-full w-[38%] rounded-full bg-linear-to-r from-blue-500 to-blue-700" />
               </div>
             </div>
           )}

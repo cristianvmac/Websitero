@@ -119,7 +119,7 @@ const StatItem = ({ stat }: { stat: Stat }) => {
       ref={ref}
       className="group flex flex-col items-center text-center lg:border-l lg:border-white/10 lg:first:border-l-0"
     >
-      <span className="mb-3.5 flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-[#7cb5db] ring-1 ring-white/10 backdrop-blur transition-colors group-hover:bg-[#4588ba]/25 group-hover:text-white">
+      <span className="mb-3.5 flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-blue-300 ring-1 ring-white/10 backdrop-blur transition-colors group-hover:bg-blue-500/25 group-hover:text-white">
         <Icon className="h-5 w-5" />
       </span>
       <dt className="bg-linear-to-r from-white to-slate-300 bg-clip-text text-3xl font-extrabold tracking-tight text-transparent tabular-nums sm:text-4xl">
@@ -140,14 +140,14 @@ const HighlightCard = ({ item }: { item: Highlight }) => {
     <article
       className={`group relative flex h-full flex-col overflow-hidden rounded-2xl p-6 text-white shadow-lg ${
         isBrand
-          ? "bg-linear-to-br from-[#4588ba] to-[#316994] shadow-[#4588ba]/25"
+          ? "bg-blue-500 shadow-blue-500/25"
           : "bg-linear-to-br from-slate-900 to-slate-800 shadow-slate-900/25"
       }`}
     >
       <div
         aria-hidden
         className={`pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full blur-3xl ${
-          isBrand ? "bg-white/10" : "bg-[#4588ba]/25"
+          isBrand ? "bg-white/10" : "bg-blue-500/25"
         }`}
       />
       <div className="relative">
@@ -163,7 +163,7 @@ const HighlightCard = ({ item }: { item: Highlight }) => {
       <ul className="relative mt-5 space-y-2">
         {item.points.map((point) => (
           <li key={point} className="flex items-center gap-2.5 text-sm">
-            <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full ${isBrand ? "bg-white/20" : "bg-[#4588ba]/25 text-[#7cb5db]"}`}>
+            <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full ${isBrand ? "bg-white/20" : "bg-blue-500/25 text-blue-300"}`}>
               <Check className="h-3 w-3" strokeWidth={3} />
             </span>
             <span className={isBrand ? "text-white/90" : "text-slate-200"}>{point}</span>
@@ -184,13 +184,13 @@ const FeatureCard = ({ cell }: { cell: Cell }) => {
   const Icon = cell.icon;
 
   return (
-    <div className="group relative h-full overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#4588ba]/40 hover:shadow-lg hover:shadow-[#4588ba]/10">
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px scale-x-0 bg-linear-to-r from-transparent via-[#4588ba] to-transparent transition-transform duration-300 group-hover:scale-x-100" />
+    <div className="group relative h-full overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-500/40 hover:shadow-lg hover:shadow-blue-500/10">
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px scale-x-0 bg-linear-to-r from-transparent via-blue-500 to-transparent transition-transform duration-300 group-hover:scale-x-100" />
       <div className="flex items-start justify-between">
-        <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#4588ba]/10 text-[#316994] transition-colors group-hover:bg-[#4588ba] group-hover:text-white">
+        <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/10 text-blue-700 transition-colors group-hover:bg-blue-500 group-hover:text-white">
           <Icon className="h-5 w-5" />
         </span>
-        <ArrowUpRight className="h-4 w-4 text-slate-300 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-[#4588ba]" />
+        <ArrowUpRight className="h-4 w-4 text-slate-300 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-blue-500" />
       </div>
       <h3 className="mt-4 text-sm font-bold text-slate-900">{cell.title}</h3>
       <p className="mt-1.5 text-[13px] leading-relaxed text-slate-600">{cell.desc}</p>
@@ -208,7 +208,7 @@ const Features = () => {
     <section id="features" className="bg-white px-6 py-24">
       <div className="mx-auto max-w-6xl">
         <div className="mx-auto max-w-2xl text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-[#4588ba]/20 bg-[#4588ba]/10 px-3.5 py-1.5 text-sm font-semibold text-[#316994]">
+          <span className="inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-3.5 py-1.5 text-sm font-semibold text-blue-700">
             Everything included
           </span>
           <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
@@ -241,9 +241,9 @@ const Features = () => {
             className="pointer-events-none absolute inset-0 opacity-[0.07]"
             style={{ backgroundImage: "radial-gradient(circle, #fff 1px, transparent 1px)", backgroundSize: "24px 24px" }}
           />
-          <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-[#4588ba]/60 to-transparent" />
-          <div aria-hidden className="pointer-events-none absolute -left-20 top-0 h-60 w-60 rounded-full bg-[#4588ba]/30 blur-3xl" />
-          <div aria-hidden className="pointer-events-none absolute -right-16 bottom-0 h-52 w-52 rounded-full bg-[#316994]/20 blur-3xl" />
+          <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-blue-500/60 to-transparent" />
+          <div aria-hidden className="pointer-events-none absolute -left-20 top-0 h-60 w-60 rounded-full bg-blue-500/30 blur-3xl" />
+          <div aria-hidden className="pointer-events-none absolute -right-16 bottom-0 h-52 w-52 rounded-full bg-blue-700/20 blur-3xl" />
 
           <dl className="relative grid grid-cols-2 gap-x-6 gap-y-9 lg:grid-cols-4">
             {stats.map((s) => (

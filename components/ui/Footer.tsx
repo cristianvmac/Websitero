@@ -38,12 +38,12 @@ const social: { name: string; url: string; icon: LucideIcon }[] = [
 
 const Footer = () => {
   return (
-    <footer className="border-t border-slate-200 bg-slate-50">
+    <footer className="border-t border-slate-200 bg-white">
       <div className="mx-auto max-w-7xl px-6 py-14">
         <div className="grid gap-10 md:grid-cols-5">
           <div className="md:col-span-2">
             <Link href="/" className="flex items-center gap-2.5">
-              <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-linear-to-br from-[#4588ba] to-[#316994] text-white shadow-sm shadow-[#4588ba]/30 transition-transform group-hover:scale-105">
+              <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-500 text-white shadow-sm shadow-blue-500/30 transition-transform group-hover:scale-105">
                 <FaCode className="h-6 w-5" />
               </span>
               <span className="text-xl font-extrabold tracking-tight text-slate-900">Websitero</span>
@@ -60,7 +60,7 @@ const Footer = () => {
                   aria-label={name}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition-colors hover:border-[#4588ba] hover:bg-[#4588ba] hover:text-white"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition-colors hover:border-blue-500 hover:bg-blue-500 hover:text-white"
                 >
                   <Icon className="h-4 w-4" />
                 </a>
@@ -74,7 +74,7 @@ const Footer = () => {
               <ul className="mt-4 space-y-2.5">
                 {col.links.map((link) => (
                   <li key={link.label}>
-                    <Link href={link.href} className="text-sm text-slate-600 transition-colors hover:text-[#316994]">
+                    <Link href={link.href} className="text-sm text-slate-600 transition-colors hover:text-blue-700">
                       {link.label}
                     </Link>
                   </li>
@@ -88,7 +88,7 @@ const Footer = () => {
           <p className="text-sm text-slate-500">&copy; 2026 Websitero. All rights reserved.</p>
           <p className="text-sm text-slate-400">
             Built by{" "}
-            <Link href="https://x.com/cristianvmac" className="font-semibold text-slate-600 hover:text-[#316994]">
+            <Link href="https://x.com/cristianvmac" className="font-semibold text-slate-600 hover:text-blue-700">
               Cristian Marinescu
             </Link>
           </p>

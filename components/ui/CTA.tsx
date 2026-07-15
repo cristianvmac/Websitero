@@ -7,7 +7,7 @@ const CTA = () => {
   return (
     <section id="cta" className="bg-white px-6 py-24">
       <div className="relative mx-auto max-w-5xl overflow-hidden rounded-3xl bg-linear-to-br from-slate-900 to-slate-800 px-6 py-16 text-center sm:px-12">
-          <div className="pointer-events-none absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-[#4588ba]/30 blur-3xl" />
+          <div className="pointer-events-none absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-blue-500/30 blur-3xl" />
           <div
             aria-hidden
             className="pointer-events-none absolute inset-0 opacity-[0.07]"
@@ -15,7 +15,7 @@ const CTA = () => {
           />
 
           <div className="relative">
-            <span className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-linear-to-br from-[#4588ba] to-[#316994] text-white shadow-lg shadow-[#4588ba]/30">
+            <span className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-500 text-white shadow-lg shadow-blue-500/30">
               <Rocket className="h-7 w-7" />
             </span>
 
@@ -30,7 +30,7 @@ const CTA = () => {
             <div className="mt-8">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 rounded-full bg-linear-to-br from-[#4588ba] to-[#316994] px-8 py-4 text-lg font-semibold text-white shadow-lg shadow-[#4588ba]/30 transition-all hover:shadow-xl hover:shadow-[#4588ba]/50"
+                className="inline-flex items-center gap-2 rounded-full bg-linear-to-br from-blue-500 to-blue-700 px-8 py-4 text-lg font-semibold text-white shadow-lg shadow-blue-500/30 transition-all hover:shadow-xl hover:shadow-blue-500/50"
               >
                 Get Started Now
                 <ArrowRight className="h-5 w-5" />

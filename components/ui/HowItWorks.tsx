@@ -132,7 +132,7 @@ const HowItWorks = () => {
       <div className="mx-auto max-w-6xl">
         {/* Heading */}
         <div className="mx-auto max-w-3xl text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-[#4588ba]/20 bg-[#4588ba]/10 px-3.5 py-1.5 text-sm font-semibold text-[#316994]">
+          <span className="inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-3.5 py-1.5 text-sm font-semibold text-blue-700">
             How it works
           </span>
           <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
@@ -158,7 +158,7 @@ const HowItWorks = () => {
                   aria-pressed={isActive}
                   className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-all ${
                     isActive
-                      ? "bg-linear-to-br from-[#4588ba] to-[#316994] text-white shadow"
+                      ? "bg-blue-500 text-white shadow"
                       : "text-slate-600 hover:text-slate-900"
                   }`}
                 >
@@ -182,14 +182,14 @@ const HowItWorks = () => {
                   key={`${mode}-${step.title}`}
                   className={`flex gap-4 rounded-2xl border p-5 transition-all duration-500 ${
                     isActive
-                      ? "border-[#4588ba]/30 bg-[#4588ba]/[0.06] shadow-sm"
+                      ? "border-blue-500/30 bg-blue-500/[0.06] shadow-sm"
                       : "border-transparent"
                   }`}
                 >
                   <span
                     className={`relative flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-all duration-500 ${
                       isActive
-                        ? "bg-linear-to-br from-[#4588ba] to-[#316994] text-white shadow-lg shadow-[#4588ba]/30"
+                        ? "bg-blue-500 text-white shadow-lg shadow-blue-500/30"
                         : "bg-slate-100 text-slate-400"
                     }`}
                   >
@@ -209,7 +209,7 @@ const HowItWorks = () => {
 
           {/* Self-playing demo */}
           <div className="relative">
-            <div className="absolute -inset-4 rounded-[2.5rem] bg-linear-to-br from-[#4588ba]/20 to-[#8b5cf6]/15 blur-2xl" />
+            <div className="absolute -inset-4 rounded-[2.5rem] bg-linear-to-br from-blue-500/20 to-blue-700/15 blur-2xl" />
             <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl shadow-slate-900/10">
               {/* Browser chrome */}
               <div className="flex items-center gap-2 border-b border-slate-100 bg-slate-50 px-4 py-3">
@@ -235,9 +235,9 @@ const HowItWorks = () => {
                   <div className="mt-4 space-y-3">
                     <div>
                       <label className="text-xs font-medium text-slate-500">Business name</label>
-                      <div className="mt-1 flex items-center rounded-lg border border-[#4588ba]/40 bg-white px-3 py-2.5 text-sm text-slate-800 ring-2 ring-[#4588ba]/10">
+                      <div className="mt-1 flex items-center rounded-lg border border-blue-500/40 bg-white px-3 py-2.5 text-sm text-slate-800 ring-2 ring-blue-500/10">
                         {mode === "forme" ? typed : BUSINESS}
-                        <span className="ml-0.5 inline-block h-4 w-0.5 animate-pulse bg-[#4588ba]" />
+                        <span className="ml-0.5 inline-block h-4 w-0.5 animate-pulse bg-blue-500" />
                       </div>
                     </div>
                     <div className="grid grid-cols-2 gap-3">
@@ -258,7 +258,7 @@ const HowItWorks = () => {
                       type="button"
                       tabIndex={-1}
                       aria-hidden
-                      className="mt-1 w-full rounded-lg bg-linear-to-br from-[#4588ba] to-[#316994] py-2.5 text-sm font-semibold text-white shadow"
+                      className="mt-1 w-full rounded-lg bg-linear-to-br from-blue-500 to-blue-700 py-2.5 text-sm font-semibold text-white shadow"
                     >
                       Build it for me
                     </button>
@@ -292,7 +292,7 @@ const HowItWorks = () => {
                 <div
                   className={`${vis(mode === "forme" && phase === 1)} flex flex-col items-center justify-center gap-4 p-6`}
                 >
-                  <span className="h-11 w-11 animate-spin rounded-full border-[3px] border-slate-200 border-t-[#4588ba]" />
+                  <span className="h-11 w-11 animate-spin rounded-full border-[3px] border-slate-200 border-t-blue-500" />
                   <p className="text-sm font-semibold text-slate-700">Building your website…</p>
                   <div className="w-full max-w-xs space-y-2">
                     <div className="h-2.5 w-5/6 animate-pulse rounded-full bg-slate-200" />
@@ -303,7 +303,7 @@ const HowItWorks = () => {
                     {["Pages", "Google Profile", "SEO"].map((chip) => (
                       <span
                         key={chip}
-                        className="rounded-full border border-[#4588ba]/20 bg-[#4588ba]/10 px-2.5 py-1 text-[11px] font-medium text-[#316994]"
+                        className="rounded-full border border-blue-500/20 bg-blue-500/10 px-2.5 py-1 text-[11px] font-medium text-blue-700"
                       >
                         {chip}
                       </span>
@@ -317,7 +317,7 @@ const HowItWorks = () => {
                     Make it yours
                   </p>
                   <div className="mt-4 space-y-3">
-                    <div className="flex h-16 items-center justify-center rounded-xl bg-linear-to-br from-[#4588ba] to-[#316994] text-sm font-bold text-white">
+                    <div className="flex h-16 items-center justify-center rounded-xl bg-linear-to-br from-blue-500 to-blue-700 text-sm font-bold text-white">
                       {BUSINESS}
                     </div>
                     <div className="h-2.5 w-2/3 rounded-full bg-slate-200" />
@@ -328,7 +328,7 @@ const HowItWorks = () => {
                         <span
                           key={c}
                           className={`h-5 w-5 rounded-full ${
-                            i === 0 ? "ring-2 ring-[#4588ba] ring-offset-2" : ""
+                            i === 0 ? "ring-2 ring-blue-500 ring-offset-2" : ""
                           }`}
                           style={{ backgroundColor: c }}
                         />
@@ -337,7 +337,7 @@ const HowItWorks = () => {
                   </div>
                   <div className="absolute bottom-4 right-4 w-52 rounded-xl border border-slate-200 bg-white p-3 shadow-xl">
                     <div className="flex items-center gap-2">
-                      <MessagesSquare className="h-4 w-4 text-[#4588ba]" />
+                      <MessagesSquare className="h-4 w-4 text-blue-500" />
                       <p className="text-xs font-semibold text-slate-800">Expert support</p>
                       <span className="ml-auto h-2 w-2 rounded-full bg-emerald-500" />
                     </div>
@@ -357,7 +357,7 @@ const HowItWorks = () => {
 
                   {/* Site mock */}
                   <div className="space-y-3">
-                    <div className="flex h-20 items-center justify-center rounded-xl bg-linear-to-br from-[#4588ba] to-[#316994] text-base font-bold text-white shadow-inner">
+                    <div className="flex h-20 items-center justify-center rounded-xl bg-linear-to-br from-blue-500 to-blue-700 text-base font-bold text-white shadow-inner">
                       {BUSINESS}
                     </div>
                     <div className="h-2.5 w-2/3 rounded-full bg-slate-200" />
@@ -365,7 +365,7 @@ const HowItWorks = () => {
                     <div className="grid grid-cols-3 gap-2 pt-1">
                       {[0, 1, 2].map((i) => (
                         <div key={i} className="space-y-1.5 rounded-lg border border-slate-100 p-2.5">
-                          <div className="h-5 w-5 rounded-md bg-[#4588ba]/15" />
+                          <div className="h-5 w-5 rounded-md bg-blue-500/15" />
                           <div className="h-1.5 w-full rounded-full bg-slate-100" />
                           <div className="h-1.5 w-3/4 rounded-full bg-slate-100" />
                         </div>
@@ -377,7 +377,7 @@ const HowItWorks = () => {
                   <div className="absolute bottom-4 right-4 w-48 rounded-xl border border-slate-200 bg-white p-3 shadow-xl">
                     <div className="flex items-center gap-2">
                       <span className="flex h-6 w-6 items-center justify-center rounded-full text-[12px] font-bold ring-1 ring-slate-200">
-                        <span className="bg-linear-to-br from-[#4588ba] to-[#316994] bg-clip-text text-transparent">
+                        <span className="text-blue-700">
                           G
                         </span>
                       </span>
@@ -406,7 +406,7 @@ const HowItWorks = () => {
                 <span
                   key={i}
                   className={`h-1.5 rounded-full transition-all duration-500 ${
-                    i === phase ? "w-6 bg-[#4588ba]" : "w-1.5 bg-slate-300"
+                    i === phase ? "w-6 bg-blue-500" : "w-1.5 bg-slate-300"
                   }`}
                 />
               ))}

@@ -18,10 +18,10 @@ const advantages = [
 
 const Comparison = () => {
   return (
-    <section id="comparison" className="bg-slate-50 px-6 py-24">
+    <section id="comparison" className="bg-white px-6 py-24">
       <div className="mx-auto max-w-5xl">
         <div className="mx-auto max-w-3xl text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-[#4588ba]/20 bg-[#4588ba]/10 px-3.5 py-1.5 text-sm font-semibold text-[#316994]">
+          <span className="inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-3.5 py-1.5 text-sm font-semibold text-blue-700">
             The honest comparison
           </span>
           <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">

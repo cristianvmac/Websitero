@@ -24,7 +24,7 @@ const Header = () => {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
-      {/*<div className="bg-linear-to-br from-[#4588ba] to-[#316994] text-white">
+      {/*<div className="bg-blue-500 text-white">
         <div className="mx-auto flex max-w-7xl items-center justify-center gap-2 px-6 py-1 text-center text-xs font-medium sm:text-sm">
           <Sparkles className="h-3.5 w-3.5 shrink-0" />
           <span>Early-adopter deal — $50 off, 10 spots left.</span>
@@ -34,10 +34,10 @@ const Header = () => {
         </div>
       </div>*/}
 
-      <div className="bg-gray-100">
+      <div className="bg-slate-100">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
           <Link href="/" className="group flex items-center gap-2.5">
-            <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-linear-to-br from-[#4588ba] to-[#316994] text-white shadow-sm shadow-[#4588ba]/30 transition-transform group-hover:scale-105">
+            <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-500 text-white shadow-sm shadow-blue-500/30 transition-transform group-hover:scale-105">
               <FaCode className="h-6 w-5" />
             </span>
             <span className="text-xl font-bold tracking-tight text-slate-900">Websitero (beta)</span>
@@ -50,7 +50,7 @@ const Header = () => {
                 href={link.href}
                 className={
                   link.highlight
-                    ? "rounded-lg px-3.5 py-2 text-sm font-semibold text-[#316994]  hover:bg-[#4588ba]/10"
+                    ? "rounded-lg px-3.5 py-2 text-sm font-semibold text-blue-700  hover:bg-blue-500/10"
                     : "rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900"
                 }
               >
@@ -70,7 +70,7 @@ const Header = () => {
 
             <Link
               href="/startyourwebsite"
-              className="items-center rounded-full bg-linear-to-br from-[#4588ba] to-[#316994] px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-[#4588ba]/25 transition-all hover:shadow-lg hover:shadow-[#4588ba]/40 inline-flex"
+              className="items-center rounded-full bg-blue-500 hover:bg-blue-700 px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-blue-500/25 transition-all hover:shadow-lg hover:shadow-blue-500/40 inline-flex"
             >
               Start Your Website
               <ArrowRight className="h-4 w-4" />
@@ -107,7 +107,7 @@ const Header = () => {
                     onClick={() => setIsOpen(false)}
                     className={
                       link.highlight
-                      ? "block rounded-lg px-3 py-2.5 text-center text-sm font-semibold text-[#316994]  hover:bg-[#4588ba]/10"
+                      ? "block rounded-lg px-3 py-2.5 text-center text-sm font-semibold text-blue-700  hover:bg-blue-500/10"
                       : "block rounded-lg px-3 py-2.5 text-center text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100"
                     }
                   >
@@ -127,7 +127,7 @@ const Header = () => {
                 <Link
                   href="#cta"
                   onClick={() => setIsOpen(false)}
-                  className="flex items-center justify-center rounded-full bg-linear-to-br from-[#4588ba] to-[#316994] px-5 py-3 text-sm font-semibold text-white"
+                  className="flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-700 px-5 py-3 text-sm font-semibold text-white"
                 >
                   Start Your Website
                   <ArrowRight className="h-4 w-4" />

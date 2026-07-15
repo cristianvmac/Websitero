@@ -48,7 +48,7 @@ const LogoMarquee = () => {
               key={`${label}-${i}`}
               className="flex shrink-0 items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm font-medium text-slate-600"
             >
-              <Icon className="h-4 w-4 text-[#4588ba]" />
+              <Icon className="h-4 w-4 text-blue-500" />
               {label}
             </span>
           ))}
