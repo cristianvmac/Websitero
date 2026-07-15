@@ -64,7 +64,7 @@ const BuildButton = ({
         className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-semibold transition-all disabled:opacity-60 ${
           codeOnly || rebuild
             ? "border border-slate-300 bg-white text-slate-700 hover:border-slate-400 hover:bg-slate-50"
-            : "bg-linear-to-br from-[#4588ba] to-[#316994] text-white shadow shadow-[#4588ba]/30 hover:shadow-md"
+            : "bg-blue-500 text-white shadow shadow-blue-500/30 hover:shadow-md"
         }`}
       >
         {building ? (

@@ -60,10 +60,10 @@ export default async function AdminBriefs() {
   const { records, manifest } = await loadData();
 
   return (
-    <section className="min-h-screen bg-linear-to-b from-slate-50 to-white px-6 pb-24 pt-28">
+    <section className="min-h-screen bg-white px-6 pb-24 pt-28">
       <div className="mx-auto w-full max-w-4xl">
         <div className="flex items-center gap-3">
-          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-[#4588ba] to-[#316994] text-white shadow-lg shadow-[#4588ba]/30">
+          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-500 text-white shadow-lg shadow-blue-500/30">
             <Inbox className="h-5 w-5" />
           </span>
           <div>
@@ -78,7 +78,7 @@ export default async function AdminBriefs() {
           {records.length === 0 && (
             <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center text-sm text-slate-500">
               No briefs yet — submit one via{" "}
-              <Link href="/builditforme" className="font-semibold text-[#316994] hover:underline">
+              <Link href="/builditforme" className="font-semibold text-blue-700 hover:underline">
                 /builditforme
               </Link>
               .
@@ -119,7 +119,7 @@ export default async function AdminBriefs() {
                     <p className="truncate font-bold text-slate-900">
                       {isMaterials ? (
                         <span className="inline-flex items-center gap-1.5">
-                          <FileText className="h-4 w-4 text-[#4588ba]" />
+                          <FileText className="h-4 w-4 text-blue-500" />
                           Materials
                         </span>
                       ) : (
@@ -168,7 +168,7 @@ export default async function AdminBriefs() {
                         href={`/previews/${built.slug}/`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 rounded-full border border-[#4588ba]/30 bg-[#4588ba]/5 px-4 py-2 text-xs font-semibold text-[#316994] transition-colors hover:bg-[#4588ba]/10"
+                        className="inline-flex items-center gap-1.5 rounded-full border border-blue-500/30 bg-blue-500/5 px-4 py-2 text-xs font-semibold text-blue-700 transition-colors hover:bg-blue-500/10"
                       >
                         <ExternalLink className="h-3.5 w-3.5" />
                         Preview
@@ -193,9 +193,9 @@ export default async function AdminBriefs() {
                       <a
                         href={`/api/admin/uploads/${id}/${brief.doc.file}`}
                         download
-                        className="inline-flex w-fit items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 transition-colors hover:border-[#4588ba]/40 hover:text-[#316994]"
+                        className="inline-flex w-fit items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 transition-colors hover:border-blue-500/40 hover:text-blue-700"
                       >
-                        <FileText className="h-3.5 w-3.5 text-[#4588ba]" />
+                        <FileText className="h-3.5 w-3.5 text-blue-500" />
                         {brief.doc.file}
                       </a>
                     )}

@@ -11,7 +11,7 @@ import { VIBES, type Brief } from "@/app/forme/brief";
    (business, style, prompt, contact); the owner's uploads stay untouched. */
 
 const inputCls =
-  "w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 placeholder:text-slate-400 outline-none transition-shadow focus:border-[#4588ba]/40 focus:ring-2 focus:ring-[#4588ba]/10";
+  "w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 placeholder:text-slate-400 outline-none transition-shadow focus:border-blue-500/40 focus:ring-2 focus:ring-blue-500/10";
 
 const Field = ({ label, children }: { label: string; children: React.ReactNode }) => (
   <label className="block">
@@ -82,7 +82,7 @@ const EditBrief = ({ briefId, brief }: { briefId: string; brief: Brief }) => {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="inline-flex w-fit items-center gap-1.5 text-xs font-semibold text-[#316994] underline-offset-2 hover:underline"
+        className="inline-flex w-fit items-center gap-1.5 text-xs font-semibold text-blue-700 underline-offset-2 hover:underline"
       >
         <Pencil className="h-3.5 w-3.5" />
         Edit brief
@@ -91,7 +91,7 @@ const EditBrief = ({ briefId, brief }: { briefId: string; brief: Brief }) => {
   }
 
   return (
-    <div className="rounded-xl border border-[#4588ba]/20 bg-[#4588ba]/5 p-4">
+    <div className="rounded-xl border border-blue-500/20 bg-blue-500/5 p-4">
       <div className="grid gap-3 sm:grid-cols-3">
         <Field label="Business name">
           <input value={form.name} onChange={set("name")} placeholder="Bella's Bakery" className={inputCls} />
@@ -153,7 +153,7 @@ const EditBrief = ({ briefId, brief }: { briefId: string; brief: Brief }) => {
           type="button"
           onClick={save}
           disabled={saving}
-          className="inline-flex items-center gap-1.5 rounded-full bg-linear-to-br from-[#4588ba] to-[#316994] px-4 py-2 text-xs font-semibold text-white shadow shadow-[#4588ba]/30 transition-all hover:shadow-md disabled:opacity-60"
+          className="inline-flex items-center gap-1.5 rounded-full bg-blue-500 hover:bg-blue-700 px-4 py-2 text-xs font-semibold text-white shadow shadow-blue-500/30 transition-all hover:shadow-md disabled:opacity-60"
         >
           {saving ? (
             <LoaderCircle className="h-3.5 w-3.5 animate-spin" />
