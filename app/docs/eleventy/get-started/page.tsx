@@ -45,7 +45,7 @@ export default function GetStarted() {
 
   return (
     <div className="min-h-full p-12">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl ml-6">
 
       {/* Hero Section */}
       <div className="mb-12">
@@ -57,7 +57,7 @@ export default function GetStarted() {
           <span><LuChevronRight /></span>
           <span aria-current="page">Get Started</span>
         </nav>
-        <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm font-medium mb-4">
+        <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 text-gray-700 rounded-full text-sm font-medium mb-4">
           <Rocket className="w-4 h-4" />
           Get started in 5 minutes
         </div>
@@ -73,17 +73,17 @@ export default function GetStarted() {
       </div>
 
       {/* Before You Start */}
-      <div className="mb-12 p-6 bg-yellow-50 border-2 border-yellow-200 rounded-xl">
-        <h3 className="text-lg font-bold text-yellow-900 mb-3 flex items-center gap-2">
+      <div className="mb-12 p-3 0 bg-gray-100 border rounded-xl">
+        <h3 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
           <Clock className="w-5 h-5" />
           Before You Start
         </h3>
-        <p className="text-yellow-800 mb-4">
+        <p className="text-gray-800 mb-4">
           Make sure you&apos;ve read the initial setup guide.
         </p>
         <Link
           href="/docs/eleventy/quick-setup"
-          className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-600 hover:bg-yellow-700 text-white font-semibold rounded-lg transition-colors"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-gray-700 font-semibold rounded-lg transition-colors"
         >
           <ArrowRight className="w-4 h-4" />
           See Quick Setup
@@ -100,7 +100,7 @@ export default function GetStarted() {
           {/* Step 1: Create from Template */}
           <div className="bg-white rounded-xl p-6 border border-gray-200">
             <div className="flex items-start gap-4">
-              <div className="shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
+              <div className="shrink-0 w-8 h-8 bg-blue-50 text-gray-700 rounded-full flex items-center justify-center font-bold">
                 1
               </div>
               <div className="flex-1">
@@ -115,7 +115,7 @@ export default function GetStarted() {
                 {/* Option A: GitHub template */}
                 <p className="text-sm font-semibold text-gray-700 mb-2">Option A — Use the GitHub template:</p>
                 <div className="mb-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
-                  <p className="text-sm text-blue-900">
+                  <p className="text-sm text-gray-900">
                     Go to{" "}
                     <Link
                       href="https://github.com/cristianvmac/Eleventy-Starter"
@@ -144,7 +144,7 @@ export default function GetStarted() {
                   </button>
                 </div>
                 <div className="mt-3 p-3 bg-blue-50 rounded-lg border border-blue-200">
-                  <p className="text-sm text-blue-900">
+                  <p className="text-sm text-gray-900">
                     <strong>💡 Pro tip:</strong> Replace <code className="bg-blue-100 px-2 py-0.5 rounded">[YOUR_APP_NAME]</code> with your project name
                   </p>
                 </div>
@@ -155,7 +155,7 @@ export default function GetStarted() {
           {/* Step 2: Install Dependencies */}
           <div className="bg-white rounded-xl p-6 border border-gray-200">
             <div className="flex items-start gap-4">
-              <div className="shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
+              <div className="shrink-0 w-8 h-8 bg-blue-50 text-gray-700 rounded-full flex items-center justify-center font-bold">
                 2
               </div>
               <div className="flex-1">
@@ -188,7 +188,7 @@ export default function GetStarted() {
           {/* Step 3: Configure Your Site */}
           <div className="bg-white rounded-xl p-6 border border-gray-200">
             <div className="flex items-start gap-4">
-              <div className="shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
+              <div className="shrink-0 w-8 h-8 bg-blue-50 text-gray-700 rounded-full flex items-center justify-center font-bold">
                 3
               </div>
               <div className="flex-1">
@@ -224,7 +224,7 @@ export default function GetStarted() {
           {/* Step 4: Start Development Server */}
           <div className="bg-white rounded-xl p-6 border border-gray-200">
             <div className="flex items-start gap-4">
-              <div className="shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
+              <div className="shrink-0 w-8 h-8 bg-blue-50 text-gray-700 rounded-full flex items-center justify-center font-bold">
                 4
               </div>
               <div className="flex-1">
@@ -248,11 +248,11 @@ export default function GetStarted() {
                     )}
                   </button>
                 </div>
-                <div className="mt-4 p-4 bg-green-50 rounded-lg border-2 border-green-200">
-                  <p className="text-green-900 font-medium mb-1">
+                <div className="mt-4 p-4 bg-blue-50 rounded-lg border-2 border-blue-200">
+                  <p className="text-gray-900 font-medium mb-1">
                     🚀 You&apos;re all set!
                   </p>
-                  <p className="text-sm text-green-800">
+                  <p className="text-sm text-gray-800">
                     Your app is now running at{" "}
                     <Link href="http://localhost:8080" className="font-mono font-bold underline" target="_blank">
                       http://localhost:8080
@@ -265,10 +265,10 @@ export default function GetStarted() {
         </div>
 
         {/* Requirements Note */}
-        <div className="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-          <p className="text-sm text-yellow-900">
+        <div className="mt-6 p-4 bg-gray-50 border border-gray-200 rounded-lg">
+          <p className="text-sm text-gray-900">
             <strong>⚠️ Requirements:</strong> This kit requires Node.js 18.17 or greater.
-            Run <code className="bg-yellow-100 px-2 py-0.5 rounded">node -v</code> in your terminal to check your version.
+            Run <code className="bg-blue-100 px-2 py-0.5 rounded">node -v</code> in your terminal to check your version.
           </p>
         </div>
       </div>
@@ -283,10 +283,10 @@ export default function GetStarted() {
         <div className="bg-[#0f1117] rounded-xl border border-gray-800 overflow-hidden font-mono text-sm">
 
           <div className="p-5 space-y-0.5 leading-6 text-[13px]">
-            <Row indent={0} connector=""   icon="folder" name="ELEVENTY-STARTER" nameClass="text-purple-300 font-semibold" />
-            <Row indent={1} connector="├─" icon="folder" name="/public" nameClass="text-purple-300" />
-            <Row indent={1} connector="├─" icon="folder" name="/scripts" nameClass="text-purple-300" desc="Build & setup utilities" />
-            <Row indent={1} connector="├─" icon="folder" name="/src" nameClass="text-purple-300" />
+            <Row indent={0} connector=""   icon="folder" name="ELEVENTY-STARTER" nameClass="text-gray-300 font-semibold" />
+            <Row indent={1} connector="├─" icon="folder" name="/public" nameClass="text-gray-300" />
+            <Row indent={1} connector="├─" icon="folder" name="/scripts" nameClass="text-gray-300" desc="Build & setup utilities" />
+            <Row indent={1} connector="├─" icon="folder" name="/src" nameClass="text-gray-300" />
           </div>
         </div>
       </div>
@@ -308,7 +308,7 @@ export default function GetStarted() {
           Once you&apos;re done, start with{" "}
           <Link
             href="./tutorials/build-in-5-minutes"
-            className="text-orange-400 underline p-2"
+            className="text-gray-400 underline p-2"
           >
             this tutorial
           </Link>

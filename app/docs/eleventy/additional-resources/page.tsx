@@ -13,9 +13,9 @@ const resources = [
     cta: "Visit Mozilla Learn HTML",
     icon: FileCode2,
     accent: {
-      card: "hover:border-orange-300 hover:shadow-orange-100",
-      iconWrap: "bg-orange-50 text-orange-600 border-orange-200",
-      link: "text-orange-600 group-hover:text-orange-700",
+      card: "hover:border-blue-300 hover:shadow-blue-100",
+      iconWrap: "bg-blue-50 text-gray-600 border-blue-200",
+      link: "text-gray-600 group-hover:text-gray-700",
     },
   },
   {
@@ -27,8 +27,8 @@ const resources = [
     icon: Paintbrush2,
     accent: {
       card: "hover:border-blue-300 hover:shadow-blue-100",
-      iconWrap: "bg-blue-50 text-blue-600 border-blue-200",
-      link: "text-blue-600 group-hover:text-blue-700",
+      iconWrap: "bg-blue-50 text-gray-600 border-blue-200",
+      link: "text-gray-600 group-hover:text-gray-700",
     },
   },
   {
@@ -39,9 +39,9 @@ const resources = [
     cta: "Visit Mozilla Learn JavaScript",
     icon: Braces,
     accent: {
-      card: "hover:border-yellow-300 hover:shadow-yellow-100",
-      iconWrap: "bg-yellow-50 text-yellow-600 border-yellow-200",
-      link: "text-yellow-700 group-hover:text-yellow-800",
+      card: "hover:border-blue-300 hover:shadow-blue-100",
+      iconWrap: "bg-blue-50 text-gray-600 border-blue-200",
+      link: "text-gray-700 group-hover:text-gray-800",
     },
   },
 ];
@@ -51,7 +51,7 @@ const resources = [
 export default function AdditionalResources() {
   return (
     <div className="min-h-full p-12">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl ml-6">
       {/* Hero */}
       <div className="mb-12">
         {/* Breadcrumb */}
@@ -110,7 +110,7 @@ export default function AdditionalResources() {
       {/* Quick Summary */}
       <div className="bg-linear-to-br from-gray-50 to-gray-100 rounded-2xl p-8 border border-gray-200">
         <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
-          <p className="text-sm text-blue-900">
+          <p className="text-sm text-gray-900">
             Following all three guides will give you a strong foundation for web
             development and prepare you for more advanced frameworks like Next.js
             or Eleventy.

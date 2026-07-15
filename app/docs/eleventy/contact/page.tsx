@@ -34,7 +34,7 @@ export default function Contact() {
               href="https://discord.com/invite/your-invite-code" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-blue-600 hover:underline"
+              className="text-gray-600 hover:underline"
             >
               Click here to join
             </a>
@@ -50,7 +50,7 @@ export default function Contact() {
             Send me a detailed message at:  
             <a 
               href="mailto:your-email@example.com" 
-              className="text-blue-600 hover:underline"
+              className="text-gray-600 hover:underline"
             >
               your-email@example.com
             </a>

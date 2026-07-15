@@ -42,18 +42,7 @@ export default function Services() {
           fontFamily: FONTS.body,
         }}
       >
-        {/* Decorative amber glow at the top */}
-        <div style={{
-          position: "fixed",
-          top: 0,
-          left: "50%",
-          transform: "translateX(-50%)",
-          width: 600,
-          height: 300,
-          background: "radial-gradient(ellipse, rgba(232,168,76,0.07) 0%, transparent 70%)",
-          pointerEvents: "none",
-          zIndex: 0,
-        }} />
+      
 
         {/* Scrollable content column */}
         <div style={{
@@ -81,11 +70,7 @@ export default function Services() {
             className={`fade-up ${mounted ? "" : "opacity-0"}`}
             style={{ marginBottom: 56 }}
           >
-            {/* Badges */}
-            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
-              <Badge>Component</Badge>
-              <Badge color="#60a5fa">MISC</Badge>
-            </div>
+          
 
             <h1 style={{
               fontFamily: FONTS.display,

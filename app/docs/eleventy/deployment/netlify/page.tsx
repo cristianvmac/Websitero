@@ -57,8 +57,8 @@ function SectionHeading({
   return (
     <div className="mb-6">
       <div className="flex items-center gap-2 mb-2">
-        <span className="h-px w-8 bg-linear-to-r from-blue-400 to-cyan-400" />
-        <span className="text-xs font-bold uppercase tracking-widest text-blue-600">
+        <span className="h-px w-8 bg-blue-50" />
+        <span className="text-xs font-bold uppercase tracking-widest text-gray-600">
           {eyebrow}
         </span>
       </div>
@@ -74,7 +74,7 @@ export default function NetlifyDeployment() {
     <section className="min-h-full p-12">
       {/* Hero */}
       <div className="relative overflow-hidden">
-        <div className="relative max-w-3xl mx-auto">
+        <div className="relative max-w-3xl ml-6">
           {/* Breadcrumb */}
           <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-x-1 gap-y-1 text-base font-normal text-slate-900">
             <Link href="/docs/eleventy" className="rounded-full py-1 hover:text-slate-600 hover:underline">
@@ -128,10 +128,10 @@ export default function NetlifyDeployment() {
           <div className="grid sm:grid-cols-2 gap-4">
             {/* Build command */}
             <div className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition hover:shadow-md hover:-translate-y-0.5">
-              <span className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-blue-400 to-cyan-400" />
+              <span className="absolute inset-x-0 top-0 h-1 bg-blue-50" />
               <div className="p-6">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-blue-50 text-blue-600">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-blue-50 text-gray-600">
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z" />
                     </svg>
@@ -145,7 +145,7 @@ export default function NetlifyDeployment() {
                 </div>
                 <div className="flex items-center justify-between gap-3 rounded-lg bg-gray-900 px-4 py-3">
                   <code className="flex items-center gap-2 font-mono text-sm text-gray-100 overflow-x-auto">
-                    <span className="text-emerald-400 select-none">$</span>
+                    <span className="text-gray-400 select-none">$</span>
                     npm run build
                   </code>
                   <CopyButton text="npm run build" />
@@ -155,10 +155,10 @@ export default function NetlifyDeployment() {
 
             {/* Publish directory */}
             <div className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition hover:shadow-md hover:-translate-y-0.5">
-              <span className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-blue-400 to-cyan-400" />
+              <span className="absolute inset-x-0 top-0 h-1 bg-blue-50" />
               <div className="p-6">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-blue-50 text-blue-600">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-blue-50 text-gray-600">
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" />
                     </svg>
@@ -199,7 +199,7 @@ export default function NetlifyDeployment() {
                   href="https://app.netlify.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-600 font-semibold hover:underline"
+                  className="text-gray-600 font-semibold hover:underline"
                 >
                   app.netlify.com
                 </a>
@@ -231,7 +231,7 @@ export default function NetlifyDeployment() {
                 key={i}
                 className="flex items-start gap-4 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm"
               >
-                <span className="flex items-center justify-center w-8 h-8 shrink-0 rounded-full bg-blue-100 text-blue-700 text-sm font-bold">
+                <span className="flex items-center justify-center w-8 h-8 shrink-0 rounded-full bg-blue-100 text-gray-700 text-sm font-bold">
                   {i + 1}
                 </span>
                 <span className="text-gray-700 leading-relaxed pt-1">{text}</span>
@@ -273,23 +273,23 @@ export default function NetlifyDeployment() {
             authentication provider so you can log in and manage content.
           </p>
 
-          <div className="flex items-start gap-4 rounded-2xl border border-rose-200 bg-rose-50 p-6">
-            <div className="flex items-center justify-center w-10 h-10 shrink-0 rounded-full bg-rose-500 text-white shadow-sm">
+          <div className="flex items-start gap-4 rounded-2xl border border-blue-200 bg-blue-50 p-6">
+            <div className="flex items-center justify-center w-10 h-10 shrink-0 rounded-full bg-blue-50 text-gray-700 shadow-sm">
               <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m0 3.75h.008M10.34 3.94l-7.5 12.99A1.5 1.5 0 004.14 19.5h15.72a1.5 1.5 0 001.3-2.25l-7.5-12.99a1.5 1.5 0 00-2.6 0z" />
               </svg>
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-rose-900 mb-1">
+              <h3 className="text-lg font-semibold text-gray-900 mb-1">
                 Important — authentication has changed
               </h3>
-              <p className="text-rose-800/90 leading-relaxed">
+              <p className="text-gray-800/90 leading-relaxed">
                 This kit now uses{" "}
                 <a
                   href="https://decapbridge.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-semibold underline hover:text-rose-900"
+                  className="font-semibold underline hover:text-gray-900"
                 >
                   decapbridge.com
                 </a>{" "}
@@ -319,7 +319,7 @@ export default function NetlifyDeployment() {
                 Navigate to{" "}
                 <strong>Project Configuration / Identity</strong> and delete the
                 Netlify Identity instance.{" "}
-                <span className="text-amber-700 font-semibold">
+                <span className="text-gray-700 font-semibold">
                   This deletes your users as well
                 </span>{" "}
                 — they&apos;ll have to be re-created in decapbridge later.
@@ -340,7 +340,7 @@ export default function NetlifyDeployment() {
                 key={i}
                 className="flex items-start gap-4 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm"
               >
-                <span className="flex items-center justify-center w-8 h-8 shrink-0 rounded-full bg-emerald-100 text-emerald-700 text-sm font-bold">
+                <span className="flex items-center justify-center w-8 h-8 shrink-0 rounded-full bg-blue-100 text-gray-700 text-sm font-bold">
                   {i + 1}
                 </span>
                 <span className="text-gray-700 leading-relaxed pt-1">{text}</span>
@@ -363,7 +363,7 @@ export default function NetlifyDeployment() {
             cheap to host.
           </p>
 
-          <div className="rounded-xl border border-blue-100 bg-blue-50 px-5 py-4 text-sm text-blue-800 max-w-2xl">
+          <div className="rounded-xl border border-blue-100 bg-blue-50 px-5 py-4 text-sm text-gray-800 max-w-2xl">
             Need dynamic behavior — form handling, API calls, or auth? You don&apos;t
             give up your static build. Layer it on with{" "}
             <span className="font-semibold">Netlify Functions</span> and{" "}
@@ -426,7 +426,7 @@ export default function NetlifyDeployment() {
                 key={item.title}
                 className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:shadow-md hover:-translate-y-0.5"
               >
-                <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-teal-50 text-teal-600 mb-3">
+                <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-blue-50 text-gray-600 mb-3">
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
                     <path strokeLinecap="round" strokeLinejoin="round" d={item.path} />
                   </svg>
@@ -439,29 +439,29 @@ export default function NetlifyDeployment() {
         </div>
 
         {/* Node version note */}
-        <div className="flex items-start gap-4 rounded-2xl border border-amber-200 bg-linear-to-r from-amber-50 to-yellow-50 p-6 mb-16">
-          <div className="flex items-center justify-center w-10 h-10 shrink-0 rounded-full bg-amber-400 text-white shadow-sm">
+        <div className="flex items-start gap-4 rounded-2xl border border-blue-200 bg-blue-50 p-6 mb-16">
+          <div className="flex items-center justify-center w-10 h-10 shrink-0 rounded-full bg-blue-50 text-gray-700 shadow-sm">
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m0 3.75h.008M10.34 3.94l-7.5 12.99A1.5 1.5 0 004.14 19.5h15.72a1.5 1.5 0 001.3-2.25l-7.5-12.99a1.5 1.5 0 00-2.6 0z" />
             </svg>
           </div>
           <div>
-            <h2 className="text-lg font-semibold text-amber-900 mb-1">
+            <h2 className="text-lg font-semibold text-gray-900 mb-1">
               A note on Node.js versions
             </h2>
-            <p className="text-amber-800/90">
+            <p className="text-gray-800/90">
               Eleventy requires a modern Node.js release. If your build fails on
               Netlify&apos;s older build image, set the version your project needs.
               Add an{" "}
-              <code className="bg-amber-100 text-amber-900 px-2 py-0.5 rounded font-mono text-sm">
+              <code className="bg-blue-100 text-gray-900 px-2 py-0.5 rounded font-mono text-sm">
                 .nvmrc
               </code>{" "}
               file (for example{" "}
-              <code className="bg-amber-100 text-amber-900 px-2 py-0.5 rounded font-mono text-sm">
+              <code className="bg-blue-100 text-gray-900 px-2 py-0.5 rounded font-mono text-sm">
                 22.12.0
               </code>
               ) to your project root, or define a{" "}
-              <code className="bg-amber-100 text-amber-900 px-2 py-0.5 rounded font-mono text-sm">
+              <code className="bg-blue-100 text-gray-900 px-2 py-0.5 rounded font-mono text-sm">
                 NODE_VERSION
               </code>{" "}
               environment variable in the Netlify dashboard.
@@ -507,14 +507,14 @@ export default function NetlifyDeployment() {
                 className="group flex items-start justify-between gap-4 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:shadow-md hover:-translate-y-0.5 hover:border-blue-200"
               >
                 <div>
-                  <h3 className="font-bold text-gray-800 group-hover:text-blue-600 transition-colors">
+                  <h3 className="font-bold text-gray-800 group-hover:text-gray-600 transition-colors">
                     {res.title}
                   </h3>
                   <p className="text-sm text-gray-600 mt-1 leading-relaxed">
                     {res.desc}
                   </p>
                 </div>
-                <svg className="w-5 h-5 shrink-0 text-gray-300 transition-colors group-hover:text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                <svg className="w-5 h-5 shrink-0 text-gray-300 transition-colors group-hover:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
                 </svg>
               </a>

@@ -43,7 +43,7 @@ export default function BuildMinutes() {
 
   return (
     <div className="min-h-full p-12">
-    <div className="max-w-3xl mx-auto">
+    <div className="max-w-3xl ml-6">
 
       {/* Breadcrumb */}
       <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-x-1 gap-y-1 text-base font-normal text-slate-900">
@@ -71,17 +71,17 @@ export default function BuildMinutes() {
       </div>
 
       {/* Before You Start */}
-      <div className="mb-10 p-4 bg-yellow-50 border-2 border-yellow-200 rounded-xl">
-        <h3 className="text-lg font-bold text-yellow-900 mb-3 flex items-center gap-2">
+      <div className="mb-10 p-4 bg-blue-50 border border-gray-200 rounded-xl">
+        <h3 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
           <Clock className="w-5 h-5" />
           Before You Start
         </h3>
-        <p className="text-yellow-800 mb-4">
+        <p className="text-gray-800 mb-4">
           Make sure that you have you&apos;ve read the initial setup guide.
         </p>
         <Link
           href="/docs/eleventy/quick-setup"
-          className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-600 hover:bg-yellow-700 text-white font-semibold rounded-lg transition-colors"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 hover:bg-blue-100 text-gray-700 font-semibold rounded-lg transition-colors"
         >
           <ArrowRight className="w-4 h-4" />
           See Quick Setup
@@ -99,12 +99,12 @@ export default function BuildMinutes() {
                 key={index}
                 className="relative bg-linear-to-br from-white to-gray-50 rounded-xl p-5 border-2 border-gray-200"
               >
-                <div className="absolute -top-3 -left-3 w-9 h-9 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold shadow-lg">
+                <div className="absolute -top-3 -left-3 w-9 h-9 bg-blue-50 text-gray-700 rounded-full flex items-center justify-center font-bold shadow-lg">
                   {index + 1}
                 </div>
                 <div className="flex items-center gap-2 mb-3 mt-1">
                   <div className="p-1.5 bg-blue-100 rounded-lg">
-                    <Icon className="w-4 h-4 text-blue-600" />
+                    <Icon className="w-4 h-4 text-gray-600" />
                   </div>
                   <span className="text-xs font-bold text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full">
                     {step.time}
@@ -121,13 +121,13 @@ export default function BuildMinutes() {
       {/* ── Step 1 ── */}
       <div className="mb-12 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center font-bold text-xl shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center font-bold text-xl shadow-lg">
             1
           </div>
           <div>
             <div className="flex items-center gap-3 mb-1">
               <h2 className="text-2xl font-bold text-gray-900">Install the Template</h2>
-              <span className="text-sm font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full">1 minute</span>
+              <span className="text-sm font-bold text-gray-600 bg-blue-50 px-3 py-1 rounded-full">1 minute</span>
             </div>
             <p className="text-gray-600">
               Pull the project straight from the GitHub template using degit.
@@ -167,14 +167,14 @@ npm start`}</pre>
             </div>
           </div>
 
-          <div className="p-4 bg-green-50 border-2 border-green-200 rounded-lg">
-            <p className="text-green-900 font-medium mb-1 flex items-center gap-2">
+          <div className="p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
+            <p className="text-gray-900 font-medium mb-1 flex items-center gap-2">
               <Eye className="w-4 h-4" />
               Your site is live locally
             </p>
-            <p className="text-sm text-green-800">
+            <p className="text-sm text-gray-800">
               Open{" "}
-              <code className="bg-green-100 px-2 py-0.5 rounded font-mono">http://localhost:8080</code>{" "}
+              <code className="bg-blue-100 px-2 py-0.5 rounded font-mono">http://localhost:8080</code>{" "}
               — you should see the full demo landing page from the template.
             </p>
           </div>
@@ -184,13 +184,13 @@ npm start`}</pre>
       {/* ── Step 2 ── */}
       <div className="mb-12 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-purple-600 text-white rounded-xl flex items-center justify-center font-bold text-xl shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center font-bold text-xl shadow-lg">
             2
           </div>
           <div>
             <div className="flex items-center gap-3 mb-1">
               <h2 className="text-2xl font-bold text-gray-900">Customize Your Site Info</h2>
-              <span className="text-sm font-bold text-purple-600 bg-purple-50 px-3 py-1 rounded-full">2 minutes</span>
+              <span className="text-sm font-bold text-gray-600 bg-blue-50 px-3 py-1 rounded-full">2 minutes</span>
             </div>
             <p className="text-gray-600">
               Two files control all global site data — your business info and your navigation links.
@@ -262,8 +262,8 @@ module.exports = {
           </div>
 
           <div className="p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
-            <p className="text-blue-900 font-medium mb-1">Also update your navigation in <code className="bg-blue-100 px-1.5 py-0.5 rounded text-sm">src/_includes/sections/header.html</code></p>
-            <p className="text-sm text-blue-800">
+            <p className="text-gray-900 font-medium mb-1">Also update your navigation in <code className="bg-blue-100 px-1.5 py-0.5 rounded text-sm">src/_includes/sections/header.html</code></p>
+            <p className="text-sm text-gray-800">
               Edit the anchor links to match your pages. The active link is highlighted automatically by comparing each <code className="bg-blue-100 px-1.5 py-0.5 rounded">href</code> against <code className="bg-blue-100 px-1.5 py-0.5 rounded">page.url</code>.
             </p>
             <div className="bg-gray-900 rounded-lg p-3 font-mono text-xs text-gray-100 mt-3 relative">
@@ -282,13 +282,13 @@ module.exports = {
       {/* ── Step 3 ── */}
       <div className="mb-12 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-indigo-600 text-white rounded-xl flex items-center justify-center font-bold text-xl shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center font-bold text-xl shadow-lg">
             3
           </div>
           <div>
             <div className="flex items-center gap-3 mb-1">
               <h2 className="text-2xl font-bold text-gray-900">Edit the Landing Page and Interior Pages</h2>
-              <span className="text-sm font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full">1 minute</span>
+              <span className="text-sm font-bold text-gray-600 bg-blue-50 px-3 py-1 rounded-full">1 minute</span>
             </div>
             <p className="text-gray-600">
               The landing page lives at <code className="bg-gray-100 px-2 py-0.5 rounded text-sm">src/index.html</code> and the interior pages live in <code className="bg-gray-100 px-2 py-0.5 rounded text-sm">src/content/pages/</code>. It&apos;s composed of pre-built sections you can swap or edit.
@@ -308,7 +308,7 @@ module.exports = {
                   href="./landing-page/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-600 underline font-semibold"
+                  className="text-gray-600 underline font-semibold"
                 >
                   Landing page
                 </Link>{" "}
@@ -364,10 +364,10 @@ module.exports = {
             </div>
           </div>
 
-          <div className="p-4 bg-yellow-50 border-2 border-yellow-200 rounded-lg">
-            <p className="text-yellow-900 font-medium mb-1">Replace placeholder images</p>
-            <p className="text-sm text-yellow-800">
-              Drop your own images into <code className="bg-yellow-100 px-1.5 py-0.5 rounded">src/assets/images/</code> and update the paths in the section files. Eleventy automatically optimizes them with the Sharp image plugin.
+          <div className="p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
+            <p className="text-gray-900 font-medium mb-1">Replace placeholder images</p>
+            <p className="text-sm text-gray-800">
+              Drop your own images into <code className="bg-blue-100 px-1.5 py-0.5 rounded">src/assets/images/</code> and update the paths in the section files. Eleventy automatically optimizes them with the Sharp image plugin.
             </p>
           </div>
         </div>
@@ -376,20 +376,20 @@ module.exports = {
       {/* ── Step 4 ── */}
       <div className="mb-10 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-green-600 text-white rounded-xl flex items-center justify-center font-bold text-xl shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center font-bold text-xl shadow-lg">
             4
           </div>
           <div>
             <div className="flex items-center gap-3 mb-1">
               <h2 className="text-2xl font-bold text-gray-900">Build &amp; Deploy</h2>
-              <span className="text-sm font-bold text-green-600 bg-green-50 px-3 py-1 rounded-full">1 minute</span>
+              <span className="text-sm font-bold text-gray-600 bg-blue-50 px-3 py-1 rounded-full">1 minute</span>
             </div>
             <p className="text-gray-600">
               Run a production build and deploy to any static host in seconds.
               See   {" "}
               <Link
                 href="/docs/eleventy/deployment"
-                className="text-blue-600 underline font-semibold"
+                className="text-gray-600 underline font-semibold"
               >
                 Deployment Guide
               </Link>
@@ -406,7 +406,7 @@ module.exports = {
                 onClick={() => copyToClipboard("npm run build", 8)}
                 className="absolute right-3 top-3 p-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors"
               >
-                {copiedStep === 8 ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4 text-gray-400" />}
+                {copiedStep === 8 ? <Check className="w-4 h-4 text-gray-400" /> : <Copy className="w-4 h-4 text-gray-400" />}
               </button>
             </div>
             <p className="text-xs text-gray-500 mt-2">
@@ -426,9 +426,9 @@ module.exports = {
                   href={platform.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`p-4 border-2 rounded-lg transition text-center group ${platform.name === "Netlify" ? "border-green-400 bg-green-50 hover:border-green-500" : "border-gray-200 hover:border-blue-400 hover:shadow-md"}`}
+                  className={`p-4 border-2 rounded-lg transition text-center group ${platform.name === "Netlify" ? "border-blue-400 bg-blue-50 hover:border-blue-500" : "border-gray-200 hover:border-blue-400 hover:shadow-md"}`}
                 >
-                  <div className={`font-bold mb-1 transition-colors ${platform.name === "Netlify" ? "text-green-700 group-hover:text-green-900" : "text-gray-900 group-hover:text-blue-600"}`}>
+                  <div className={`font-bold mb-1 transition-colors ${platform.name === "Netlify" ? "text-gray-700 group-hover:text-gray-900" : "text-gray-900 group-hover:text-gray-600"}`}>
                     {platform.name}
                   </div>
                   <p className="text-xs text-gray-600">{platform.desc}</p>

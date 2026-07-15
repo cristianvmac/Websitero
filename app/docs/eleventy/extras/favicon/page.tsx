@@ -81,7 +81,7 @@ function TabPreview() {
         <button
           onClick={() => setDark(false)}
           className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
-            !dark ? "bg-amber-100 text-amber-800" : "text-gray-500 hover:text-gray-800"
+            !dark ? "bg-blue-100 text-gray-800" : "text-gray-500 hover:text-gray-800"
           }`}
         >
           <Sun className="h-3.5 w-3.5" />
@@ -90,7 +90,7 @@ function TabPreview() {
         <button
           onClick={() => setDark(true)}
           className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
-            dark ? "bg-gray-800 text-white" : "text-gray-500 hover:text-gray-800"
+            dark ? "bg-gray-800 text-gray-700" : "text-gray-500 hover:text-gray-800"
           }`}
         >
           <Moon className="h-3.5 w-3.5" />
@@ -170,9 +170,9 @@ export default function Favicon() {
   return (
     <section className="relative overflow-hidden min-h-full p-12">
       {/* Decorative background glow */}
-      <div className="pointer-events-none absolute -top-32 left-1/2 h-72 w-xl -translate-x-1/2 rounded-full bg-linear-to-br from-amber-200/40 to-orange-200/40 blur-3xl" />
+      <div className="pointer-events-none absolute -top-32 left-1/2 h-72 w-xl -translate-x-1/2 rounded-full bg-linear-to-br from-blue-50/40 to-blue-50/40 blur-3xl" />
 
-      <div className="relative mx-auto max-w-3xl">
+      <div className="relative max-w-3xl ml-6">
         {/* Breadcrumb */}
         <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-x-1 gap-y-1 text-base font-normal text-slate-900">
           <Link href="/docs/eleventy" className="rounded-full py-1 hover:text-slate-600 hover:underline">
@@ -213,20 +213,20 @@ export default function Favicon() {
         </p>
 
         {/* ── Step 1 ── */}
-        <div className="mt-12 rounded-2xl border border-amber-200 bg-white p-7 shadow-sm transition-shadow hover:shadow-md">
+        <div className="mt-12 rounded-2xl border border-blue-200 bg-white p-7 shadow-sm transition-shadow hover:shadow-md">
           <div className="flex flex-wrap items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-amber-500 to-orange-600 text-white shadow-sm">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-gray-700 shadow-sm">
               <Wand2 className="h-5 w-5" />
             </div>
             <div>
-              <span className="text-xs font-semibold uppercase tracking-wider text-amber-600">
+              <span className="text-xs font-semibold uppercase tracking-wider text-gray-600">
                 Step 1
               </span>
               <h2 className="text-xl font-semibold text-gray-900">
                 Generate a full favicon set
               </h2>
             </div>
-            <span className="ml-auto rounded-full bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-700">
+            <span className="ml-auto rounded-full bg-blue-100 px-2.5 py-1 text-xs font-semibold text-gray-700">
               Best practice
             </span>
           </div>
@@ -238,7 +238,7 @@ export default function Favicon() {
               href="https://realfavicongenerator.net"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-medium text-amber-700 underline decoration-amber-300 underline-offset-2 hover:text-amber-800"
+              className="font-medium text-gray-700 underline decoration-blue-300 underline-offset-2 hover:text-gray-800"
             >
               realfavicongenerator.net
             </a>{" "}
@@ -247,7 +247,7 @@ export default function Favicon() {
               href="https://favicon.io"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-medium text-amber-700 underline decoration-amber-300 underline-offset-2 hover:text-amber-800"
+              className="font-medium text-gray-700 underline decoration-blue-300 underline-offset-2 hover:text-gray-800"
             >
               favicon.io
             </a>
@@ -259,11 +259,11 @@ export default function Favicon() {
         {/* ── Step 2 ── */}
         <div className="mt-8 rounded-2xl border border-gray-200 bg-white p-7 shadow-sm transition-shadow hover:shadow-md">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-blue-500 to-blue-600 text-white shadow-sm">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-gray-700 shadow-sm">
               <FolderInput className="h-5 w-5" />
             </div>
             <div>
-              <span className="text-xs font-semibold uppercase tracking-wider text-blue-600">
+              <span className="text-xs font-semibold uppercase tracking-wider text-gray-600">
                 Step 2
               </span>
               <h2 className="text-xl font-semibold text-gray-900">
@@ -333,8 +333,8 @@ export default function Favicon() {
 
           {/* Info callout — the key Eleventy passthrough detail */}
           <div className="mt-5 flex gap-3 rounded-xl border border-blue-100 bg-blue-50 p-4">
-            <Info className="mt-0.5 h-5 w-5 shrink-0 text-blue-600" />
-            <p className="text-sm leading-relaxed text-blue-900">
+            <Info className="mt-0.5 h-5 w-5 shrink-0 text-gray-600" />
+            <p className="text-sm leading-relaxed text-gray-900">
               Eleventy only copies files you opt in with{" "}
               <code className="rounded bg-blue-100 px-1.5 py-0.5 font-mono text-xs">
                 addPassthroughCopy
@@ -367,11 +367,11 @@ export default function Favicon() {
         {/* ── Step 3 ── */}
         <div className="mt-8 rounded-2xl border border-gray-200 bg-white p-7 shadow-sm transition-shadow hover:shadow-md">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-purple-500 to-fuchsia-600 text-white shadow-sm">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-gray-700 shadow-sm">
               <Link2 className="h-5 w-5" />
             </div>
             <div>
-              <span className="text-xs font-semibold uppercase tracking-wider text-purple-600">
+              <span className="text-xs font-semibold uppercase tracking-wider text-gray-600">
                 Step 3
               </span>
               <h2 className="text-xl font-semibold text-gray-900">
@@ -423,31 +423,31 @@ export default function Favicon() {
         </div>
 
         {/* ── Troubleshooting ── */}
-        <div className="mt-8 flex gap-3 rounded-2xl border border-orange-200 bg-orange-50 p-5">
-          <RotateCcw className="mt-0.5 h-5 w-5 shrink-0 text-orange-600" />
+        <div className="mt-8 flex gap-3 rounded-2xl border border-blue-200 bg-blue-50 p-5">
+          <RotateCcw className="mt-0.5 h-5 w-5 shrink-0 text-gray-600" />
           <div>
-            <h3 className="font-semibold text-orange-900">Not showing up?</h3>
-            <p className="mt-1 text-sm leading-relaxed text-orange-800">
+            <h3 className="font-semibold text-gray-900">Not showing up?</h3>
+            <p className="mt-1 text-sm leading-relaxed text-gray-800">
               First confirm the files actually landed in{" "}
-              <code className="rounded bg-orange-100 px-1.5 py-0.5 font-mono text-xs">
+              <code className="rounded bg-blue-100 px-1.5 py-0.5 font-mono text-xs">
                 public/assets/favicons/
               </code>{" "}
               after a rebuild — if not, double-check the{" "}
-              <code className="rounded bg-orange-100 px-1.5 py-0.5 font-mono text-xs">
+              <code className="rounded bg-blue-100 px-1.5 py-0.5 font-mono text-xs">
                 addPassthroughCopy
               </code>{" "}
               line in{" "}
-              <code className="rounded bg-orange-100 px-1.5 py-0.5 font-mono text-xs">
+              <code className="rounded bg-blue-100 px-1.5 py-0.5 font-mono text-xs">
                 .eleventy.js
               </code>
               . Favicons are also aggressively cached, so do a hard refresh
               (<span className="font-mono">Ctrl/Cmd + Shift + R</span>), open the page in
               a private window, or append a cache-buster like{" "}
-              <code className="rounded bg-orange-100 px-1.5 py-0.5 font-mono text-xs">
+              <code className="rounded bg-blue-100 px-1.5 py-0.5 font-mono text-xs">
                 /assets/favicons/favicon.svg?v=2
               </code>
               . And make sure each path starts with a leading{" "}
-              <code className="rounded bg-orange-100 px-1.5 py-0.5 font-mono text-xs">
+              <code className="rounded bg-blue-100 px-1.5 py-0.5 font-mono text-xs">
                 /
               </code>
               .

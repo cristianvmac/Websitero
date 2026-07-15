@@ -41,19 +41,7 @@ export default function Header() {
           fontFamily: FONTS.body,
         }}
       >
-        {/* Decorative amber glow at the top */}
-        <div style={{
-          position: "fixed",
-          top: 0,
-          left: "50%",
-          transform: "translateX(-50%)",
-          width: 600,
-          height: 300,
-          background: "radial-gradient(ellipse, rgba(232,168,76,0.07) 0%, transparent 70%)",
-          pointerEvents: "none",
-          zIndex: 0,
-        }} />
-
+     
         {/* Scrollable content column */}
         <div style={{
           maxWidth: 864,

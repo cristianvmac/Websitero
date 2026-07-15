@@ -16,7 +16,7 @@ export default function Internationalization() {
 
   return (
     <div className="min-h-full p-12">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl ml-6">
 
       {/* Hero Section */}
       <div className="mb-12">
@@ -49,7 +49,7 @@ export default function Internationalization() {
       {/* Setup Instructions */}
       <div className="mb-12 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <Globe className="w-6 h-6" />
           </div>
           <div>
@@ -66,7 +66,7 @@ export default function Internationalization() {
           {/* Step 1 */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
+              <div className="shrink-0 w-8 h-8 bg-blue-50 text-gray-700 rounded-full flex items-center justify-center font-bold">
                 1
               </div>
               <h3 className="text-xl font-bold text-gray-900">
@@ -132,7 +132,7 @@ module.exports = async function (eleventyConfig) {
               </button>
             </div>
             <div className="ml-11 mt-3 p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
-              <p className="text-sm text-blue-800">
+              <p className="text-sm text-gray-800">
                 💡 <strong>Note:</strong> <code className="bg-blue-100 px-2 py-0.5 rounded">defaultLanguage</code> should be the language you publish at the root. In this starter that&apos;s English &mdash; the page files already carry <code className="bg-blue-100 px-2 py-0.5 rounded">lang: en</code>.
               </p>
             </div>
@@ -141,7 +141,7 @@ module.exports = async function (eleventyConfig) {
           {/* Step 2 */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
+              <div className="shrink-0 w-8 h-8 bg-blue-50 text-gray-700 rounded-full flex items-center justify-center font-bold">
                 2
               </div>
               <h3 className="text-xl font-bold text-gray-900">
@@ -207,9 +207,9 @@ module.exports = async function (eleventyConfig) {
                 )}
               </button>
             </div>
-            <div className="ml-11 mt-3 p-4 bg-green-50 border-2 border-green-200 rounded-lg">
-              <p className="text-sm text-green-800">
-                ✨ Folders aren&apos;t URL segments in this kit &mdash; <code className="bg-green-100 px-1.5 py-0.5 rounded">permalink</code> is. Serving English at the root and prefixing the rest is exactly the official guide&apos;s <strong>&ldquo;implied default language&rdquo;</strong> layout. Keep page slugs aligned across languages so the locale filters can map between them.
+            <div className="ml-11 mt-3 p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
+              <p className="text-sm text-gray-800">
+                ✨ Folders aren&apos;t URL segments in this kit &mdash; <code className="bg-blue-100 px-1.5 py-0.5 rounded">permalink</code> is. Serving English at the root and prefixing the rest is exactly the official guide&apos;s <strong>&ldquo;implied default language&rdquo;</strong> layout. Keep page slugs aligned across languages so the locale filters can map between them.
               </p>
             </div>
           </div>
@@ -217,7 +217,7 @@ module.exports = async function (eleventyConfig) {
           {/* Step 3 */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
+              <div className="shrink-0 w-8 h-8 bg-blue-50 text-gray-700 rounded-full flex items-center justify-center font-bold">
                 3
               </div>
               <h3 className="text-xl font-bold text-gray-900">
@@ -261,7 +261,7 @@ permalink: "/es/about/"
           {/* Step 4 */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
+              <div className="shrink-0 w-8 h-8 bg-blue-50 text-gray-700 rounded-full flex items-center justify-center font-bold">
                 4
               </div>
               <h3 className="text-xl font-bold text-gray-900">
@@ -299,13 +299,13 @@ permalink: "/es/about/"
           </div>
 
           {/* Success */}
-          <div className="ml-11 p-6 bg-green-50 border-2 border-green-200 rounded-lg">
-            <p className="text-green-900 font-medium mb-2">
+          <div className="ml-11 p-6 bg-blue-50 border-2 border-blue-200 rounded-lg">
+            <p className="text-gray-900 font-medium mb-2">
               🎉 You&apos;re Multi-Language!
             </p>
-            <p className="text-sm text-green-800">
+            <p className="text-sm text-gray-800">
               Eleventy now builds localized routes from your folders and permalinks, and
-              {" "}<code className="bg-green-100 px-1.5 py-0.5 rounded">locale_url</code> keeps every link pointing at the right language.
+              {" "}<code className="bg-blue-100 px-1.5 py-0.5 rounded">locale_url</code> keeps every link pointing at the right language.
             </p>
           </div>
         </div>
@@ -314,12 +314,12 @@ permalink: "/es/about/"
       {/* Setting the html lang */}
       <div className="mb-12 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-purple-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <FolderTree className="w-6 h-6" />
           </div>
           <div>
             <h2 className="text-3xl font-bold text-gray-900 mb-2">
-              Output the Correct <code className="text-2xl bg-purple-100 text-purple-800 px-2 py-0.5 rounded">&lt;html lang&gt;</code>
+              Output the Correct <code className="text-2xl bg-blue-100 text-gray-800 px-2 py-0.5 rounded">&lt;html lang&gt;</code>
             </h2>
             <p className="text-lg text-gray-600">
               Let the plugin set the language attribute for you
@@ -361,10 +361,10 @@ permalink: "/es/about/"
           </button>
         </div>
 
-        <div className="mt-4 p-4 bg-purple-50 border-2 border-purple-200 rounded-lg">
-          <p className="text-sm text-purple-800">
-            ✨ <code className="bg-purple-100 px-1.5 py-0.5 rounded">page.lang</code> is always available once the plugin is registered, so you get a correct
-            {" "}<code className="bg-purple-100 px-1.5 py-0.5 rounded">&lt;html lang&gt;</code> for accessibility and SEO with no per-page wiring. The <code className="bg-purple-100 px-1.5 py-0.5 rounded">lang</code> you set in <code className="bg-purple-100 px-1.5 py-0.5 rounded">es.json</code> stays available too, for your own translation logic.
+        <div className="mt-4 p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
+          <p className="text-sm text-gray-800">
+            ✨ <code className="bg-blue-100 px-1.5 py-0.5 rounded">page.lang</code> is always available once the plugin is registered, so you get a correct
+            {" "}<code className="bg-blue-100 px-1.5 py-0.5 rounded">&lt;html lang&gt;</code> for accessibility and SEO with no per-page wiring. The <code className="bg-blue-100 px-1.5 py-0.5 rounded">lang</code> you set in <code className="bg-blue-100 px-1.5 py-0.5 rounded">es.json</code> stays available too, for your own translation logic.
           </p>
         </div>
       </div>
@@ -372,7 +372,7 @@ permalink: "/es/about/"
       {/* Fallback / errorMode */}
       <div className="mb-12 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-green-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <GitBranch className="w-6 h-6" />
           </div>
           <div>
@@ -429,7 +429,7 @@ eleventyConfig.addPlugin(I18nPlugin, {
               The default. Throws a build error when the localized content is missing, so gaps surface early.
             </p>
           </div>
-          <div className="bg-green-50 rounded-xl p-5 border-2 border-green-200">
+          <div className="bg-blue-50 rounded-xl p-5 border-2 border-blue-200">
             <h3 className="font-bold text-gray-900 mb-1 text-sm">allow-fallback</h3>
             <p className="text-sm text-gray-600">
               Only errors when content is missing in <em>both</em> the locale and the default language.
@@ -443,41 +443,41 @@ eleventyConfig.addPlugin(I18nPlugin, {
           </div>
         </div>
 
-        <div className="mt-4 p-4 bg-green-50 border-2 border-green-200 rounded-lg">
-          <p className="text-sm text-green-800">
-            With <code className="bg-green-100 px-1.5 py-0.5 rounded">allow-fallback</code>, a link built with
-            {" "}<code className="bg-green-100 px-1.5 py-0.5 rounded">locale_url</code> on an <code className="bg-green-100 px-1.5 py-0.5 rounded">/es/</code> page
+        <div className="mt-4 p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
+          <p className="text-sm text-gray-800">
+            With <code className="bg-blue-100 px-1.5 py-0.5 rounded">allow-fallback</code>, a link built with
+            {" "}<code className="bg-blue-100 px-1.5 py-0.5 rounded">locale_url</code> on an <code className="bg-blue-100 px-1.5 py-0.5 rounded">/es/</code> page
             falls back to the English version when
-            {" "}<code className="bg-green-100 px-1.5 py-0.5 rounded">src/content/es/my-page.html</code> doesn&apos;t exist yet &mdash; no broken link.
+            {" "}<code className="bg-blue-100 px-1.5 py-0.5 rounded">src/content/es/my-page.html</code> doesn&apos;t exist yet &mdash; no broken link.
           </p>
         </div>
       </div>
 
       {/* Language switcher with locale_links */}
-      <div className="mb-12 bg-linear-to-br from-green-50 to-emerald-50 rounded-2xl p-8 border-2 border-green-200">
+      <div className="mb-12 bg-blue-50 rounded-2xl p-8 border-2 border-blue-200">
         <h2 className="text-2xl font-bold text-gray-900 mb-2 text-center">
           Build a Language Switcher
         </h2>
         <p className="text-gray-600 mb-6 text-center max-w-2xl mx-auto">
-          The <code className="bg-white px-1.5 py-0.5 rounded border border-green-200">locale_links</code> filter returns
+          The <code className="bg-white px-1.5 py-0.5 rounded border border-blue-200">locale_links</code> filter returns
           every <em>other</em> localized version of the current page (the current page is excluded) &mdash; perfect for a dropdown or
-          {" "}<code className="bg-white px-1.5 py-0.5 rounded border border-green-200">hreflang</code> tags.
+          {" "}<code className="bg-white px-1.5 py-0.5 rounded border border-blue-200">hreflang</code> tags.
         </p>
 
         <div className="grid md:grid-cols-3 gap-4 mb-6">
-          <div className="bg-white rounded-xl p-5 border-2 border-green-200">
+          <div className="bg-white rounded-xl p-5 border-2 border-blue-200">
             <h3 className="font-bold text-gray-900 mb-1 text-sm">link.url</h3>
             <p className="text-sm text-gray-600">
               The localized URL for that translation of the current page.
             </p>
           </div>
-          <div className="bg-white rounded-xl p-5 border-2 border-green-200">
+          <div className="bg-white rounded-xl p-5 border-2 border-blue-200">
             <h3 className="font-bold text-gray-900 mb-1 text-sm">link.lang</h3>
             <p className="text-sm text-gray-600">
               The BCP 47 language code, e.g. <code className="bg-gray-100 px-1 rounded">es</code> or <code className="bg-gray-100 px-1 rounded">pt-br</code>.
             </p>
           </div>
-          <div className="bg-white rounded-xl p-5 border-2 border-green-200">
+          <div className="bg-white rounded-xl p-5 border-2 border-blue-200">
             <h3 className="font-bold text-gray-900 mb-1 text-sm">link.label</h3>
             <p className="text-sm text-gray-600">
               A human-friendly language name when one is available for that code.
@@ -517,7 +517,7 @@ eleventyConfig.addPlugin(I18nPlugin, {
           </button>
         </div>
 
-        <div className="mt-4 p-4 bg-white border-2 border-green-200 rounded-lg">
+        <div className="mt-4 p-4 bg-white border-2 border-blue-200 rounded-lg">
           <p className="text-sm text-gray-700">
             💡 Eleventy builds static HTML, so there&apos;s no runtime browser detection. Pair this switcher with
             {" "}<code className="bg-gray-100 px-1.5 py-0.5 rounded">hreflang</code> tags so search engines route each visitor to the right language.
@@ -528,7 +528,7 @@ eleventyConfig.addPlugin(I18nPlugin, {
       {/* Localized blog navigation */}
       <div className="mb-12 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-orange-500 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <BookOpen className="w-6 h-6" />
           </div>
           <div>
@@ -574,24 +574,24 @@ eleventyConfig.addPlugin(I18nPlugin, {
       </div>
 
       {/* Next Steps */}
-      <div className="bg-linear-to-br from-gray-900 to-gray-800 rounded-2xl p-8 text-white text-center">
+      <div className="bg-white border-2 border-gray-200 shadow-sm rounded-2xl p-8 text-gray-700 text-center">
         <h2 className="text-3xl font-bold mb-4">
           Ready to Go Global! 🌍
         </h2>
-        <p className="text-xl text-gray-300 mb-8">
+        <p className="text-xl text-gray-600 mb-8">
           Your site now speaks multiple languages with clean URLs and smart fallbacks.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <Link
             href="https://www.11ty.dev/docs/plugins/i18n/"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-50 hover:bg-blue-100 text-gray-700 font-bold rounded-lg transition-colors"
           >
             <Globe className="w-5 h-5" />
             Eleventy I18n Docs
           </Link>
           <Link
             href="/docs/eleventy/features"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-white hover:bg-gray-100 text-gray-900 font-bold rounded-lg transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-white hover:bg-gray-100 text-gray-900 border border-gray-200 font-bold rounded-lg transition-colors"
           >
             Back to Features
             <ArrowRight className="w-5 h-5" />

@@ -149,7 +149,7 @@ site_url: https://your-site.netlify.app`;
 
   return (
     <div className="min-h-full p-12">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl ml-6">
 
       {/* Breadcrumb */}
       <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-x-1 gap-y-1 text-base font-normal text-slate-900">
@@ -175,7 +175,7 @@ site_url: https://your-site.netlify.app`;
             href="https://decapcms.org/docs/basic-steps/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-600 underline font-semibold"
+            className="text-gray-600 underline font-semibold"
           >
             Decap CMS
           </a>
@@ -185,7 +185,7 @@ site_url: https://your-site.netlify.app`;
             href="https://decapbridge.com/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-600 underline font-semibold"
+            className="text-gray-600 underline font-semibold"
           >
             DecapBridge
           </a>
@@ -194,19 +194,19 @@ site_url: https://your-site.netlify.app`;
       </div>
 
       {/* Before You Start */}
-      <div className="mb-12 p-6 bg-yellow-50 border-2 border-yellow-200 rounded-xl">
-        <h3 className="text-lg font-bold text-yellow-900 mb-3 flex items-center gap-2">
+      <div className="mb-12 p-6 bg-blue-50 border-2 border-blue-200 rounded-xl">
+        <h3 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
           <Clock className="w-5 h-5" />
           Before You Start
         </h3>
-        <p className="text-yellow-800 mb-4">
+        <p className="text-gray-800 mb-4">
           Make sure your repo is pushed to GitHub and your site is deployed (it doesn&apos;t have to
           be Netlify) before moving on. If you haven&apos;t scaffolded and deployed the template yet,
           start with the quick build tutorial first.
         </p>
         <Link
           href="/docs/eleventy/tutorials/build-in-5-minutes"
-          className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-600 hover:bg-yellow-700 text-white font-semibold rounded-lg transition-colors"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 hover:bg-gray-700 text-gray-700 font-semibold rounded-lg transition-colors"
         >
           <ArrowRight className="w-4 h-4" />
           Build in 5 Minutes
@@ -245,12 +245,12 @@ site_url: https://your-site.netlify.app`;
                 key={index}
                 className="relative bg-linear-to-br from-white to-gray-50 rounded-xl p-5 border-2 border-gray-200"
               >
-                <div className="absolute -top-3 -left-3 w-9 h-9 bg-green-600 text-white rounded-full flex items-center justify-center font-bold shadow-lg">
+                <div className="absolute -top-3 -left-3 w-9 h-9 bg-blue-50 text-gray-700 rounded-full flex items-center justify-center font-bold shadow-lg">
                   {index + 1}
                 </div>
                 <div className="flex items-center gap-2 mb-3 mt-1">
-                  <div className="p-1.5 bg-green-100 rounded-lg">
-                    <Icon className="w-4 h-4 text-green-600" />
+                  <div className="p-1.5 bg-blue-100 rounded-lg">
+                    <Icon className="w-4 h-4 text-gray-600" />
                   </div>
                 </div>
                 <h3 className="font-bold text-gray-900 text-sm mb-1">{item.title}</h3>
@@ -264,7 +264,7 @@ site_url: https://your-site.netlify.app`;
       {/* ── Section: How the blog works ── */}
       <div className="mb-12 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-emerald-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <FolderTree className="w-6 h-6" />
           </div>
           <div>
@@ -294,21 +294,21 @@ site_url: https://your-site.netlify.app`;
 
           <div className="grid md:grid-cols-3 gap-4">
             <div className="p-4 border-2 border-gray-200 rounded-lg">
-              <FileCode className="w-5 h-5 text-emerald-600 mb-2" />
+              <FileCode className="w-5 h-5 text-gray-600 mb-2" />
               <p className="font-bold text-gray-900 text-sm mb-1">src/admin/config.yml</p>
               <p className="text-xs text-gray-600">
                 Defines your collection, the fields each post has, and which backend handles login.
               </p>
             </div>
             <div className="p-4 border-2 border-gray-200 rounded-lg">
-              <FileText className="w-5 h-5 text-emerald-600 mb-2" />
+              <FileText className="w-5 h-5 text-gray-600 mb-2" />
               <p className="font-bold text-gray-900 text-sm mb-1">src/content/blog/</p>
               <p className="text-xs text-gray-600">
                 One markdown file per post. The CMS creates, updates, and deletes files here.
               </p>
             </div>
             <div className="p-4 border-2 border-gray-200 rounded-lg">
-              <ImageIcon className="w-5 h-5 text-emerald-600 mb-2" />
+              <ImageIcon className="w-5 h-5 text-gray-600 mb-2" />
               <p className="font-bold text-gray-900 text-sm mb-1">src/assets/images/blog/</p>
               <p className="text-xs text-gray-600">
                 Where featured images land when uploaded through the dashboard.
@@ -317,11 +317,11 @@ site_url: https://your-site.netlify.app`;
           </div>
 
           <div className="p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
-            <p className="text-blue-900 font-medium mb-1 flex items-center gap-2">
+            <p className="text-gray-900 font-medium mb-1 flex items-center gap-2">
               <Info className="w-4 h-4" />
               Edits become commits
             </p>
-            <p className="text-sm text-blue-800">
+            <p className="text-sm text-gray-800">
               When someone saves a post in the dashboard, Decap commits the markdown change to your
               GitHub repo. That commit triggers a rebuild on your host, and the new post goes live —
               no manual deploy needed.
@@ -333,7 +333,7 @@ site_url: https://your-site.netlify.app`;
       {/* ── Section: Configure the blog collection ── */}
       <div className="mb-12 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-indigo-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <Settings className="w-6 h-6" />
           </div>
           <div>
@@ -359,7 +359,7 @@ site_url: https://your-site.netlify.app`;
               className="absolute right-3 top-3 p-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors"
             >
               {copiedStep === 2 ? (
-                <Check className="w-4 h-4 text-green-400" />
+                <Check className="w-4 h-4 text-gray-400" />
               ) : (
                 <Copy className="w-4 h-4 text-gray-400" />
               )}
@@ -379,7 +379,7 @@ site_url: https://your-site.netlify.app`;
                     <code className="bg-gray-100 px-1.5 py-0.5 rounded text-xs text-gray-700">
                       {field.name}
                     </code>
-                    <code className="bg-indigo-50 text-indigo-700 px-1.5 py-0.5 rounded text-xs">
+                    <code className="bg-blue-50 text-gray-700 px-1.5 py-0.5 rounded text-xs">
                       {field.widget}
                     </code>
                   </div>
@@ -389,17 +389,17 @@ site_url: https://your-site.netlify.app`;
             </div>
           </div>
 
-          <div className="p-4 bg-yellow-50 border-2 border-yellow-200 rounded-lg">
-            <p className="text-yellow-900 font-medium mb-1 flex items-center gap-2">
+          <div className="p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
+            <p className="text-gray-900 font-medium mb-1 flex items-center gap-2">
               <ImageIcon className="w-4 h-4" />
               Where images go
             </p>
-            <p className="text-sm text-yellow-800">
-              <code className="bg-yellow-100 px-1.5 py-0.5 rounded">media_folder</code> is where
+            <p className="text-sm text-gray-800">
+              <code className="bg-blue-100 px-1.5 py-0.5 rounded">media_folder</code> is where
               uploaded files are stored in the repo, and{" "}
-              <code className="bg-yellow-100 px-1.5 py-0.5 rounded">public_folder</code> is the path
+              <code className="bg-blue-100 px-1.5 py-0.5 rounded">public_folder</code> is the path
               written into your markdown. Keep them pointed at the same{" "}
-              <code className="bg-yellow-100 px-1.5 py-0.5 rounded">blog</code> folder so featured
+              <code className="bg-blue-100 px-1.5 py-0.5 rounded">blog</code> folder so featured
               images resolve correctly on the live site.
             </p>
           </div>
@@ -409,7 +409,7 @@ site_url: https://your-site.netlify.app`;
       {/* ── Section: Post layout & permalink ── */}
       <div className="mb-12 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-purple-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <FileText className="w-6 h-6" />
           </div>
           <div>
@@ -473,7 +473,7 @@ site_url: https://your-site.netlify.app`;
       {/* ── Section: Create a DecapBridge site ── */}
       <div className="mb-12 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <Server className="w-6 h-6" />
           </div>
           <div>
@@ -488,14 +488,14 @@ site_url: https://your-site.netlify.app`;
         <div className="space-y-6">
           <ul className="space-y-3 text-sm text-gray-700">
             <li className="flex gap-2">
-              <span className="text-blue-600 font-bold">1.</span>
+              <span className="text-gray-600 font-bold">1.</span>
               <span>
                 Navigate to{" "}
                 <a
                   href="https://decapbridge.com/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-600 underline"
+                  className="text-gray-600 underline"
                 >
                   decapbridge.com
                 </a>{" "}
@@ -503,7 +503,7 @@ site_url: https://your-site.netlify.app`;
               </span>
             </li>
             <li className="flex gap-2">
-              <span className="text-blue-600 font-bold">2.</span>
+              <span className="text-gray-600 font-bold">2.</span>
               <span>
                 Open the dashboard and click{" "}
                 <strong>Create New Site</strong>. You&apos;ll be asked to fill in three input fields.
@@ -513,7 +513,7 @@ site_url: https://your-site.netlify.app`;
 
           <div className="grid md:grid-cols-3 gap-4">
             <div className="p-4 border-2 border-gray-200 rounded-lg">
-              <Github className="w-5 h-5 text-blue-600 mb-2" />
+              <Github className="w-5 h-5 text-gray-600 mb-2" />
               <p className="font-bold text-gray-900 text-sm mb-1">GitHub repository</p>
               <p className="text-xs text-gray-600">
                 Must be in{" "}
@@ -523,14 +523,14 @@ site_url: https://your-site.netlify.app`;
               </p>
             </div>
             <div className="p-4 border-2 border-gray-200 rounded-lg">
-              <KeyRound className="w-5 h-5 text-blue-600 mb-2" />
+              <KeyRound className="w-5 h-5 text-gray-600 mb-2" />
               <p className="font-bold text-gray-900 text-sm mb-1">GitHub access token</p>
               <p className="text-xs text-gray-600">
                 A fine-grained personal access token (see the next section for how to create one).
               </p>
             </div>
             <div className="p-4 border-2 border-gray-200 rounded-lg">
-              <Link2 className="w-5 h-5 text-blue-600 mb-2" />
+              <Link2 className="w-5 h-5 text-gray-600 mb-2" />
               <p className="font-bold text-gray-900 text-sm mb-1">Decap CMS URL</p>
               <p className="text-xs text-gray-600">
                 The deployed URL of your admin dashboard, e.g.{" "}
@@ -545,7 +545,7 @@ site_url: https://your-site.netlify.app`;
       {/* ── Section: GitHub personal access token ── */}
       <div className="mb-12 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-gray-800 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <Github className="w-6 h-6" />
           </div>
           <div>
@@ -572,7 +572,7 @@ site_url: https://your-site.netlify.app`;
               "Set Repository access to the desired repository only.",
             ].map((step, i) => (
               <li key={i} className="flex gap-3">
-                <span className="shrink-0 w-6 h-6 bg-gray-800 text-white rounded-full flex items-center justify-center text-xs font-bold">
+                <span className="shrink-0 w-6 h-6 bg-blue-50 text-gray-700 rounded-full flex items-center justify-center text-xs font-bold">
                   {i + 1}
                 </span>
                 <span className="pt-0.5">{step}</span>
@@ -581,11 +581,11 @@ site_url: https://your-site.netlify.app`;
           </ol>
 
           <div className="p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
-            <p className="text-blue-900 font-medium mb-1 flex items-center gap-2">
+            <p className="text-gray-900 font-medium mb-1 flex items-center gap-2">
               <ShieldCheck className="w-4 h-4" />
               Repository permissions
             </p>
-            <p className="text-sm text-blue-800">
+            <p className="text-sm text-gray-800">
               Under <strong>Permissions / Repository permissions</strong>, set{" "}
               <strong>Read and write</strong> access for this repository&apos;s{" "}
               <code className="bg-blue-100 px-1.5 py-0.5 rounded">Contents</code> and{" "}
@@ -600,7 +600,7 @@ site_url: https://your-site.netlify.app`;
               "Copy your token now — you will not be able to see it again.",
             ].map((step, i) => (
               <li key={i} className="flex gap-3">
-                <span className="shrink-0 w-6 h-6 bg-gray-800 text-white rounded-full flex items-center justify-center text-xs font-bold">
+                <span className="shrink-0 w-6 h-6 bg-blue-50 text-gray-700 rounded-full flex items-center justify-center text-xs font-bold">
                   {i + 9}
                 </span>
                 <span className="pt-0.5">{step}</span>
@@ -608,12 +608,12 @@ site_url: https://your-site.netlify.app`;
             ))}
           </ol>
 
-          <div className="p-4 bg-yellow-50 border-2 border-yellow-200 rounded-lg">
-            <p className="text-yellow-900 font-medium mb-1 flex items-center gap-2">
+          <div className="p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
+            <p className="text-gray-900 font-medium mb-1 flex items-center gap-2">
               <Info className="w-4 h-4" />
               Don&apos;t lose the token
             </p>
-            <p className="text-sm text-yellow-800">
+            <p className="text-sm text-gray-800">
               The token is shown only once. Copy it before leaving the page and paste it straight
               into the DecapBridge <strong>GitHub access token</strong> field.
             </p>
@@ -624,7 +624,7 @@ site_url: https://your-site.netlify.app`;
       {/* ── Section: Configure the backend ── */}
       <div className="mb-12 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-indigo-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <Settings className="w-6 h-6" />
           </div>
           <div>
@@ -663,12 +663,12 @@ site_url: https://your-site.netlify.app`;
             </button>
           </div>
 
-          <div className="p-4 bg-green-50 border-2 border-green-200 rounded-lg">
-            <p className="text-green-900 font-medium mb-1 flex items-center gap-2">
+          <div className="p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
+            <p className="text-gray-900 font-medium mb-1 flex items-center gap-2">
               <Rocket className="w-4 h-4" />
               Push and test
             </p>
-            <p className="text-sm text-green-800">
+            <p className="text-sm text-gray-800">
               Push the change to your repo and test the authentication system. As the admin of the
               site, your login credentials for the Decap dashboard are the same as your
               decapbridge.com credentials.
@@ -680,7 +680,7 @@ site_url: https://your-site.netlify.app`;
       {/* ── Section: Publish posts & invite the client ── */}
       <div className="mb-12 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-pink-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <PenLine className="w-6 h-6" />
           </div>
           <div>
@@ -714,7 +714,7 @@ site_url: https://your-site.netlify.app`;
               </>,
             ].map((step, i) => (
               <li key={i} className="flex gap-3">
-                <span className="shrink-0 w-6 h-6 bg-pink-600 text-white rounded-full flex items-center justify-center text-xs font-bold">
+                <span className="shrink-0 w-6 h-6 bg-blue-50 text-gray-700 rounded-full flex items-center justify-center text-xs font-bold">
                   {i + 1}
                 </span>
                 <span className="pt-0.5">{step}</span>
@@ -724,11 +724,11 @@ site_url: https://your-site.netlify.app`;
 
           <div className="grid md:grid-cols-2 gap-4">
             <div className="p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
-              <p className="text-blue-900 font-medium mb-1 flex items-center gap-2">
+              <p className="text-gray-900 font-medium mb-1 flex items-center gap-2">
                 <UserPlus className="w-4 h-4" />
                 Invite your client
               </p>
-              <p className="text-sm text-blue-800">
+              <p className="text-sm text-gray-800">
                 In your DecapBridge dashboard, add your client as a collaborator. They get their own
                 email and password — they never need a GitHub account to publish.
               </p>
@@ -745,34 +745,34 @@ site_url: https://your-site.netlify.app`;
             </div>
           </div>
 
-          <div className="p-4 bg-indigo-50 border-2 border-indigo-200 rounded-lg">
-            <p className="text-indigo-900 font-medium mb-1 flex items-center gap-2">
+          <div className="p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
+            <p className="text-gray-900 font-medium mb-1 flex items-center gap-2">
               <Terminal className="w-4 h-4" />
               Editing locally (optional)
             </p>
-            <p className="text-sm text-indigo-800">
+            <p className="text-sm text-gray-800">
               The config keeps{" "}
-              <code className="bg-indigo-100 px-1.5 py-0.5 rounded">local_backend: true</code>, so you
+              <code className="bg-blue-100 px-1.5 py-0.5 rounded">local_backend: true</code>, so you
               can edit content on your machine without logging in. In one terminal run{" "}
-              <code className="bg-indigo-100 px-1.5 py-0.5 rounded">npx decap-server</code>, start the
-              site with <code className="bg-indigo-100 px-1.5 py-0.5 rounded">npm start</code> in
+              <code className="bg-blue-100 px-1.5 py-0.5 rounded">npx decap-server</code>, start the
+              site with <code className="bg-blue-100 px-1.5 py-0.5 rounded">npm start</code> in
               another, then open{" "}
-              <code className="bg-indigo-100 px-1.5 py-0.5 rounded">localhost:8080/admin/</code>.
+              <code className="bg-blue-100 px-1.5 py-0.5 rounded">localhost:8080/admin/</code>.
             </p>
           </div>
         </div>
       </div>
 
       {/* Next Steps */}
-      <div className="bg-linear-to-br from-gray-900 to-gray-800 rounded-2xl p-8 text-white">
+      <div className="bg-white border-2 border-gray-200 shadow-sm rounded-2xl p-8 text-gray-700">
         <div className="flex items-center gap-3 mb-4">
           <Newspaper className="w-8 h-8" />
           <h2 className="text-3xl font-bold">Your Blog Is Live</h2>
         </div>
-        <p className="text-xl text-gray-300 mb-6">
+        <p className="text-xl text-gray-600 mb-6">
           Decap CMS now powers your blog and DecapBridge handles the logins. You and your clients can
           sign in at the{" "}
-          <code className="bg-white/10 px-2 py-0.5 rounded">/admin</code> dashboard, and every edit
+          <code className="bg-blue-100 px-2 py-0.5 rounded">/admin</code> dashboard, and every edit
           lands back in your GitHub repo as a commit.
         </p>
         <div className="flex flex-wrap gap-4">
@@ -780,14 +780,14 @@ site_url: https://your-site.netlify.app`;
             href="https://decapcms.org/docs/"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-50 hover:bg-blue-100 text-gray-700 font-bold rounded-lg transition-colors"
           >
             <FileText className="w-5 h-5" />
             Decap CMS Docs
           </a>
           <Link
             href="/docs/eleventy/deployment"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-white hover:bg-gray-100 text-gray-900 font-bold rounded-lg transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-white hover:bg-gray-100 text-gray-900 border border-gray-200 font-bold rounded-lg transition-colors"
           >
             <Rocket className="w-5 h-5" />
             Deployment Guide

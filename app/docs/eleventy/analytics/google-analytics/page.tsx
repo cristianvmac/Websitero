@@ -16,7 +16,7 @@ export default function Analytics() {
 
   return (
     <div className="min-h-full p-12">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl ml-6">
 
       {/* Hero Section */}
       <div className="mb-12">
@@ -45,7 +45,7 @@ export default function Analytics() {
       {/* Google Analytics Setup */}
       <div className="mb-12 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <BarChart3 className="w-6 h-6" />
           </div>
           <div>
@@ -62,7 +62,7 @@ export default function Analytics() {
           {/* Step 1 */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
+              <div className="shrink-0 w-8 h-8 bg-blue-50 text-gray-700 rounded-full flex items-center justify-center font-bold">
                 1
               </div>
               <h3 className="text-xl font-bold text-gray-900">
@@ -70,7 +70,7 @@ export default function Analytics() {
               </h3>
             </div>
             <ol className="space-y-2 text-gray-700 ml-11 list-decimal list-inside">
-              <li>Go to <a href="https://analytics.google.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline font-semibold">Google Analytics</a> and click <span className="font-semibold">Start measuring</span></li>
+              <li>Go to <a href="https://analytics.google.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 underline font-semibold">Google Analytics</a> and click <span className="font-semibold">Start measuring</span></li>
               <li>Create a property (name, timezone, currency) and fill in your business details</li>
               <li>Choose <span className="font-semibold">Web</span> as the platform and add a data stream with your site URL</li>
               <li>Copy your Measurement ID (starts with <code className="bg-gray-100 px-2 py-0.5 rounded">G-</code>)</li>
@@ -80,7 +80,7 @@ export default function Analytics() {
           {/* Step 2 */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
+              <div className="shrink-0 w-8 h-8 bg-blue-50 text-gray-700 rounded-full flex items-center justify-center font-bold">
                 2
               </div>
               <h3 className="text-xl font-bold text-gray-900">
@@ -128,7 +128,7 @@ module.exports = {
           {/* Step 3 */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
+              <div className="shrink-0 w-8 h-8 bg-blue-50 text-gray-700 rounded-full flex items-center justify-center font-bold">
                 3
               </div>
               <h3 className="text-xl font-bold text-gray-900">
@@ -194,7 +194,7 @@ module.exports = {
           {/* Step 4 */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
+              <div className="shrink-0 w-8 h-8 bg-blue-50 text-gray-700 rounded-full flex items-center justify-center font-bold">
                 4
               </div>
               <h3 className="text-xl font-bold text-gray-900">
@@ -223,16 +223,16 @@ npx @11ty/eleventy --serve`}</code></pre>
             </div>
             <ul className="space-y-2 text-gray-700 ml-11 mt-4 list-disc list-inside">
               <li><span className="font-semibold">Realtime report:</span> open Google Analytics → <span className="font-semibold">Reports → Realtime</span>, visit your live site, and you should appear within a minute or two</li>
-              <li><span className="font-semibold">Tag Assistant:</span> install the <a href="https://chromewebstore.google.com/detail/tag-assistant-companion/jmekfmbnaedfebfnmakmokmlfpblbfdm" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline font-semibold">Google Tag Assistant</a> extension to confirm the GA4 tag is firing correctly</li>
+              <li><span className="font-semibold">Tag Assistant:</span> install the <a href="https://chromewebstore.google.com/detail/tag-assistant-companion/jmekfmbnaedfebfnmakmokmlfpblbfdm" target="_blank" rel="noopener noreferrer" className="text-gray-600 underline font-semibold">Google Tag Assistant</a> extension to confirm the GA4 tag is firing correctly</li>
             </ul>
           </div>
 
-          <div className="ml-11 p-4 bg-green-50 border-2 border-green-200 rounded-lg">
-            <p className="text-green-900 font-medium mb-2">
+          <div className="ml-11 p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
+            <p className="text-gray-900 font-medium mb-2">
               ✅ That&apos;s It!
             </p>
-            <p className="text-sm text-green-800">
-              Once you see yourself in the Realtime report, tracking is live. Full reports can take 24&ndash;48 hours to populate. If you run a strict Content Security Policy, allow <code className="bg-green-100 px-1.5 py-0.5 rounded">googletagmanager.com</code> and <code className="bg-green-100 px-1.5 py-0.5 rounded">google-analytics.com</code>.
+            <p className="text-sm text-gray-800">
+              Once you see yourself in the Realtime report, tracking is live. Full reports can take 24&ndash;48 hours to populate. If you run a strict Content Security Policy, allow <code className="bg-blue-100 px-1.5 py-0.5 rounded">googletagmanager.com</code> and <code className="bg-blue-100 px-1.5 py-0.5 rounded">google-analytics.com</code>.
             </p>
           </div>
         </div>
@@ -241,7 +241,7 @@ npx @11ty/eleventy --serve`}</code></pre>
       {/* Track Custom Events */}
       <div className="mb-12 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-green-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <TrendingUp className="w-6 h-6" />
           </div>
           <div>
@@ -300,37 +300,37 @@ npx @11ty/eleventy --serve`}</code></pre>
       </div>
 
       {/* Privacy Note */}
-      <div className="mb-12 p-6 bg-yellow-50 border-2 border-yellow-200 rounded-xl">
+      <div className="mb-12 p-6 bg-blue-50 border-2 border-blue-200 rounded-xl">
         <h3 className="text-lg font-bold text-gray-900 mb-2">
           📋 Privacy &amp; Cookie Consent
         </h3>
         <ul className="space-y-2 text-gray-700">
           <li>• If your visitors are in the EU, GDPR requires consent before loading Analytics cookies</li>
           <li>• A common approach: show a cookie consent banner, then load Analytics only after consent is granted</li>
-          <li>• For compliant tracking, use <a href="https://developers.google.com/tag-platform/security/guides/consent" target="_blank" rel="noopener noreferrer" className="text-blue-700 underline font-semibold">Google Consent Mode</a></li>
+          <li>• For compliant tracking, use <a href="https://developers.google.com/tag-platform/security/guides/consent" target="_blank" rel="noopener noreferrer" className="text-gray-700 underline font-semibold">Google Consent Mode</a></li>
           <li>• Update your privacy policy to mention analytics tracking, and never track personally identifiable information (PII)</li>
         </ul>
       </div>
 
       {/* Next Steps */}
-      <div className="bg-linear-to-br from-gray-900 to-gray-800 rounded-2xl p-8 text-white text-center">
+      <div className="bg-white border-2 border-gray-200 shadow-sm rounded-2xl p-8 text-gray-700 text-center">
         <h2 className="text-3xl font-bold mb-4">
           You&apos;re All Set! 🎉
         </h2>
-        <p className="text-xl text-gray-300 mb-8">
+        <p className="text-xl text-gray-600 mb-8">
           Analytics is now tracking your visitors. Check your dashboard to see real-time data.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <Link
             href="/docs/eleventy/deployment"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-50 hover:bg-blue-100 text-gray-700 font-bold rounded-lg transition-colors"
           >
             <Zap className="w-5 h-5" />
             Deploy Your Site
           </Link>
           <Link
             href="/docs/eleventy/features/seo"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-white hover:bg-gray-100 text-gray-900 font-bold rounded-lg transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-white hover:bg-gray-100 text-gray-900 border border-gray-200 font-bold rounded-lg transition-colors"
           >
             Optimize SEO
             <ArrowRight className="w-5 h-5" />

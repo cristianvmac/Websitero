@@ -79,14 +79,14 @@ export default function GoogleBProfile() {
   ];
 
   const colorClasses = {
-    blue: { bg: "bg-blue-100", text: "text-blue-700", icon: "bg-blue-600" },
-    yellow: { bg: "bg-yellow-100", text: "text-yellow-700", icon: "bg-yellow-600" },
-    green: { bg: "bg-green-100", text: "text-green-700", icon: "bg-green-600" }
+    blue: { bg: "bg-blue-100", text: "text-gray-700", icon: "bg-blue-50" },
+    yellow: { bg: "bg-blue-100", text: "text-gray-700", icon: "bg-blue-50" },
+    green: { bg: "bg-blue-100", text: "text-gray-700", icon: "bg-blue-50" }
   };
 
   return (
     <div className="min-h-full p-12">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl ml-6">
 
       {/* Hero Section */}
       <div className="mb-16 text-center">
@@ -104,7 +104,7 @@ export default function GoogleBProfile() {
         </nav>
         
         <h1 className="text-6xl font-bold text-gray-900 mb-6 leading-tight">
-          Get Found on <span className="text-blue-600">Google Maps</span>
+          Get Found on <span className="text-gray-600">Google Maps</span>
         </h1>
         
         <p className="text-2xl text-gray-600 leading-relaxed mb-4 max-w-4xl mx-auto">
@@ -140,16 +140,16 @@ export default function GoogleBProfile() {
                   href={topic.href}
                   className="group flex items-center gap-4 bg-white rounded-2xl p-4 border-2 border-gray-200 hover:border-blue-400 hover:shadow-lg hover:-translate-y-0.5 transition-all"
                 >
-                  <div className="shrink-0 w-11 h-11 bg-linear-to-br from-blue-50 to-indigo-100 text-blue-600 rounded-xl flex items-center justify-center group-hover:from-blue-600 group-hover:to-indigo-600 group-hover:text-white transition-all">
+                  <div className="shrink-0 w-11 h-11 bg-blue-50 text-gray-600 rounded-xl flex items-center justify-center group-hover:text-gray-700 transition-all">
                     <Icon className="w-5 h-5" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="font-bold text-gray-900 group-hover:text-blue-600 transition-colors leading-snug">
+                    <div className="font-bold text-gray-900 group-hover:text-gray-600 transition-colors leading-snug">
                       {topic.label}
                     </div>
                     <div className="text-sm text-gray-500 truncate">{topic.desc}</div>
                   </div>
-                  <ArrowRight className="w-4 h-4 text-gray-300 shrink-0 group-hover:text-blue-500 group-hover:translate-x-0.5 transition-all" />
+                  <ArrowRight className="w-4 h-4 text-gray-300 shrink-0 group-hover:text-gray-500 group-hover:translate-x-0.5 transition-all" />
                 </Link>
               );
             })}
@@ -158,20 +158,20 @@ export default function GoogleBProfile() {
       </div>
 
       {/* Why It Matters */}
-      <div id="why" className="mb-16 scroll-mt-24 bg-linear-to-br from-orange-50 to-red-50 rounded-3xl p-8 md:p-12 border-2 border-orange-200">
+      <div id="why" className="mb-16 scroll-mt-24 bg-blue-50 rounded-3xl p-8 md:p-12 border-2 border-blue-200">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-4xl font-bold text-gray-900 mb-6 text-center">
             Why Your Google Profile Matters More Than Your Website
           </h2>
           
-          <div className="bg-white rounded-2xl p-8 mb-8 border-2 border-orange-200 shadow-lg">
+          <div className="bg-white rounded-2xl p-8 mb-8 border-2 border-blue-200 shadow-lg">
             <div className="flex items-start gap-4 mb-6">
-              <div className="shrink-0 w-16 h-16 bg-orange-600 text-white rounded-xl flex items-center justify-center text-2xl font-bold">
+              <div className="shrink-0 w-16 h-16 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center text-2xl font-bold">
                 80%
               </div>
               <div>
                 <p className="text-xl text-gray-800 leading-relaxed">
-                  For local service businesses, <strong className="text-orange-600">80% of customer interactions</strong> happen directly on Google Search results pages.
+                  For local service businesses, <strong className="text-gray-600">80% of customer interactions</strong> happen directly on Google Search results pages.
                 </p>
               </div>
             </div>
@@ -180,7 +180,7 @@ export default function GoogleBProfile() {
             </p>
           </div>
 
-          <div className="bg-linear-to-r from-red-600 to-orange-600 rounded-2xl p-8 text-white text-center">
+          <div className="bg-blue-50 rounded-2xl p-8 text-gray-700 text-center">
             <p className="text-2xl font-bold mb-3">
               An unoptimized profile is a leaky bucket.
             </p>
@@ -210,7 +210,7 @@ export default function GoogleBProfile() {
                 className="bg-white rounded-2xl p-8 border-2 border-gray-200 hover:border-gray-300 hover:shadow-xl transition-all"
               >
                 <div className={`w-16 h-16 ${colors.icon} rounded-xl flex items-center justify-center mb-6 shadow-lg`}>
-                  <Icon className="w-8 h-8 text-white" />
+                  <Icon className="w-8 h-8 text-gray-700" />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">
                   {benefit.title}
@@ -225,7 +225,7 @@ export default function GoogleBProfile() {
       </div>
 
       {/* Stats Section */}
-      <div id="results" className="mb-16 scroll-mt-24 bg-linear-to-br from-blue-600 to-indigo-700 rounded-3xl p-8 md:p-12 text-white">
+      <div id="results" className="mb-16 scroll-mt-24 bg-blue-50 rounded-3xl p-8 md:p-12 text-gray-700">
         <h2 className="text-4xl font-bold mb-12 text-center">
           Real Results for Local Businesses
         </h2>
@@ -235,12 +235,12 @@ export default function GoogleBProfile() {
             const Icon = feature.icon;
             return (
               <div key={index} className="text-center">
-                <div className="w-16 h-16 bg-white/20 backdrop-blur rounded-xl flex items-center justify-center mx-auto mb-4">
-                  <Icon className="w-8 h-8 text-white" />
+                <div className="w-16 h-16 bg-white border border-blue-200 rounded-xl flex items-center justify-center mx-auto mb-4">
+                  <Icon className="w-8 h-8 text-gray-700" />
                 </div>
                 <div className="text-5xl font-bold mb-2">{feature.stat}</div>
                 <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
-                <p className="text-blue-100">{feature.description}</p>
+                <p className="text-gray-600">{feature.description}</p>
               </div>
             );
           })}
@@ -263,7 +263,7 @@ export default function GoogleBProfile() {
               className="bg-white rounded-2xl p-8 border-2 border-gray-200 hover:border-blue-400 hover:shadow-lg transition-all"
             >
               <div className="flex items-start gap-6">
-                <div className="shrink-0 w-16 h-16 bg-linear-to-br from-blue-600 to-indigo-600 text-white rounded-xl flex items-center justify-center text-2xl font-bold shadow-lg">
+                <div className="shrink-0 w-16 h-16 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center text-2xl font-bold shadow-lg">
                   {step.number}
                 </div>
                 <div className="flex-1">
@@ -271,7 +271,7 @@ export default function GoogleBProfile() {
                     <h3 className="text-2xl font-bold text-gray-900">
                       {step.title}
                     </h3>
-                    <span className="text-sm font-semibold text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
+                    <span className="text-sm font-semibold text-gray-600 bg-blue-50 px-3 py-1 rounded-full">
                       <Clock className="w-4 h-4 inline mr-1" />
                       {step.duration}
                     </span>
@@ -294,9 +294,9 @@ export default function GoogleBProfile() {
 
         <div className="grid md:grid-cols-2 gap-8">
           {/* Before */}
-          <div className="bg-linear-to-br from-red-50 to-orange-50 rounded-2xl p-8 border-2 border-red-200">
+          <div className="bg-blue-50 rounded-2xl p-8 border-2 border-blue-200">
             <div className="text-center mb-6">
-              <div className="inline-block px-4 py-2 bg-red-600 text-white font-bold rounded-lg mb-4">
+              <div className="inline-block px-4 py-2 bg-blue-50 text-gray-700 font-bold rounded-lg mb-4">
                 ❌ Before
               </div>
               <h3 className="text-2xl font-bold text-gray-900">
@@ -315,7 +315,7 @@ export default function GoogleBProfile() {
                 "Missing important attributes"
               ].map((item, index) => (
                 <li key={index} className="flex items-start gap-3 text-gray-700">
-                  <span className="text-red-600 font-bold shrink-0">✗</span>
+                  <span className="text-gray-600 font-bold shrink-0">✗</span>
                   <span>{item}</span>
                 </li>
               ))}
@@ -323,9 +323,9 @@ export default function GoogleBProfile() {
           </div>
 
           {/* After */}
-          <div className="bg-linear-to-br from-green-50 to-emerald-50 rounded-2xl p-8 border-2 border-green-200">
+          <div className="bg-blue-50 rounded-2xl p-8 border-2 border-blue-200">
             <div className="text-center mb-6">
-              <div className="inline-block px-4 py-2 bg-green-600 text-white font-bold rounded-lg mb-4">
+              <div className="inline-block px-4 py-2 bg-blue-50 text-gray-700 font-bold rounded-lg mb-4">
                 ✓ After
               </div>
               <h3 className="text-2xl font-bold text-gray-900">
@@ -344,7 +344,7 @@ export default function GoogleBProfile() {
                 "All relevant attributes filled"
               ].map((item, index) => (
                 <li key={index} className="flex items-start gap-3 text-gray-700">
-                  <CheckCircle className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-gray-600 shrink-0 mt-0.5" />
                   <span className="font-medium">{item}</span>
                 </li>
               ))}
@@ -398,9 +398,9 @@ export default function GoogleBProfile() {
           ].map((step, index) => (
             <div
               key={index}
-              className="flex items-start gap-5 p-6 bg-gray-50 rounded-2xl border-2 border-gray-100 hover:border-blue-300 hover:bg-blue-50/40 transition-all"
+              className="flex items-start gap-5 p-6 bg-gray-50 rounded-2xl border-2 border-gray-100 hover:border-blue-300 hover:bg-blue-100/40 transition-all"
             >
-              <div className="shrink-0 w-12 h-12 bg-linear-to-br from-blue-600 to-indigo-600 text-white rounded-xl flex items-center justify-center text-xl font-bold shadow-md">
+              <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center text-xl font-bold shadow-md">
                 {index + 1}
               </div>
               <div className="flex-1">
@@ -415,7 +415,7 @@ export default function GoogleBProfile() {
                     href={step.link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-blue-600 font-semibold hover:gap-2.5 transition-all"
+                    className="inline-flex items-center gap-1.5 text-gray-600 font-semibold hover:gap-2.5 transition-all"
                   >
                     {step.link.label}
                     <ExternalLink className="w-4 h-4" />
@@ -427,7 +427,7 @@ export default function GoogleBProfile() {
         </div>
 
         <div className="max-w-3xl mx-auto mt-8 flex items-start gap-3 p-5 bg-blue-50 rounded-xl border-2 border-blue-200">
-          <Zap className="w-6 h-6 text-blue-600 shrink-0 mt-0.5" />
+          <Zap className="w-6 h-6 text-gray-600 shrink-0 mt-0.5" />
           <p className="text-gray-700">
             <strong className="text-gray-900">Short on time?</strong> We handle all of this for you — from verification to ongoing posts and review management. Request a free audit below to get started.
           </p>
@@ -435,17 +435,17 @@ export default function GoogleBProfile() {
       </div>
 
       {/* Free Audit CTA */}
-      <div id="audit" className="scroll-mt-24 bg-linear-to-br from-gray-900 to-gray-800 rounded-3xl p-4 md:p-4 text-white text-center">
+      <div id="audit" className="scroll-mt-24 bg-white border-2 border-gray-200 shadow-sm rounded-3xl p-4 md:p-4 text-gray-700 text-center">
         <div className="max-w-2xl mx-auto">
           <div className="text-4xl mb-4">🎯</div>
           <h2 className="text-3xl font-bold mb-3">
             Get Your Free Profile Audit
           </h2>
-          <p className="text-lg text-gray-300 mb-6 leading-relaxed">
+          <p className="text-lg text-gray-600 mb-6 leading-relaxed">
             Find out exactly what&apos;s holding your Google Business Profile back — and how to fix it.
           </p>
 
-          <div className="bg-white/10 backdrop-blur rounded-2xl p-4 mb-6 text-left">
+          <div className="bg-white border border-gray-200 rounded-2xl p-4 mb-6 text-left">
             <div className="grid sm:grid-cols-2 gap-3">
               {[
                 "Complete profile health score",
@@ -463,7 +463,7 @@ export default function GoogleBProfile() {
 
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 px-7 py-3.5 bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold rounded-xl transition-all shadow-lg hover:-translate-y-0.5"
+            className="inline-flex items-center gap-2 px-7 py-3.5 bg-blue-50 text-gray-700 font-bold rounded-xl transition-all shadow-lg hover:-translate-y-0.5"
           >
             <Zap className="w-5 h-5" />
             Request Your Free Audit

@@ -48,7 +48,7 @@ const topics = [
 export default function LearnJs() {
   return (
     <div className="min-h-full p-12">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl ml-6">
       {/* Hero */}
       <div className="mb-12">
         {/* Breadcrumb */}
@@ -80,9 +80,9 @@ export default function LearnJs() {
         href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript"
         target="_blank"
         rel="noopener noreferrer"
-        className="group flex flex-col sm:flex-row sm:items-center gap-5 bg-linear-to-br from-yellow-50 to-amber-50 rounded-2xl p-6 sm:p-8 border-2 border-yellow-200 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg hover:border-yellow-300 mb-12"
+        className="group flex flex-col sm:flex-row sm:items-center gap-5 bg-blue-50 rounded-2xl p-6 sm:p-8 border-2 border-blue-200 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg hover:border-blue-300 mb-12"
       >
-        <div className="w-14 h-14 shrink-0 rounded-xl border border-yellow-200 bg-white text-yellow-600 flex items-center justify-center">
+        <div className="w-14 h-14 shrink-0 rounded-xl border border-blue-200 bg-white text-gray-600 flex items-center justify-center">
           <Braces className="w-7 h-7" />
         </div>
         <div className="flex-1">
@@ -93,7 +93,7 @@ export default function LearnJs() {
             The complete JavaScript guide, straight from the source.
           </p>
         </div>
-        <span className="inline-flex items-center gap-1.5 text-base font-semibold text-yellow-700 group-hover:text-yellow-800 whitespace-nowrap">
+        <span className="inline-flex items-center gap-1.5 text-base font-semibold text-gray-700 group-hover:text-gray-800 whitespace-nowrap">
           Visit guide
           <ArrowUpRight className="w-5 h-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </span>
@@ -109,9 +109,9 @@ export default function LearnJs() {
           return (
             <div
               key={topic.title}
-              className="bg-white rounded-xl p-5 border border-gray-200 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md hover:border-yellow-200"
+              className="bg-white rounded-xl p-5 border border-gray-200 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md hover:border-blue-200"
             >
-              <div className="w-10 h-10 rounded-lg bg-yellow-50 text-yellow-600 border border-yellow-200 flex items-center justify-center mb-3">
+              <div className="w-10 h-10 rounded-lg bg-blue-50 text-gray-600 border border-blue-200 flex items-center justify-center mb-3">
                 <Icon className="w-5 h-5" />
               </div>
               <h3 className="font-bold text-gray-900 mb-1">{topic.title}</h3>
@@ -125,13 +125,13 @@ export default function LearnJs() {
 
       {/* Tip */}
       <div className="flex items-start gap-3 p-5 bg-linear-to-br from-gray-50 to-gray-100 rounded-2xl border border-gray-200">
-        <Lightbulb className="w-6 h-6 shrink-0 text-yellow-500 mt-0.5" />
+        <Lightbulb className="w-6 h-6 shrink-0 text-gray-500 mt-0.5" />
         <p className="text-sm text-gray-700 leading-relaxed">
           With HTML, CSS, and JavaScript under your belt, you have a strong
           foundation for web development. Head back to{" "}
           <Link
             href="/docs/astro/additional-resources"
-            className="font-semibold text-blue-600 hover:text-blue-700 hover:underline"
+            className="font-semibold text-gray-600 hover:text-gray-700 hover:underline"
           >
             Additional Resources
           </Link>{" "}

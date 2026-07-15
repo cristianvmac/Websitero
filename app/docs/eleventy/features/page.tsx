@@ -45,16 +45,16 @@ export default function Features() {
   ];
 
   const colorClasses: Record<string, { bg: string; icon: string; border: string; hover: string }> = {
-    green: { bg: "bg-green-50", icon: "bg-green-600", border: "border-green-200", hover: "hover:border-green-400" },
-    blue: { bg: "bg-blue-50", icon: "bg-blue-600", border: "border-blue-200", hover: "hover:border-blue-400" },
-    purple: { bg: "bg-purple-50", icon: "bg-purple-600", border: "border-purple-200", hover: "hover:border-purple-400" },
-    orange: { bg: "bg-orange-50", icon: "bg-orange-600", border: "border-orange-200", hover: "hover:border-orange-400" },
-    red: { bg: "bg-red-50", icon: "bg-red-600", border: "border-red-200", hover: "hover:border-red-400" }
+    green: { bg: "bg-blue-50", icon: "bg-blue-50", border: "border-blue-200", hover: "hover:border-blue-400" },
+    blue: { bg: "bg-blue-50", icon: "bg-blue-50", border: "border-blue-200", hover: "hover:border-blue-400" },
+    purple: { bg: "bg-blue-50", icon: "bg-blue-50", border: "border-blue-200", hover: "hover:border-blue-400" },
+    orange: { bg: "bg-blue-50", icon: "bg-blue-50", border: "border-blue-200", hover: "hover:border-blue-400" },
+    red: { bg: "bg-blue-50", icon: "bg-blue-50", border: "border-blue-200", hover: "hover:border-blue-400" }
   };
 
   return (
     <div className="min-h-full p-12">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl ml-6">
 
       {/* Hero Section */}
       <div className="mb-12 text-center">
@@ -92,16 +92,16 @@ export default function Features() {
               <div className="flex flex-col md:flex-row gap-6">
                 {/* Icon */}
                 <div className={`shrink-0 w-16 h-16 ${colors.icon} rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform`}>
-                  <Icon className="w-8 h-8 text-white" />
+                  <Icon className="w-8 h-8 text-gray-700" />
                 </div>
 
                 {/* Content */}
                 <div className="flex-1">
                   <div className="flex items-start justify-between mb-3">
-                    <h2 className="text-2xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                    <h2 className="text-2xl font-bold text-gray-900 group-hover:text-gray-600 transition-colors">
                       {feature.title}
                     </h2>
-                    <ArrowRight className="w-6 h-6 text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all shrink-0" />
+                    <ArrowRight className="w-6 h-6 text-gray-400 group-hover:text-gray-600 group-hover:translate-x-1 transition-all shrink-0" />
                   </div>
                   
                   <p className="text-gray-600 mb-4">
@@ -126,44 +126,44 @@ export default function Features() {
 
       {/* Quick Stats */}
       <div className="grid md:grid-cols-3 gap-6 mb-12">
-        <div className="bg-linear-to-br from-blue-50 to-indigo-50 rounded-xl p-6 border-2 border-blue-200 text-center">
-          <div className="text-4xl font-bold text-blue-600 mb-2">4</div>
+        <div className="bg-blue-50 rounded-xl p-6 border-2 border-blue-200 text-center">
+          <div className="text-4xl font-bold text-gray-600 mb-2">4</div>
           <div className="text-gray-700 font-medium">Core Features</div>
           <div className="text-sm text-gray-600">Everything you need</div>
         </div>
 
-        <div className="bg-linear-to-br from-green-50 to-emerald-50 rounded-xl p-6 border-2 border-green-200 text-center">
-          <div className="text-4xl font-bold text-green-600 mb-2">5min</div>
+        <div className="bg-blue-50 rounded-xl p-6 border-2 border-blue-200 text-center">
+          <div className="text-4xl font-bold text-gray-600 mb-2">5min</div>
           <div className="text-gray-700 font-medium">Setup Time</div>
           <div className="text-sm text-gray-600">Quick & easy</div>
         </div>
 
-        <div className="bg-linear-to-br from-purple-50 to-pink-50 rounded-xl p-6 border-2 border-purple-200 text-center">
-          <div className="text-4xl font-bold text-purple-600 mb-2">0</div>
+        <div className="bg-blue-50 rounded-xl p-6 border-2 border-blue-200 text-center">
+          <div className="text-4xl font-bold text-gray-600 mb-2">0</div>
           <div className="text-gray-700 font-medium">Complex Config</div>
           <div className="text-sm text-gray-600">Just works</div>
         </div>
       </div>
 
       {/* CTA */}
-      <div className="bg-linear-to-br from-gray-900 to-gray-800 rounded-2xl p-4 text-white text-center">
+      <div className="bg-white border-2 border-gray-200 shadow-sm rounded-2xl p-4 text-gray-700 text-center">
         <h2 className="text-xl font-bold mb-4">
           Ready to Get Started?
         </h2>
-        <p className="text-lg text-gray-300 mb-8">
+        <p className="text-lg text-gray-600 mb-8">
           All features are ready to use. Just follow the quick setup guides.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <Link
             href="/docs/get-started"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-colors text-lg shadow-lg"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-blue-50 hover:bg-blue-100 text-gray-700 font-bold rounded-lg transition-colors text-lg shadow-lg"
           >
             <Zap className="w-5 h-5" />
             Get Started Now
           </Link>
           <Link
             href="/docs/build-in-5-minutes"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-white hover:bg-gray-100 text-gray-900 font-bold rounded-lg transition-colors text-lg"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-white hover:bg-gray-100 text-gray-900 border border-gray-200 font-bold rounded-lg transition-colors text-lg"
           >
             Build in 5 Minutes
             <ArrowRight className="w-5 h-5" />

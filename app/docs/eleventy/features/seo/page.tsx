@@ -19,7 +19,7 @@ export default function SEOtags() {
 
   return (
     <div className="min-h-full p-12">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl ml-6">
       {/* Breadcrumb */}
       <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-x-1 gap-y-1 text-base font-normal text-slate-900">
         <Link href="/docs/eleventy" className="rounded-full py-1 hover:text-slate-600 hover:underline">
@@ -50,7 +50,7 @@ export default function SEOtags() {
       {/* The base layout head Section */}
       <div id="setup" className="mb-16 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-green-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <FileCode className="w-6 h-6" />
           </div>
           <div>
@@ -67,7 +67,7 @@ export default function SEOtags() {
           {/* Step 1: client.js */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="shrink-0 w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center font-bold">1</div>
+              <div className="shrink-0 w-8 h-8 bg-blue-50 text-gray-700 rounded-full flex items-center justify-center font-bold">1</div>
               <h3 className="text-xl font-bold text-gray-900">Configure Your Site Data</h3>
             </div>
             <p className="text-gray-600 mb-4 ml-11">
@@ -134,7 +134,7 @@ module.exports = {
           {/* Step 2: base.html head */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="shrink-0 w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center font-bold">2</div>
+              <div className="shrink-0 w-8 h-8 bg-blue-50 text-gray-700 rounded-full flex items-center justify-center font-bold">2</div>
               <h3 className="text-xl font-bold text-gray-900">How the <code className="text-lg bg-gray-100 px-2 py-1 rounded">&lt;head&gt;</code> Uses It</h3>
             </div>
             <p className="text-gray-600 mb-4 ml-11">
@@ -251,12 +251,12 @@ module.exports = {
             </div>
           </div>
 
-          <div className="ml-11 p-4 bg-green-50 border-2 border-green-200 rounded-lg">
-            <p className="text-green-900 font-medium mb-2">✅ No Per-Page Wiring Needed</p>
-            <p className="text-sm text-green-800">
-              Every page that extends <code className="bg-green-100 px-1.5 py-0.5 rounded">base.html</code> inherits these tags. You only set
-              <code className="bg-green-100 px-1.5 py-0.5 rounded"> title</code>, <code className="bg-green-100 px-1.5 py-0.5 rounded">description</code>, and an optional
-              <code className="bg-green-100 px-1.5 py-0.5 rounded"> image</code> in front matter.
+          <div className="ml-11 p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
+            <p className="text-gray-900 font-medium mb-2">✅ No Per-Page Wiring Needed</p>
+            <p className="text-sm text-gray-800">
+              Every page that extends <code className="bg-blue-100 px-1.5 py-0.5 rounded">base.html</code> inherits these tags. You only set
+              <code className="bg-blue-100 px-1.5 py-0.5 rounded"> title</code>, <code className="bg-blue-100 px-1.5 py-0.5 rounded">description</code>, and an optional
+              <code className="bg-blue-100 px-1.5 py-0.5 rounded"> image</code> in front matter.
             </p>
           </div>
         </div>
@@ -265,7 +265,7 @@ module.exports = {
       {/* Per-page SEO via front matter */}
       <div className="mb-16 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <Settings className="w-6 h-6" />
           </div>
           <div>
@@ -282,7 +282,7 @@ module.exports = {
           {/* Basic page */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">1</div>
+              <div className="shrink-0 w-8 h-8 bg-blue-50 text-gray-700 rounded-full flex items-center justify-center font-bold">1</div>
               <h3 className="text-xl font-bold text-gray-900">Basic Page</h3>
             </div>
             <p className="text-gray-600 mb-4 ml-11">
@@ -331,7 +331,7 @@ permalink: "/about/"
           {/* Page with social image */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">2</div>
+              <div className="shrink-0 w-8 h-8 bg-blue-50 text-gray-700 rounded-full flex items-center justify-center font-bold">2</div>
               <h3 className="text-xl font-bold text-gray-900">Page With a Social Image</h3>
             </div>
             <p className="text-gray-600 mb-4 ml-11">
@@ -374,8 +374,8 @@ image: "/assets/images/portfolio/port1.jpg"
           </div>
 
           <div className="ml-11 p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
-            <p className="text-blue-900 font-medium mb-2">💡 Recommended for Every Page</p>
-            <ul className="text-sm text-blue-800 space-y-1">
+            <p className="text-gray-900 font-medium mb-2">💡 Recommended for Every Page</p>
+            <ul className="text-sm text-gray-800 space-y-1">
               <li>• <code className="bg-blue-100 px-2 py-0.5 rounded">title</code> — unique page title (50–60 chars)</li>
               <li>• <code className="bg-blue-100 px-2 py-0.5 rounded">description</code> — page description (150–160 chars)</li>
               <li>• <code className="bg-blue-100 px-2 py-0.5 rounded">permalink</code> — clean URL path, e.g. <code className="bg-blue-100 px-2 py-0.5 rounded">/about/</code></li>
@@ -388,7 +388,7 @@ image: "/assets/images/portfolio/port1.jpg"
       {/* Structured Data */}
       <div className="mb-16 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-purple-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <Sparkles className="w-6 h-6" />
           </div>
           <div>
@@ -402,14 +402,14 @@ image: "/assets/images/portfolio/port1.jpg"
         </div>
 
         <div className="space-y-6">
-          <div className="p-4 bg-amber-50 border-2 border-amber-200 rounded-lg">
-            <p className="text-amber-900 font-medium mb-2 flex items-center gap-2">
-              <ImageIcon className="w-5 h-5 text-amber-600" />
+          <div className="p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
+            <p className="text-gray-900 font-medium mb-2 flex items-center gap-2">
+              <ImageIcon className="w-5 h-5 text-gray-600" />
               Schemas Are Opt-In
             </p>
-            <p className="text-sm text-amber-800">
-              To keep validation clean, the schema includes are commented out by default in <code className="bg-amber-100 px-1.5 py-0.5 rounded">index.html</code> and
-              <code className="bg-amber-100 px-1.5 py-0.5 rounded"> layouts/post.html</code>. Uncomment them once you&apos;ve filled in your details, then verify the output.
+            <p className="text-sm text-gray-800">
+              To keep validation clean, the schema includes are commented out by default in <code className="bg-blue-100 px-1.5 py-0.5 rounded">index.html</code> and
+              <code className="bg-blue-100 px-1.5 py-0.5 rounded"> layouts/post.html</code>. Uncomment them once you&apos;ve filled in your details, then verify the output.
             </p>
           </div>
 
@@ -656,9 +656,9 @@ image: "/assets/images/portfolio/port1.jpg"
             </div>
           </div>
 
-          <div className="p-4 bg-purple-50 border-2 border-purple-200 rounded-lg">
-            <p className="text-purple-900 font-medium mb-2">🎯 Rich Snippets Benefits</p>
-            <p className="text-sm text-purple-800">
+          <div className="p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
+            <p className="text-gray-900 font-medium mb-2">🎯 Rich Snippets Benefits</p>
+            <p className="text-sm text-gray-800">
               Structured data can surface enhanced features in search results. After enabling a schema and deploying, validate the output with{" "}
               <a href="https://search.google.com/test/rich-results" target="_blank" rel="noopener noreferrer" className="underline font-semibold">
                 Google&apos;s Rich Results Test
@@ -671,7 +671,7 @@ image: "/assets/images/portfolio/port1.jpg"
       {/* Sitemap & Robots */}
       <div className="mb-16 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-orange-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <Globe className="w-6 h-6" />
           </div>
           <div>
@@ -783,12 +783,12 @@ Sitemap: {{ client.domain }}/sitemap.xml`, 10)}
             </div>
           </div>
 
-          <div className="p-4 bg-orange-50 border-2 border-orange-200 rounded-lg">
-            <p className="text-orange-900 font-medium mb-2">📍 Submit Your Sitemap</p>
-            <p className="text-sm text-orange-800 mb-3">
-              After deploying, submit <code className="bg-orange-100 px-1.5 py-0.5 rounded">/sitemap.xml</code> to search engines:
+          <div className="p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
+            <p className="text-gray-900 font-medium mb-2">📍 Submit Your Sitemap</p>
+            <p className="text-sm text-gray-800 mb-3">
+              After deploying, submit <code className="bg-blue-100 px-1.5 py-0.5 rounded">/sitemap.xml</code> to search engines:
             </p>
-            <ul className="text-sm text-orange-800 space-y-1">
+            <ul className="text-sm text-gray-800 space-y-1">
               <li>• <a href="https://search.google.com/search-console" target="_blank" rel="noopener noreferrer" className="underline font-semibold">Google Search Console</a></li>
               <li>• <a href="https://www.bing.com/webmasters" target="_blank" rel="noopener noreferrer" className="underline font-semibold">Bing Webmaster Tools</a></li>
             </ul>

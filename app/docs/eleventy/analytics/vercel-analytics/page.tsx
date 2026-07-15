@@ -16,7 +16,7 @@ export default function VercelAnalytics() {
 
   return (
     <div className="min-h-full p-12">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl ml-6">
 
       {/* Hero Section */}
       <div className="mb-12">
@@ -46,7 +46,7 @@ export default function VercelAnalytics() {
       {/* Setup */}
       <div className="mb-12 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-gray-900 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <Triangle className="w-6 h-6 fill-white" />
           </div>
           <div>
@@ -63,7 +63,7 @@ export default function VercelAnalytics() {
           {/* Step 1 */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="shrink-0 w-8 h-8 bg-gray-900 text-white rounded-full flex items-center justify-center font-bold">
+              <div className="shrink-0 w-8 h-8 bg-blue-50 text-gray-700 rounded-full flex items-center justify-center font-bold">
                 1
               </div>
               <h3 className="text-xl font-bold text-gray-900">
@@ -71,7 +71,7 @@ export default function VercelAnalytics() {
               </h3>
             </div>
             <ol className="space-y-2 text-gray-700 ml-11 list-decimal list-inside">
-              <li>Make sure your Eleventy site is deployed on <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline font-semibold">Vercel</a></li>
+              <li>Make sure your Eleventy site is deployed on <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 underline font-semibold">Vercel</a></li>
               <li>Open your project in the Vercel dashboard and go to the <span className="font-semibold">Analytics</span> tab</li>
               <li>Click <span className="font-semibold">Enable</span> under Web Analytics</li>
             </ol>
@@ -80,7 +80,7 @@ export default function VercelAnalytics() {
           {/* Step 2 */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="shrink-0 w-8 h-8 bg-gray-900 text-white rounded-full flex items-center justify-center font-bold">
+              <div className="shrink-0 w-8 h-8 bg-blue-50 text-gray-700 rounded-full flex items-center justify-center font-bold">
                 2
               </div>
               <h3 className="text-xl font-bold text-gray-900">
@@ -130,7 +130,7 @@ export default function VercelAnalytics() {
           {/* Step 3 */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="shrink-0 w-8 h-8 bg-gray-900 text-white rounded-full flex items-center justify-center font-bold">
+              <div className="shrink-0 w-8 h-8 bg-blue-50 text-gray-700 rounded-full flex items-center justify-center font-bold">
                 3
               </div>
               <h3 className="text-xl font-bold text-gray-900">
@@ -155,13 +155,13 @@ export default function VercelAnalytics() {
             </div>
           </div>
 
-          <div className="ml-11 p-4 bg-green-50 border-2 border-green-200 rounded-lg">
-            <p className="text-green-900 font-medium mb-2">
+          <div className="ml-11 p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
+            <p className="text-gray-900 font-medium mb-2">
               ✅ That&apos;s It!
             </p>
-            <p className="text-sm text-green-800">
+            <p className="text-sm text-gray-800">
               Visit your live site, then open the <span className="font-semibold">Analytics</span> tab in Vercel — page views show up within about 30 seconds.
-              Note that data is only collected on production deployments, so you won&apos;t see anything from <code className="bg-green-100 px-1.5 py-0.5 rounded">localhost</code>.
+              Note that data is only collected on production deployments, so you won&apos;t see anything from <code className="bg-blue-100 px-1.5 py-0.5 rounded">localhost</code>.
             </p>
           </div>
         </div>
@@ -170,7 +170,7 @@ export default function VercelAnalytics() {
       {/* Track Custom Events */}
       <div className="mb-12 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <MousePointerClick className="w-6 h-6" />
           </div>
           <div>
@@ -223,7 +223,7 @@ export default function VercelAnalytics() {
       {/* Bonus: Speed Insights */}
       <div className="mb-12 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-purple-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <Gauge className="w-6 h-6" />
           </div>
           <div>
@@ -283,7 +283,7 @@ export default function VercelAnalytics() {
       </div>
 
       {/* Privacy Note */}
-      <div className="mb-12 p-6 bg-yellow-50 border-2 border-yellow-200 rounded-xl">
+      <div className="mb-12 p-6 bg-blue-50 border-2 border-blue-200 rounded-xl">
         <h3 className="text-lg font-bold text-gray-900 mb-2">
           📋 Privacy Considerations
         </h3>
@@ -296,24 +296,24 @@ export default function VercelAnalytics() {
       </div>
 
       {/* Next Steps */}
-      <div className="bg-linear-to-br from-gray-900 to-gray-800 rounded-2xl p-8 text-white text-center">
+      <div className="bg-white border-2 border-gray-200 shadow-sm rounded-2xl p-8 text-gray-700 text-center">
         <h2 className="text-3xl font-bold mb-4">
           You&apos;re All Set! 🎉
         </h2>
-        <p className="text-xl text-gray-300 mb-8">
+        <p className="text-xl text-gray-600 mb-8">
           Vercel Analytics is now tracking your visitors. Check the Analytics tab to see real-time data.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <Link
             href="/docs/eleventy/deployment"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-50 hover:bg-blue-100 text-gray-700 font-bold rounded-lg transition-colors"
           >
             <Zap className="w-5 h-5" />
             Deploy Your Site
           </Link>
           <Link
             href="/docs/eleventy/features/seo"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-white hover:bg-gray-100 text-gray-900 font-bold rounded-lg transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-white hover:bg-gray-100 text-gray-900 border border-gray-200 font-bold rounded-lg transition-colors"
           >
             Optimize SEO
             <ArrowRight className="w-5 h-5" />

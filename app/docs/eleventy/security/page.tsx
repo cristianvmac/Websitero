@@ -30,7 +30,7 @@ export default function Security() {
 
   return (
     <div className="min-h-full p-12">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl ml-6">
       {/* Breadcrumb */}
       <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-x-1 gap-y-1 text-base font-normal text-slate-900">
         <Link href="/docs/eleventy" className="rounded-full py-1 hover:text-slate-600 hover:underline">
@@ -56,7 +56,7 @@ export default function Security() {
 
       {/* Quick Benefits */}
       <div className="grid md:grid-cols-3 gap-6 mb-16">
-        <div className="bg-linear-to-br from-green-50 to-green-100 rounded-xl p-6 border-2 border-green-200">
+        <div className="bg-blue-50 rounded-xl p-6 border-2 border-blue-200">
           <div className="text-4xl mb-3">🛡️</div>
           <h3 className="text-lg font-bold text-gray-900 mb-2">Purely Static</h3>
           <p className="text-gray-700">
@@ -65,7 +65,7 @@ export default function Security() {
           </p>
         </div>
 
-        <div className="bg-linear-to-br from-blue-50 to-blue-100 rounded-xl p-6 border-2 border-blue-200">
+        <div className="bg-blue-50 rounded-xl p-6 border-2 border-blue-200">
           <div className="text-4xl mb-3">🧼</div>
           <h3 className="text-lg font-bold text-gray-900 mb-2">Escaped by Default</h3>
           <p className="text-gray-700">
@@ -73,11 +73,11 @@ export default function Security() {
           </p>
         </div>
 
-        <div className="bg-linear-to-br from-purple-50 to-purple-100 rounded-xl p-6 border-2 border-purple-200">
+        <div className="bg-blue-50 rounded-xl p-6 border-2 border-blue-200">
           <div className="text-4xl mb-3">🔑</div>
           <h3 className="text-lg font-bold text-gray-900 mb-2">Secrets Stay at Build Time</h3>
           <p className="text-gray-700">
-            <code className="bg-purple-100 px-1.5 py-0.5 rounded text-sm">process.env</code> is read only during the Node build. Nothing reaches the browser unless you print it.
+            <code className="bg-blue-100 px-1.5 py-0.5 rounded text-sm">process.env</code> is read only during the Node build. Nothing reaches the browser unless you print it.
           </p>
         </div>
       </div>
@@ -85,7 +85,7 @@ export default function Security() {
       {/* Minimal attack surface */}
       <div className="mb-16 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-green-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <Server className="w-6 h-6" />
           </div>
           <div>
@@ -106,9 +106,9 @@ export default function Security() {
         </p>
 
         <div className="grid sm:grid-cols-2 gap-4">
-          <div className="p-4 bg-green-50 border-2 border-green-200 rounded-lg">
+          <div className="p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
             <p className="font-bold text-gray-900 mb-2 flex items-center gap-2">
-              <ShieldCheck className="w-5 h-5 text-green-600" />
+              <ShieldCheck className="w-5 h-5 text-gray-600" />
               Removed by static output
             </p>
             <ul className="text-sm text-gray-700 space-y-1.5">
@@ -132,8 +132,8 @@ export default function Security() {
           </div>
         </div>
 
-        <div className="mt-6 p-4 bg-yellow-50 border-2 border-yellow-200 rounded-lg flex items-start gap-3">
-          <AlertTriangle className="w-5 h-5 text-yellow-600 shrink-0 mt-0.5" />
+        <div className="mt-6 p-4 bg-blue-50 border-2 border-blue-200 rounded-lg flex items-start gap-3">
+          <AlertTriangle className="w-5 h-5 text-gray-600 shrink-0 mt-0.5" />
           <p className="text-sm text-gray-800">
             <strong>Your build is the runtime.</strong> The one place code actually executes is
             the build &mdash; on your machine or in CI. Treat that environment as production: keep
@@ -146,7 +146,7 @@ export default function Security() {
       {/* XSS / auto-escaping */}
       <div className="mb-16 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <Code2 className="w-6 h-6" />
           </div>
           <div>
@@ -234,7 +234,7 @@ module.exports = function (eleventyConfig) {
       {/* Environment variables & secrets */}
       <div className="mb-16 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-purple-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <KeyRound className="w-6 h-6" />
           </div>
           <div>
@@ -312,13 +312,13 @@ module.exports = async function () {
           </button>
         </div>
 
-        <div className="mt-6 p-4 bg-red-50 border-2 border-red-200 rounded-lg flex items-start gap-3">
-          <AlertTriangle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
-          <p className="text-sm text-red-800">
+        <div className="mt-6 p-4 bg-blue-50 border-2 border-blue-200 rounded-lg flex items-start gap-3">
+          <AlertTriangle className="w-5 h-5 text-gray-600 shrink-0 mt-0.5" />
+          <p className="text-sm text-gray-800">
             <strong>Never</strong> print a secret into a template &mdash; even in a comment or a{" "}
-            <code className="bg-red-100 px-1.5 py-0.5 rounded">data-</code> attribute. Anything you
+            <code className="bg-blue-100 px-1.5 py-0.5 rounded">data-</code> attribute. Anything you
             output ends up in the public HTML. Build-time secrets must stay in build-time code
-            (config, <code className="bg-red-100 px-1.5 py-0.5 rounded">_data</code>, filters),
+            (config, <code className="bg-blue-100 px-1.5 py-0.5 rounded">_data</code>, filters),
             never in the rendered page.
           </p>
         </div>
@@ -327,7 +327,7 @@ module.exports = async function () {
       {/* Forms & dynamic features */}
       <div className="mb-16 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-indigo-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <Lock className="w-6 h-6" />
           </div>
           <div>
@@ -374,9 +374,9 @@ module.exports = async function () {
           </button>
         </div>
 
-        <div className="mt-6 p-4 bg-indigo-50 border-2 border-indigo-200 rounded-lg flex items-start gap-3">
-          <ShieldCheck className="w-5 h-5 text-indigo-600 shrink-0 mt-0.5" />
-          <p className="text-sm text-indigo-900">
+        <div className="mt-6 p-4 bg-blue-50 border-2 border-blue-200 rounded-lg flex items-start gap-3">
+          <ShieldCheck className="w-5 h-5 text-gray-600 shrink-0 mt-0.5" />
+          <p className="text-sm text-gray-900">
             Pick a reputable provider and let it do the hard part. By keeping submissions, payment
             details, and authentication on a maintained third-party platform, your site keeps a
             strong security posture without ever exposing a server.
@@ -387,7 +387,7 @@ module.exports = async function () {
       {/* Decap CMS admin */}
       <div className="mb-16 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-sky-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <KeyRound className="w-6 h-6" />
           </div>
           <div>
@@ -410,9 +410,9 @@ module.exports = async function () {
         </p>
 
         <div className="grid sm:grid-cols-2 gap-4 mb-6">
-          <div className="p-4 bg-sky-50 border-2 border-sky-200 rounded-lg">
+          <div className="p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
             <p className="font-bold text-gray-900 mb-2 flex items-center gap-2">
-              <ShieldCheck className="w-5 h-5 text-sky-600" />
+              <ShieldCheck className="w-5 h-5 text-gray-600" />
               Why it stays safe
             </p>
             <ul className="text-sm text-gray-700 space-y-1.5">
@@ -436,14 +436,14 @@ module.exports = async function () {
           </div>
         </div>
 
-        <div className="p-4 bg-sky-50 border-2 border-sky-200 rounded-lg flex items-start gap-3">
-          <AlertTriangle className="w-5 h-5 text-sky-600 shrink-0 mt-0.5" />
-          <p className="text-sm text-sky-900">
+        <div className="p-4 bg-blue-50 border-2 border-blue-200 rounded-lg flex items-start gap-3">
+          <AlertTriangle className="w-5 h-5 text-gray-600 shrink-0 mt-0.5" />
+          <p className="text-sm text-gray-900">
             Because content authored in Decap is &ldquo;trusted-ish&rdquo; user input, the same
             escaping rules apply: render Markdown bodies normally, and if you ever pipe CMS HTML
-            through <code className="bg-sky-100 px-1.5 py-0.5 rounded">safe</code>, sanitize it first.
+            through <code className="bg-blue-100 px-1.5 py-0.5 rounded">safe</code>, sanitize it first.
             Not building a blog? The kit&apos;s{" "}
-            <code className="bg-sky-100 px-1.5 py-0.5 rounded">remove-decap</code> script strips the
+            <code className="bg-blue-100 px-1.5 py-0.5 rounded">remove-decap</code> script strips the
             admin entirely, shrinking the attack surface to nothing but static files.
           </p>
         </div>
@@ -452,7 +452,7 @@ module.exports = async function () {
       {/* Security headers & CSP */}
       <div className="mb-16 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-teal-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <ShieldCheck className="w-6 h-6" />
           </div>
           <div>
@@ -532,13 +532,13 @@ module.exports = async function () {
           </button>
         </div>
 
-        <div className="p-4 bg-teal-50 border-2 border-teal-200 rounded-lg">
-          <p className="text-teal-900 font-medium mb-2">🔒 Content Security Policy</p>
-          <p className="text-sm text-teal-800">
+        <div className="p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
+          <p className="text-gray-900 font-medium mb-2">🔒 Content Security Policy</p>
+          <p className="text-sm text-gray-800">
             Eleventy does not generate CSP hashes for you, so the cleanest path is to avoid inline
             scripts and styles &mdash; then you can ship a strict{" "}
-            <code className="bg-teal-100 px-1.5 py-0.5 rounded">Content-Security-Policy</code> header
-            (alongside the others above) without <code className="bg-teal-100 px-1.5 py-0.5 rounded">unsafe-inline</code>.
+            <code className="bg-blue-100 px-1.5 py-0.5 rounded">Content-Security-Policy</code> header
+            (alongside the others above) without <code className="bg-blue-100 px-1.5 py-0.5 rounded">unsafe-inline</code>.
             If you must use inline code, generate a hash or nonce and add it to the policy. A CSP is
             your strongest defense-in-depth layer against XSS, blocking unauthorized scripts even if
             one slips through.
@@ -549,7 +549,7 @@ module.exports = async function () {
       {/* Input validation */}
       <div className="mb-16 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-rose-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <FileCheck className="w-6 h-6" />
           </div>
           <div>
@@ -615,9 +615,9 @@ module.exports = async function () {
       </div>
 
       {/* Dependencies */}
-      <div className="mb-16 bg-linear-to-br from-amber-50 to-orange-50 rounded-2xl p-8 border-2 border-amber-200">
+      <div className="mb-16 bg-blue-50 rounded-2xl p-8 border-2 border-blue-200">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-amber-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <RefreshCw className="w-6 h-6" />
           </div>
           <div>

@@ -32,9 +32,9 @@ function CodeBlock({ label, code }: { label?: string; code: string }) {
   return (
     <div className="overflow-hidden rounded-xl border border-gray-800 bg-gray-900 shadow-sm">
       <div className="flex items-center gap-2 border-b border-gray-800 bg-gray-950/40 px-4 py-2.5">
-        <span className="h-3 w-3 rounded-full bg-red-400/80" />
-        <span className="h-3 w-3 rounded-full bg-yellow-400/80" />
-        <span className="h-3 w-3 rounded-full bg-green-400/80" />
+        <span className="h-3 w-3 rounded-full bg-blue-50/80" />
+        <span className="h-3 w-3 rounded-full bg-blue-50/80" />
+        <span className="h-3 w-3 rounded-full bg-blue-50/80" />
         {label && (
           <span className="ml-2 font-mono text-xs text-gray-400">{label}</span>
         )}
@@ -71,8 +71,8 @@ const favicon: Section = {
   title: "Favicon",
   icon: Star,
   accent: {
-    iconWrap: "bg-amber-50 text-amber-600 border-amber-200",
-    rule: "bg-amber-500",
+    iconWrap: "bg-blue-50 text-gray-600 border-blue-200",
+    rule: "bg-blue-50",
   },
 };
 
@@ -81,8 +81,8 @@ const logo: Section = {
   title: "SVG Logo",
   icon: PenTool,
   accent: {
-    iconWrap: "bg-violet-50 text-violet-600 border-violet-200",
-    rule: "bg-violet-500",
+    iconWrap: "bg-blue-50 text-gray-600 border-blue-200",
+    rule: "bg-blue-50",
   },
 };
 
@@ -91,8 +91,8 @@ const speed: Section = {
   title: "Page Speed",
   icon: Gauge,
   accent: {
-    iconWrap: "bg-emerald-50 text-emerald-600 border-emerald-200",
-    rule: "bg-emerald-500",
+    iconWrap: "bg-blue-50 text-gray-600 border-blue-200",
+    rule: "bg-blue-50",
   },
 };
 
@@ -125,7 +125,7 @@ function SectionHeader({ section }: { section: Section }) {
 export default function Extras() {
   return (
     <div className="min-h-full p-12">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl ml-6">
       {/* Hero */}
       <div className="mb-12">
         {/* Breadcrumb */}
@@ -163,7 +163,7 @@ export default function Extras() {
           </p>
           <ul className="mb-5 space-y-2 pl-1 text-gray-700">
             <li className="flex gap-2">
-              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-400" />
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-50" />
               <span>
                 Generate a complete set from a square source image (512×512 or
                 larger, or an SVG) with a tool like realfavicongenerator.net or
@@ -171,7 +171,7 @@ export default function Extras() {
               </span>
             </li>
             <li className="flex gap-2">
-              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-400" />
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-50" />
               <span>
                 Drop the generated files into{" "}
                 <InlineCode>src/assets/favicons/</InlineCode>, keeping the same
@@ -179,7 +179,7 @@ export default function Extras() {
               </span>
             </li>
             <li className="flex gap-2">
-              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-400" />
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-50" />
               <span>
                 Nothing else to configure — the whole{" "}
                 <InlineCode>src/assets</InlineCode> folder is already
@@ -208,7 +208,7 @@ export default function Extras() {
           <SectionLink
             href="/docs/eleventy/extras/favicon"
             label="Read the full favicon guide"
-            className="text-amber-700 hover:text-amber-800"
+            className="text-gray-700 hover:text-gray-800"
           />
         </section>
 
@@ -221,7 +221,7 @@ export default function Extras() {
           </p>
           <ul className="mb-5 space-y-2 pl-1 text-gray-700">
             <li className="flex gap-2">
-              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-violet-400" />
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-50" />
               <span>
                 Add the SVG as an image file and copy it using{" "}
                 <InlineCode>addPassthroughCopy</InlineCode>:
@@ -244,7 +244,7 @@ export default function Extras() {
           <SectionLink
             href="/docs/eleventy/extras/logo-svg"
             label="Read the full SVG logo guide"
-            className="text-violet-700 hover:text-violet-800"
+            className="text-gray-700 hover:text-gray-800"
           />
         </section>
 
@@ -282,7 +282,7 @@ export default function Extras() {
               </>,
             ].map((tip, i) => (
               <li key={i} className="flex gap-2">
-                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" />
+                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-50" />
                 <span>{tip}</span>
               </li>
             ))}
@@ -295,7 +295,7 @@ export default function Extras() {
           <SectionLink
             href="/docs/eleventy/extras/page-speed-test"
             label="Read the full page speed guide"
-            className="text-emerald-700 hover:text-emerald-800"
+            className="text-gray-700 hover:text-gray-800"
           />
         </section>
       </div>
@@ -303,7 +303,7 @@ export default function Extras() {
       {/* Quick Tips */}
       <div className="mt-12 rounded-2xl border border-gray-200 bg-linear-to-br from-gray-50 to-gray-100 p-8">
         <h2 className="mb-6 flex items-center gap-2 text-2xl font-bold text-gray-900">
-          <Lightbulb className="h-6 w-6 text-amber-500" />
+          <Lightbulb className="h-6 w-6 text-gray-500" />
           Quick Tips
         </h2>
         <div className="grid gap-4 sm:grid-cols-2">
@@ -312,7 +312,7 @@ export default function Extras() {
               key={tip}
               className="flex items-start gap-3 rounded-xl border border-gray-200 bg-white p-4"
             >
-              <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+              <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-100 text-gray-600">
                 <Check className="h-3.5 w-3.5" />
               </span>
               <p className="text-sm text-gray-700">{tip}</p>

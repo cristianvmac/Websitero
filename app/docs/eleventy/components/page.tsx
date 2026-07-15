@@ -76,7 +76,7 @@ export default function ComponentsIndex() {
 
   return (
     <div className="min-h-full p-12">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl ml-6">
         {/* Breadcrumb */}
         <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-x-1 gap-y-1 text-base font-normal text-slate-900">
           <Link href="/docs/eleventy" className="rounded-full py-1 hover:text-slate-600 hover:underline">
@@ -125,15 +125,15 @@ export default function ComponentsIndex() {
             <Link
               key={component.slug}
               href={href}
-              className="group block bg-white rounded-2xl p-5 border-2 border-gray-200 hover:border-orange-400 hover:shadow-xl transition-all"
+              className="group block bg-white rounded-2xl p-5 border-2 border-gray-200 hover:border-blue-400 hover:shadow-xl transition-all"
             >
               <div className="flex items-start justify-between mb-4">
-                <div className="w-11 h-11 bg-orange-50 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Icon className="w-5 h-5 text-orange-600" />
+                <div className="w-11 h-11 bg-blue-50 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Icon className="w-5 h-5 text-gray-600" />
                 </div>
-                <ArrowRight className="w-5 h-5 text-gray-300 group-hover:text-orange-600 group-hover:translate-x-1 transition-all shrink-0" />
+                <ArrowRight className="w-5 h-5 text-gray-300 group-hover:text-gray-600 group-hover:translate-x-1 transition-all shrink-0" />
               </div>
-              <h2 className="text-lg font-bold text-gray-900 group-hover:text-orange-600 transition-colors mb-1">
+              <h2 className="text-lg font-bold text-gray-900 group-hover:text-gray-600 transition-colors mb-1">
                 {component.name}
               </h2>
               <p className="text-sm text-gray-600">{component.description}</p>

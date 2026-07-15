@@ -146,7 +146,7 @@ function LighthousePreview() {
         <button
           onClick={() => setMode("spa")}
           className={`rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-colors ${
-            mode === "spa" ? "bg-amber-100 text-gray-900" : "text-gray-900 hover:bg-gray-50"
+            mode === "spa" ? "bg-blue-100 text-gray-900" : "text-gray-900 hover:bg-gray-50"
           }`}
         >
           Heavy SPA
@@ -154,7 +154,7 @@ function LighthousePreview() {
         <button
           onClick={() => setMode("eleventy")}
           className={`rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-colors ${
-            mode === "eleventy" ? "bg-emerald-100 text-gray-900" : "text-gray-900 hover:bg-gray-50"
+            mode === "eleventy" ? "bg-blue-100 text-gray-900" : "text-gray-900 hover:bg-gray-50"
           }`}
         >
           Eleventy static
@@ -183,11 +183,11 @@ function LighthousePreview() {
 type Tone = "emerald" | "blue" | "purple" | "pink" | "cyan";
 
 const TONE: Record<Tone, { tile: string; ring: string }> = {
-  emerald: { tile: "from-emerald-500 to-teal-600", ring: "ring-emerald-100" },
-  blue: { tile: "from-blue-500 to-indigo-600", ring: "ring-blue-100" },
-  purple: { tile: "from-purple-500 to-fuchsia-600", ring: "ring-purple-100" },
-  pink: { tile: "from-pink-500 to-rose-600", ring: "ring-pink-100" },
-  cyan: { tile: "from-cyan-500 to-sky-600", ring: "ring-cyan-100" },
+  emerald: { tile: "from-blue-50 to-blue-50", ring: "ring-blue-100" },
+  blue: { tile: "from-blue-50 to-blue-50", ring: "ring-blue-100" },
+  purple: { tile: "from-blue-50 to-blue-50", ring: "ring-blue-100" },
+  pink: { tile: "from-blue-50 to-blue-50", ring: "ring-blue-100" },
+  cyan: { tile: "from-blue-50 to-blue-50", ring: "ring-blue-100" },
 };
 
 function StepHeader({
@@ -206,7 +206,7 @@ function StepHeader({
   return (
     <div className="flex flex-wrap items-center gap-4">
       <div
-        className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-linear-to-br ${TONE[tone].tile} text-white shadow-md ring-4 ${TONE[tone].ring}`}
+        className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-linear-to-br ${TONE[tone].tile} text-gray-700 shadow-md ring-4 ${TONE[tone].ring}`}
       >
         <Icon className="h-6 w-6" />
       </div>
@@ -217,7 +217,7 @@ function StepHeader({
         <h2 className="text-xl font-bold text-gray-900">{title}</h2>
       </div>
       {badge && (
-        <span className="ml-auto rounded-full bg-gray-900 px-3 py-1 text-xs font-semibold text-white">
+        <span className="ml-auto rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-gray-700">
           {badge}
         </span>
       )}
@@ -235,7 +235,7 @@ function Card({
   return (
     <div
       className={`mt-8 rounded-3xl border bg-white p-7 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg ${
-        highlight ? "border-emerald-200 bg-linear-to-b from-emerald-50/40 to-white" : "border-gray-200"
+        highlight ? "border-blue-200 bg-linear-to-b from-blue-50/40 to-white" : "border-gray-200"
       }`}
     >
       {children}
@@ -254,9 +254,9 @@ export default function PageSpeed() {
   return (
     <section className="relative overflow-hidden min-h-full p-12">
       {/* Decorative background glow */}
-      <div className="pointer-events-none absolute -top-32 left-1/2 h-72 w-xl -translate-x-1/2 rounded-full bg-linear-to-br from-emerald-200/50 to-teal-200/50 blur-3xl" />
+      <div className="pointer-events-none absolute -top-32 left-1/2 h-72 w-xl -translate-x-1/2 rounded-full bg-linear-to-br from-blue-50/50 to-blue-50/50 blur-3xl" />
 
-      <div className="relative mx-auto max-w-3xl">
+      <div className="relative max-w-3xl ml-6">
         {/* Breadcrumb */}
         <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-x-1 gap-y-1 text-base font-normal text-slate-900">
           <Link href="/docs/eleventy" className="rounded-full py-1 hover:text-slate-600 hover:underline">
@@ -290,7 +290,7 @@ export default function PageSpeed() {
               key={label}
               className="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-3.5 py-2 text-sm font-semibold text-gray-900 shadow-sm"
             >
-              <Icon className="h-4 w-4 text-emerald-600" />
+              <Icon className="h-4 w-4 text-gray-600" />
               {label}
             </span>
           ))}
@@ -387,7 +387,7 @@ eleventyConfig.addNunjucksAsyncShortcode("image", imageShortcode);`}
 
           {/* Info callout — the key Eleventy detail */}
           <div className="mt-5 flex gap-3 rounded-2xl border border-blue-200 bg-blue-50 p-4">
-            <Info className="mt-0.5 h-5 w-5 shrink-0 text-blue-600" />
+            <Info className="mt-0.5 h-5 w-5 shrink-0 text-gray-600" />
             <p className="text-sm leading-relaxed text-gray-900">
               Always route images through <Code>{"{% image %}"}</Code> rather than a raw{" "}
               <Code>{"<img>"}</Code> — every call emits responsive WebP with dimensions baked
@@ -453,8 +453,8 @@ const processor = postcss([
         </Card>     
 
         {/* ── Audit callout ── */}
-        <div className="mt-8 flex gap-3 rounded-3xl border border-emerald-200 bg-emerald-50 p-5">
-          <Gauge className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600" />
+        <div className="mt-8 flex gap-3 rounded-3xl border border-blue-200 bg-blue-50 p-5">
+          <Gauge className="mt-0.5 h-5 w-5 shrink-0 text-gray-600" />
           <div>
             <h3 className="font-bold text-gray-900">Measure, don&apos;t guess</h3>
             <p className="mt-1 text-sm leading-relaxed text-gray-900">
@@ -463,7 +463,7 @@ const processor = postcss([
                 href="https://pagespeed.web.dev"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-bold text-emerald-700 underline decoration-emerald-400 underline-offset-2 hover:text-emerald-900"
+                className="font-bold text-gray-700 underline decoration-blue-400 underline-offset-2 hover:text-gray-900"
               >
                 Google PageSpeed Insights
               </a>{" "}
@@ -475,7 +475,7 @@ const processor = postcss([
 
         {/* Subtle footer flourish */}
         <p className="mt-10 flex items-center justify-center gap-2 text-sm font-medium text-gray-900">
-          <Feather className="h-4 w-4 text-emerald-500" />
+          <Feather className="h-4 w-4 text-gray-500" />
           Light pages, happy users.
         </p>
       </div>
