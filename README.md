@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Websitero
 It gets local business owners a real, fast, custom-coded website live in hours — either built for you from a few plain-English prompts, or DIY from an Eleventy/Astro kit. Every site ships with Google Business Profile, SEO, and 24/7 expert support, with code you own.
 =======
