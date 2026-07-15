@@ -275,7 +275,7 @@ export default function Sidebar({ site, credits, locale }: SidebarProps) {
       <Link
         href={site.editUrl}
         target="_blank"
-        className="mt-3 flex items-center justify-center gap-2 rounded-xl bg-linear-to-br from-[#4588ba] to-[#316994] px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-[#4588ba]/25 transition-all hover:shadow-lg hover:shadow-[#4588ba]/40"
+        className="mt-3 flex items-center justify-center gap-2 rounded-xl bg-blue-500 hover:bg-blue-700 px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-blue-500/25 transition-all hover:shadow-lg hover:shadow-blue-500/40"
       >
         <PenLine className="h-4 w-4" />
         Edit my site
@@ -295,9 +295,9 @@ export default function Sidebar({ site, credits, locale }: SidebarProps) {
 
       <Link
         href="/dashboard/credits"
-        className="mt-3 flex items-center gap-3 rounded-xl border border-[#4588ba]/25 bg-[#4588ba]/10 px-4 py-3 transition-colors hover:border-[#4588ba]/40"
+        className="mt-3 flex items-center gap-3 rounded-xl border border-blue-500/25 bg-blue-500/10 px-4 py-3 transition-colors hover:border-blue-500/40"
       >
-        <Zap className="h-5 w-5 shrink-0 text-[#316994]" />
+        <Zap className="h-5 w-5 shrink-0 text-blue-700" />
         <span>
           <span className="block text-sm font-bold text-slate-900">
             {credits.available} credits

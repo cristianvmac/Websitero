@@ -17,7 +17,7 @@ export default function ChecklistCard({ steps }: { steps: ChecklistStep[] }) {
   return (
     <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
       <div className="flex items-start gap-4">
-        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#4588ba]/10 text-[#316994]">
+        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-blue-500/10 text-blue-700">
           <Sparkles className="h-6 w-6" />
         </span>
         <div>
@@ -29,7 +29,7 @@ export default function ChecklistCard({ steps }: { steps: ChecklistStep[] }) {
           </p>
         </div>
         <div className="ml-auto flex items-center gap-2">
-          <span className="text-sm font-bold text-[#316994]">
+          <span className="text-sm font-bold text-blue-700">
             {done}/{total}
           </span>
           <button
@@ -45,7 +45,7 @@ export default function ChecklistCard({ steps }: { steps: ChecklistStep[] }) {
 
       <div className="mt-5 h-2 overflow-hidden rounded-full bg-slate-100">
         <div
-          className="h-full rounded-full bg-linear-to-r from-[#4588ba] to-[#316994] transition-all"
+          className="h-full rounded-full bg-blue-500 transition-all"
           style={{ width: `${percent}%` }}
         />
       </div>
@@ -70,7 +70,7 @@ export default function ChecklistCard({ steps }: { steps: ChecklistStep[] }) {
             {!step.done && step.action && (
               <Link
                 href={step.action.href}
-                className="ml-auto inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-[#316994] hover:underline"
+                className="ml-auto inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-blue-700 hover:underline"
               >
                 {step.action.label}
                 <ExternalLink className="h-3.5 w-3.5" />

@@ -25,7 +25,7 @@ export default function SeoCard({ seo }: { seo: DashboardData["seo"] }) {
       </button>
 
       <div className="flex items-start gap-4">
-        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#4588ba]/10 text-[#316994]">
+        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-blue-500/10 text-blue-700">
           <TrendingUp className="h-6 w-6" />
         </span>
         <div>
@@ -65,7 +65,7 @@ export default function SeoCard({ seo }: { seo: DashboardData["seo"] }) {
 
       <Link
         href="/dashboard/content"
-        className="mt-5 flex w-full items-center justify-center gap-2 rounded-xl bg-linear-to-br from-[#4588ba] to-[#316994] px-6 py-3.5 text-sm font-semibold text-white shadow-md shadow-[#4588ba]/25 transition-all hover:shadow-lg hover:shadow-[#4588ba]/40"
+        className="mt-5 flex w-full items-center justify-center gap-2 rounded-xl bg-blue-500 hover:bg-blue-700 px-6 py-3.5 text-sm font-semibold text-white shadow-md shadow-blue-500/25 transition-all hover:shadow-lg hover:shadow-blue-500/40"
       >
         Generate my free article
         <ArrowRight className="h-4 w-4" />
