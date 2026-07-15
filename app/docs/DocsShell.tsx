@@ -43,7 +43,7 @@ const sectionTemplates = [
       { name: "Build in 5 minutes", slug: "tutorials/build-in-5-minutes" },
       { name: "Landing page", slug: "tutorials/landing-page" },
       { name: "Start a blog", slug: "tutorials/start-blog" },
-      { name: "Start an ecommerce website", slug: "tutorials/start-ecommerce" },
+      { name: "Start an Ecommerce website", slug: "tutorials/start-ecommerce" },
     ],
   },
   {
@@ -260,7 +260,7 @@ export default function DocsShell({
                 onClick={() => setIsMobileSidebarOpen(false)}
                 className={`flex w-full items-center justify-between rounded px-1 py-1 text-left text-base font-bold uppercase tracking-wider transition hover:text-gray-700 ${
                   pathname === section.path || pathname.startsWith(section.path + "/")
-                    ? "bg-orange-100 text-gray-900"
+                    ? "bg- text-gray-900"
                     : "text-gray-500"
                 }`}
               >
@@ -289,7 +289,7 @@ export default function DocsShell({
                         onClick={() => setIsMobileSidebarOpen(false)}
                         className={`block w-full rounded-md px-2 py-1 text-left text-base transition ${
                           pathname === item.path
-                            ? "bg-orange-100 font-medium text-black"
+                            ? "bg-blue-50 font-medium text-black"
                             : "text-gray-700 hover:bg-gray-100 hover:text-black"
                         }`}
                       >
