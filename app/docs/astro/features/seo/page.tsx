@@ -29,7 +29,7 @@ export default function SEOtags() {
 
   return (
     <div className="min-h-full p-12">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl ml-6">
       {/* Breadcrumb */}
       <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-x-1 gap-y-1 text-base font-normal text-slate-900">
         <Link href="/docs/astro" className="rounded-full py-1 hover:text-slate-600 hover:underline">
@@ -59,7 +59,7 @@ export default function SEOtags() {
       {/* Meta Component Section */}
       <div id="setup" className="mb-16 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-green-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <FileCode className="w-6 h-6" />
           </div>
           <div>
@@ -76,7 +76,7 @@ export default function SEOtags() {
           {/* Features */}
           <div>
             <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-green-600" />
+              <Sparkles className="w-5 h-5 text-gray-600" />
               Features
             </h3>
             <ul className="space-y-3">
@@ -88,7 +88,7 @@ export default function SEOtags() {
                 "Enhanced meta tags for articles (author, published/modified dates)"
               ].map((feature) => (
                 <li key={feature} className="flex items-start gap-2.5 text-gray-700">
-                  <Check className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
+                  <Check className="w-5 h-5 text-gray-600 shrink-0 mt-0.5" />
                   <span>{feature}</span>
                 </li>
               ))}
@@ -98,7 +98,7 @@ export default function SEOtags() {
           {/* Social Image Strategy */}
           <div>
             <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-              <ImageIcon className="w-5 h-5 text-green-600" />
+              <ImageIcon className="w-5 h-5 text-gray-600" />
               Social Image Strategy
             </h3>
             <ul className="space-y-3">
@@ -108,7 +108,7 @@ export default function SEOtags() {
                 { label: "Blog posts", value: "Automatically use the post's featured image" }
               ].map((item) => (
                 <li key={item.label} className="flex items-start gap-2.5 text-gray-700">
-                  <ChevronRight className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
+                  <ChevronRight className="w-5 h-5 text-gray-600 shrink-0 mt-0.5" />
                   <span>
                     <span className="font-semibold text-gray-900">{item.label}:</span> {item.value}
                   </span>
@@ -122,7 +122,7 @@ export default function SEOtags() {
       {/* BaseLayout Props */}
       <div className="mb-16 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <Settings className="w-6 h-6" />
           </div>
           <div>
@@ -139,7 +139,7 @@ export default function SEOtags() {
           {/* Props interface */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">1</div>
+              <div className="shrink-0 w-8 h-8 bg-blue-50 text-gray-700 rounded-full flex items-center justify-center font-bold">1</div>
               <h3 className="text-xl font-bold text-gray-900">Props Interface</h3>
             </div>
             <div className="ml-11 bg-gray-900 rounded-lg p-4 font-mono text-xs text-gray-100 relative group overflow-x-auto">
@@ -164,7 +164,7 @@ export default function SEOtags() {
           {/* Basic page */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">2</div>
+              <div className="shrink-0 w-8 h-8 bg-blue-50 text-gray-700 rounded-full flex items-center justify-center font-bold">2</div>
               <h3 className="text-xl font-bold text-gray-900">Basic Page (uses defaults)</h3>
             </div>
             <p className="text-gray-600 mb-4 ml-11">
@@ -194,7 +194,7 @@ export default function SEOtags() {
           {/* Page with social image */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">3</div>
+              <div className="shrink-0 w-8 h-8 bg-blue-50 text-gray-700 rounded-full flex items-center justify-center font-bold">3</div>
               <h3 className="text-xl font-bold text-gray-900">Page With Social Image</h3>
             </div>
             <p className="text-gray-600 mb-4 ml-11">
@@ -236,8 +236,8 @@ const optimizedImage = await getImage({ src: heroImage, format: "webp" });
           </div>
 
           <div className="ml-11 p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
-            <p className="text-blue-900 font-medium mb-2">💡 Sensible Defaults</p>
-            <p className="text-sm text-blue-800">
+            <p className="text-gray-900 font-medium mb-2">💡 Sensible Defaults</p>
+            <p className="text-sm text-gray-800">
               Omit any prop and the Meta component pulls the value from <code className="bg-blue-100 px-1.5 py-0.5 rounded">client.ts</code>.
               You only override what&apos;s different on a given page.
             </p>
@@ -248,7 +248,7 @@ const optimizedImage = await getImage({ src: heroImage, format: "webp" });
       {/* Extending SEO Metadata */}
       <div className="mb-16 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-purple-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <Sparkles className="w-6 h-6" />
           </div>
           <div>
@@ -264,7 +264,7 @@ const optimizedImage = await getImage({ src: heroImage, format: "webp" });
         <div className="space-y-6">
           <div className="p-4 bg-gray-50 border-2 border-gray-200 rounded-lg">
             <p className="font-bold text-gray-900 mb-2 flex items-center gap-2">
-              <ImageIcon className="w-5 h-5 text-purple-600" />
+              <ImageIcon className="w-5 h-5 text-gray-600" />
               Custom Open Graph Tags
             </p>
             <p className="text-sm text-gray-700">
@@ -418,11 +418,11 @@ const faqSchema = getFAQSchema(faqData);
             </div>
           </div>
 
-          <div className="p-4 bg-purple-50 border-2 border-purple-200 rounded-lg">
-            <p className="text-purple-900 font-medium mb-2">🎯 Multiple Schemas</p>
-            <p className="text-sm text-purple-800">
-              You can add multiple <code className="bg-purple-100 px-1.5 py-0.5 rounded">&lt;script slot=&quot;schema&quot;&gt;</code> tags &mdash;
-              each one renders in the <code className="bg-purple-100 px-1.5 py-0.5 rounded">&lt;head&gt;</code>. Validate output with{" "}
+          <div className="p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
+            <p className="text-gray-900 font-medium mb-2">🎯 Multiple Schemas</p>
+            <p className="text-sm text-gray-800">
+              You can add multiple <code className="bg-blue-100 px-1.5 py-0.5 rounded">&lt;script slot=&quot;schema&quot;&gt;</code> tags &mdash;
+              each one renders in the <code className="bg-blue-100 px-1.5 py-0.5 rounded">&lt;head&gt;</code>. Validate output with{" "}
               <a href="https://search.google.com/test/rich-results" target="_blank" rel="noopener noreferrer" className="underline font-semibold">
                 Google&apos;s Rich Results Test
               </a>.

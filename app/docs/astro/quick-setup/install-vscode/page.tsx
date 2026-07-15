@@ -54,7 +54,7 @@ const CodeBlock = ({ code }: { code: string }) => (
 const Step = ({ number, title, children }: { number: number; title: string; children: React.ReactNode }) => (
   <div className="flex gap-4 mb-6">
     <div
-      className="shrink-0 w-9 h-9 rounded-full flex items-center justify-center font-bold text-white text-sm"
+      className="shrink-0 w-9 h-9 rounded-full flex items-center justify-center font-bold text-gray-700 text-sm"
       style={{ background: "#c3c5c7" }}
     >
       {number}
@@ -73,8 +73,8 @@ const TipBox = ({ icon, title, children }: { icon: React.ReactNode; title: strin
   >
     <span className="text-xl shrink-0">{icon}</span>
     <div>
-      <p className="font-bold text-yellow-800 text-sm mb-1">{title}</p>
-      <p className="text-yellow-700 text-sm leading-relaxed">{children}</p>
+      <p className="font-bold text-gray-800 text-sm mb-1">{title}</p>
+      <p className="text-gray-700 text-sm leading-relaxed">{children}</p>
     </div>
   </div>
 );

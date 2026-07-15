@@ -20,8 +20,8 @@ const providers = [
     icon: BarChart3,
     accent: {
       card: "hover:border-blue-300 hover:shadow-blue-100",
-      iconWrap: "bg-blue-50 text-blue-600 border-blue-200",
-      link: "text-blue-600 group-hover:text-blue-700",
+      iconWrap: "bg-blue-50 text-gray-600 border-blue-200",
+      link: "text-gray-600 group-hover:text-gray-700",
     },
   },
   {
@@ -43,19 +43,19 @@ const comparison = [
   {
     label: "Google Analytics",
     icon: LineChart,
-    color: "bg-blue-500",
+    color: "bg-blue-50",
     text: "Most powerful reporting. Requires a cookie consent banner in the EU.",
   },
   {
     label: "Vercel Analytics",
     icon: ShieldCheck,
-    color: "bg-gray-900",
+    color: "bg-blue-50",
     text: "Cookieless and privacy-friendly. Zero config when hosted on Vercel.",
   },
   {
     label: "Use both?",
     icon: Cookie,
-    color: "bg-purple-500",
+    color: "bg-blue-50",
     text: "You can run them side by side — GA for depth, Vercel for privacy.",
   },
 ];
@@ -63,7 +63,7 @@ const comparison = [
 export default function Analytics() {
   return (
     <div className="min-h-full p-12">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl ml-6">
       {/* Hero */}
       <div className="mb-12">
         {/* Breadcrumb */}
@@ -120,7 +120,7 @@ export default function Analytics() {
       {/* Quick comparison */}
       <div className="bg-linear-to-br from-gray-50 to-gray-100 rounded-2xl p-8 border border-gray-200">
         <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-          <Sparkles className="w-6 h-6 text-blue-600" />
+          <Sparkles className="w-6 h-6 text-gray-600" />
           Which Should You Choose?
         </h2>
 
@@ -134,7 +134,7 @@ export default function Analytics() {
               >
                 <div className="flex items-center gap-2 mb-2">
                   <span
-                    className={`w-7 h-7 rounded-lg ${item.color} text-white flex items-center justify-center`}
+                    className={`w-7 h-7 rounded-lg ${item.color} text-gray-700 flex items-center justify-center`}
                   >
                     <Icon className="w-4 h-4" />
                   </span>
@@ -147,7 +147,7 @@ export default function Analytics() {
         </div>
 
         <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
-          <p className="text-sm text-blue-900">
+          <p className="text-sm text-gray-900">
             Not sure? Start with <span className="font-semibold">Vercel Analytics</span> if
             your site is on Vercel — it&apos;s the fastest, most private setup.
             Reach for <span className="font-semibold">Google Analytics</span> when you need

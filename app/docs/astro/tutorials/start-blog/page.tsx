@@ -160,7 +160,7 @@ site_url: https://your-site.netlify.app`;
 
   return (
     <div className="min-h-full p-12">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl ml-6">
 
       {/* Breadcrumb */}
       <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-x-1 gap-y-1 text-base font-normal text-slate-900">
@@ -186,7 +186,7 @@ site_url: https://your-site.netlify.app`;
             href="https://decapcms.org/docs/basic-steps/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-600 underline font-semibold"
+            className="text-gray-600 underline font-semibold"
           >
             Decap CMS
           </a>
@@ -196,7 +196,7 @@ site_url: https://your-site.netlify.app`;
             href="https://decapbridge.com/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-600 underline font-semibold"
+            className="text-gray-600 underline font-semibold"
           >
             DecapBridge
           </a>
@@ -205,19 +205,19 @@ site_url: https://your-site.netlify.app`;
       </div>
 
       {/* Before You Start */}
-      <div className="mb-12 p-6 bg-yellow-50 border-2 border-yellow-200 rounded-xl">
-        <h3 className="text-lg font-bold text-yellow-900 mb-3 flex items-center gap-2">
+      <div className="mb-12 p-6 bg-blue-50 border-2 border-blue-200 rounded-xl">
+        <h3 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
           <Clock className="w-5 h-5" />
           Before You Start
         </h3>
-        <p className="text-yellow-800 mb-4">
+        <p className="text-gray-800 mb-4">
           Make sure you&apos;ve scaffolded the template and have the dev server running, with your
           repo pushed to GitHub and the site deployed. If not, start with the quick build tutorial
           first.
         </p>
         <Link
           href="/docs/astro/tutorials/build-in-5-minutes"
-          className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-600 hover:bg-yellow-700 text-white font-semibold rounded-lg transition-colors"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 hover:bg-blue-100 text-gray-700 font-semibold rounded-lg transition-colors"
         >
           <ArrowRight className="w-4 h-4" />
           Build in 5 Minutes
@@ -256,12 +256,12 @@ site_url: https://your-site.netlify.app`;
                 key={index}
                 className="relative bg-linear-to-br from-white to-gray-50 rounded-xl p-5 border-2 border-gray-200"
               >
-                <div className="absolute -top-3 -left-3 w-9 h-9 bg-green-600 text-white rounded-full flex items-center justify-center font-bold shadow-lg">
+                <div className="absolute -top-3 -left-3 w-9 h-9 bg-blue-50 text-gray-700 rounded-full flex items-center justify-center font-bold shadow-lg">
                   {index + 1}
                 </div>
                 <div className="flex items-center gap-2 mb-3 mt-1">
-                  <div className="p-1.5 bg-green-100 rounded-lg">
-                    <Icon className="w-4 h-4 text-green-600" />
+                  <div className="p-1.5 bg-blue-100 rounded-lg">
+                    <Icon className="w-4 h-4 text-gray-600" />
                   </div>
                 </div>
                 <h3 className="font-bold text-gray-900 text-sm mb-1">{item.title}</h3>
@@ -275,7 +275,7 @@ site_url: https://your-site.netlify.app`;
       {/* ── Section: How the blog works ── */}
       <div className="mb-12 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-emerald-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <FolderTree className="w-6 h-6" />
           </div>
           <div>
@@ -308,14 +308,14 @@ src/
 
           <div className="grid md:grid-cols-2 gap-4">
             <div className="p-4 border-2 border-gray-200 rounded-lg">
-              <FileCode className="w-5 h-5 text-emerald-600 mb-2" />
+              <FileCode className="w-5 h-5 text-gray-600 mb-2" />
               <p className="font-bold text-gray-900 text-sm mb-1">public/admin/config.yml</p>
               <p className="text-xs text-gray-600">
                 Defines your collection, the fields each post has, and which backend handles login.
               </p>
             </div>
             <div className="p-4 border-2 border-gray-200 rounded-lg">
-              <Database className="w-5 h-5 text-emerald-600 mb-2" />
+              <Database className="w-5 h-5 text-gray-600 mb-2" />
               <p className="font-bold text-gray-900 text-sm mb-1">src/content.config.ts</p>
               <p className="text-xs text-gray-600">
                 A Zod schema that validates each post&apos;s frontmatter and enables image
@@ -323,7 +323,7 @@ src/
               </p>
             </div>
             <div className="p-4 border-2 border-gray-200 rounded-lg">
-              <FileText className="w-5 h-5 text-emerald-600 mb-2" />
+              <FileText className="w-5 h-5 text-gray-600 mb-2" />
               <p className="font-bold text-gray-900 text-sm mb-1">src/content/blog/</p>
               <p className="text-xs text-gray-600">
                 One <code className="bg-gray-100 px-1 rounded">.md</code> or{" "}
@@ -332,7 +332,7 @@ src/
               </p>
             </div>
             <div className="p-4 border-2 border-gray-200 rounded-lg">
-              <ImageIcon className="w-5 h-5 text-emerald-600 mb-2" />
+              <ImageIcon className="w-5 h-5 text-gray-600 mb-2" />
               <p className="font-bold text-gray-900 text-sm mb-1">src/assets/images/blog/</p>
               <p className="text-xs text-gray-600">
                 Where cover images land when uploaded through the dashboard.
@@ -341,11 +341,11 @@ src/
           </div>
 
           <div className="p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
-            <p className="text-blue-900 font-medium mb-1 flex items-center gap-2">
+            <p className="text-gray-900 font-medium mb-1 flex items-center gap-2">
               <Info className="w-4 h-4" />
               Edits become commits
             </p>
-            <p className="text-sm text-blue-800">
+            <p className="text-sm text-gray-800">
               When someone saves a post in the dashboard, Decap commits the markdown change to your
               GitHub repo. That commit triggers a rebuild on your host, and the new post goes live —
               no manual deploy needed.
@@ -357,7 +357,7 @@ src/
       {/* ── Section: Configure the blog collection ── */}
       <div className="mb-12 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <Settings className="w-6 h-6" />
           </div>
           <div>
@@ -378,7 +378,7 @@ src/
               href="https://decapcms.org/docs/configuration-options/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 underline"
+              className="text-gray-600 underline"
             >
               Decap&apos;s configuration docs
             </a>{" "}
@@ -412,7 +412,7 @@ src/
                     <code className="bg-gray-100 px-1.5 py-0.5 rounded text-xs text-gray-700">
                       {field.name}
                     </code>
-                    <code className="bg-blue-50 text-blue-700 px-1.5 py-0.5 rounded text-xs">
+                    <code className="bg-blue-50 text-gray-700 px-1.5 py-0.5 rounded text-xs">
                       {field.widget}
                     </code>
                   </div>
@@ -434,16 +434,16 @@ src/
                 at <code className="bg-gray-100 px-1.5 py-0.5 rounded">/blog/my-first-post/</code>.
               </p>
             </div>
-            <div className="p-4 bg-yellow-50 border-2 border-yellow-200 rounded-lg">
-              <p className="text-yellow-900 font-medium mb-1 flex items-center gap-2">
+            <div className="p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
+              <p className="text-gray-900 font-medium mb-1 flex items-center gap-2">
                 <ImageIcon className="w-4 h-4" />
                 Where images go
               </p>
-              <p className="text-sm text-yellow-800">
-                <code className="bg-yellow-100 px-1.5 py-0.5 rounded">public_folder</code> uses the{" "}
-                <code className="bg-yellow-100 px-1.5 py-0.5 rounded">@assets</code> path alias, so
+              <p className="text-sm text-gray-800">
+                <code className="bg-blue-100 px-1.5 py-0.5 rounded">public_folder</code> uses the{" "}
+                <code className="bg-blue-100 px-1.5 py-0.5 rounded">@assets</code> path alias, so
                 uploaded covers are referenced as{" "}
-                <code className="bg-yellow-100 px-1.5 py-0.5 rounded">@assets/images/blog/...</code>{" "}
+                <code className="bg-blue-100 px-1.5 py-0.5 rounded">@assets/images/blog/...</code>{" "}
                 and Astro optimizes them at build time.
               </p>
             </div>
@@ -454,7 +454,7 @@ src/
       {/* ── Section: Match the content collection schema ── */}
       <div className="mb-12 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-purple-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <Database className="w-6 h-6" />
           </div>
           <div>
@@ -492,15 +492,15 @@ src/
             </button>
           </div>
 
-          <div className="p-4 bg-red-50 border-2 border-red-200 rounded-lg">
-            <p className="text-red-900 font-medium mb-1 flex items-center gap-2">
+          <div className="p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
+            <p className="text-gray-900 font-medium mb-1 flex items-center gap-2">
               <ShieldCheck className="w-4 h-4" />
               Keep the schema and config.yml in sync
             </p>
-            <p className="text-sm text-red-800">
+            <p className="text-sm text-gray-800">
               This is the one rule that trips people up: if you add or rename a field in{" "}
-              <code className="bg-red-100 px-1.5 py-0.5 rounded">config.yml</code>, make the same
-              change in <code className="bg-red-100 px-1.5 py-0.5 rounded">content.config.ts</code>.
+              <code className="bg-blue-100 px-1.5 py-0.5 rounded">config.yml</code>, make the same
+              change in <code className="bg-blue-100 px-1.5 py-0.5 rounded">content.config.ts</code>.
               If a post&apos;s frontmatter doesn&apos;t match the schema, Astro fails the build with a
               validation error.
             </p>
@@ -532,7 +532,7 @@ src/
       {/* ── Section: Create a DecapBridge site ── */}
       <div className="mb-12 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <Server className="w-6 h-6" />
           </div>
           <div>
@@ -547,14 +547,14 @@ src/
         <div className="space-y-6">
           <ul className="space-y-3 text-sm text-gray-700">
             <li className="flex gap-2">
-              <span className="text-blue-600 font-bold">1.</span>
+              <span className="text-gray-600 font-bold">1.</span>
               <span>
                 Navigate to{" "}
                 <a
                   href="https://decapbridge.com/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-600 underline"
+                  className="text-gray-600 underline"
                 >
                   decapbridge.com
                 </a>{" "}
@@ -562,7 +562,7 @@ src/
               </span>
             </li>
             <li className="flex gap-2">
-              <span className="text-blue-600 font-bold">2.</span>
+              <span className="text-gray-600 font-bold">2.</span>
               <span>
                 Open the dashboard and click <strong>Create New Site</strong>. You&apos;ll be asked
                 to fill in three input fields.
@@ -572,7 +572,7 @@ src/
 
           <div className="grid md:grid-cols-3 gap-4">
             <div className="p-4 border-2 border-gray-200 rounded-lg">
-              <Github className="w-5 h-5 text-blue-600 mb-2" />
+              <Github className="w-5 h-5 text-gray-600 mb-2" />
               <p className="font-bold text-gray-900 text-sm mb-1">GitHub repository</p>
               <p className="text-xs text-gray-600">
                 Must be in{" "}
@@ -581,14 +581,14 @@ src/
               </p>
             </div>
             <div className="p-4 border-2 border-gray-200 rounded-lg">
-              <KeyRound className="w-5 h-5 text-blue-600 mb-2" />
+              <KeyRound className="w-5 h-5 text-gray-600 mb-2" />
               <p className="font-bold text-gray-900 text-sm mb-1">GitHub access token</p>
               <p className="text-xs text-gray-600">
                 A fine-grained personal access token (see the next section for how to create one).
               </p>
             </div>
             <div className="p-4 border-2 border-gray-200 rounded-lg">
-              <Link2 className="w-5 h-5 text-blue-600 mb-2" />
+              <Link2 className="w-5 h-5 text-gray-600 mb-2" />
               <p className="font-bold text-gray-900 text-sm mb-1">Decap CMS URL</p>
               <p className="text-xs text-gray-600">
                 The deployed URL of your admin dashboard, e.g.{" "}
@@ -603,7 +603,7 @@ src/
       {/* ── Section: GitHub personal access token ── */}
       <div className="mb-12 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-gray-800 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <Github className="w-6 h-6" />
           </div>
           <div>
@@ -628,7 +628,7 @@ src/
               "Set Repository access to the desired repository only.",
             ].map((step, i) => (
               <li key={i} className="flex gap-3">
-                <span className="shrink-0 w-6 h-6 bg-gray-800 text-white rounded-full flex items-center justify-center text-xs font-bold">
+                <span className="shrink-0 w-6 h-6 bg-blue-50 text-gray-700 rounded-full flex items-center justify-center text-xs font-bold">
                   {i + 1}
                 </span>
                 <span className="pt-0.5">{step}</span>
@@ -637,11 +637,11 @@ src/
           </ol>
 
           <div className="p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
-            <p className="text-blue-900 font-medium mb-1 flex items-center gap-2">
+            <p className="text-gray-900 font-medium mb-1 flex items-center gap-2">
               <ShieldCheck className="w-4 h-4" />
               Repository permissions
             </p>
-            <p className="text-sm text-blue-800">
+            <p className="text-sm text-gray-800">
               Under <strong>Permissions / Repository permissions</strong>, set{" "}
               <strong>Read and write</strong> access for this repository&apos;s{" "}
               <code className="bg-blue-100 px-1.5 py-0.5 rounded">Contents</code> and{" "}
@@ -656,7 +656,7 @@ src/
               "Copy your token now — you will not be able to see it again.",
             ].map((step, i) => (
               <li key={i} className="flex gap-3">
-                <span className="shrink-0 w-6 h-6 bg-gray-800 text-white rounded-full flex items-center justify-center text-xs font-bold">
+                <span className="shrink-0 w-6 h-6 bg-blue-50 text-gray-700 rounded-full flex items-center justify-center text-xs font-bold">
                   {i + 9}
                 </span>
                 <span className="pt-0.5">{step}</span>
@@ -664,12 +664,12 @@ src/
             ))}
           </ol>
 
-          <div className="p-4 bg-yellow-50 border-2 border-yellow-200 rounded-lg">
-            <p className="text-yellow-900 font-medium mb-1 flex items-center gap-2">
+          <div className="p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
+            <p className="text-gray-900 font-medium mb-1 flex items-center gap-2">
               <Info className="w-4 h-4" />
               Don&apos;t lose the token
             </p>
-            <p className="text-sm text-yellow-800">
+            <p className="text-sm text-gray-800">
               The token is shown only once. Copy it before leaving the page and paste it straight
               into the DecapBridge <strong>GitHub access token</strong> field.
             </p>
@@ -680,7 +680,7 @@ src/
       {/* ── Section: Swap in the backend snippet ── */}
       <div className="mb-12 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-indigo-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <Settings className="w-6 h-6" />
           </div>
           <div>
@@ -718,12 +718,12 @@ src/
             </button>
           </div>
 
-          <div className="p-4 bg-green-50 border-2 border-green-200 rounded-lg">
-            <p className="text-green-900 font-medium mb-1 flex items-center gap-2">
+          <div className="p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
+            <p className="text-gray-900 font-medium mb-1 flex items-center gap-2">
               <Rocket className="w-4 h-4" />
               Push and test
             </p>
-            <p className="text-sm text-green-800">
+            <p className="text-sm text-gray-800">
               Push the change to your repo and test the authentication system. As the admin of the
               site, your login credentials for the Decap dashboard are the same as your
               decapbridge.com credentials.
@@ -735,7 +735,7 @@ src/
       {/* ── Section: Publish posts & invite the client ── */}
       <div className="mb-12 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-pink-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <PenLine className="w-6 h-6" />
           </div>
           <div>
@@ -770,7 +770,7 @@ src/
               </>,
             ].map((step, i) => (
               <li key={i} className="flex gap-3">
-                <span className="shrink-0 w-6 h-6 bg-pink-600 text-white rounded-full flex items-center justify-center text-xs font-bold">
+                <span className="shrink-0 w-6 h-6 bg-blue-50 text-gray-700 rounded-full flex items-center justify-center text-xs font-bold">
                   {i + 1}
                 </span>
                 <span className="pt-0.5">{step}</span>
@@ -780,11 +780,11 @@ src/
 
           <div className="grid md:grid-cols-2 gap-4">
             <div className="p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
-              <p className="text-blue-900 font-medium mb-1 flex items-center gap-2">
+              <p className="text-gray-900 font-medium mb-1 flex items-center gap-2">
                 <UserPlus className="w-4 h-4" />
                 Invite your client
               </p>
-              <p className="text-sm text-blue-800">
+              <p className="text-sm text-gray-800">
                 In your DecapBridge dashboard, add your client as a collaborator. They get their own
                 email and password — they never need a GitHub account to publish.
               </p>
@@ -806,7 +806,7 @@ src/
       {/* ── Section: Styling the preview pane ── */}
       <div className="mb-12 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-purple-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <Palette className="w-6 h-6" />
           </div>
           <div>
@@ -822,7 +822,7 @@ src/
             <h3 className="text-base font-bold text-gray-900 mb-2">How it works</h3>
             <ul className="space-y-2 text-sm text-gray-700">
               <li className="flex gap-2">
-                <span className="text-purple-600 font-bold">1.</span>
+                <span className="text-gray-600 font-bold">1.</span>
                 <span>
                   The preview styles are defined in{" "}
                   <code className="bg-gray-100 px-1.5 py-0.5 rounded">
@@ -832,7 +832,7 @@ src/
                 </span>
               </li>
               <li className="flex gap-2">
-                <span className="text-purple-600 font-bold">2.</span>
+                <span className="text-gray-600 font-bold">2.</span>
                 <span>
                   The CMS preview script in{" "}
                   <code className="bg-gray-100 px-1.5 py-0.5 rounded">src/pages/admin.astro</code>{" "}
@@ -857,7 +857,7 @@ src/
                 href="https://decapcms.org/docs/customization/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-purple-700 underline"
+                className="text-gray-700 underline"
               >
                 Decap&apos;s documentation on customizing the preview pane
               </a>
@@ -870,7 +870,7 @@ src/
       {/* ── Section: Adding local backend ── */}
       <div className="mb-12 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-teal-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <Terminal className="w-6 h-6" />
           </div>
           <div>
@@ -953,18 +953,18 @@ npm install decap-server`}</pre>
             </div>
           </div>
 
-          <div className="p-4 bg-green-50 border-2 border-green-200 rounded-lg">
-            <p className="text-green-900 font-medium mb-1 flex items-center gap-2">
+          <div className="p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
+            <p className="text-gray-900 font-medium mb-1 flex items-center gap-2">
               <Eye className="w-4 h-4" />
               Run it
             </p>
-            <p className="text-sm text-green-800">
+            <p className="text-sm text-gray-800">
               Now when{" "}
-              <code className="bg-green-100 px-1.5 py-0.5 rounded">npm run dev</code> runs, a proxy
+              <code className="bg-blue-100 px-1.5 py-0.5 rounded">npm run dev</code> runs, a proxy
               server for the CMS spins up on{" "}
-              <code className="bg-green-100 px-1.5 py-0.5 rounded">localhost:8081</code>. Access the
+              <code className="bg-blue-100 px-1.5 py-0.5 rounded">localhost:8081</code>. Access the
               blog locally at{" "}
-              <code className="bg-green-100 px-1.5 py-0.5 rounded">http://localhost:4321/admin</code>
+              <code className="bg-blue-100 px-1.5 py-0.5 rounded">http://localhost:4321/admin</code>
               . While running the local dev server, you won&apos;t need to log in to access the admin
               dashboard.
             </p>
@@ -973,29 +973,29 @@ npm install decap-server`}</pre>
       </div>
 
       {/* Next Steps */}
-      <div className="bg-linear-to-br from-gray-900 to-gray-800 rounded-2xl p-8 text-white">
+      <div className="bg-linear-to-br from-gray-50 to-gray-100 border border-gray-200 rounded-2xl p-8 text-gray-700">
         <div className="flex items-center gap-3 mb-4">
           <Newspaper className="w-8 h-8" />
           <h2 className="text-3xl font-bold">Your Blog Is Ready</h2>
         </div>
-        <p className="text-xl text-gray-300 mb-6">
+        <p className="text-xl text-gray-600 mb-6">
           You now have a CMS-powered blog your clients can manage themselves — content lives in
           markdown, media is optimized automatically, and everything is editable from the{" "}
-          <code className="bg-white/10 px-2 py-0.5 rounded">/admin</code> dashboard.
+          <code className="bg-gray-100 px-2 py-0.5 rounded">/admin</code> dashboard.
         </p>
         <div className="flex flex-wrap gap-4">
           <a
             href="https://decapcms.org/docs/"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-50 hover:bg-blue-100 text-gray-700 font-bold rounded-lg transition-colors"
           >
             <Database className="w-5 h-5" />
             Decap CMS Docs
           </a>
           <Link
             href="/docs/astro/deployment"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-white hover:bg-gray-100 text-gray-900 font-bold rounded-lg transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-white hover:bg-gray-100 text-gray-900 border border-gray-200 font-bold rounded-lg transition-colors"
           >
             <Rocket className="w-5 h-5" />
             Deployment Guide

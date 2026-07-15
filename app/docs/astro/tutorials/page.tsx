@@ -4,7 +4,7 @@ import { LuChevronRight } from "react-icons/lu";
 export default function Tutorials() {
     return (
         <div className="min-h-full p-12">
-            <div className="max-w-3xl mx-auto text-center">
+            <div className="max-w-3xl ml-6 text-center">
                 {/* Breadcrumb */}
                 <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-x-1 gap-y-1 text-base font-normal text-slate-900 text-left">
                     <Link href="/docs/astro" className="rounded-full py-1 hover:text-slate-600 hover:underline">
@@ -32,7 +32,7 @@ export default function Tutorials() {
 
                 <Link
                     href="/tutorials/build-in-5-minutes"
-                    className="inline-flex items-center px-8 py-3 bg-black text-white rounded-lg text-base font-medium hover:opacity-90 transition"
+                    className="inline-flex items-center px-8 py-3 bg-blue-50 text-gray-700 rounded-lg text-base font-medium hover:opacity-90 transition"
                 >
                     Get Started
                 </Link>

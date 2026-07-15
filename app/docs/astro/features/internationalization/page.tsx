@@ -16,7 +16,7 @@ export default function Internationalization() {
 
   return (
     <div className="min-h-full p-12">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl ml-6">
 
       {/* Hero Section */}
       <div className="mb-12">
@@ -48,7 +48,7 @@ export default function Internationalization() {
       {/* Setup Instructions */}
       <div className="mb-12 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <Globe className="w-6 h-6" />
           </div>
           <div>
@@ -65,7 +65,7 @@ export default function Internationalization() {
           {/* Step 1 */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
+              <div className="shrink-0 w-8 h-8 bg-blue-50 text-gray-700 rounded-full flex items-center justify-center font-bold">
                 1
               </div>
               <h3 className="text-xl font-bold text-gray-900">
@@ -108,7 +108,7 @@ export default defineConfig({
               </button>
             </div>
             <div className="ml-11 mt-3 p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
-              <p className="text-sm text-blue-800">
+              <p className="text-sm text-gray-800">
                 💡 <strong>Note:</strong> <code className="bg-blue-100 px-2 py-0.5 rounded">defaultLocale</code> must be one of the languages listed in <code className="bg-blue-100 px-2 py-0.5 rounded">locales</code>.
               </p>
             </div>
@@ -117,7 +117,7 @@ export default defineConfig({
           {/* Step 2 */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
+              <div className="shrink-0 w-8 h-8 bg-blue-50 text-gray-700 rounded-full flex items-center justify-center font-bold">
                 2
               </div>
               <h3 className="text-xl font-bold text-gray-900">
@@ -162,9 +162,9 @@ export default defineConfig({
                 )}
               </button>
             </div>
-            <div className="ml-11 mt-3 p-4 bg-green-50 border-2 border-green-200 rounded-lg">
-              <p className="text-sm text-green-800">
-                ✨ The localized folders don&apos;t need to sit at the root of <code className="bg-green-100 px-2 py-0.5 rounded">/pages/</code> — they can be nested anywhere.
+            <div className="ml-11 mt-3 p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
+              <p className="text-sm text-gray-800">
+                ✨ The localized folders don&apos;t need to sit at the root of <code className="bg-blue-100 px-2 py-0.5 rounded">/pages/</code> — they can be nested anywhere.
               </p>
             </div>
           </div>
@@ -172,7 +172,7 @@ export default defineConfig({
           {/* Step 3 */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
+              <div className="shrink-0 w-8 h-8 bg-blue-50 text-gray-700 rounded-full flex items-center justify-center font-bold">
                 3
               </div>
               <h3 className="text-xl font-bold text-gray-900">
@@ -218,11 +218,11 @@ const aboutURL = getRelativeLocaleUrl("es", "about");
           </div>
 
           {/* Success */}
-          <div className="ml-11 p-6 bg-green-50 border-2 border-green-200 rounded-lg">
-            <p className="text-green-900 font-medium mb-2">
+          <div className="ml-11 p-6 bg-blue-50 border-2 border-blue-200 rounded-lg">
+            <p className="text-gray-900 font-medium mb-2">
               🎉 You&apos;re Multi-Language!
             </p>
-            <p className="text-sm text-green-800">
+            <p className="text-sm text-gray-800">
               Astro now generates localized routes from your folder structure and the i18n middleware
               verifies that every localized URL maps to a valid route.
             </p>
@@ -233,7 +233,7 @@ const aboutURL = getRelativeLocaleUrl("es", "about");
       {/* prefixDefaultLocale */}
       <div className="mb-12 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-purple-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <FolderTree className="w-6 h-6" />
           </div>
           <div>
@@ -260,18 +260,18 @@ const aboutURL = getRelativeLocaleUrl("es", "about");
             </p>
             <ul className="space-y-2 text-sm text-gray-700">
               <li className="flex items-start gap-2">
-                <span className="font-bold text-purple-600">•</span>
+                <span className="font-bold text-gray-600">•</span>
                 <span><code className="bg-gray-100 px-1.5 py-0.5 rounded">pages/about.astro</code> → <code className="bg-gray-100 px-1.5 py-0.5 rounded">/about/</code></span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="font-bold text-purple-600">•</span>
+                <span className="font-bold text-gray-600">•</span>
                 <span><code className="bg-gray-100 px-1.5 py-0.5 rounded">pages/fr/about.astro</code> → <code className="bg-gray-100 px-1.5 py-0.5 rounded">/fr/about/</code></span>
               </li>
             </ul>
           </div>
 
-          <div className="bg-purple-50 rounded-xl p-6 border-2 border-purple-200">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-purple-200 text-purple-800 rounded-full text-xs font-bold mb-3">
+          <div className="bg-blue-50 rounded-xl p-6 border-2 border-blue-200">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-200 text-gray-800 rounded-full text-xs font-bold mb-3">
               Prefixed
             </div>
             <h3 className="text-lg font-bold text-gray-900 mb-2">
@@ -283,12 +283,12 @@ const aboutURL = getRelativeLocaleUrl("es", "about");
             </p>
             <ul className="space-y-2 text-sm text-gray-700">
               <li className="flex items-start gap-2">
-                <span className="font-bold text-purple-600">•</span>
-                <span><code className="bg-purple-100 px-1.5 py-0.5 rounded">pages/en/about.astro</code> → <code className="bg-purple-100 px-1.5 py-0.5 rounded">/en/about/</code></span>
+                <span className="font-bold text-gray-600">•</span>
+                <span><code className="bg-blue-100 px-1.5 py-0.5 rounded">pages/en/about.astro</code> → <code className="bg-blue-100 px-1.5 py-0.5 rounded">/en/about/</code></span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="font-bold text-purple-600">•</span>
-                <span>A root <code className="bg-purple-100 px-1.5 py-0.5 rounded">pages/index.astro</code> is always required</span>
+                <span className="font-bold text-gray-600">•</span>
+                <span>A root <code className="bg-blue-100 px-1.5 py-0.5 rounded">pages/index.astro</code> is always required</span>
               </li>
             </ul>
           </div>
@@ -334,13 +334,13 @@ export default defineConfig({
           </button>
         </div>
 
-        <div className="mt-4 p-4 bg-yellow-50 border-2 border-yellow-200 rounded-lg">
-          <p className="text-sm text-yellow-800">
-            ⚠️ With <code className="bg-yellow-100 px-1.5 py-0.5 rounded">prefixDefaultLocale: true</code>, URLs
+        <div className="mt-4 p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
+          <p className="text-sm text-gray-800">
+            ⚠️ With <code className="bg-blue-100 px-1.5 py-0.5 rounded">prefixDefaultLocale: true</code>, URLs
             without a locale prefix return a <strong>404</strong> unless you set a fallback. The home page
-            {" "}<code className="bg-yellow-100 px-1.5 py-0.5 rounded">/</code> stays unprefixed by default — add
-            {" "}<code className="bg-yellow-100 px-1.5 py-0.5 rounded">redirectToDefaultLocale: true</code> to
-            redirect it to <code className="bg-yellow-100 px-1.5 py-0.5 rounded">/[defaultLocale]/</code>.
+            {" "}<code className="bg-blue-100 px-1.5 py-0.5 rounded">/</code> stays unprefixed by default — add
+            {" "}<code className="bg-blue-100 px-1.5 py-0.5 rounded">redirectToDefaultLocale: true</code> to
+            redirect it to <code className="bg-blue-100 px-1.5 py-0.5 rounded">/[defaultLocale]/</code>.
           </p>
         </div>
       </div>
@@ -348,7 +348,7 @@ export default defineConfig({
       {/* Fallback */}
       <div className="mb-12 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-green-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <GitBranch className="w-6 h-6" />
           </div>
           <div>
@@ -411,11 +411,11 @@ export default defineConfig({
           </button>
         </div>
 
-        <div className="mt-4 p-4 bg-green-50 border-2 border-green-200 rounded-lg">
-          <p className="text-sm text-green-800">
-            With this config, a visitor opening <code className="bg-green-100 px-1.5 py-0.5 rounded">example.com/fr/my-page/</code> sees
-            the content from <code className="bg-green-100 px-1.5 py-0.5 rounded">/es/my-page/</code> — no 404 — even when
-            {" "}<code className="bg-green-100 px-1.5 py-0.5 rounded">src/pages/fr/my-page.astro</code> doesn&apos;t exist yet.
+        <div className="mt-4 p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
+          <p className="text-sm text-gray-800">
+            With this config, a visitor opening <code className="bg-blue-100 px-1.5 py-0.5 rounded">example.com/fr/my-page/</code> sees
+            the content from <code className="bg-blue-100 px-1.5 py-0.5 rounded">/es/my-page/</code> — no 404 — even when
+            {" "}<code className="bg-blue-100 px-1.5 py-0.5 rounded">src/pages/fr/my-page.astro</code> doesn&apos;t exist yet.
           </p>
         </div>
       </div>
@@ -423,7 +423,7 @@ export default defineConfig({
       {/* Custom locale paths */}
       <div className="mb-12 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-pink-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <Route className="w-6 h-6" />
           </div>
           <div>
@@ -490,12 +490,12 @@ export default defineConfig({
           </button>
         </div>
 
-        <div className="mt-4 p-4 bg-pink-50 border-2 border-pink-200 rounded-lg">
-          <p className="text-sm text-pink-800">
-            📁 Your <code className="bg-pink-100 px-1.5 py-0.5 rounded">/[locale]/</code> folder must be named to match
-            {" "}<code className="bg-pink-100 px-1.5 py-0.5 rounded">path</code> (here <code className="bg-pink-100 px-1.5 py-0.5 rounded">src/pages/french/</code>),
-            and you pass <code className="bg-pink-100 px-1.5 py-0.5 rounded">path</code> — not a code — as the locale to helpers
-            like <code className="bg-pink-100 px-1.5 py-0.5 rounded">getRelativeLocaleUrl(&quot;french&quot;, &quot;about&quot;)</code>.
+        <div className="mt-4 p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
+          <p className="text-sm text-gray-800">
+            📁 Your <code className="bg-blue-100 px-1.5 py-0.5 rounded">/[locale]/</code> folder must be named to match
+            {" "}<code className="bg-blue-100 px-1.5 py-0.5 rounded">path</code> (here <code className="bg-blue-100 px-1.5 py-0.5 rounded">src/pages/french/</code>),
+            and you pass <code className="bg-blue-100 px-1.5 py-0.5 rounded">path</code> — not a code — as the locale to helpers
+            like <code className="bg-blue-100 px-1.5 py-0.5 rounded">getRelativeLocaleUrl(&quot;french&quot;, &quot;about&quot;)</code>.
           </p>
         </div>
       </div>
@@ -503,7 +503,7 @@ export default defineConfig({
       {/* Routing logic & custom middleware */}
       <div className="mb-12 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-indigo-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <Workflow className="w-6 h-6" />
           </div>
           <div>
@@ -516,12 +516,12 @@ export default defineConfig({
           </div>
         </div>
 
-        <div className="p-4 bg-indigo-50 border-2 border-indigo-200 rounded-lg mb-8">
-          <p className="text-sm text-indigo-900">
+        <div className="p-4 bg-blue-50 border-2 border-blue-200 rounded-lg mb-8">
+          <p className="text-sm text-gray-900">
             🧭 Astro implements i18n as a <strong>middleware</strong> placed first in the chain. It awaits every
             response from your own middleware and page routes, <em>then</em> runs its logic — such as verifying
             that a localized URL maps to a valid route. You can add your own logic alongside or instead of it
-            while still using the <code className="bg-indigo-100 px-1.5 py-0.5 rounded">astro:i18n</code> helpers.
+            while still using the <code className="bg-blue-100 px-1.5 py-0.5 rounded">astro:i18n</code> helpers.
           </p>
         </div>
 
@@ -645,7 +645,7 @@ export const onRequest = sequence(
       {/* Domains */}
       <div className="mb-12 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-cyan-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <Server className="w-6 h-6" />
           </div>
           <div>
@@ -723,38 +723,38 @@ export default defineConfig({
           </button>
         </div>
 
-        <div className="mt-4 p-4 bg-cyan-50 border-2 border-cyan-200 rounded-lg">
-          <p className="text-sm text-cyan-900 font-medium mb-2">⚙️ Requirements &amp; limitations</p>
-          <ul className="space-y-1.5 text-sm text-cyan-800">
+        <div className="mt-4 p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
+          <p className="text-sm text-gray-900 font-medium mb-2">⚙️ Requirements &amp; limitations</p>
+          <ul className="space-y-1.5 text-sm text-gray-800">
             <li className="flex items-start gap-2">
               <span className="font-bold">•</span>
-              <span><code className="bg-cyan-100 px-1.5 py-0.5 rounded">site</code> is mandatory and <code className="bg-cyan-100 px-1.5 py-0.5 rounded">output</code> must be <code className="bg-cyan-100 px-1.5 py-0.5 rounded">&quot;server&quot;</code> with no prerendered pages.</span>
+              <span><code className="bg-blue-100 px-1.5 py-0.5 rounded">site</code> is mandatory and <code className="bg-blue-100 px-1.5 py-0.5 rounded">output</code> must be <code className="bg-blue-100 px-1.5 py-0.5 rounded">&quot;server&quot;</code> with no prerendered pages.</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="font-bold">•</span>
-              <span>Your proxy/host must forward <code className="bg-cyan-100 px-1.5 py-0.5 rounded">X-Forwarded-Host</code> (or <code className="bg-cyan-100 px-1.5 py-0.5 rounded">Host</code>) and <code className="bg-cyan-100 px-1.5 py-0.5 rounded">X-Forwarded-Proto</code>; missing headers cause a 404.</span>
+              <span>Your proxy/host must forward <code className="bg-blue-100 px-1.5 py-0.5 rounded">X-Forwarded-Host</code> (or <code className="bg-blue-100 px-1.5 py-0.5 rounded">Host</code>) and <code className="bg-blue-100 px-1.5 py-0.5 rounded">X-Forwarded-Proto</code>; missing headers cause a 404.</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="font-bold">•</span>
-              <span>These URLs are also returned by <code className="bg-cyan-100 px-1.5 py-0.5 rounded">getAbsoluteLocaleUrl()</code> and <code className="bg-cyan-100 px-1.5 py-0.5 rounded">getAbsoluteLocaleUrlList()</code>.</span>
+              <span>These URLs are also returned by <code className="bg-blue-100 px-1.5 py-0.5 rounded">getAbsoluteLocaleUrl()</code> and <code className="bg-blue-100 px-1.5 py-0.5 rounded">getAbsoluteLocaleUrlList()</code>.</span>
             </li>
           </ul>
         </div>
       </div>
 
       {/* Browser language detection */}
-      <div className="mb-12 bg-linear-to-br from-green-50 to-emerald-50 rounded-2xl p-8 border-2 border-green-200">
+      <div className="mb-12 bg-blue-50 rounded-2xl p-8 border-2 border-blue-200">
         <h2 className="text-2xl font-bold text-gray-900 mb-2 text-center">
           Browser Language Detection
         </h2>
         <p className="text-gray-600 mb-6 text-center max-w-2xl mx-auto">
           On pages rendered on demand, Astro combines the browser&apos;s
-          {" "}<code className="bg-white px-1.5 py-0.5 rounded border border-green-200">Accept-Language</code> header with
+          {" "}<code className="bg-white px-1.5 py-0.5 rounded border border-blue-200">Accept-Language</code> header with
           your locales to detect a visitor&apos;s preferences.
         </p>
 
         <div className="grid md:grid-cols-3 gap-4 mb-6">
-          <div className="bg-white rounded-xl p-5 border-2 border-green-200">
+          <div className="bg-white rounded-xl p-5 border-2 border-blue-200">
             <h3 className="font-bold text-gray-900 mb-1 text-sm">
               Astro.preferredLocale
             </h3>
@@ -762,7 +762,7 @@ export default defineConfig({
               The best-matching locale for the visitor, or <code className="bg-gray-100 px-1 rounded">undefined</code> if none match.
             </p>
           </div>
-          <div className="bg-white rounded-xl p-5 border-2 border-green-200">
+          <div className="bg-white rounded-xl p-5 border-2 border-blue-200">
             <h3 className="font-bold text-gray-900 mb-1 text-sm">
               Astro.preferredLocaleList
             </h3>
@@ -770,7 +770,7 @@ export default defineConfig({
               Every locale supported by both the site and the browser, as an array.
             </p>
           </div>
-          <div className="bg-white rounded-xl p-5 border-2 border-green-200">
+          <div className="bg-white rounded-xl p-5 border-2 border-blue-200">
             <h3 className="font-bold text-gray-900 mb-1 text-sm">
               Astro.currentLocale
             </h3>
@@ -806,24 +806,24 @@ const locale = Astro.preferredLocale ?? Astro.currentLocale;
       </div>
 
       {/* Next Steps */}
-      <div className="bg-linear-to-br from-gray-900 to-gray-800 rounded-2xl p-4 text-white text-center">
+      <div className="bg-linear-to-br from-gray-50 to-gray-100 border border-gray-200 rounded-2xl p-4 text-gray-700 text-center">
         <h2 className="text-xl font-bold mb-4">
           Ready to Go Global! 🌍
         </h2>
-        <p className="text-lg text-gray-300 mb-8">
+        <p className="text-lg text-gray-600 mb-8">
           Your site now speaks multiple languages with clean URLs and smart fallbacks.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <Link
             href="https://docs.astro.build/en/guides/internationalization/"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-50 hover:bg-blue-100 text-gray-700 font-bold rounded-lg transition-colors"
           >
             <Globe className="w-5 h-5" />
             Astro i18n Docs
           </Link>
           <Link
             href="/docs/astro/features"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-white hover:bg-gray-100 text-gray-900 font-bold rounded-lg transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-white hover:bg-gray-100 text-gray-900 border border-gray-200 font-bold rounded-lg transition-colors"
           >
             Back to Features
             <ArrowRight className="w-5 h-5" />

@@ -220,7 +220,7 @@ export function CodePreview({ root, html, css, js, preview }: CodePreviewProps) 
           width: "100%",
           height: "auto",
           maxHeight: 500,
-         // overflow: "auto",
+          overflow: "auto",
           display: "block"
         }}>
           {preview}

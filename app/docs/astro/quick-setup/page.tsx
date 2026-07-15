@@ -14,7 +14,7 @@ export default function Setup() {
             iconColor: "text-[#5FA04E]",
             iconBg: "bg-[#5FA04E]/10",
             badge: "Required",
-            badgeColor: "bg-blue-100 text-blue-700",
+            badgeColor: "bg-blue-100 text-gray-700",
         },
         {
             name: "Git",
@@ -24,7 +24,7 @@ export default function Setup() {
             iconColor: "text-[#F05032]",
             iconBg: "bg-[#F05032]/10",
             badge: "Required",
-            badgeColor: "bg-blue-100 text-blue-700",
+            badgeColor: "bg-blue-100 text-gray-700",
         },
         {
             name: "VS Code",
@@ -93,7 +93,7 @@ export default function Setup() {
                                     </div>
                                     <div>
                                         <div className="flex items-center gap-2 mb-0.5">
-                                            <span className="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+                                            <span className="font-semibold text-gray-900 group-hover:text-gray-600 transition-colors">
                                                 {prereq.name}
                                             </span>
                                             <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${prereq.badgeColor}`}>
@@ -105,7 +105,7 @@ export default function Setup() {
                                         </p>
                                     </div>
                                 </div>
-                                <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-blue-600 shrink-0 ml-4 transition-colors" />
+                                <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-gray-600 shrink-0 ml-4 transition-colors" />
                             </Link>
                         );
                     })}
@@ -122,7 +122,7 @@ export default function Setup() {
                     </p>
                     <Link
                         href="/docs/astro/get-started"
-                        className="inline-flex items-center gap-2 mt-3 px-4 py-2 bg-blue-400 text-white font-semibold rounded-lg transition-colors text-sm"
+                        className="inline-flex items-center gap-2 mt-3 px-4 py-2 bg-blue-50 text-gray-700 font-semibold rounded-lg transition-colors text-sm"
                     >
                       {/*  <ArrowRight className="w-4 h-4" />*/}
                         Get Started
@@ -146,15 +146,15 @@ export default function Setup() {
                             href={guide.href}
                             className="flex items-center gap-4 p-4 rounded-xl bg-white hover:bg-blue-50 border-2 border-transparent hover:border-blue-200 transition-all group"
                         >
-                            <div className="w-9 h-9 rounded-full bg-blue-100 group-hover:bg-blue-600 flex items-center justify-center transition-colors shrink-0">
-                                <span className="text-sm font-bold text-blue-600 group-hover:text-white transition-colors">
+                            <div className="w-9 h-9 rounded-full bg-blue-100 group-hover:bg-blue-100 flex items-center justify-center transition-colors shrink-0">
+                                <span className="text-sm font-bold text-gray-600 group-hover:text-gray-700 transition-colors">
                                     {guide.step}
                                 </span>
                             </div>
-                            <span className="font-medium text-gray-900 group-hover:text-blue-600 transition-colors flex-1">
+                            <span className="font-medium text-gray-900 group-hover:text-gray-600 transition-colors flex-1">
                                 {guide.label}
                             </span>
-                            <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-blue-600 transition-colors" />
+                            <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-colors" />
                         </Link>
                     ))}
                 </div>

@@ -18,7 +18,7 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-full p-12">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl ml-6">
       {/* Hero Section */}
       <div className="mb-12">
         {/* Breadcrumb */}
@@ -44,7 +44,7 @@ export default function LandingPage() {
             href="https://github.com/cristianvmac/Astro-Starter"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-600 underline font-semibold"
+            className="text-gray-600 underline font-semibold"
           >
            Astro Starter Kit 
           </Link>{" "}
@@ -54,17 +54,17 @@ export default function LandingPage() {
 
       {/* Quick Start */}
       {/* Before You Start */}
-      <div className="mb-12 p-6 bg-yellow-50 border-2 border-yellow-200 rounded-xl">
-        <h3 className="text-lg font-bold text-yellow-900 mb-3 flex items-center gap-2">
+      <div className="mb-12 p-6 bg-blue-50 border-2 border-blue-200 rounded-xl">
+        <h3 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
           <Clock className="w-5 h-5" />
           Before You Start
         </h3>
-        <p className="text-yellow-800 mb-4">
+        <p className="text-gray-800 mb-4">
           Make sure that you have you&apos;ve read the initial setup guide.
         </p>
         <Link
           href="/docs/astro/quick-setup"
-          className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-600 hover:bg-yellow-700 text-white font-semibold rounded-lg transition-colors"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 hover:bg-blue-100 text-gray-700 font-semibold rounded-lg transition-colors"
         >
           <ArrowRight className="w-4 h-4" />
           See Quick Setup
@@ -74,7 +74,7 @@ export default function LandingPage() {
       {/* Example Landing Page */}
       <div id="example" className="mb-16 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-purple-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <FileCode className="w-6 h-6" />
           </div>
           <div>
@@ -191,11 +191,11 @@ const optimizedHeroImage = await getImage({ src: heroImage, format: "webp" });
           </div>
 
           <div className="p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
-            <p className="text-blue-900 font-medium mb-2 flex items-center gap-2">
+            <p className="text-gray-900 font-medium mb-2 flex items-center gap-2">
               <Eye className="w-5 h-5" />
               Preview Your Landing Page
             </p>
-            <p className="text-sm text-blue-800">
+            <p className="text-sm text-gray-800">
               Start your dev server with{" "}
               <code className="bg-blue-100 px-2 py-0.5 rounded">
                 npm run dev
@@ -215,25 +215,25 @@ const optimizedHeroImage = await getImage({ src: heroImage, format: "webp" });
       </div>
 
       {/* Next Steps */}
-      <div className="bg-linear-to-br from-gray-900 to-gray-800 rounded-2xl p-4 text-white">
+      <div className="bg-linear-to-br from-gray-50 to-gray-100 border border-gray-200 rounded-2xl p-4 text-gray-700">
         <h2 className="text-xl font-bold mb-4">
           Ready to Build Something Amazing?
         </h2>
-        <p className="text-lg text-gray-300 mb-6">
+        <p className="text-lg text-gray-600 mb-6">
           You now have everything you need to create fast, SEO-optimized landing
           pages with Astro Starter Kit.
         </p>
         <div className="flex flex-wrap gap-4">
           <Link
             href="/docs/astro/tutorials/build-in-5-minutes"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-50 hover:bg-blue-100 text-gray-700 font-bold rounded-lg transition-colors"
           >
             <Rocket className="w-5 h-5" />
             Build in 5 Minutes
           </Link>
           <Link
             href="/docs/astro/components"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-white hover:bg-gray-100 text-gray-900 font-bold rounded-lg transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-white hover:bg-gray-100 text-gray-900 border border-gray-200 font-bold rounded-lg transition-colors"
           >
             <Layout className="w-5 h-5" />
             Explore All Components

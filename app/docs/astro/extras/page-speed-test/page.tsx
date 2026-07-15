@@ -142,7 +142,7 @@ function LighthousePreview() {
         <button
           onClick={() => setMode("spa")}
           className={`rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-colors ${
-            mode === "spa" ? "bg-amber-100 text-gray-900" : "text-gray-900 hover:bg-gray-50"
+            mode === "spa" ? "bg-blue-100 text-gray-900" : "text-gray-900 hover:bg-gray-50"
           }`}
         >
           Heavy SPA
@@ -150,7 +150,7 @@ function LighthousePreview() {
         <button
           onClick={() => setMode("astro")}
           className={`rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-colors ${
-            mode === "astro" ? "bg-emerald-100 text-gray-900" : "text-gray-900 hover:bg-gray-50"
+            mode === "astro" ? "bg-blue-100 text-gray-900" : "text-gray-900 hover:bg-gray-50"
           }`}
         >
           Astro static
@@ -179,11 +179,11 @@ function LighthousePreview() {
 type Tone = "emerald" | "blue" | "purple" | "pink" | "cyan";
 
 const TONE: Record<Tone, { tile: string; ring: string }> = {
-  emerald: { tile: "from-emerald-500 to-teal-600", ring: "ring-emerald-100" },
-  blue: { tile: "from-blue-500 to-indigo-600", ring: "ring-blue-100" },
-  purple: { tile: "from-purple-500 to-fuchsia-600", ring: "ring-purple-100" },
-  pink: { tile: "from-pink-500 to-rose-600", ring: "ring-pink-100" },
-  cyan: { tile: "from-cyan-500 to-sky-600", ring: "ring-cyan-100" },
+  emerald: { tile: "from-blue-50 to-blue-50", ring: "ring-blue-100" },
+  blue: { tile: "from-blue-50 to-blue-50", ring: "ring-blue-100" },
+  purple: { tile: "from-blue-50 to-blue-50", ring: "ring-blue-100" },
+  pink: { tile: "from-blue-50 to-blue-50", ring: "ring-blue-100" },
+  cyan: { tile: "from-blue-50 to-blue-50", ring: "ring-blue-100" },
 };
 
 function StepHeader({
@@ -202,7 +202,7 @@ function StepHeader({
   return (
     <div className="flex flex-wrap items-center gap-4">
       <div
-        className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-linear-to-br ${TONE[tone].tile} text-white shadow-md ring-4 ${TONE[tone].ring}`}
+        className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-linear-to-br ${TONE[tone].tile} text-gray-700 shadow-md ring-4 ${TONE[tone].ring}`}
       >
         <Icon className="h-6 w-6" />
       </div>
@@ -213,7 +213,7 @@ function StepHeader({
         <h2 className="text-xl font-bold text-gray-900">{title}</h2>
       </div>
       {badge && (
-        <span className="ml-auto rounded-full bg-gray-900 px-3 py-1 text-xs font-semibold text-white">
+        <span className="ml-auto rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-gray-700">
           {badge}
         </span>
       )}
@@ -231,7 +231,7 @@ function Card({
   return (
     <div
       className={`mt-8 rounded-3xl border bg-white p-7 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg ${
-        highlight ? "border-emerald-200 bg-linear-to-b from-emerald-50/40 to-white" : "border-gray-200"
+        highlight ? "border-blue-200 bg-linear-to-b from-blue-50/40 to-white" : "border-gray-200"
       }`}
     >
       {children}
@@ -250,9 +250,9 @@ export default function PageSpeed() {
   return (
     <section className="relative overflow-hidden min-h-full p-12">
       {/* Decorative background glow */}
-      <div className="pointer-events-none absolute -top-32 left-1/2 h-72 w-xl -translate-x-1/2 rounded-full bg-linear-to-br from-emerald-200/50 to-teal-200/50 blur-3xl" />
+      <div className="pointer-events-none absolute -top-32 left-1/2 h-72 w-xl -translate-x-1/2 rounded-full bg-linear-to-br from-blue-50/50 to-blue-50/50 blur-3xl" />
 
-      <div className="relative mx-auto max-w-3xl">
+      <div className="relative max-w-3xl ml-6">
         {/* Breadcrumb */}
         <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-x-1 gap-y-1 text-base font-normal text-slate-900">
           <Link href="/docs/astro" className="rounded-full py-1 hover:text-slate-600 hover:underline">
@@ -283,7 +283,7 @@ export default function PageSpeed() {
               key={label}
               className="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-3.5 py-2 text-sm font-semibold text-gray-900 shadow-sm"
             >
-              <Icon className="h-4 w-4 text-emerald-600" />
+              <Icon className="h-4 w-4 text-gray-600" />
               {label}
             </span>
           ))}
@@ -360,7 +360,7 @@ import Counter from "../components/Counter.jsx";
 
           <ul className="mt-5 space-y-2.5 text-sm text-gray-900">
             <li className="flex gap-2.5">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-blue-600" />
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-gray-600" />
               <span>
                 <Code>srcset</Code> and <Code>sizes</Code> are generated automatically from
                 each image&apos;s dimensions, so the browser downloads a right-sized file
@@ -368,7 +368,7 @@ import Counter from "../components/Counter.jsx";
               </span>
             </li>
             <li className="flex gap-2.5">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-blue-600" />
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-gray-600" />
               <span>
                 <Code>width</Code> / <Code>height</Code> are optional for images in{" "}
                 <Code>src/</Code> (Astro infers them) and reserve the space up front, so the
@@ -406,7 +406,7 @@ import heroImage from "@assets/images/hero.jpg";
           <p className="mt-6 mb-3 font-medium text-gray-900">Key properties</p>
           <ul className="space-y-2.5 text-sm text-gray-900">
             <li className="flex gap-2.5">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-blue-600" />
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-gray-600" />
               <span>
                 <Code>formats</Code> — output formats, e.g.{" "}
                 <Code>{"['avif', 'webp']"}</Code>. AVIF and WebP are far smaller than
@@ -414,7 +414,7 @@ import heroImage from "@assets/images/hero.jpg";
               </span>
             </li>
             <li className="flex gap-2.5">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-blue-600" />
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-gray-600" />
               <span>
                 <Code>priority</Code> — automatically sets the optimal <Code>loading</Code>,{" "}
                 <Code>decoding</Code>, and <Code>fetchpriority</Code> for above-the-fold
@@ -422,13 +422,13 @@ import heroImage from "@assets/images/hero.jpg";
               </span>
             </li>
             <li className="flex gap-2.5">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-blue-600" />
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-gray-600" />
               <span>
                 <Code>width</Code> / <Code>height</Code> — the dimensions to render at.
               </span>
             </li>
             <li className="flex gap-2.5">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-blue-600" />
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-gray-600" />
               <span>
                 <Code>layout</Code> — defaults to <Code>&apos;constrained&apos;</Code>{" "}
                 (responsive); other options are <Code>&apos;fixed&apos;</Code> and{" "}
@@ -440,7 +440,7 @@ import heroImage from "@assets/images/hero.jpg";
           {/* CSPicture subsection — art direction */}
           <div className="mt-7 rounded-2xl border border-gray-200 bg-gray-50/60 p-5">
             <h3 className="flex flex-wrap items-center gap-2 font-bold text-gray-900">
-              <Layers className="h-5 w-5 shrink-0 text-blue-600" />
+              <Layers className="h-5 w-5 shrink-0 text-gray-600" />
               Art-direct with <span className="font-mono">{"<CSPicture />"}</span>
             </h3>
             <p className="mt-2 text-sm leading-relaxed text-gray-900">
@@ -484,8 +484,8 @@ import fallbackImage from "@assets/images/cabinets2.jpg";
           </div>
 
           {/* Native picture vs. Astro Picture callout */}
-          <div className="mt-5 flex gap-3 rounded-2xl border border-amber-200 bg-amber-50 p-4">
-            <Info className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" />
+          <div className="mt-5 flex gap-3 rounded-2xl border border-blue-200 bg-blue-50 p-4">
+            <Info className="mt-0.5 h-5 w-5 shrink-0 text-gray-600" />
             <p className="text-sm leading-relaxed text-gray-900">
               Not every native <Code>{"<picture>"}</Code> from a CodeStitch block is swapped
               for Astro&apos;s component — it&apos;s your call. The stock markup already
@@ -496,7 +496,7 @@ import fallbackImage from "@assets/images/cabinets2.jpg";
                 href="https://docs.astro.build/en/guides/images/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-bold text-amber-700 underline decoration-amber-400 underline-offset-2 hover:text-amber-900"
+                className="font-bold text-gray-700 underline decoration-blue-400 underline-offset-2 hover:text-gray-900"
               >
                 Astro images docs
               </a>
@@ -557,8 +557,8 @@ const optimizedImage = await getImage({ src: heroImage, format: "webp" });
 
           {/* Do / don't preload */}
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
-            <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4">
-              <p className="mb-3 flex items-center gap-2 text-sm font-bold text-emerald-800">
+            <div className="rounded-2xl border border-blue-200 bg-blue-50 p-4">
+              <p className="mb-3 flex items-center gap-2 text-sm font-bold text-gray-800">
                 <Check className="h-4 w-4" /> Preload these
               </p>
               <ul className="space-y-2 text-sm text-gray-900">
@@ -567,8 +567,8 @@ const optimizedImage = await getImage({ src: heroImage, format: "webp" });
                 <li>Above-the-fold content.</li>
               </ul>
             </div>
-            <div className="rounded-2xl border border-rose-200 bg-rose-50 p-4">
-              <p className="mb-3 flex items-center gap-2 text-sm font-bold text-rose-800">
+            <div className="rounded-2xl border border-blue-200 bg-blue-50 p-4">
+              <p className="mb-3 flex items-center gap-2 text-sm font-bold text-gray-800">
                 <X className="h-4 w-4" /> Don&apos;t preload
               </p>
               <ul className="space-y-2 text-sm text-gray-900">
@@ -625,7 +625,7 @@ html {
           {/* Why this approach is fast */}
           <ul className="mt-6 space-y-2.5 text-sm text-gray-900">
             <li className="flex gap-2.5">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-purple-600" />
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-gray-600" />
               <span>
                 <span className="font-semibold">No third-party request</span> — fonts ship
                 from your own domain, so there&apos;s no extra DNS lookup and connection to
@@ -633,21 +633,21 @@ html {
               </span>
             </li>
             <li className="flex gap-2.5">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-purple-600" />
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-gray-600" />
               <span>
                 <Code>.woff2</Code> first with a <Code>.woff</Code> fallback — woff2 is the
                 smallest modern format and is supported almost everywhere.
               </span>
             </li>
             <li className="flex gap-2.5">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-purple-600" />
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-gray-600" />
               <span>
                 <Code>font-display: swap</Code> shows your text immediately in the fallback
                 font, then swaps in Roboto once it arrives — no invisible text (FOIT).
               </span>
             </li>
             <li className="flex gap-2.5">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-purple-600" />
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-gray-600" />
               <span>
                 Only the weights you actually use ship — <Code>400</Code>, <Code>700</Code>,
                 and <Code>900</Code> — three files, not the whole Roboto family.
@@ -664,8 +664,8 @@ html {
         </Card>
 
         {/* ── Audit callout — measure after each change ── */}
-        <div className="mt-8 flex gap-3 rounded-3xl border border-emerald-200 bg-emerald-50 p-5">
-          <Gauge className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600" />
+        <div className="mt-8 flex gap-3 rounded-3xl border border-blue-200 bg-blue-50 p-5">
+          <Gauge className="mt-0.5 h-5 w-5 shrink-0 text-gray-600" />
           <div>
             <h3 className="font-bold text-gray-900">Measure, don&apos;t guess</h3>
             <p className="mt-1 text-sm leading-relaxed text-gray-900">
@@ -674,7 +674,7 @@ html {
                 href="https://pagespeed.web.dev"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-bold text-emerald-700 underline decoration-emerald-400 underline-offset-2 hover:text-emerald-900"
+                className="font-bold text-gray-700 underline decoration-blue-400 underline-offset-2 hover:text-gray-900"
               >
                 Google PageSpeed Insights
               </a>{" "}
@@ -686,7 +686,7 @@ html {
 
         {/* Subtle footer flourish */}
         <p className="mt-10 flex items-center justify-center gap-2 text-sm font-medium text-gray-900">
-          <Feather className="h-4 w-4 text-emerald-500" />
+          <Feather className="h-4 w-4 text-gray-500" />
           Light pages, happy users.
         </p>
       </div>

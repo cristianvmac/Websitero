@@ -18,7 +18,7 @@ export default function CustomerSupport() {
 
   return (
     <div className="min-h-full p-12">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl ml-6">
 
       {/* Hero Section */}
       <div className="mb-12">
@@ -48,7 +48,7 @@ export default function CustomerSupport() {
       {/* Setup Instructions */}
       <div className="mb-12 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <MessageCircle className="w-6 h-6" />
           </div>
           <div>
@@ -65,7 +65,7 @@ export default function CustomerSupport() {
           {/* Step 1 */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
+              <div className="shrink-0 w-8 h-8 bg-blue-50 text-gray-700 rounded-full flex items-center justify-center font-bold">
                 1
               </div>
               <h3 className="text-xl font-bold text-gray-900">
@@ -75,15 +75,15 @@ export default function CustomerSupport() {
             <div className="ml-11">
               <p className="text-gray-700 mb-3">
                 Sign up for a free account at{" "}
-                <a href="https://crisp.chat" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline font-semibold">
+                <a href="https://crisp.chat" target="_blank" rel="noopener noreferrer" className="text-gray-600 underline font-semibold">
                   crisp.chat
                 </a>
               </p>
-              <div className="p-4 bg-green-50 border-2 border-green-200 rounded-lg">
-                <p className="text-green-900 font-medium mb-1">
+              <div className="p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
+                <p className="text-gray-900 font-medium mb-1">
                   ✨ Free Plan Available
                 </p>
-                <p className="text-sm text-green-800">
+                <p className="text-sm text-gray-800">
                   Crisp offers a free plan with unlimited conversations - perfect for getting started!
                 </p>
               </div>
@@ -93,7 +93,7 @@ export default function CustomerSupport() {
           {/* Step 2 */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
+              <div className="shrink-0 w-8 h-8 bg-blue-50 text-gray-700 rounded-full flex items-center justify-center font-bold">
                 2
               </div>
               <h3 className="text-xl font-bold text-gray-900">
@@ -103,24 +103,24 @@ export default function CustomerSupport() {
             <div className="ml-11">
               <ol className="space-y-2 text-gray-700 mb-4">
                 <li className="flex items-start gap-2">
-                  <span className="font-bold text-blue-600">•</span>
+                  <span className="font-bold text-gray-600">•</span>
                   <span>In your Crisp dashboard, create a new website (workspace)</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="font-bold text-blue-600">•</span>
+                  <span className="font-bold text-gray-600">•</span>
                   <span>Open <strong>Settings → Workspace Settings → Setup &amp; Integrations</strong></span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="font-bold text-blue-600">•</span>
+                  <span className="font-bold text-gray-600">•</span>
                   <span>Click <strong>Chatbox setup instructions</strong></span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="font-bold text-blue-600">•</span>
+                  <span className="font-bold text-gray-600">•</span>
                   <span>Copy the <code className="bg-gray-100 px-2 py-0.5 rounded">CRISP_WEBSITE_ID</code> (looks like: <code className="bg-gray-100 px-2 py-0.5 rounded">xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</code>)</span>
                 </li>
               </ol>
               <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-4">
-                <p className="text-sm text-blue-800">
+                <p className="text-sm text-gray-800">
                   💡 <strong>Tip:</strong> The Website ID is the UUID inside the HTML snippet on the <strong>Chatbox setup instructions</strong> screen — it&apos;s the value assigned to <code className="bg-blue-100 px-1.5 py-0.5 rounded">CRISP_WEBSITE_ID</code>.
                 </p>
               </div>
@@ -130,7 +130,7 @@ export default function CustomerSupport() {
           {/* Step 3 */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
+              <div className="shrink-0 w-8 h-8 bg-blue-50 text-gray-700 rounded-full flex items-center justify-center font-bold">
                 3
               </div>
               <h3 className="text-xl font-bold text-gray-900">
@@ -174,7 +174,7 @@ export const SUPPORT = {
           {/* Step 4 */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
+              <div className="shrink-0 w-8 h-8 bg-blue-50 text-gray-700 rounded-full flex items-center justify-center font-bold">
                 4
               </div>
               <h3 className="text-xl font-bold text-gray-900">
@@ -271,19 +271,19 @@ import { SUPPORT } from "@data/client";
             </div>
 
             <div className="ml-11 mt-4 bg-blue-50 border-2 border-blue-200 rounded-lg p-4">
-              <p className="text-sm text-blue-800">
+              <p className="text-sm text-gray-800">
                 🔁 <strong>Why <code className="bg-blue-100 px-1.5 py-0.5 rounded">astro:page-load</code>?</strong> This starter uses Astro View Transitions (<code className="bg-blue-100 px-1.5 py-0.5 rounded">&lt;ClientRouter /&gt;</code>), which swap page content without a full reload. Booting Crisp from the <code className="bg-blue-100 px-1.5 py-0.5 rounded">astro:page-load</code> event — instead of a one-off snippet before <code className="bg-blue-100 px-1.5 py-0.5 rounded">&lt;/body&gt;</code> — keeps the chat available on every page, not just the first one a visitor lands on.
               </p>
             </div>
           </div>
 
           {/* Success */}
-          <div className="ml-11 p-6 bg-green-50 border-2 border-green-200 rounded-lg">
-            <p className="text-green-900 font-medium mb-2">
+          <div className="ml-11 p-6 bg-blue-50 border-2 border-blue-200 rounded-lg">
+            <p className="text-gray-900 font-medium mb-2">
               🎉 You&apos;re All Set!
             </p>
-            <p className="text-sm text-green-800">
-              Run <code className="bg-green-100 px-1.5 py-0.5 rounded">npm run dev</code> and you&apos;ll see the Crisp chat widget in the bottom-right corner — and thanks to the <code className="bg-green-100 px-1.5 py-0.5 rounded">astro:page-load</code> hook it stays put as visitors move between pages. Customize colors, messages, and behavior in your Crisp dashboard.
+            <p className="text-sm text-gray-800">
+              Run <code className="bg-blue-100 px-1.5 py-0.5 rounded">npm run dev</code> and you&apos;ll see the Crisp chat widget in the bottom-right corner — and thanks to the <code className="bg-blue-100 px-1.5 py-0.5 rounded">astro:page-load</code> hook it stays put as visitors move between pages. Customize colors, messages, and behavior in your Crisp dashboard.
             </p>
           </div>
         </div>
@@ -292,7 +292,7 @@ import { SUPPORT } from "@data/client";
       {/* Support Button Component */}
       <div className="mb-12 bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-sm">
         <div className="flex items-start gap-4 mb-6">
-          <div className="shrink-0 w-12 h-12 bg-purple-600 text-white rounded-xl flex items-center justify-center shadow-lg">
+          <div className="shrink-0 w-12 h-12 bg-blue-50 text-gray-700 rounded-xl flex items-center justify-center shadow-lg">
             <MessageCircle className="w-6 h-6" />
           </div>
           <div>
@@ -324,7 +324,7 @@ const { crispWebsiteId, email } = SUPPORT;
 {crispWebsiteId ? (
   <button
     onclick="$crisp.push(['do', 'chat:open'])"
-    class="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-colors shadow-lg">
+    class="inline-flex items-center gap-2 px-6 py-3 bg-blue-50 hover:bg-blue-100 text-gray-700 font-bold rounded-lg transition-colors shadow-lg">
     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
@@ -334,7 +334,7 @@ const { crispWebsiteId, email } = SUPPORT;
 ) : (
   <a
     href={\`mailto:\${email}?subject=Support%20Request\`}
-    class="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-colors shadow-lg">
+    class="inline-flex items-center gap-2 px-6 py-3 bg-blue-50 hover:bg-blue-100 text-gray-700 font-bold rounded-lg transition-colors shadow-lg">
     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -353,7 +353,7 @@ const { crispWebsiteId, email } = SUPPORT;
 {crispWebsiteId ? (
   <button
     onclick="$crisp.push(['do', 'chat:open'])"
-    class="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-colors shadow-lg">
+    class="inline-flex items-center gap-2 px-6 py-3 bg-blue-50 hover:bg-blue-100 text-gray-700 font-bold rounded-lg transition-colors shadow-lg">
     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
@@ -363,7 +363,7 @@ const { crispWebsiteId, email } = SUPPORT;
 ) : (
   <a
     href={\`mailto:\${email}?subject=Support%20Request\`}
-    class="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-colors shadow-lg">
+    class="inline-flex items-center gap-2 px-6 py-3 bg-blue-50 hover:bg-blue-100 text-gray-700 font-bold rounded-lg transition-colors shadow-lg">
     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -418,11 +418,11 @@ import SupportButton from "@components/SupportButton/SupportButton.astro";
             </div>
           </div>
 
-          <div className="p-4 bg-purple-50 border-2 border-purple-200 rounded-lg">
-            <p className="text-purple-900 font-medium mb-2">
+          <div className="p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
+            <p className="text-gray-900 font-medium mb-2">
               💡 Smart Fallback
             </p>
-            <p className="text-sm text-purple-800">
+            <p className="text-sm text-gray-800">
               The button automatically switches between Crisp chat and email based on your configuration.
               If Crisp isn&apos;t set up, users can still contact you via email.
             </p>
@@ -431,16 +431,16 @@ import SupportButton from "@components/SupportButton/SupportButton.astro";
       </div>
 
       {/* Alternative: Email Only */}
-      <div className="mb-12 p-6 bg-yellow-50 border-2 border-yellow-200 rounded-xl">
+      <div className="mb-12 p-6 bg-blue-50 border-2 border-blue-200 rounded-xl">
         <div className="flex items-start gap-3">
-          <Mail className="w-6 h-6 text-yellow-600 shrink-0 mt-1" />
+          <Mail className="w-6 h-6 text-gray-600 shrink-0 mt-1" />
           <div>
             <h3 className="text-lg font-bold text-gray-900 mb-2">
               Don&apos;t Want Live Chat?
             </h3>
             <p className="text-gray-700 mb-3">
               You can skip Crisp setup and use email-only support. Simply leave{" "}
-              <code className="bg-yellow-100 px-2 py-0.5 rounded">crispWebsiteId</code> empty
+              <code className="bg-blue-100 px-2 py-0.5 rounded">crispWebsiteId</code> empty
               in your config and the support button will automatically use your support email instead.
             </p>
             <p className="text-sm text-gray-600">
@@ -451,17 +451,17 @@ import SupportButton from "@components/SupportButton/SupportButton.astro";
       </div>
 
       {/* Next Steps */}
-      <div className="bg-linear-to-br from-gray-900 to-gray-800 rounded-2xl p-4 text-white text-center">
+      <div className="bg-linear-to-br from-gray-50 to-gray-100 border border-gray-200 rounded-2xl p-4 text-gray-700 text-center">
         <h2 className="text-xl font-bold mb-4">
           Ready to Help Your Customers! 💬
         </h2>
-        <p className="text-lg text-gray-300 mb-8">
+        <p className="text-lg text-gray-600 mb-8">
           Your live chat is now set up and ready to handle customer inquiries in real-time.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <Link
             href="https://crisp.chat"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-50 hover:bg-blue-100 text-gray-700 font-bold rounded-lg transition-colors"
           >
             <Shield className="w-5 h-5" />
             Add Live Chat Support
