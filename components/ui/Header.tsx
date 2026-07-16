@@ -60,7 +60,21 @@ const Header = () => {
             ))}
           </nav>
 
-          <div className="hidden items-center gap-6 md:flex">
+          <div className="hidden items-center gap-2 md:flex">
+            <Link
+              href="/admin/briefs"
+              className="items-center rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900 inline-flex"
+            >
+              Briefs
+            </Link>
+
+            <Link
+              href="/dashboard"
+              className="items-center rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900 inline-flex"
+            >
+              Dashboard
+            </Link>
+
             <Link
               href="/login"
               className="items-center rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900 inline-flex"
