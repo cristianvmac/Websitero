@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -49,7 +49,7 @@ type NavItem = {
   children?: NavChild[];
 };
 
-export const homeItem: NavItem = { label: "Home", href: "/dashboard", icon: Home };
+export const homeItem: NavItem = { label: "Overview", href: "/dashboard", icon: Home };
 
 export const navSections: { label: string; items: NavItem[] }[] = [
   {
@@ -253,12 +253,8 @@ export default function Sidebar({ site, credits, locale }: SidebarProps) {
     return group ? { [group]: true } : {};
   });
 
-  // Keep the group of the current page expanded when navigating from elsewhere
-  // (e.g. a checklist link), without collapsing groups the user opened manually.
-  useEffect(() => {
-    const group = activeGroupLabel(pathname);
-    if (group) setOpen((prev) => (prev[group] ? prev : { ...prev, [group]: true }));
-  }, [pathname]);
+  const activeGroup = activeGroupLabel(pathname);
+  const effectiveOpen = activeGroup ? { ...open, [activeGroup]: true } : open;
 
   const toggle = (label: string) => setOpen((prev) => ({ ...prev, [label]: !prev[label] }));
 
@@ -319,7 +315,7 @@ export default function Sidebar({ site, credits, locale }: SidebarProps) {
                 key={item.label}
                 item={item}
                 pathname={pathname}
-                open={!!open[item.label]}
+                open={!!effectiveOpen[item.label]}
                 onToggle={() => toggle(item.label)}
               />
             ) : (
