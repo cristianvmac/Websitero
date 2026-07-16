@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { PanelLeft, X } from "lucide-react";
+import { Home, PanelLeft, X } from "lucide-react";
 import type { DashboardData } from "@/src/data/dashboard";
 import Sidebar, { pageLabel } from "./Sidebar";
 
@@ -67,6 +68,14 @@ export default function DashboardShell({ site, credits, locale, children }: Dash
             <PanelLeft className="h-5 w-5" />
           </button>
           <span className="text-sm font-medium text-slate-700">{pageLabel(pathname)}</span>
+
+          <Link
+            href="/"
+            className="ml-auto inline-flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900"
+          >
+            <Home className="h-4 w-4" />
+            <span className="hidden sm:inline">Back to home page</span>
+          </Link>
         </header>
 
         <main className="main-scroll flex-1 overflow-y-auto bg-white">
