@@ -1,19 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useActionState, useState } from "react";
 import Link from "next/link";
-import { Mail, Send, ArrowLeft, CheckCircle2 } from "lucide-react";
+import { Mail, Send, ArrowLeft, CheckCircle2, LoaderCircle } from "lucide-react";
+import { requestPasswordReset, type AuthState } from "@/lib/auth-actions";
 
 export default function ForgotPassword() {
     const [email, setEmail] = useState("");
-    const [submitted, setSubmitted] = useState(false);
-
-    function handleSubmit(e: React.SyntheticEvent) {
-        e.preventDefault();
-        // TODO: wire up to your auth provider / API route.
-        console.log("Password reset requested for:", email);
-        setSubmitted(true);
-    }
+    const [state, formAction, pending] = useActionState<AuthState, FormData>(
+        requestPasswordReset,
+        {},
+    );
+    const submitted = Boolean(state.notice);
 
     return (
         <section className="flex min-h-screen items-center justify-center bg-base-100 px-4 py-16">
@@ -29,10 +27,7 @@ export default function ForgotPassword() {
                         <div className="flex flex-col gap-4">
                             <div role="alert" className="alert alert-success">
                                 <CheckCircle2 className="h-5 w-5" />
-                                <span>
-                                    If an account exists for {email}, a reset link is on its
-                                    way.
-                                </span>
+                                <span>{state.notice}</span>
                             </div>
                             <Link href="/login" className="btn btn-primary">
                                 <ArrowLeft className="h-4 w-4" />
@@ -40,7 +35,7 @@ export default function ForgotPassword() {
                             </Link>
                         </div>
                     ) : (
-                        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                        <form action={formAction} className="flex flex-col gap-4">
                             <div className="form-control">
                                 <label htmlFor="email" className="label">
                                     <span className="label-text">Email</span>
@@ -61,9 +56,19 @@ export default function ForgotPassword() {
                                 </div>
                             </div>
 
-                            <button type="submit" className="btn btn-primary mt-2">
-                                <Send className="h-4 w-4" />
-                                Send reset link
+                            {state.error && (
+                                <p role="alert" className="text-sm font-medium text-error">
+                                    {state.error}
+                                </p>
+                            )}
+
+                            <button type="submit" disabled={pending} className="btn btn-primary mt-2">
+                                {pending ? (
+                                    <LoaderCircle className="h-4 w-4 animate-spin" />
+                                ) : (
+                                    <Send className="h-4 w-4" />
+                                )}
+                                {pending ? "Sending…" : "Send reset link"}
                             </button>
 
                             <Link
