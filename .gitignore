@@ -47,3 +47,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Better Auth dev mailer outbox (lib/mailer.ts writes emailed links here in dev)
+.dev-outbox.jsonl
