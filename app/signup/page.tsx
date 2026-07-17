@@ -1,8 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useActionState, useState } from "react";
 import Link from "next/link";
-import { User, Mail, Lock, Eye, EyeOff, UserPlus } from "lucide-react";
+import { User, Mail, Lock, Eye, EyeOff, UserPlus, LoaderCircle } from "lucide-react";
+import { signUp, type AuthState } from "@/lib/auth-actions";
+import GoogleButton from "@/components/auth/GoogleButton";
 
 export default function Signup() {
     const [form, setForm] = useState({
@@ -12,6 +14,7 @@ export default function Signup() {
         confirmPassword: "",
     });
     const [showPassword, setShowPassword] = useState(false);
+    const [state, formAction, pending] = useActionState<AuthState, FormData>(signUp, {});
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         const { name, value } = e.target;
@@ -21,12 +24,9 @@ export default function Signup() {
     const passwordsMismatch =
         form.confirmPassword.length > 0 && form.password !== form.confirmPassword;
 
-    function handleSubmit(e: React.SyntheticEvent) {
-        e.preventDefault();
-        if (passwordsMismatch) return;
-        // TODO: wire up to your auth provider / API route.
-        console.log("Signup form submitted:", form);
-    }
+    // No "check your inbox" state here: signing up grants the session outright
+    // and the action redirects to /dashboard, so success never re-renders this
+    // page. Only errors come back.
 
     return (
         <section className="flex min-h-screen items-center justify-center bg-base-100 px-4 py-16">
@@ -39,7 +39,9 @@ export default function Signup() {
                         Get started in less than a minute.
                     </p>
 
-                    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                    <GoogleButton label="Sign up with Google" />
+
+                    <form action={formAction} className="flex flex-col gap-4">
                         <div className="form-control">
                             <label htmlFor="name" className="label">
                                 <span className="label-text">Name</span>
@@ -142,13 +144,23 @@ export default function Signup() {
                             )}
                         </div>
 
+                        {state.error && (
+                            <p role="alert" className="text-sm font-medium text-error">
+                                {state.error}
+                            </p>
+                        )}
+
                         <button
                             type="submit"
                             className="btn btn-primary mt-2"
-                            disabled={passwordsMismatch}
+                            disabled={passwordsMismatch || pending}
                         >
-                            <UserPlus className="h-4 w-4" />
-                            Create account
+                            {pending ? (
+                                <LoaderCircle className="h-4 w-4 animate-spin" />
+                            ) : (
+                                <UserPlus className="h-4 w-4" />
+                            )}
+                            {pending ? "Creating account…" : "Create account"}
                         </button>
                     </form>
 
