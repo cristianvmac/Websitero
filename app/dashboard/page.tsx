@@ -1,5 +1,7 @@
 import Link from "next/link";
-import { Clock, CreditCard, ExternalLink, Eye, Globe, Pencil, Sparkles } from "lucide-react";
+// Eye/Pencil left with the View & Edit buttons they belonged to — see the note
+// on the site card: nothing to link to until a built site has a real home.
+import { Clock, CreditCard, ExternalLink, Globe, Sparkles } from "lucide-react";
 import { getDashboardData, trialRemaining, yearlyDiscount } from "@/src/data/dashboard";
 import SeoCard from "@/components/dashboard/SeoCard";
 import ChecklistCard from "@/components/dashboard/ChecklistCard";
@@ -9,7 +11,7 @@ export default async function DashboardHomePage() {
   const { site, plan, seo, checklist } = data;
 
   const remaining = trialRemaining(data.trialEndsAt);
-  const onTrial = site.status === "trial" && remaining !== null;
+  const onTrial = site?.status === "trial" && remaining !== null;
   const priceLine = `${plan.currency}${plan.monthly}/month or ${plan.currency}${plan.yearly}/year`;
 
   return (
@@ -69,48 +71,62 @@ export default async function DashboardHomePage() {
         </Link>
       )}
 
-      <section className="flex flex-col gap-5 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:flex-row sm:items-center">
-        <div className="flex min-w-0 items-center gap-4">
-          <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-slate-100 text-blue-700">
-            <Globe className="h-6 w-6" />
-          </span>
-          <div className="min-w-0">
-            <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
-              Your site
-            </p>
-            <h2 className="truncate text-xl font-bold text-slate-900">{site.name}</h2>
-            <p className="truncate text-sm text-slate-500">/{site.slug}</p>
+      {site ? (
+        <section className="flex flex-col gap-5 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:flex-row sm:items-center">
+          <div className="flex min-w-0 items-center gap-4">
+            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-slate-100 text-blue-700">
+              <Globe className="h-6 w-6" />
+            </span>
+            <div className="min-w-0">
+              <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                Your site
+              </p>
+              <h2 className="truncate text-xl font-bold text-slate-900">{site.name}</h2>
+              <p className="truncate text-sm text-slate-500">
+                {/* A built site has nowhere public to live yet, so there's no
+                    address to show — see the slug note in src/data/dashboard.ts. */}
+                We&apos;re hand-coding it now — you&apos;ll get the link by email.
+              </p>
+            </div>
           </div>
-        </div>
-        <div className="flex flex-wrap items-center gap-2 sm:ml-auto">
+          {/* View / Edit stay hidden until site.url and site.editUrl are real;
+              linking them to "" today would just look broken. */}
           {onTrial && (
-            <Link
-              href="/dashboard/upgrade"
-              className="inline-flex items-center gap-2 rounded-xl bg-blue-500 hover:bg-blue-700 px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-blue-500/25 transition-all hover:shadow-lg hover:shadow-blue-500/40"
-            >
-              <CreditCard className="h-4 w-4" />
-              Buy
-            </Link>
+            <div className="flex flex-wrap items-center gap-2 sm:ml-auto">
+              <Link
+                href="/dashboard/upgrade"
+                className="inline-flex items-center gap-2 rounded-xl bg-blue-500 hover:bg-blue-700 px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-blue-500/25 transition-all hover:shadow-lg hover:shadow-blue-500/40"
+              >
+                <CreditCard className="h-4 w-4" />
+                Buy
+              </Link>
+            </div>
           )}
+        </section>
+      ) : (
+        /* Signed up, but no brief has arrived from this address yet. */
+        <section className="flex flex-col gap-5 rounded-2xl border border-dashed border-slate-300 bg-white p-6 sm:flex-row sm:items-center">
+          <div className="flex min-w-0 items-center gap-4">
+            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-400">
+              <Globe className="h-6 w-6" />
+            </span>
+            <div className="min-w-0">
+              <h2 className="text-xl font-bold text-slate-900">No site yet</h2>
+              <p className="text-sm text-slate-500">
+                Send us your business info and photos — we&apos;ll hand-code your site from
+                them.
+              </p>
+            </div>
+          </div>
           <Link
-            href={site.url}
-            target="_blank"
-            className="inline-flex items-center gap-2 rounded-xl border border-slate-200 px-5 py-2.5 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-50"
+            href="/builditforme"
+            className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-blue-500 px-5 py-3 text-sm font-semibold text-white shadow-md shadow-blue-500/25 transition-all hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-500/40 sm:ml-auto"
           >
-            <Eye className="h-4 w-4" />
-            View
+            <Sparkles className="h-4 w-4" />
+            Start my site
           </Link>
-          <Link
-            href={site.editUrl}
-            target="_blank"
-            className="inline-flex items-center gap-2 rounded-xl bg-blue-500/10 px-5 py-2.5 text-sm font-semibold text-blue-700 transition-colors hover:bg-blue-500/20"
-          >
-            <Pencil className="h-4 w-4" />
-            Edit
-            <ExternalLink className="h-3.5 w-3.5" />
-          </Link>
-        </div>
-      </section>
+        </section>
+      )}
 
       <SeoCard seo={seo} />
 
