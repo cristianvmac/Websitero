@@ -1,4 +1,14 @@
-// Brief → preview site. Step 1 of the Stage 2 pipeline:
+// Brief → preview site.
+//
+// INTERNAL TOOL — not wired into the product. Nothing in app/ calls this; the
+// app never auto-builds. Run it by hand to scaffold a customer's workspace
+// (branding, drafted copy, photos) as a starting point for hand-coding, then
+// keep your edits with --code-only.
+//
+// The output stays reviewable: /admin/briefs links each built brief to
+// /previews/<slug>/ (app/previews/[...path]) so the site can be checked before
+// it goes to the owner. That loop is local-only — previews/ is gitignored and
+// never exists on a deployed host.
 //
 //   node scripts/build-site.mjs [briefIdOrPath] [--kit eleventy|astro] [--root] [--no-ai] [--fresh] [--refresh-kit] [--code-only]
 //
