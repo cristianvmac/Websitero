@@ -16,6 +16,7 @@ import {
   LifeBuoy,
 } from "lucide-react";
 import type { Brief } from "@/app/forme/brief";
+import { submitBrief } from "@/lib/submit-brief";
 
 /* Websitero "Build it for me" — no questions, no wizard. The owner uploads a
    document about their business (or pastes a few lines) plus their photos,
@@ -152,12 +153,7 @@ const BuildItForMe = () => {
         images: { mode: photos.length > 0 ? "upload" : "stock" },
         contact: { email: email.trim(), phone: phone.trim() },
       };
-      const form = new FormData();
-      form.append("brief", JSON.stringify(brief));
-      if (doc) form.append("doc", doc);
-      photos.forEach((p) => form.append("photos", p.file));
-      const res = await fetch("/api/forme", { method: "POST", body: form });
-      if (!res.ok) throw new Error(`Request failed (${res.status})`);
+      await submitBrief(brief, { doc, photos: photos.map((p) => p.file) });
       setDone(true);
     } catch {
       setError("Something went wrong sending your files. Please try again.");
