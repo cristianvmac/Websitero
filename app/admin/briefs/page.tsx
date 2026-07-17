@@ -3,16 +3,22 @@ import path from "path";
 import Link from "next/link";
 import { Inbox, ExternalLink, CheckCircle2, CircleDashed, FileText, Code2 } from "lucide-react";
 import type { Brief } from "@/app/forme/brief";
-import BuildButton from "./BuildButton";
+import { BRIEFS_BUCKET, supabaseAdmin } from "@/lib/supabase";
 import DeleteButton from "./DeleteButton";
 import EditBrief from "./EditBrief";
 
 /* Internal fulfillment queue: every brief submitted via /forme or
-   /builditforme, its build status, the owner's materials (sent text, doc
-   download, photo thumbnails — files served via /api/admin/uploads), an
-   inline editor to complete a brief before building, and one-click
-   (re)build / delete. No auth yet — do NOT deploy this publicly before
-   adding access control. */
+   /builditforme, the owner's materials (sent text, doc download, photo
+   thumbnails — linked by hour-long signed URLs, since the bucket is private),
+   an inline editor to complete a brief, a link to the built preview for review
+   before the site goes to the owner, and delete.
+
+   Sites are hand-coded from these materials. The build status and preview
+   below reflect scripts/build-site.mjs runs from the CLI, not anything this
+   page triggers — so both are local-only: previews/ is gitignored and never
+   exists on a deployed host, where every brief therefore reads as not built.
+
+   Team-only: proxy.ts gates this path behind ADMIN_PASSWORD. */
 
 export const dynamic = "force-dynamic"; // always read the briefs dir fresh
 
@@ -28,36 +34,63 @@ interface ManifestEntry {
 }
 
 async function loadData() {
-  const root = process.cwd();
-  let records: BriefRecord[] = [];
-  try {
-    const files = await fs.readdir(path.join(root, "briefs"));
-    records = await Promise.all(
-      files
-        .filter((f) => f.endsWith(".json"))
-        .map(async (f) =>
-          JSON.parse(await fs.readFile(path.join(root, "briefs", f), "utf8")),
-        ),
-    );
-    records.sort((a, b) => b.receivedAt.localeCompare(a.receivedAt));
-  } catch {
-    /* no briefs dir yet — empty queue */
+  const supabase = supabaseAdmin();
+
+  const { data, error } = await supabase
+    .from("briefs")
+    .select("id, received_at, brief")
+    .order("received_at", { ascending: false });
+
+  // Deliberately not caught. An unreadable table must not render as "No briefs
+  // yet" — that's indistinguishable from a quiet Sunday, and it's exactly how
+  // the old fs version lost data without anyone noticing. Let it hit the error
+  // boundary and be obvious.
+  if (error) throw new Error(`Could not load briefs: ${error.message}`);
+
+  const records: BriefRecord[] = (data ?? []).map((row) => ({
+    id: row.id,
+    receivedAt: row.received_at,
+    brief: row.brief as Brief,
+  }));
+
+  // The bucket is private, so every doc and thumbnail needs its own short-lived
+  // signed URL. One batch for the whole page rather than a call per file.
+  const paths = records.flatMap(({ id, brief }) => {
+    const names = [
+      ...(brief.doc ? [brief.doc.file] : []),
+      ...(brief.images?.mode === "upload" ? (brief.images.files ?? []) : []),
+    ];
+    return names.map((n) => `${id}/${n}`);
+  });
+
+  const urls: Record<string, string> = {};
+  if (paths.length > 0) {
+    const { data: signed } = await supabase.storage
+      .from(BRIEFS_BUCKET)
+      .createSignedUrls(paths, 3600);
+    for (const s of signed ?? []) {
+      if (s.path && s.signedUrl) urls[s.path] = s.signedUrl;
+    }
   }
 
+  // Build status is local-only: scripts/build-site.mjs writes this manifest on
+  // the developer's machine and previews/ is gitignored, so on a deployed host
+  // this file never exists and every brief reads as not built. The `status`
+  // column on public.briefs is where that eventually comes from instead.
   let manifest: Record<string, ManifestEntry> = {};
   try {
     manifest = JSON.parse(
-      await fs.readFile(path.join(root, "previews", "manifest.json"), "utf8"),
+      await fs.readFile(path.join(process.cwd(), "previews", "manifest.json"), "utf8"),
     );
   } catch {
-    /* nothing built yet */
+    /* nothing built yet, or not running locally */
   }
 
-  return { records, manifest };
+  return { records, manifest, urls };
 }
 
 export default async function AdminBriefs() {
-  const { records, manifest } = await loadData();
+  const { records, manifest, urls } = await loadData();
 
   return (
     <section className="min-h-screen bg-white px-6 pb-24 pt-28">
@@ -156,13 +189,14 @@ export default async function AdminBriefs() {
                           <code className="rounded bg-slate-100 px-1 py-0.5 font-mono text-[11px] text-slate-600">
                             workspaces/{built.slug}/
                           </code>{" "}
-                          then hit Rebuild code
+                          then rebuild it from the CLI
                         </span>
                       </p>
                     )}
                   </div>
 
                   <div className="flex shrink-0 items-center gap-2 self-end sm:self-auto">
+                    {/* Review the built site before it goes to the owner */}
                     {built && (
                       <a
                         href={`/previews/${built.slug}/`}
@@ -174,9 +208,6 @@ export default async function AdminBriefs() {
                         Preview
                       </a>
                     )}
-                    {/* Only once a workspace exists is there code to recompile */}
-                    {built && <BuildButton briefId={id} rebuild codeOnly />}
-                    <BuildButton briefId={id} rebuild={Boolean(built)} />
                     <DeleteButton briefId={id} />
                   </div>
                 </div>
@@ -189,9 +220,9 @@ export default async function AdminBriefs() {
                         {sentText}
                       </p>
                     )}
-                    {brief.doc && (
+                    {brief.doc && urls[`${id}/${brief.doc.file}`] && (
                       <a
-                        href={`/api/admin/uploads/${id}/${brief.doc.file}`}
+                        href={urls[`${id}/${brief.doc.file}`]}
                         download
                         className="inline-flex w-fit items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 transition-colors hover:border-blue-500/40 hover:text-blue-700"
                       >
@@ -201,23 +232,25 @@ export default async function AdminBriefs() {
                     )}
                     {uploads.length > 0 && (
                       <div className="flex flex-wrap gap-2">
-                        {uploads.map((f) => (
-                          <a
-                            key={f}
-                            href={`/api/admin/uploads/${id}/${f}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            title={f}
-                            className="transition-opacity hover:opacity-80"
-                          >
-                            {/* eslint-disable-next-line @next/next/no-img-element -- served by the admin uploads route */}
-                            <img
-                              src={`/api/admin/uploads/${id}/${f}`}
-                              alt={f}
-                              className="h-16 w-16 rounded-lg object-cover ring-1 ring-black/5"
-                            />
-                          </a>
-                        ))}
+                        {uploads
+                          .filter((f) => urls[`${id}/${f}`])
+                          .map((f) => (
+                            <a
+                              key={f}
+                              href={urls[`${id}/${f}`]}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              title={f}
+                              className="transition-opacity hover:opacity-80"
+                            >
+                              {/* eslint-disable-next-line @next/next/no-img-element -- signed storage URL, expires hourly; not worth next/image's remotePatterns */}
+                              <img
+                                src={urls[`${id}/${f}`]}
+                                alt={f}
+                                className="h-16 w-16 rounded-lg object-cover ring-1 ring-black/5"
+                              />
+                            </a>
+                          ))}
                       </div>
                     )}
                   </div>
