@@ -23,6 +23,7 @@ import {
   VIBES,
   BRAND_COLORS,
 } from "./brief";
+import { submitBrief } from "@/lib/submit-brief";
 
 /* Websitero "Build it for me" — the guided wizard that turns an owner's
    answers into a structured brief. Mirrors the "Quick setup" demo in
@@ -85,27 +86,14 @@ const Forme = () => {
     setSending(true);
     setError("");
     try {
-      // Adding photos is what selects "upload" — no separate mode toggle.
-      // They ride along as multipart; without them plain JSON keeps the
-      // API's original contract and the site uses stock imagery.
+      // Adding photos is what selects "upload" — no separate mode toggle. The
+      // server confirms the mode against what actually reached the bucket, so
+      // this is a statement of intent rather than the last word.
       const briefToSend: Brief = {
         ...brief,
         images: { mode: photos.length > 0 ? "upload" : "stock" },
       };
-      let res: Response;
-      if (photos.length > 0) {
-        const form = new FormData();
-        form.append("brief", JSON.stringify(briefToSend));
-        for (const file of photos) form.append("photos", file);
-        res = await fetch("/api/forme", { method: "POST", body: form });
-      } else {
-        res = await fetch("/api/forme", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(briefToSend),
-        });
-      }
-      if (!res.ok) throw new Error(`Request failed (${res.status})`);
+      await submitBrief(briefToSend, { photos });
       setDone(true);
     } catch {
       setError("Something went wrong sending your brief. Please try again.");
