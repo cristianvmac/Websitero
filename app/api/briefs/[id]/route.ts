@@ -1,27 +1,23 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { NextResponse } from "next/server";
+import { BRIEFS_BUCKET, supabaseAdmin } from "@/lib/supabase";
 import type { Brief } from "@/app/forme/brief";
 
 /* Admin mutations for a stored brief:
-   PATCH  — merge edited fields (business, style, prompt, contact) into
-            briefs/<id>.json so the team can complete a materials brief
-            before building it.
+   PATCH  — merge edited fields (business, style, prompt, contact) into the
+            brief's jsonb so the team can complete a materials brief before
+            building it.
    DELETE — remove the brief, its uploads, and any built preview.
-   Same caveat as /admin/briefs: no auth yet, local / self-hosted only. */
+   Team-only: proxy.ts gates this path behind ADMIN_PASSWORD. */
 
 const ID_RE = /^[a-zA-Z0-9-]+$/;
-
-const briefPath = (id: string) => path.join(process.cwd(), "briefs", `${id}.json`);
 
 // Only trimmed strings make it into the stored brief — anything else in the
 // payload (wrong types, missing keys) leaves the existing value untouched.
 const str = (v: unknown) => (typeof v === "string" ? v.trim() : undefined);
 
-export async function PATCH(
-  req: Request,
-  { params }: { params: Promise<{ id: string }> },
-) {
+export async function PATCH(req: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   if (!ID_RE.test(id)) {
     return NextResponse.json({ ok: false, error: "Invalid brief id" }, { status: 400 });
@@ -34,16 +30,23 @@ export async function PATCH(
     return NextResponse.json({ ok: false, error: "Invalid JSON" }, { status: 400 });
   }
 
-  let record: { id: string; receivedAt: string; brief: Brief };
-  try {
-    record = JSON.parse(await fs.readFile(briefPath(id), "utf8"));
-  } catch {
+  const supabase = supabaseAdmin();
+  const { data: row, error: readError } = await supabase
+    .from("briefs")
+    .select("brief")
+    .eq("id", id)
+    .maybeSingle();
+  if (readError) {
+    console.error("[briefs] read failed:", readError);
+    return NextResponse.json({ ok: false, error: "Could not read brief" }, { status: 500 });
+  }
+  if (!row) {
     return NextResponse.json({ ok: false, error: "Brief not found" }, { status: 404 });
   }
 
   // Merge only the fields the edit form owns — the owner's uploads (`images`,
   // `doc`) and `features` can't be clobbered from here.
-  const b = record.brief;
+  const b = row.brief as Brief;
   b.business = {
     name: str(patch.business?.name) ?? b.business.name,
     type: str(patch.business?.type) ?? b.business.type,
@@ -65,32 +68,54 @@ export async function PATCH(
   const phone = str(patch.contact?.phone);
   if (phone !== undefined) b.contact.phone = phone;
 
-  await fs.writeFile(briefPath(id), JSON.stringify(record, null, 2));
+  const { error: writeError } = await supabase.from("briefs").update({ brief: b }).eq("id", id);
+  if (writeError) {
+    console.error("[briefs] update failed:", writeError);
+    return NextResponse.json({ ok: false, error: "Could not save changes" }, { status: 500 });
+  }
+
   return NextResponse.json({ ok: true, brief: b });
 }
 
-export async function DELETE(
-  _req: Request,
-  { params }: { params: Promise<{ id: string }> },
-) {
+export async function DELETE(_req: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   if (!ID_RE.test(id)) {
     return NextResponse.json({ ok: false, error: "Invalid brief id" }, { status: 400 });
   }
 
-  try {
-    await fs.rm(briefPath(id));
-  } catch {
+  const supabase = supabaseAdmin();
+
+  // The owner's materials go first: an orphaned row is visible and fixable in
+  // the queue, whereas an orphaned folder is invisible and would quietly keep
+  // customer documents around after their brief is gone.
+  const { data: listed } = await supabase.storage.from(BRIEFS_BUCKET).list(id);
+  if (listed?.length) {
+    const { error } = await supabase.storage
+      .from(BRIEFS_BUCKET)
+      .remove(listed.map((f) => `${id}/${f.name}`));
+    if (error) {
+      console.error("[briefs] could not remove uploads:", error);
+      return NextResponse.json({ ok: false, error: "Could not remove uploads" }, { status: 500 });
+    }
+  }
+
+  const { data: deleted, error } = await supabase
+    .from("briefs")
+    .delete()
+    .eq("id", id)
+    .select("id");
+  if (error) {
+    console.error("[briefs] delete failed:", error);
+    return NextResponse.json({ ok: false, error: "Could not delete brief" }, { status: 500 });
+  }
+  if (!deleted?.length) {
     return NextResponse.json({ ok: false, error: "Brief not found" }, { status: 404 });
   }
 
-  // Best-effort cleanup of everything the brief produced: the owner's uploads,
-  // and — if it was ever built — its preview, its manifest entry, and the
-  // workspace (which holds any code the developer hand-wrote for them).
-  await fs
-    .rm(path.join(process.cwd(), "briefs", "uploads", id), { recursive: true, force: true })
-    .catch(() => {});
-
+  // Local-only cleanup: the preview, its manifest entry, and the workspace (which
+  // holds any code hand-written for this customer). None of these exist on a
+  // deployed host — previews/ and workspaces/ are gitignored build output — so
+  // this is a no-op there and only does real work on the developer's machine.
   try {
     const manifestPath = path.join(process.cwd(), "previews", "manifest.json");
     const manifest = JSON.parse(await fs.readFile(manifestPath, "utf8"));
@@ -105,7 +130,7 @@ export async function DELETE(
       }
     }
   } catch {
-    /* never built — no preview, manifest entry, or workspace to clean */
+    /* never built, or not running locally — no preview or workspace to clean */
   }
 
   return NextResponse.json({ ok: true });
