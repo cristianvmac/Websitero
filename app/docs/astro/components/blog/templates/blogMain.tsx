@@ -1,11 +1,11 @@
 import React from "react";
 import type { Example } from "../types/codePreview";
-import { sampleRoot, sampleHtml, sampleCss, sampleJs } from "../samples/samplesMain";
+import { sampleRoot, sampleHtml, sampleCss, sampleJs } from "../samples/samplesEleventyMain";
 import Image from "next/image";
 import screenshotSrc from "../images/AstroBlog.png";
 
 
-export const blogMain: Example = {
+export const blogEleventyMain: Example = {
   title: "Blog",
   description: "",
   code: { root: sampleRoot, html: sampleHtml, css: sampleCss, js: sampleJs },
