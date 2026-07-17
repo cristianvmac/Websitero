@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { Mail, Lock, Eye, EyeOff, LogIn, LoaderCircle } from "lucide-react";
 import { signIn, type AuthState } from "@/lib/auth-actions";
 import GoogleButton from "@/components/auth/GoogleButton";
+import { FaCode } from "react-icons/fa";
 
 /* Why anyone got sent back here. Google failures return to /login with Better
    Auth's own ?error=<code> appended (access_denied is someone declining the
@@ -56,11 +57,16 @@ function Login() {
         <section className="flex min-h-screen items-center justify-center bg-base-100 px-4 py-16">
             <div className="card w-full max-w-md bg-base-100 shadow-xl">
                 <div className="card-body">
-                    <h1 className="text-3xl font-bold text-base-content">Welcome back</h1>
+                    {/*<h1 className="text-3xl font-bold text-base-content">Welcome back</h1>
                     <p className="mb-4 text-base-content/70">
                         Sign in to your account to continue.
-                    </p>
-
+                    </p>*/}
+                    <div className="group flex items-center gap-2.5 mb-6">
+                        <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-500 text-white shadow-sm shadow-blue-500/30 transition-transform group-hover:scale-105">
+                            <FaCode className="h-6 w-5" />
+                        </span>
+                        <span className="text-xl font-bold tracking-tight text-slate-900">Websitero</span>
+                    </div>
                     {redirectReason && (
                         <div role="alert" className="alert alert-warning mb-4 text-sm">
                             <span>{redirectReason}</span>
