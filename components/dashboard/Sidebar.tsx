@@ -34,6 +34,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import type { DashboardData } from "@/src/data/dashboard";
+import { signOut } from "@/lib/auth-actions";
 
 type NavChild = {
   label: string;
@@ -268,14 +269,17 @@ export default function Sidebar({ site, credits, locale }: SidebarProps) {
         <NavLink item={homeItem} active={pathname === homeItem.href} />
       </nav>
 
-      <Link
-        href={site.editUrl}
-        target="_blank"
-        className="mt-3 flex items-center justify-center gap-2 rounded-xl bg-blue-500 hover:bg-blue-700 px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-blue-500/25 transition-all hover:shadow-lg hover:shadow-blue-500/40"
-      >
-        <PenLine className="h-4 w-4" />
-        Edit my site
-      </Link>
+      {/* Hidden until there's a site with a real editUrl behind it. */}
+      {site?.editUrl && (
+        <Link
+          href={site.editUrl}
+          target="_blank"
+          className="mt-3 flex items-center justify-center gap-2 rounded-xl bg-blue-500 hover:bg-blue-700 px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-blue-500/25 transition-all hover:shadow-lg hover:shadow-blue-500/40"
+        >
+          <PenLine className="h-4 w-4" />
+          Edit my site
+        </Link>
+      )}
 
       <label className="mt-3 flex cursor-text items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-2">
         <Search className="h-4 w-4 shrink-0 text-slate-400" />
@@ -330,13 +334,17 @@ export default function Sidebar({ site, credits, locale }: SidebarProps) {
           <Languages className="h-4.5 w-4.5" />
           {locale}
         </span>
-        <Link
-          href="/login"
-          className="flex items-center gap-3 rounded-lg px-2.5 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900"
-        >
-          <LogOut className="h-4.5 w-4.5" />
-          Log out
-        </Link>
+        {/* A link here only navigated away — the session cookie survived, so
+            /dashboard let you straight back in. This actually ends it. */}
+        <form action={signOut}>
+          <button
+            type="submit"
+            className="flex w-full items-center gap-3 rounded-lg px-2.5 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900"
+          >
+            <LogOut className="h-4.5 w-4.5" />
+            Log out
+          </button>
+        </form>
       </div>
     </div>
   );
