@@ -3,9 +3,12 @@ import path from "path";
 import Link from "next/link";
 import { Inbox, ExternalLink, CheckCircle2, CircleDashed, FileText, Code2 } from "lucide-react";
 import type { Brief } from "@/app/forme/brief";
+import { asSiteStage, type SiteStage } from "@/lib/site-stage";
+import { isTier, type Tier } from "@/lib/pricing";
 import { BRIEFS_BUCKET, supabaseAdmin } from "@/lib/supabase";
 import DeleteButton from "./DeleteButton";
 import EditBrief from "./EditBrief";
+import StatusControls from "./StatusControls";
 
 /* Internal fulfillment queue: every brief submitted via /forme or
    /builditforme, the owner's materials (sent text, doc download, photo
@@ -26,6 +29,12 @@ interface BriefRecord {
   id: string;
   receivedAt: string;
   brief: Brief;
+  /** The customer-facing lifecycle — what their tracker shows. */
+  status: SiteStage;
+  previewUrl: string;
+  liveUrl: string;
+  /** "" until the team scopes the build to a package. */
+  tier: Tier | "";
 }
 
 interface ManifestEntry {
@@ -38,7 +47,7 @@ async function loadData() {
 
   const { data, error } = await supabase
     .from("briefs")
-    .select("id, received_at, brief")
+    .select("id, received_at, brief, status, preview_url, live_url, tier")
     .order("received_at", { ascending: false });
 
   // Deliberately not caught. An unreadable table must not render as "No briefs
@@ -51,7 +60,29 @@ async function loadData() {
     id: row.id,
     receivedAt: row.received_at,
     brief: row.brief as Brief,
+    status: asSiteStage(row.status),
+    previewUrl: row.preview_url ?? "",
+    liveUrl: row.live_url ?? "",
+    tier: isTier(row.tier) ? row.tier : "",
   }));
+
+  // What each owner has asked to change, so the team sees it here instead of
+  // only in an email. Grouped by brief, newest first.
+  const changeRequests: Record<string, { body: string; createdAt: string }[]> = {};
+  if (records.length > 0) {
+    const { data: reqs, error: reqError } = await supabase
+      .from("change_requests")
+      .select("brief_id, body, created_at")
+      .in(
+        "brief_id",
+        records.map((r) => r.id),
+      )
+      .order("created_at", { ascending: false });
+    if (reqError) console.error("[admin] could not load change requests:", reqError);
+    for (const r of reqs ?? []) {
+      (changeRequests[r.brief_id] ??= []).push({ body: r.body, createdAt: r.created_at });
+    }
+  }
 
   // The bucket is private, so every doc and thumbnail needs its own short-lived
   // signed URL. One batch for the whole page rather than a call per file.
@@ -86,11 +117,11 @@ async function loadData() {
     /* nothing built yet, or not running locally */
   }
 
-  return { records, manifest, urls };
+  return { records, manifest, urls, changeRequests };
 }
 
 export default async function AdminBriefs() {
-  const { records, manifest, urls } = await loadData();
+  const { records, manifest, urls, changeRequests } = await loadData();
 
   return (
     <section className="min-h-screen bg-white px-6 pb-24 pt-28">
@@ -118,7 +149,7 @@ export default async function AdminBriefs() {
             </div>
           )}
 
-          {records.map(({ id, receivedAt, brief }) => {
+          {records.map(({ id, receivedAt, brief, status, previewUrl, liveUrl, tier }) => {
             const built = manifest[id];
             // Materials briefs (the /builditforme upload flow) arrive without
             // the structured wizard fields — the doc/text/photos ARE the brief.
@@ -211,6 +242,34 @@ export default async function AdminBriefs() {
                     <DeleteButton briefId={id} />
                   </div>
                 </div>
+
+                {/* Where the customer's tracker is, and the links their dashboard shows */}
+                <StatusControls
+                  briefId={id}
+                  status={status}
+                  previewUrl={previewUrl}
+                  liveUrl={liveUrl}
+                  tier={tier}
+                />
+
+                {/* What this owner has asked to change — was email-only before */}
+                {(changeRequests[id]?.length ?? 0) > 0 && (
+                  <div className="rounded-xl border border-amber-200 bg-amber-50/60 p-4">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-amber-700">
+                      Change requests ({changeRequests[id].length})
+                    </p>
+                    <ul className="mt-2 flex flex-col gap-2">
+                      {changeRequests[id].map((req) => (
+                        <li key={req.createdAt} className="text-sm text-slate-700">
+                          <span className="text-xs text-slate-400">
+                            {new Date(req.createdAt).toLocaleString()}
+                          </span>
+                          <p className="mt-0.5 whitespace-pre-wrap">{req.body}</p>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
 
                 {/* The owner's materials — sent text, doc download, photo thumbnails */}
                 {(sentText || brief.doc || uploads.length > 0) && (
