@@ -55,6 +55,7 @@ DO AS YOU WILL LIKE TO HAVE IT:
 However, the websites should be built using our internal documentation found at docs/
 and CodeStitch components (https://codestitch.app/app), 
 as I want the final pages constructed from pure HTML, CSS, and JS components.
-To help build better websites for 'Build it for me using prompts' I think its better to create templates for each industry 
+To help build better websites for 'Build it for me using prompts' I think its better 
+to create templates that have 3 pages(landing page with others dispayed as id # faq, reviews, about; services page; contact form) for each industry 
 from CodeStitch components (https://codestitch.app/app) and internal documentation found at docs/ or
 better Store the composition as an ordered list of component ids, not as copied HTML
