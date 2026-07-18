@@ -4,17 +4,28 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, PanelLeft, X } from "lucide-react";
-import type { DashboardData } from "@/src/data/dashboard";
+import type { DashboardData, ShellSite } from "@/src/data/dashboard";
 import Sidebar, { pageLabel } from "./Sidebar";
 
+export type ShellUser = { name: string; email: string };
+
 type DashboardShellProps = {
-  site: DashboardData["site"];
+  user: ShellUser;
+  site: ShellSite | null;
+  diy: DashboardData["diy"];
   credits: DashboardData["credits"];
   locale: string;
   children: React.ReactNode;
 };
 
-export default function DashboardShell({ site, credits, locale, children }: DashboardShellProps) {
+export default function DashboardShell({
+  user,
+  site,
+  diy,
+  credits,
+  locale,
+  children,
+}: DashboardShellProps) {
   const pathname = usePathname();
   // Independent toggles: the drawer only exists below lg, the static aside only at lg+.
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -28,7 +39,7 @@ export default function DashboardShell({ site, credits, locale, children }: Dash
           desktopHidden ? "hidden" : "hidden lg:flex"
         } w-72 shrink-0 border-r border-slate-200`}
       >
-        <Sidebar site={site} credits={credits} locale={locale} />
+        <Sidebar user={user} site={site} diy={diy} credits={credits} locale={locale} />
       </aside>
 
       {/* Drawer sidebar (mobile) */}
@@ -41,7 +52,7 @@ export default function DashboardShell({ site, credits, locale, children }: Dash
             className="absolute inset-0 bg-slate-900/40"
           />
           <aside className="absolute inset-y-0 left-0 flex w-72 max-w-[85vw] bg-white shadow-xl">
-            <Sidebar site={site} credits={credits} locale={locale} />
+            <Sidebar user={user} site={site} diy={diy} credits={credits} locale={locale} />
             <button
               type="button"
               onClick={() => setMobileOpen(false)}
