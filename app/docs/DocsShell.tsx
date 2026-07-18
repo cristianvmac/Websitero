@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { ChevronDown, ChevronRight, Menu, Search, X } from "lucide-react";
+import AccountNudge from "./AccountNudge";
 
 type Framework = "eleventy" | "astro";
 
@@ -307,6 +308,8 @@ export default function DocsShell({
               No docs found.
             </div>
           )}
+
+          <AccountNudge framework={framework} />
         </div>
   );
 
