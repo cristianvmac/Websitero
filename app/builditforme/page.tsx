@@ -14,6 +14,7 @@ import {
   ShieldCheck,
   Code2,
   LifeBuoy,
+  ArrowRight,
 } from "lucide-react";
 import type { Brief } from "@/app/forme/brief";
 import { submitBrief } from "@/lib/submit-brief";
@@ -190,9 +191,30 @@ const BuildItForMe = () => {
             ))}
           </ul>
           <p className="text-sm text-slate-500">No templates. The code is yours to keep.</p>
+
+          {/* The one action that makes the whole build visible to them. Without
+              an account they never see the tracker, the preview, or the approve
+              button — the brief just lands in an inbox. Signing up with this
+              same browser auto-claims the brief they just sent (the claim
+              cookie is already set), so "follow your build" is literal. */}
+          <div className="w-full max-w-sm rounded-2xl border border-blue-500/30 bg-blue-500/5 p-5">
+            <p className="font-bold text-slate-900">Follow your build live</p>
+            <p className="mt-1 text-sm text-slate-600">
+              Create your free account to watch your site come together, see your preview, and
+              approve it in one click.
+            </p>
+            <Link
+              href="/signup"
+              className="mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-blue-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-500/30 transition-all hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-500/40"
+            >
+              Create my account
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+
           <Link
             href="/"
-            className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-700 transition-colors hover:border-slate-400 hover:bg-slate-50"
+            className="text-sm font-semibold text-slate-500 underline-offset-2 transition-colors hover:text-slate-700 hover:underline"
           >
             Back to home
           </Link>
