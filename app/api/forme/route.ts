@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { BRIEFS_BUCKET, supabaseAdmin } from "@/lib/supabase";
 import { CLAIM_COOKIE, CLAIM_COOKIE_OPTIONS, claimToken } from "@/lib/brief-claim";
+import { briefReceivedEmail } from "@/lib/customer-emails";
+import { sendMail } from "@/lib/mailer";
 import type { Brief } from "@/app/forme/brief";
 
 /* Records a "Build it for me" brief from the /forme wizard or the /builditforme
@@ -78,6 +80,16 @@ export async function POST(req: Request) {
   if (error) {
     console.error("[forme] could not save brief:", error);
     return NextResponse.json({ ok: false, error: "Could not save your brief" }, { status: 500 });
+  }
+
+  /* Confirm receipt and nudge them to sign up — best-effort. The brief is
+     already saved; a failed email must not turn a successful submission into an
+     error the owner sees. It's logged, and the same nudge is on the success
+     screen they're looking at right now. */
+  try {
+    await sendMail({ to: brief.contact.email, ...briefReceivedEmail(brief.business?.name) });
+  } catch (mailError) {
+    console.error("[forme] brief-received email failed:", mailError);
   }
 
   /* Hand this browser a signed claim on the brief it just submitted, so that
