@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { Transition } from "@headlessui/react";
 import { Menu, X, Rocket, ArrowRight, Sparkles, ExternalLink, ArrowUp,  ArrowUpRight } from "lucide-react";
 import { FaCode } from "react-icons/fa";
+import { useSession } from "@/lib/auth-client";
 
 const navLinks = [
   { label: "Features", href: "/#features" },
@@ -15,9 +16,23 @@ const navLinks = [
   { label: "See Demo ", href: "/", highlight: true },
 ];
 
+/** First name, or the part of the email before the @ — whatever fits a nav
+    slot. Someone who signed up as "Ana Maria Popescu" gets "Ana". */
+function shortName(user: { name?: string | null; email?: string | null }): string {
+  const first = user.name?.trim().split(/\s+/)[0];
+  return first || user.email?.split("@")[0] || "My account";
+}
+
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+  /* Resolves after hydration (see lib/auth-client.ts for why it isn't read on
+     the server). `isPending` is the first paint and the reload after it —
+     during that window neither "Login" nor a name is true yet, so the account
+     slot renders empty rather than flashing "Login" at someone who is signed
+     in. Everything around it keeps its position. */
+  const { data: session, isPending } = useSession();
+  const user = session?.user ?? null;
 
   // The dashboard has its own chrome (sidebar + topbar).
   if (pathname?.startsWith("/dashboard")) return null;
@@ -68,19 +83,26 @@ const Header = () => {
               Briefs
             </Link>
 
-            <Link
-              href="/dashboard"
-              className="items-center rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900 inline-flex"
-            >
-              Dashboard
-            </Link>
-
-            <Link
-              href="/login"
-              className="items-center rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900 inline-flex"
-            >
-              Login
-            </Link>
+            {/* Signed in: their name, which is also the way back into the app.
+                Signed out: the login link. Nothing while we're still asking. */}
+            {isPending ? null : user ? (
+              <Link
+                href="/dashboard"
+                className="items-center gap-2 rounded-lg py-1.5 pl-1.5 pr-3.5 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100 hover:text-slate-900 inline-flex"
+              >
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-500 text-xs font-bold uppercase text-white">
+                  {shortName(user).charAt(0)}
+                </span>
+                <span className="max-w-40 truncate">{shortName(user)}</span>
+              </Link>
+            ) : (
+              <Link
+                href="/login"
+                className="items-center rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900 inline-flex"
+              >
+                Login
+              </Link>
+            )}
 
             <Link
               href="/startyourwebsite"
@@ -131,13 +153,26 @@ const Header = () => {
                 </li>
               ))}
               <li className=" flex flex-col gap-3">
-                <Link
-                  href="/login"
-                  onClick={() => setIsOpen(false)}
-                  className="block rounded-lg px-3 py-2.5 text-center text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100"
-                >
-                  Login
-                </Link>
+                {isPending ? null : user ? (
+                  <Link
+                    href="/dashboard"
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center justify-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100"
+                  >
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-500 text-xs font-bold uppercase text-white">
+                      {shortName(user).charAt(0)}
+                    </span>
+                    <span className="truncate">{shortName(user)}</span>
+                  </Link>
+                ) : (
+                  <Link
+                    href="/login"
+                    onClick={() => setIsOpen(false)}
+                    className="block rounded-lg px-3 py-2.5 text-center text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100"
+                  >
+                    Login
+                  </Link>
+                )}
                 <Link
                   href="#cta"
                   onClick={() => setIsOpen(false)}
