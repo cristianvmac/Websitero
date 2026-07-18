@@ -1,136 +1,171 @@
 import Link from "next/link";
-// Eye/Pencil left with the View & Edit buttons they belonged to — see the note
-// on the site card: nothing to link to until a built site has a real home.
-import { Clock, CreditCard, ExternalLink, Globe, Sparkles } from "lucide-react";
-import { getDashboardData, trialRemaining, yearlyDiscount } from "@/src/data/dashboard";
+import { redirect } from "next/navigation";
+import { ArrowRight, ExternalLink, Globe, Sparkles } from "lucide-react";
+import { getDashboardData } from "@/src/data/dashboard";
+import BuildTracker from "@/components/dashboard/BuildTracker";
+import KitCard from "@/components/dashboard/KitCard";
+import KitUpdates from "@/components/dashboard/KitUpdates";
+import LinkSiteCard from "@/components/dashboard/LinkSiteCard";
+import PreviewCard from "@/components/dashboard/PreviewCard";
 import SeoCard from "@/components/dashboard/SeoCard";
 import ChecklistCard from "@/components/dashboard/ChecklistCard";
 
+/* The overview routes the journey — what it shows is decided by what the
+   account HAS, never by a mode the user picked somewhere:
+
+   nothing yet       → not here at all: sent to /startyourwebsite, which owns
+                       the fork now. Signing in shouldn't open a dashboard for
+                       a site that doesn't exist, and this page has nothing
+                       true to say until the account has done something.
+   diy, no brief     → the kit card: clone command, docs path, switch, plus
+                       the standing "we'll take it from here" offer.
+   brief, not live   → the build tracker, plus the preview review card once
+                       the team publishes a preview URL. A brief always
+                       outranks the kit here: submitting one hands the build
+                       over, though the Developer nav stays for DIY accounts.
+   live              → the site card with its real address, growth steps, SEO.
+
+   There are no trial or upgrade banners: pricing is a one-off build fee taken
+   at approval, so the only money moment is the Activate button inside the
+   preview card. Nothing here nags someone who hasn't got a site yet. */
+
 export default async function DashboardHomePage() {
   const data = await getDashboardData();
-  const { site, plan, seo, checklist } = data;
+  const { site, materials, diy, seo, checklist } = data;
 
-  const remaining = trialRemaining(data.trialEndsAt);
-  const onTrial = site?.status === "trial" && remaining !== null;
-  const priceLine = `${plan.currency}${plan.monthly}/month or ${plan.currency}${plan.yearly}/year`;
+  // No brief, no kit — nothing to manage yet. /startyourwebsite is where both
+  // paths start, and picking either one lands back here.
+  if (!site && !diy) redirect("/startyourwebsite");
+
+  const showPreview =
+    site &&
+    site.previewUrl &&
+    (site.stage === "preview_ready" ||
+      site.stage === "changes_requested" ||
+      site.stage === "approved");
 
   return (
     <div className="flex flex-col gap-8">
-      {onTrial && (
-        <section className="relative rounded-2xl border border-blue-500/30 bg-blue-500/10 p-5">
-          <span className="absolute -top-3 right-6 rounded-full bg-blue-700 px-3 py-1 text-xs font-bold text-white shadow-md">
-            {remaining.split(" ")[0]}
-          </span>
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-blue-500/15 text-blue-700">
-              <Clock className="h-6 w-6" />
-            </span>
-            <div className="min-w-0">
-              <h2 className="font-bold text-slate-900">
-                Your trial ends in {remaining} — keep your site online
-              </h2>
-              <p className="text-sm text-slate-600">
-                {priceLine} (-{yearlyDiscount(plan)}%). No commitment.
-              </p>
-            </div>
-            <Link
-              href="/dashboard/upgrade"
-              className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-blue-500 hover:bg-blue-700 px-5 py-3 text-sm font-semibold text-white shadow-md shadow-blue-500/25 transition-all hover:shadow-lg hover:shadow-blue-500/40 sm:ml-auto"
-            >
-              <Sparkles className="h-4 w-4" />
-              Activate my site
-            </Link>
-          </div>
-        </section>
-      )}
-
       <header>
         <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
           Welcome to your space
         </h1>
         <p className="mt-2 text-slate-500">
-          Manage your site, follow your messages and stats in one place.
+          {!site
+            ? "Your kit and your docs, all in one place."
+            : site.stage === "live"
+              ? "Manage your site, follow your messages and stats in one place."
+              : "Your site is being hand-coded — follow every step here."}
         </p>
       </header>
 
-      {onTrial && (
-        <Link
-          href="/dashboard/upgrade"
-          className="group flex items-center gap-4 rounded-2xl border border-blue-500/30 bg-blue-500/10 p-5 transition-colors hover:border-blue-500/50"
-        >
-          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-blue-500 text-white">
-            <CreditCard className="h-6 w-6" />
-          </span>
-          <span className="min-w-0">
-            <span className="block text-lg font-bold text-slate-900">Buy my site</span>
-            <span className="block text-sm text-slate-600">
-              {priceLine} to keep this site online.
-            </span>
-          </span>
-          <ExternalLink className="ml-auto h-5 w-5 shrink-0 text-blue-700 transition-transform group-hover:translate-x-0.5" />
-        </Link>
-      )}
+      {/* ------------------------------------------------- DIY: kit + docs */}
+      {!site && diy && (
+        <>
+          <KitCard framework={diy.framework} />
 
-      {site ? (
-        <section className="flex flex-col gap-5 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:flex-row sm:items-center">
-          <div className="flex min-w-0 items-center gap-4">
-            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-slate-100 text-blue-700">
-              <Globe className="h-6 w-6" />
+          {/* Keyed by siteUrl: a successful save remounts the card, closing
+              its edit form. */}
+          <LinkSiteCard key={diy.siteUrl} siteUrl={diy.siteUrl} framework={diy.framework} />
+
+          {/* Renders nothing when the kit repo has no CHANGELOG.md yet. */}
+          <KitUpdates framework={diy.framework} />
+
+          {/* The standing offer, not a nag: DIY is a product, this is its exit
+              ramp for the day they'd rather hand it over. */}
+          <section className="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:flex-row sm:items-center">
+            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-blue-500/10 text-blue-700">
+              <Sparkles className="h-6 w-6" />
             </span>
             <div className="min-w-0">
-              <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
-                Your site
-              </p>
-              <h2 className="truncate text-xl font-bold text-slate-900">{site.name}</h2>
-              <p className="truncate text-sm text-slate-500">
-                {/* A built site has nowhere public to live yet, so there's no
-                    address to show — see the slug note in src/data/dashboard.ts. */}
-                We&apos;re hand-coding it now — you&apos;ll get the link by email.
-              </p>
-            </div>
-          </div>
-          {/* View / Edit stay hidden until site.url and site.editUrl are real;
-              linking them to "" today would just look broken. */}
-          {onTrial && (
-            <div className="flex flex-wrap items-center gap-2 sm:ml-auto">
-              <Link
-                href="/dashboard/upgrade"
-                className="inline-flex items-center gap-2 rounded-xl bg-blue-500 hover:bg-blue-700 px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-blue-500/25 transition-all hover:shadow-lg hover:shadow-blue-500/40"
-              >
-                <CreditCard className="h-4 w-4" />
-                Buy
-              </Link>
-            </div>
-          )}
-        </section>
-      ) : (
-        /* Signed up, but no brief has arrived from this address yet. */
-        <section className="flex flex-col gap-5 rounded-2xl border border-dashed border-slate-300 bg-white p-6 sm:flex-row sm:items-center">
-          <div className="flex min-w-0 items-center gap-4">
-            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-400">
-              <Globe className="h-6 w-6" />
-            </span>
-            <div className="min-w-0">
-              <h2 className="text-xl font-bold text-slate-900">No site yet</h2>
+              <h2 className="font-bold text-slate-900">Rather have it done for you?</h2>
               <p className="text-sm text-slate-500">
-                Send us your business info and photos — we&apos;ll hand-code your site from
-                them.
+                Send us your info and we hand-code your site — everything you&apos;ve built
+                stays yours.
               </p>
             </div>
-          </div>
-          <Link
-            href="/builditforme"
-            className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-blue-500 px-5 py-3 text-sm font-semibold text-white shadow-md shadow-blue-500/25 transition-all hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-500/40 sm:ml-auto"
-          >
-            <Sparkles className="h-4 w-4" />
-            Start my site
-          </Link>
-        </section>
+            <Link
+              href="/builditforme"
+              className="inline-flex shrink-0 items-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 transition-colors hover:border-slate-400 hover:bg-slate-50 sm:ml-auto"
+            >
+              Build it for me
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </section>
+        </>
       )}
 
-      <SeoCard seo={seo} />
+      {/* ------------------------------------------- building: tracker + review */}
+      {site && site.stage !== "live" && (
+        <>
+          {/* The preview leads when it's waiting on the owner's decision;
+              otherwise "where is my site?" does. */}
+          {showPreview && site.stage === "preview_ready" && (
+            <PreviewCard
+              stage={site.stage}
+              previewUrl={site.previewUrl}
+              changeRequests={site.changeRequests}
+              tier={site.tier}
+              // Not payable until they've approved — and the card is a client
+              // component, so an unused link here would still ship in the
+              // page payload. They see the price, not the checkout.
+              paymentUrl=""
+            />
+          )}
+          <BuildTracker stage={site.stage} receivedAt={site.receivedAt} materials={materials} />
+          {showPreview && site.stage !== "preview_ready" && (
+            <PreviewCard
+              stage={site.stage}
+              previewUrl={site.previewUrl}
+              changeRequests={site.changeRequests}
+              tier={site.tier}
+              // Only once it's payable. The link isn't secret, but it has no
+              // business sitting in the page payload before they've approved.
+              paymentUrl={site.stage === "approved" ? site.paymentUrl : ""}
+            />
+          )}
+        </>
+      )}
 
-      <ChecklistCard steps={checklist} />
+      {/* --------------------------------------------------------------- live */}
+      {site && site.stage === "live" && (
+        <>
+          <section className="flex flex-col gap-5 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:flex-row sm:items-center">
+            <div className="flex min-w-0 items-center gap-4">
+              <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-slate-100 text-blue-700">
+                <Globe className="h-6 w-6" />
+              </span>
+              <div className="min-w-0">
+                <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                  Your site
+                </p>
+                <h2 className="truncate text-xl font-bold text-slate-900">{site.name}</h2>
+                <p className="truncate text-sm text-slate-500">
+                  {site.url || "Live — the address is on its way."}
+                </p>
+              </div>
+            </div>
+            {/* No "Buy" here — reaching live means it's already paid for. */}
+            <div className="flex flex-wrap items-center gap-2 sm:ml-auto">
+              {site.url && (
+                <a
+                  href={site.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-xl bg-blue-500 px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-blue-500/25 transition-all hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-500/40"
+                >
+                  <ExternalLink className="h-4 w-4" />
+                  View my site
+                </a>
+              )}
+            </div>
+          </section>
+
+          <SeoCard seo={seo} />
+
+          <ChecklistCard steps={checklist} />
+        </>
+      )}
     </div>
   );
 }

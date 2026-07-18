@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getDashboardData } from "@/src/data/dashboard";
+import { getDashboardData, toShellSite } from "@/src/data/dashboard";
 import DashboardShell from "@/components/dashboard/DashboardShell";
 
 export const metadata: Metadata = {
@@ -18,7 +18,17 @@ export default async function DashboardLayout({
   const data = await getDashboardData();
 
   return (
-    <DashboardShell site={data.site} credits={data.credits} locale={data.user.locale}>
+    <DashboardShell
+      // Narrowed deliberately — the shell is a client component, so anything
+      // passed here lands in every dashboard page's payload. `user` is the two
+      // fields the sidebar prints; the id stays server-side, it has no business
+      // in a bundle that renders a name.
+      user={{ name: data.user.name, email: data.user.email }}
+      site={toShellSite(data.site)}
+      diy={data.diy}
+      credits={data.credits}
+      locale={data.user.locale}
+    >
       {children}
     </DashboardShell>
   );
