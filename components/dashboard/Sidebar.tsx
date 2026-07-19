@@ -442,10 +442,10 @@ export default function Sidebar({ user, site, diy, locale }: SidebarProps) {
           </span>
         </Link>
 
-        <span className="flex items-center gap-3 rounded-lg px-2.5 py-2 text-sm font-medium text-slate-600">
+       {/* <span className="flex items-center gap-3 rounded-lg px-2.5 py-2 text-sm font-medium text-slate-600">
           <Languages className="h-4.5 w-4.5" />
           {locale}
-        </span>
+        </span>*/}
         {/* A link here only navigated away — the session cookie survived, so
             /dashboard let you straight back in. This actually ends it. */}
         <form action={signOut}>
