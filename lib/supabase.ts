@@ -1,5 +1,5 @@
 import "server-only";
-import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import { createClient, type PostgrestError, type SupabaseClient } from "@supabase/supabase-js";
 
 /* The Supabase handle, secret-key and server-side only.
 
@@ -50,4 +50,32 @@ export function supabaseAdmin(): SupabaseClient {
     auth: { persistSession: false, autoRefreshToken: false },
   });
   return cached;
+}
+
+/* Run a write again when the connection died under it, not the query.
+
+   Node's fetch keeps TLS sockets pooled between requests and Supabase's edge
+   retires idle ones on its own schedule. When the two disagree, a request goes
+   out on a socket that is already gone and undici throws `TypeError: fetch
+   failed` (Caused by: SocketError: other side closed). The query was never seen
+   by the database; the same call on a fresh socket succeeds.
+
+   postgrest-js already retries GET/HEAD/OPTIONS for exactly this, which is why
+   reads self-heal and only writes surface it. It deliberately won't retry
+   PATCH/POST, since a write may have landed before the response was lost — so
+   this is opt-in per call, and only for writes that are safe to repeat. */
+export async function retryOnDroppedSocket<T extends { error: PostgrestError | null }>(
+  run: () => PromiseLike<T>,
+): Promise<T> {
+  const result = await run();
+  // Re-invoked rather than re-awaited: a Supabase builder is a one-shot
+  // thenable, so awaiting the same one twice replays the first result.
+  return isDroppedSocket(result.error) ? run() : result;
+}
+
+function isDroppedSocket(error: PostgrestError | null): boolean {
+  // A genuine PostgREST error always carries a code (a SQLSTATE or PGRST###).
+  // An empty one alongside a fetch failure is the signature of a request that
+  // never reached the database at all.
+  return error !== null && error.code === "" && error.message.includes("fetch failed");
 }
