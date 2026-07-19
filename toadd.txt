@@ -1,7 +1,13 @@
-DO AS YOU WILL LIKE TO HAVE IT:
+
+
+
+DO IT AS YOU WILL LIKE TO HAVE IT:
 
 
 !!! - Content changes:
+# create a websitero mail for register on cloud console Google, twitter etc
+# add as admin websitero mail, briefs to be seen by admin
+# fix routes
 # separate pages for Pricing ...
 # in deployment add info how to get domain from namecheap and how to buy your domain
 # review both Github clones and add some comment suggestions in code
@@ -22,15 +28,13 @@ DO AS YOU WILL LIKE TO HAVE IT:
 # add Mobile Responsiveness
 # add See Demo in the nav bar like in supastarter and see the description of site demo and get inspired for clones
 
-!!! - To add after getting some feedback:
+!!! - To add after:
 # add Templates in the Header 
-# add different languages as: french, espanol, german ... 
 # add a video on landing page to explain how it works
 # make the pricing monthly and yearly more options: starter 29, normal 99 , ecommerce 199
 # check ListsKit boilerplate, buy once run it forever etc
 # in Pricing mention that you dont need credits, full control of the user,  NOT like in Base44 pricing plan
 
-# implement Stripe
 
 # think about Wellcode model communication user <--> platform
 
