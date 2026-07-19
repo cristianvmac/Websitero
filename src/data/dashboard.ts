@@ -6,7 +6,7 @@ import { isDiyFramework, type DiyFramework } from "@/lib/diy";
 import { asSiteStage, type SiteStage } from "@/lib/site-stage";
 import { isTier, paymentLink, TIERS, type Tier } from "@/lib/pricing";
 import { currentUser } from "@/lib/session";
-import { supabaseAdmin } from "@/lib/supabase";
+import { retryOnDroppedSocket, supabaseAdmin } from "@/lib/supabase";
 import { CLAIM_COOKIE, readClaim } from "@/lib/brief-claim";
 
 export type DashboardSite = {
@@ -149,23 +149,28 @@ export async function getDashboardData(): Promise<DashboardData> {
      also catches a brief sent *after* the account existed. Both are idempotent:
      the `user_id is null` filter matches nothing on the second pass, which is
      also what stops a stale cookie on a shared browser from stealing a brief
-     that someone has already claimed. */
+     that someone has already claimed. That same filter is what makes them safe
+     to send twice when the connection drops under one. */
   const claimedBriefId = readClaim((await cookies()).get(CLAIM_COOKIE)?.value);
   if (claimedBriefId) {
-    const { error } = await admin
-      .from("briefs")
-      .update({ user_id: user.id })
-      .is("user_id", null)
-      .eq("id", claimedBriefId);
+    const { error } = await retryOnDroppedSocket(() =>
+      admin
+        .from("briefs")
+        .update({ user_id: user.id })
+        .is("user_id", null)
+        .eq("id", claimedBriefId),
+    );
     if (error) console.error("[dashboard] could not claim brief from cookie:", error);
   }
 
   if (email && user.emailVerified) {
-    const { error } = await admin
-      .from("briefs")
-      .update({ user_id: user.id })
-      .is("user_id", null)
-      .filter("brief->contact->>email", "eq", email);
+    const { error } = await retryOnDroppedSocket(() =>
+      admin
+        .from("briefs")
+        .update({ user_id: user.id })
+        .is("user_id", null)
+        .filter("brief->contact->>email", "eq", email),
+    );
     if (error) console.error("[dashboard] could not claim briefs:", error);
   }
 
