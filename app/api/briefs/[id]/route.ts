@@ -6,6 +6,7 @@ import { SITE_STAGES, type SiteStage } from "@/lib/site-stage";
 import { isTier } from "@/lib/pricing";
 import { previewReadyEmail, siteLiveEmail } from "@/lib/customer-emails";
 import { sendMail } from "@/lib/mailer";
+import { isAdmin } from "@/lib/session";
 import type { Brief } from "@/app/forme/brief";
 
 /* Admin mutations for a stored brief:
@@ -16,9 +17,20 @@ import type { Brief } from "@/app/forme/brief";
               own columns — this is what moves the customer's tracker and, at
               preview_ready + a preview URL, unlocks Approve / Request changes.
    DELETE — remove the brief, its uploads, and any built preview.
-   Team-only: proxy.ts gates this path behind ADMIN_PASSWORD. */
+
+   Admin-only, and enforced here. app/admin/layout.tsx covers the pages but not
+   this route, and proxy.ts only proves the caller is signed in as *somebody* —
+   without the guard below, any customer with a session could PATCH another
+   customer's brief or DELETE it along with their uploads. */
 
 const ID_RE = /^[a-zA-Z0-9-]+$/;
+
+// Every handler in this file starts with this. Returns a response to send back
+// when the caller isn't the admin, or null to continue.
+async function denyNonAdmin() {
+  if (await isAdmin()) return null;
+  return NextResponse.json({ ok: false, error: "Not authorized" }, { status: 403 });
+}
 
 // Only trimmed strings make it into the stored brief — anything else in the
 // payload (wrong types, missing keys) leaves the existing value untouched.
@@ -32,6 +44,9 @@ type PatchPayload = Partial<Brief> & {
 };
 
 export async function PATCH(req: Request, { params }: { params: Promise<{ id: string }> }) {
+  const denied = await denyNonAdmin();
+  if (denied) return denied;
+
   const { id } = await params;
   if (!ID_RE.test(id)) {
     return NextResponse.json({ ok: false, error: "Invalid brief id" }, { status: 400 });
@@ -241,6 +256,9 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
 }
 
 export async function DELETE(_req: Request, { params }: { params: Promise<{ id: string }> }) {
+  const denied = await denyNonAdmin();
+  if (denied) return denied;
+
   const { id } = await params;
   if (!ID_RE.test(id)) {
     return NextResponse.json({ ok: false, error: "Invalid brief id" }, { status: 400 });
