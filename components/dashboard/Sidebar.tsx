@@ -38,7 +38,7 @@ import {
 import { FRAMEWORKS } from "@/lib/diy";
 import type { DashboardData, ShellSite } from "@/src/data/dashboard";
 import type { ShellUser } from "./DashboardShell";
-import { signOut } from "@/lib/auth-actions";
+import LogOutButton from "@/components/auth/LogOutButton";
 
 /* The nav below is the planned information architecture, but what renders is a
    function of the account's state — two gates per entry:
@@ -448,15 +448,10 @@ export default function Sidebar({ user, site, diy, locale }: SidebarProps) {
         </span>*/}
         {/* A link here only navigated away — the session cookie survived, so
             /dashboard let you straight back in. This actually ends it. */}
-        <form action={signOut}>
-          <button
-            type="submit"
-            className="flex w-full items-center gap-3 rounded-lg px-2.5 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900"
-          >
-            <LogOut className="h-4.5 w-4.5" />
-            Log out
-          </button>
-        </form>
+        <LogOutButton className="flex w-full cursor-pointer items-center gap-3 rounded-lg px-2.5 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900">
+          <LogOut className="h-4.5 w-4.5" />
+          Log out
+        </LogOutButton>
       </div>
     </div>
   );
