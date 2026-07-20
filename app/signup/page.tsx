@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import Link from "next/link";
 import { User, Mail, Lock, Eye, EyeOff, UserPlus, LoaderCircle } from "lucide-react";
 import { signUp, type AuthState } from "@/lib/auth-actions";
@@ -15,6 +15,14 @@ export default function Signup() {
     });
     const [showPassword, setShowPassword] = useState(false);
     const [state, formAction, pending] = useActionState<AuthState, FormData>(signUp, {});
+
+    /* Full document load, not router.push — signing up mints a session, and
+       useSession()'s store in this tab still says "signed out". A client-side
+       navigation would carry that staleness to the dashboard and leave the nav
+       offering "Login". See AuthState.redirectTo in lib/auth-actions. */
+    useEffect(() => {
+        if (state.redirectTo) window.location.href = state.redirectTo;
+    }, [state.redirectTo]);
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         const { name, value } = e.target;
@@ -150,17 +158,21 @@ export default function Signup() {
                             </p>
                         )}
 
+                        {/* Holds the "creating" state through the redirect: the
+                            action has returned by then, but the page is still
+                            navigating, and a button that snapped back would
+                            invite a second submit against an existing account. */}
                         <button
                             type="submit"
                             className="btn btn-primary mt-2"
-                            disabled={passwordsMismatch || pending}
+                            disabled={passwordsMismatch || pending || Boolean(state.redirectTo)}
                         >
-                            {pending ? (
+                            {pending || state.redirectTo ? (
                                 <LoaderCircle className="h-4 w-4 animate-spin" />
                             ) : (
                                 <UserPlus className="h-4 w-4" />
                             )}
-                            {pending ? "Creating account…" : "Create account"}
+                            {pending || state.redirectTo ? "Creating account…" : "Create account"}
                         </button>
                     </form>
 
