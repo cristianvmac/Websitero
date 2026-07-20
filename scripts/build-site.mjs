@@ -671,5 +671,5 @@ console.log(`\n✓ Preview built: ${previewDir}`);
 if (serveAtRoot) {
   console.log(`  Serve it with: npx serve "${path.relative(repoRoot, previewDir)}"`);
 } else {
-  console.log(`  View it at: https://websitero.vercel.app/previews/${slug}/`);
+  console.log(`  View it at: http://localhost:3000/previews/${slug}/`);
 }
