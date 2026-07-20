@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useActionState, useState } from "react";
+import { Suspense, useActionState, useEffect, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Mail, Lock, Eye, EyeOff, LogIn, LoaderCircle } from "lucide-react";
@@ -43,10 +43,22 @@ function Login() {
     const [form, setForm] = useState({ email: "", password: "" });
     const [showPassword, setShowPassword] = useState(false);
     const [state, formAction, pending] = useActionState<AuthState, FormData>(signIn, {});
-    const errorCode = useSearchParams().get("error");
+    const params = useSearchParams();
+    const errorCode = params.get("error");
+    // Where proxy.ts bounced them from, so sign-in returns them there.
+    const next = params.get("next") ?? "/dashboard";
     const redirectReason = errorCode
         ? (REDIRECT_REASONS[errorCode] ?? "Sign-in didn't complete — please try again.")
         : undefined;
+
+    /* window.location, not router.push: a full document load is the point. The
+       action set the session cookie, but useSession()'s store in this tab still
+       says "signed out", and a client-side navigation would carry that stale
+       store to the next page — the nav bar would keep offering "Login" to
+       someone who just signed in. See AuthState.redirectTo in lib/auth-actions. */
+    useEffect(() => {
+        if (state.redirectTo) window.location.href = state.redirectTo;
+    }, [state.redirectTo]);
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         const { name, value } = e.target;
@@ -76,6 +88,8 @@ function Login() {
                     <GoogleButton label="Sign in with Google" />
 
                     <form action={formAction} className="flex flex-col gap-4">
+                        <input type="hidden" name="next" value={next} />
+
                         <div className="form-control">
                             <label htmlFor="email" className="label">
                                 <span className="label-text">Email</span>
@@ -147,13 +161,21 @@ function Login() {
                             </p>
                         )}
 
-                        <button type="submit" disabled={pending} className="btn btn-primary mt-2">
-                            {pending ? (
+                        {/* Stays in the "signing in" state through the redirect
+                            too — the action has returned by then, but the page
+                            is mid-navigation and a button that snapped back to
+                            "Sign in" would invite a second submit. */}
+                        <button
+                            type="submit"
+                            disabled={pending || Boolean(state.redirectTo)}
+                            className="btn btn-primary mt-2"
+                        >
+                            {pending || state.redirectTo ? (
                                 <LoaderCircle className="h-4 w-4 animate-spin" />
                             ) : (
                                 <LogIn className="h-4 w-4" />
                             )}
-                            {pending ? "Signing in…" : "Sign in"}
+                            {pending || state.redirectTo ? "Signing in…" : "Sign in"}
                         </button>
                     </form>
 
