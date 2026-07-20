@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { LogOut, Mail, ShieldCheck, UserRound } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
 import { getDashboardData } from "@/src/data/dashboard";
-import { signOut } from "@/lib/auth-actions";
+import LogOutButton from "@/components/auth/LogOutButton";
 import { accountHasPassword, signInMethods } from "./account-info";
 import ProfileForm from "./ProfileForm";
 import PasswordForm from "./PasswordForm";
@@ -107,15 +107,10 @@ export default async function AccountPage() {
               Ends this session on this device. Your site and everything in it stays put.
             </p>
           </div>
-          <form action={signOut}>
-            <button
-              type="submit"
-              className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition-colors hover:border-slate-400 hover:bg-slate-50"
-            >
-              <LogOut className="h-4 w-4" />
-              Log out
-            </button>
-          </form>
+          <LogOutButton className="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition-colors hover:border-slate-400 hover:bg-slate-50">
+            <LogOut className="h-4 w-4" />
+            Log out
+          </LogOutButton>
         </div>
       </section>
     </div>
