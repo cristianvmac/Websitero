@@ -14,7 +14,7 @@ import "server-only";
 
 function appUrl(): string {
   // Same resolution as lib/auth.ts — the app's own origin, localhost in dev.
-  return (process.env.BETTER_AUTH_URL ?? "http://localhost:3000").replace(/\/$/, "");
+  return (process.env.BETTER_AUTH_URL ?? "https://websitero.vercel.app/").replace(/\/$/, "");
 }
 
 /** Greeting that works with or without a business name on the brief. */

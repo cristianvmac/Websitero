@@ -21,7 +21,7 @@ import { sendMail } from "./mailer";
    handler import it, and those are server modules. */
 
 export const auth = betterAuth({
-  baseURL: process.env.BETTER_AUTH_URL ?? "http://localhost:3000",
+  baseURL: process.env.BETTER_AUTH_URL ?? "https://websitero.vercel.app/",
   secret: process.env.BETTER_AUTH_SECRET,
 
   /* A direct Postgres connection — Better Auth speaks SQL, not PostgREST.
