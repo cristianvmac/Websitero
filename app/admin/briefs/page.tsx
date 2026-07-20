@@ -21,7 +21,8 @@ import StatusControls from "./StatusControls";
    page triggers — so both are local-only: previews/ is gitignored and never
    exists on a deployed host, where every brief therefore reads as not built.
 
-   Team-only: proxy.ts gates this path behind ADMIN_PASSWORD. */
+   Admin-only: app/admin/layout.tsx gates everything under /admin on the one
+   admin account in lib/admin.ts. */
 
 export const dynamic = "force-dynamic"; // always read the briefs dir fresh
 
