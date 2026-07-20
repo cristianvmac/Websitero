@@ -227,10 +227,9 @@ export async function requestChanges(
    re-clicking is the retry. Switching later is harmless and keeps started_at
    (upsert only touches the columns it names).
 
-   It redirects rather than only revalidating because the write is what makes
-   /dashboard renderable at all: an account with no site and no kit gets sent
-   to /startyourwebsite, so picking here has to land on the kit card. Called
-   from the dashboard itself (switch kit), it's a no-op navigation.
+   It redirects rather than only revalidating so the pick lands on the kit
+   card wherever it was made — from the empty-state card on the overview, or
+   from the kit card itself (switch kit), where it's a no-op navigation.
 
    Both early returns leave the caller where they are, which reads as "nothing
    happened" — right for a bad value, and for a signed-out visitor the button

@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { redirect } from "next/navigation";
-import { ArrowRight, ExternalLink, Globe, Sparkles } from "lucide-react";
+import { ArrowRight, ExternalLink, Globe, Rocket, Sparkles, Wrench } from "lucide-react";
+import { FRAMEWORKS, DIY_FRAMEWORKS } from "@/lib/diy";
+import { chooseDiyFramework } from "@/app/dashboard/actions";
 import { getDashboardData } from "@/src/data/dashboard";
 import BuildTracker from "@/components/dashboard/BuildTracker";
 import KitCard from "@/components/dashboard/KitCard";
@@ -13,10 +14,11 @@ import ChecklistCard from "@/components/dashboard/ChecklistCard";
 /* The overview routes the journey — what it shows is decided by what the
    account HAS, never by a mode the user picked somewhere:
 
-   nothing yet       → not here at all: sent to /startyourwebsite, which owns
-                       the fork now. Signing in shouldn't open a dashboard for
-                       a site that doesn't exist, and this page has nothing
-                       true to say until the account has done something.
+   nothing yet       → the empty state below: the two ways to start, offered
+                       in place. Signing in always opens the dashboard — an
+                       account that has done nothing yet still owns this space,
+                       and bouncing it to a marketing page made the app look
+                       broken to anyone who had only signed up.
    diy, no brief     → the kit card: clone command, docs path, switch, plus
                        the standing "we'll take it from here" offer.
    brief, not live   → the build tracker, plus the preview review card once
@@ -33,9 +35,9 @@ export default async function DashboardHomePage() {
   const data = await getDashboardData();
   const { site, materials, diy, seo, checklist } = data;
 
-  // No brief, no kit — nothing to manage yet. /startyourwebsite is where both
-  // paths start, and picking either one lands back here.
-  if (!site && !diy) redirect("/startyourwebsite");
+  // No brief, no kit — nothing to manage yet, but this is still their space.
+  // Both ways to start are offered below rather than by a redirect.
+  const empty = !site && !diy;
 
   const showPreview =
     site &&
@@ -51,13 +53,66 @@ export default async function DashboardHomePage() {
           Welcome to your space
         </h1>
         <p className="mt-2 text-slate-500">
-          {!site
-            ? "Your kit and your docs, all in one place."
-            : site.stage === "live"
-              ? "Manage your site, follow your messages and stats in one place."
-              : "Your site is being hand-coded — follow every step here."}
+          {empty
+            ? "Nothing here yet — pick how you'd like to start."
+            : !site
+              ? "Your kit and your docs, all in one place."
+              : site.stage === "live"
+                ? "Manage your site, follow your messages and stats in one place."
+                : "Your site is being hand-coded — follow every step here."}
         </p>
       </header>
+
+      {/* ------------------------------------------- nothing yet: the two ways */}
+      {empty && (
+        <div className="grid gap-4 sm:grid-cols-2">
+          {/* Default path — the primary audience isn't technical. */}
+          <section className="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 text-blue-700">
+              <Rocket className="h-6 w-6" />
+            </span>
+            <h2 className="mt-4 font-bold text-slate-900">Build it for me</h2>
+            <p className="mt-1 text-sm text-slate-500">
+              Send a doc about your business and your photos. We hand-code your site — no
+              questions, no forms.
+            </p>
+            <Link
+              href="/builditforme"
+              className="mt-5 inline-flex items-center justify-center gap-2 rounded-xl bg-blue-500 px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-blue-500/25 transition-all hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-500/40"
+            >
+              Get started
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </section>
+
+          {/* DIY starts with the framework pick — the only signal it leaves.
+              Posting straight to the action means no detour through the
+              marketing page just to land back here on the kit card. */}
+          <section className="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-slate-600">
+              <Wrench className="h-6 w-6" />
+            </span>
+            <h2 className="mt-4 font-bold text-slate-900">I&apos;ll build it myself</h2>
+            <p className="mt-1 text-sm text-slate-500">
+              Start from a complete kit with step-by-step docs and chat support. Pick your
+              stack:
+            </p>
+            <form action={chooseDiyFramework} className="mt-5 flex flex-wrap gap-2">
+              {DIY_FRAMEWORKS.map((key) => (
+                <button
+                  key={key}
+                  type="submit"
+                  name="framework"
+                  value={key}
+                  className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition-colors hover:border-blue-500/40 hover:bg-blue-500/5 hover:text-blue-700"
+                >
+                  {FRAMEWORKS[key].label}
+                </button>
+              ))}
+            </form>
+          </section>
+        </div>
+      )}
 
       {/* ------------------------------------------------- DIY: kit + docs */}
       {!site && diy && (
