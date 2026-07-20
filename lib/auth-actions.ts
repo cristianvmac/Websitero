@@ -23,6 +23,19 @@ export interface AuthState {
   error?: string;
   /** Set when the next step is in the person's inbox, not on the page. */
   notice?: string;
+  /* Where to go after a successful sign-in or sign-up — returned for the CLIENT
+     to navigate to, rather than redirect()ing from here.
+
+     redirect() from a server action is a soft RSC navigation: the browser keeps
+     its JS heap, and with it useSession()'s module-level store, still holding
+     "signed out" from before the form was submitted. The header would go on
+     showing "Login" until a manual reload. The pages below send the browser
+     with window.location, a full document load, which rebuilds that store from
+     the cookie the action just set. (Google sign-in never had this problem —
+     it comes back from Google's domain as a document load already.)
+
+     One reload at sign-in only; every navigation after it stays client-side. */
+  redirectTo?: string;
 }
 
 const EMAIL_RE = /^\S+@\S+\.\S+$/;
@@ -56,7 +69,10 @@ export async function signIn(_prev: AuthState, formData: FormData): Promise<Auth
     throw err;
   }
 
-  redirect("/dashboard");
+  // Honours ?next= — proxy.ts puts the page someone was bounced from there, so
+  // an admin sent to /login from /admin/briefs lands back on the queue rather
+  // than on a customer dashboard. internal() keeps it to our own paths.
+  return { redirectTo: internal(String(formData.get("next") ?? "/dashboard")) };
 }
 
 export async function signUp(_prev: AuthState, formData: FormData): Promise<AuthState> {
@@ -89,7 +105,7 @@ export async function signUp(_prev: AuthState, formData: FormData): Promise<Auth
   // wrote it) — there's nothing left in an inbox to wait for. If they submitted a
   // brief in this browser first, the claim cookie rides along and the dashboard
   // redeems it on this very first read.
-  redirect("/dashboard");
+  return { redirectTo: "/dashboard" };
 }
 
 /* "Continue with Google". Nothing here signs anyone in — it asks Better Auth
@@ -170,12 +186,7 @@ export async function resetPassword(_prev: AuthState, formData: FormData): Promi
   return { notice: "Password updated. Sign in with the new one." };
 }
 
-export async function signOut() {
-  try {
-    await auth.api.signOut({ headers: await headers() });
-  } catch {
-    // Signing out with a dead session is still signing out — proceed to login
-    // rather than strand someone on an error for wanting to leave.
-  }
-  redirect("/login");
-}
+/* No signOut action here on purpose. Ending a session from the server clears
+   the cookie but cannot clear the useSession() store in the browser, so the
+   header kept rendering the signed-out user until a full reload. Logging out
+   goes through components/auth/LogOutButton.tsx instead, which clears both. */
