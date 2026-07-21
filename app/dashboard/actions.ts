@@ -231,15 +231,17 @@ export async function requestChanges(
    card wherever it was made — from the empty-state card on the overview, or
    from the kit card itself (switch kit), where it's a no-op navigation.
 
-   Both early returns leave the caller where they are, which reads as "nothing
-   happened" — right for a bad value, and for a signed-out visitor the button
-   isn't rendered in the first place. */
+   A bad value returns silently — the caller stays put, which reads as "nothing
+   happened", and the only source of that value is our own two buttons. A
+   signed-out visitor is a real case now that /startyourwebsite offers this
+   button publicly: they go to sign in and come back to the dashboard, where
+   they pick again. Starting DIY requires an account, same as a build. */
 export async function chooseDiyFramework(formData: FormData): Promise<void> {
   const framework = formData.get("framework");
   if (!isDiyFramework(framework)) return;
 
   const user = await currentUser();
-  if (!user) return;
+  if (!user) redirect(`/login?next=${encodeURIComponent("/dashboard")}`);
 
   const { error } = await supabaseAdmin()
     .from("diy_profiles")

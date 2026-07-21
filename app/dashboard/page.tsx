@@ -33,7 +33,11 @@ import ChecklistCard from "@/components/dashboard/ChecklistCard";
 
 export default async function DashboardHomePage() {
   const data = await getDashboardData();
-  const { site, materials, diy, seo, checklist } = data;
+  const { user, site, materials, diy, seo, checklist } = data;
+
+  // Just the first name — "Welcome, Cristian" reads better than the full name,
+  // and single-word names come through unchanged.
+  const firstName = user.name.split(" ")[0];
 
   // No brief, no kit — nothing to manage yet, but this is still their space.
   // Both ways to start are offered below rather than by a redirect.
@@ -50,9 +54,9 @@ export default async function DashboardHomePage() {
     <div className="flex flex-col gap-8">
       <header>
         <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-          Welcome to your space
+          Welcome, {firstName}
         </h1>
-        <p className="mt-2 text-slate-500">
+       {/* <p className="mt-2 text-slate-500">
           {empty
             ? "Nothing here yet — pick how you'd like to start."
             : !site
@@ -60,7 +64,7 @@ export default async function DashboardHomePage() {
               : site.stage === "live"
                 ? "Manage your site, follow your messages and stats in one place."
                 : "Your site is being hand-coded — follow every step here."}
-        </p>
+        </p>*/}
       </header>
 
       {/* ------------------------------------------- nothing yet: the two ways */}
@@ -117,33 +121,34 @@ export default async function DashboardHomePage() {
       {/* ------------------------------------------------- DIY: kit + docs */}
       {!site && diy && (
         <>
-          <KitCard framework={diy.framework} />
+         {/* <KitCard framework={diy.framework} /> */}
 
           {/* Keyed by siteUrl: a successful save remounts the card, closing
               its edit form. */}
           <LinkSiteCard key={diy.siteUrl} siteUrl={diy.siteUrl} framework={diy.framework} />
 
           {/* Renders nothing when the kit repo has no CHANGELOG.md yet. */}
-          <KitUpdates framework={diy.framework} />
+          {/*<KitUpdates framework={diy.framework} /> */}
 
-          {/* The standing offer, not a nag: DIY is a product, this is its exit
-              ramp for the day they'd rather hand it over. */}
+          {/* A nudge to get going, not a nag: /startyourwebsite is where both
+              ways to launch live, so whichever way they lean the next step is
+              one click away — nothing they've already built is lost. */}
           <section className="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:flex-row sm:items-center">
             <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-blue-500/10 text-blue-700">
               <Sparkles className="h-6 w-6" />
             </span>
             <div className="min-w-0">
-              <h2 className="font-bold text-slate-900">Rather have it done for you?</h2>
+              <h2 className="font-bold text-slate-900">Ready to start your website?</h2>
               <p className="text-sm text-slate-500">
-                Send us your info and we hand-code your site — everything you&apos;ve built
-                stays yours.
+                Pick up where you left off — build it yourself with your kit, or hand it
+                over and we&apos;ll code it for you.
               </p>
             </div>
             <Link
-              href="/builditforme"
-              className="inline-flex shrink-0 items-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 transition-colors hover:border-slate-400 hover:bg-slate-50 sm:ml-auto"
+              href="/startyourwebsite"
+              className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-blue-500 px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-blue-500/25 transition-all hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-500/40 sm:ml-auto"
             >
-              Build it for me
+              Start your website
               <ArrowRight className="h-4 w-4" />
             </Link>
           </section>
