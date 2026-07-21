@@ -2,6 +2,8 @@
 // This is the contract the fulfillment pipeline reads (Stage 1: the team,
 // Stage 2: the automated build worker), so keep it stable and additive.
 
+import type { DiyFramework } from "@/lib/diy";
+
 export interface Brief {
   business: {
     name: string;
@@ -28,6 +30,12 @@ export interface Brief {
       about their business, stored with the photos in briefs/uploads/<id>/.
       Readable text (plain-text docs, pasted lines) also rides in `prompt`. */
   doc?: { file: string };
+  /** DIY handoff — the dashboard's "Have us finish it". The owner built the
+      site on their own machine, pushed it to a git host, and asked us to take
+      it from there. Its presence is what makes a brief a handoff: the build
+      starts from THIS repo instead of a fresh kit clone, and `prompt` is what
+      they need finished rather than a description of their business. */
+  repo?: { url: string; framework: DiyFramework };
   contact: {
     email: string;
     phone: string;
