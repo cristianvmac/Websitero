@@ -192,22 +192,20 @@ const BuildItForMe = () => {
           </ul>
           <p className="text-sm text-slate-500">No templates. The code is yours to keep.</p>
 
-          {/* The one action that makes the whole build visible to them. Without
-              an account they never see the tracker, the preview, or the approve
-              button — the brief just lands in an inbox. Signing up with this
-              same browser auto-claims the brief they just sent (the claim
-              cookie is already set), so "follow your build" is literal. */}
+          {/* Reaching this page means they were signed in to submit, so the
+              brief is already theirs — no "create an account" nudge, no claim
+              to wait on. The tracker is live on the dashboard right now. */}
           <div className="w-full max-w-sm rounded-2xl border border-blue-500/30 bg-blue-500/5 p-5">
             <p className="font-bold text-slate-900">Follow your build live</p>
             <p className="mt-1 text-sm text-slate-600">
-              Create your free account to watch your site come together, see your preview, and
-              approve it in one click.
+              Your dashboard tracks every step, shows your preview the moment it&apos;s ready,
+              and lets you approve it in one click.
             </p>
             <Link
-              href="/signup"
+              href="/dashboard"
               className="mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-blue-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-500/30 transition-all hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-500/40"
             >
-              Create my account
+              Go to my dashboard
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
