@@ -1,8 +1,17 @@
 import { promises as fs } from "fs";
 import path from "path";
 import Link from "next/link";
-import { Inbox, ExternalLink, CheckCircle2, CircleDashed, FileText, Code2 } from "lucide-react";
+import {
+  Inbox,
+  ExternalLink,
+  CheckCircle2,
+  CircleDashed,
+  FileText,
+  Code2,
+  GitBranch,
+} from "lucide-react";
 import type { Brief } from "@/app/forme/brief";
+import { FRAMEWORKS, repoSlug } from "@/lib/diy";
 import { asSiteStage, type SiteStage } from "@/lib/site-stage";
 import { isTier, type Tier } from "@/lib/pricing";
 import { BRIEFS_BUCKET, supabaseAdmin } from "@/lib/supabase";
@@ -11,7 +20,10 @@ import EditBrief from "./EditBrief";
 import StatusControls from "./StatusControls";
 
 /* Internal fulfillment queue: every brief submitted via /forme or
-   /builditforme, the owner's materials (sent text, doc download, photo
+   /builditforme — plus every DIY handoff, where an owner who started building
+   on their own machine pushed their repo and asked us to finish it. Same row,
+   same lifecycle; a handoff just starts from their code instead of the kit.
+   Also: the owner's materials (sent text, doc download, photo
    thumbnails — linked by hour-long signed URLs, since the bucket is private),
    an inline editor to complete a brief, a link to the built preview for review
    before the site goes to the owner, and delete.
@@ -134,7 +146,7 @@ export default async function AdminBriefs() {
           <div>
             <h1 className="text-2xl font-bold tracking-tight text-slate-900">Briefs</h1>
             <p className="text-sm text-slate-500">
-              {records.length} {""} submitted · every &quot;Build it for me&quot; request lands here
+              {records.length} {""} submitted · every build request and DIY handoff lands here
             </p>
           </div>
         </div>
@@ -152,9 +164,17 @@ export default async function AdminBriefs() {
 
           {records.map(({ id, receivedAt, brief, status, previewUrl, liveUrl, tier }) => {
             const built = manifest[id];
-            // Materials briefs (the /builditforme upload flow) arrive without
-            // the structured wizard fields — the doc/text/photos ARE the brief.
-            const isMaterials = !brief.business.name?.trim();
+            /* Three kinds of brief land in this queue, told apart by what the
+               brief carries rather than by a flag:
+
+               handoff   — a DIY owner pushed their half-built site and asked us
+                           to finish it (dashboard "Have us finish it"). Their
+                           repo is the starting point, not a fresh kit clone.
+               materials — the /builditforme upload flow: no structured wizard
+                           fields, because the doc/text/photos ARE the brief.
+               wizard    — the full /forme questionnaire. */
+            const handoff = brief.repo;
+            const isMaterials = !handoff && !brief.business.name?.trim();
             const uploads = brief.images?.mode === "upload" ? brief.images.files ?? [] : [];
             const sentText = brief.prompt?.trim();
 
@@ -163,9 +183,11 @@ export default async function AdminBriefs() {
             if (uploads.length > 0)
               parts.push(`${uploads.length} photo${uploads.length === 1 ? "" : "s"}`);
             if (sentText) parts.push("text");
-            const summary = isMaterials
-              ? parts.join(" · ") || "empty brief"
-              : `${brief.business.type} · ${brief.business.location}`;
+            const summary = handoff
+              ? `${FRAMEWORKS[handoff.framework]?.label ?? handoff.framework} · ${repoSlug(handoff.url)}`
+              : isMaterials
+                ? parts.join(" · ") || "empty brief"
+                : `${brief.business.type} · ${brief.business.location}`;
 
             return (
               <div
@@ -182,7 +204,12 @@ export default async function AdminBriefs() {
 
                   <div className="min-w-0 flex-1">
                     <p className="truncate font-bold text-slate-900">
-                      {isMaterials ? (
+                      {handoff ? (
+                        <span className="inline-flex items-center gap-1.5">
+                          <GitBranch className="h-4 w-4 text-blue-500" />
+                          DIY handoff
+                        </span>
+                      ) : isMaterials ? (
                         <span className="inline-flex items-center gap-1.5">
                           <FileText className="h-4 w-4 text-blue-500" />
                           Materials
@@ -212,8 +239,11 @@ export default async function AdminBriefs() {
                         </>
                       )}
                     </p>
-                    {/* Where the developer hand-edits this customer's site */}
-                    {built && (
+                    {/* Where the developer hand-edits this customer's site.
+                        Not for handoffs: their site isn't built from the kit
+                        into workspaces/, it's their own repo — the panel below
+                        says where. */}
+                    {built && !handoff && (
                       <p className="mt-1 flex items-center gap-1.5 text-xs text-slate-400">
                         <Code2 className="h-3.5 w-3.5 shrink-0" />
                         <span className="truncate">
@@ -243,6 +273,34 @@ export default async function AdminBriefs() {
                     <DeleteButton briefId={id} />
                   </div>
                 </div>
+
+                {/* A handoff's starting point: the owner's own repo. Everything
+                    a developer needs to pick it up is here, including the rule
+                    that keeps their work safe — branch, PR, never their main. */}
+                {handoff && (
+                  <div className="flex flex-col gap-2 rounded-xl border border-blue-500/20 bg-blue-500/5 p-4">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-blue-700">
+                      Start from their code
+                    </p>
+                    <a
+                      href={handoff.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex w-fit items-center gap-1.5 text-sm font-semibold text-slate-700 transition-colors hover:text-blue-700"
+                    >
+                      <GitBranch className="h-3.5 w-3.5 shrink-0 text-blue-500" />
+                      {repoSlug(handoff.url)}
+                      <ExternalLink className="h-3.5 w-3.5 shrink-0" />
+                    </a>
+                    <code className="overflow-x-auto rounded-lg bg-white px-3 py-2 font-mono text-[11px] text-slate-600 ring-1 ring-slate-200">
+                      git clone {handoff.url}
+                    </code>
+                    <p className="text-xs text-slate-500">
+                      Work on a branch and hand it back as a PR — never push to their main.
+                      They may still be editing it themselves.
+                    </p>
+                  </div>
+                )}
 
                 {/* Where the customer's tracker is, and the links their dashboard shows */}
                 <StatusControls
