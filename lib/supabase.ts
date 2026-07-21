@@ -79,3 +79,43 @@ function isDroppedSocket(error: PostgrestError | null): boolean {
   // never reached the database at all.
   return error !== null && error.code === "" && error.message.includes("fetch failed");
 }
+
+/* Run a query again when Supabase rejected our own credentials as future-dated.
+
+   Nothing here mints a JWT — the sb_secret_ key goes out as-is. But Supabase's
+   edge exchanges that key for a short-lived JWT stamped `iat = now`, and the
+   PostgREST that validates it runs on a different clock. When PostgREST's is a
+   second behind, a token minted moments ago looks issued in the future and the
+   request is rejected with `JWT issued at future` before it reaches the
+   database. It is skew between two of their containers, not our clock and not
+   the query.
+
+   That makes it both invisible and unfair: the failure is per-request, so two
+   reads fired in the same Promise.all can disagree, and the one that lost
+   500s a page that had nothing wrong with it. Safe to repeat for writes too —
+   a rejected token means the statement never ran.
+
+   Waits before retrying, since the skew is measured in seconds and an instant
+   retry just re-loses the race. Two attempts is where it stops: past a couple
+   of seconds this is no longer skew, and a page that fails is better than one
+   that hangs. */
+export async function retryOnClockSkew<T extends { error: PostgrestError | null }>(
+  run: () => PromiseLike<T>,
+): Promise<T> {
+  let result = await run();
+  for (const delay of [400, 1200]) {
+    if (!isClockSkew(result.error)) break;
+    await new Promise((resolve) => setTimeout(resolve, delay));
+    // Re-invoked rather than re-awaited, for the same reason as above: a
+    // Supabase builder is a one-shot thenable.
+    result = await run();
+  }
+  return result;
+}
+
+function isClockSkew(error: PostgrestError | null): boolean {
+  // Matched on the message rather than the code: PostgREST files every JWT
+  // complaint under PGRST301, so the code alone would also swallow a genuinely
+  // bad key — which must fail loudly and immediately, not after two retries.
+  return error !== null && error.message.includes("issued at future");
+}
