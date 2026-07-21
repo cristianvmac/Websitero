@@ -46,6 +46,30 @@ export function briefReceivedEmail(businessName?: string): Email {
   };
 }
 
+/** Sent when a DIY owner hands their half-built site over from the dashboard
+    ("Have us finish it"). Its job is to answer the question they're left with
+    after clicking: what happens to the code I just pointed you at? */
+export function handoffReceivedEmail(): Email {
+  return {
+    subject: "We've got your project — we'll take it from here",
+    text: [
+      hello(),
+      "",
+      "Thanks for sending your project over. A developer is cloning your repository now and picking up where you left off.",
+      "",
+      "Two things worth knowing:",
+      "",
+      "· We work on a separate branch and never touch your main one, so nothing you've built gets overwritten. When it's ready you'll get the changes as a pull request you can look through and merge.",
+      "· Keep an eye on your dashboard — that's where your preview turns up, and where you approve it:",
+      `  ${appUrl()}/dashboard`,
+      "",
+      "If you keep working in the meantime, that's fine — git will sort out the two sets of changes.",
+      "",
+      "— The Websitero team",
+    ].join("\n"),
+  };
+}
+
 /** Sent when the admin moves a brief to preview_ready (with a preview URL). */
 export function previewReadyEmail(businessName?: string): Email {
   return {
