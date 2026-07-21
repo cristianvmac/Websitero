@@ -7,6 +7,7 @@ import Image from "next/image";
 import { Sparkles, Star, Zap, ShieldCheck, Rocket, Wrench } from "lucide-react";
 import { BiSupport } from "react-icons/bi";
 import { FRAMEWORKS, FRAMEWORK_ORDER, type FrameworkKey } from "@/components/ui/frameworks-data";
+import { chooseDiyFramework } from "@/app/dashboard/actions";
 
 // Two ways to launch:
 //   forme   — the owner sends us their info (a doc + photos) and we hand-code
@@ -179,12 +180,20 @@ const Startyourwebsite = () => {
         <div className="flex flex-col items-center gap-3 sm:flex-row">
           {mode === "diy" ? (
             <>
-              <Link
-                href={active.docs}
-                className="inline-flex items-center gap-2 rounded-full bg-blue-500 hover:bg-blue-700 px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-blue-500/30 transition-all hover:shadow-xl hover:shadow-blue-500/40"
-              >
-                Get Started
-              </Link>
+              {/* Starting DIY means picking a kit, and that's an account-level
+                  fact — so this posts the choice instead of linking. Signed out,
+                  the action sends them to sign in and back to the dashboard. The
+                  docs button beside it stays open to anyone: the kits are public
+                  repos, and reading how they work needs no account. */}
+              <form action={chooseDiyFramework}>
+                <input type="hidden" name="framework" value={fw} />
+                <button
+                  type="submit"
+                  className="inline-flex items-center gap-2 rounded-full bg-blue-500 hover:bg-blue-700 px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-blue-500/30 transition-all hover:shadow-xl hover:shadow-blue-500/40"
+                >
+                  Get Started
+                </button>
+              </form>
               <Link
                 href={active.docs}
                 className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-7 py-3.5 text-base font-semibold text-slate-700 transition-colors hover:border-slate-400 hover:bg-slate-50"
