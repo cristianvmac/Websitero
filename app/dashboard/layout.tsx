@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 import { getDashboardData, toShellSite } from "@/src/data/dashboard";
+import { isAdmin } from "@/lib/session";
 import DashboardShell from "@/components/dashboard/DashboardShell";
 
 export const metadata: Metadata = {
@@ -15,6 +17,22 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
+  /* The admin has no dashboard — send them to the queue instead.
+
+     Here rather than at the login form because the redirect target is picked
+     before anyone is signed in: /login and GoogleButton bake "/dashboard" into
+     a hidden field, and Google's callbackURL is fixed when the consent URL is
+     minted. This runs once the session exists, so it catches every way in —
+     password, Google, signup, a bookmark — and every page under /dashboard,
+     including ones added later.
+
+     Before getDashboardData(): that call redirects to /login for an account
+     with no customer rows, which would fire first and send the admin somewhere
+     wrong. isAdmin() also checks emailVerified, so someone who registered the
+     admin address with a password (signup sends no confirmation email) gets an
+     ordinary dashboard and never learns the queue is there. */
+  if (await isAdmin()) redirect("/admin/briefs");
+
   const data = await getDashboardData();
 
   return (

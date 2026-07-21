@@ -2,12 +2,12 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import type { Brief } from "@/app/forme/brief";
-import { isDiyFramework } from "@/lib/diy";
+import { EMPTY_BRIEF, type Brief } from "@/app/forme/brief";
+import { FRAMEWORKS, isDiyFramework, normalizeRepoUrl, repoSlug } from "@/lib/diy";
 import { currentUser } from "@/lib/session";
 import { supabaseAdmin } from "@/lib/supabase";
 import { sendMail } from "@/lib/mailer";
-import { approvedActivateEmail } from "@/lib/customer-emails";
+import { approvedActivateEmail, handoffReceivedEmail } from "@/lib/customer-emails";
 import { CURRENCY, isTier, paymentLink, TIERS } from "@/lib/pricing";
 
 /* The review loop on a ready preview — the two things an owner can say about
@@ -255,10 +255,17 @@ export async function chooseDiyFramework(formData: FormData): Promise<void> {
   redirect("/dashboard");
 }
 
-/* "Link my site": the owner tells us where their kit-built site lives. The
-   input is human-typed ("mysite.com"), so it gets normalized (https:// when no
-   scheme) and validated properly; an empty submit unlinks. Errors come back
-   through useActionState — unlike the framework buttons, typing can go wrong. */
+/* "Link my site": the owner tells us where their site lives — the two senses of
+   "where" being independent, so both ride on one form and one save.
+
+     url      the public address it's SERVED at. Human-typed ("mysite.com"), so
+              it gets a scheme bolted on and a real parse.
+     repoUrl  the git remote its CODE lives at. Normalized by lib/diy.ts, which
+              also rejects hosts we couldn't clone from.
+
+   Either can be empty, and an empty field clears that link — the card's Unlink
+   button is just a submit with both blank. Errors come back through
+   useActionState: unlike the framework buttons, typing can go wrong. */
 export async function linkDiySite(
   _prev: ReviewFormState,
   formData: FormData,
@@ -277,21 +284,150 @@ export async function linkDiySite(
     }
   }
 
+  const repo = normalizeRepoUrl(String(formData.get("repoUrl") ?? ""));
+  if ("error" in repo) return { error: repo.error };
+
   const user = await currentUser();
   if (!user) return { error: "You're signed out — reload the page and try again." };
 
   const { data, error } = await supabaseAdmin()
     .from("diy_profiles")
-    .update({ site_url: url || null })
+    .update({ site_url: url || null, repo_url: repo.url || null })
     .eq("user_id", user.id)
     .select("user_id");
   if (error) {
-    console.error("[diy] could not save site url:", error);
+    console.error("[diy] could not save site links:", error);
     return { error: "We couldn't save that — please try again." };
   }
   // No profile row = no kit chosen; the card shouldn't be reachable then, but
   // a stale tab could get here.
   if (!data?.length) return { error: "Pick your kit first — reload the page." };
+
+  revalidatePath("/dashboard");
+  return null;
+}
+
+/* "Have us finish it": a DIY owner who got stuck hands the half-built site
+   over. This is the whole point of storing repo_url — the request is only
+   answerable because their code is somewhere we can clone it from, so a linked
+   repo is a hard precondition rather than a nice-to-have.
+
+   It deliberately creates an ordinary brief. A handoff needs exactly what a
+   "Build it for me" brief needs (an owner, something to work from, a way to
+   reply, a lifecycle) and the only difference — start from their repo, not a
+   fresh kit clone — is carried by Brief.repo. So the admin queue, the status
+   controls, the tracker, the preview review and pay-at-approval all pick it up
+   with no second pipeline: the brief IS the handoff record.
+
+   Insert first, notify after. The brief row is durable storage for what they
+   asked, so unlike the approval flow (whose notes exist only in an email) a
+   failed send costs a ping, not the request — same reasoning as
+   requestChanges. */
+export async function requestBuildHelp(
+  _prev: ReviewFormState,
+  formData: FormData,
+): Promise<ReviewFormState> {
+  const notes = String(formData.get("notes") ?? "").trim();
+  if (!notes) return { error: "Tell us what you'd like us to finish." };
+  if (notes.length > notesLimit) {
+    return { error: `That's a bit long — please keep it under ${notesLimit} characters.` };
+  }
+
+  const user = await currentUser();
+  if (!user) return { error: "You're signed out — reload the page and try again." };
+
+  const email = user.email ?? "";
+  if (!/^\S+@\S+\.\S+$/.test(email)) {
+    return { error: "Your account has no email address for us to reply to." };
+  }
+
+  const admin = supabaseAdmin();
+
+  const { data: profile, error: profileError } = await admin
+    .from("diy_profiles")
+    .select("framework, repo_url")
+    .eq("user_id", user.id)
+    .maybeSingle();
+  if (profileError) {
+    console.error("[handoff] could not read diy profile:", profileError);
+    return { error: "We couldn't reach your kit — please try again." };
+  }
+
+  const repoUrl = (profile?.repo_url as string | null) ?? "";
+  const framework = profile?.framework;
+  if (!repoUrl || !isDiyFramework(framework)) {
+    revalidatePath("/dashboard"); // their card is stale — show them the repo field
+    return { error: "Link your code repository first so we know where your site lives." };
+  }
+
+  /* One build per account, matching what the dashboard can render: it shows
+     the newest brief and nothing else, so a second one would silently hide the
+     first. A stale tab is the realistic way to get here. */
+  const { data: existing, error: existingError } = await admin
+    .from("briefs")
+    .select("id")
+    .eq("user_id", user.id)
+    .limit(1);
+  if (existingError) {
+    console.error("[handoff] could not check for an existing brief:", existingError);
+    return { error: "We couldn't send that — please try again." };
+  }
+  if (existing?.length) {
+    revalidatePath("/dashboard");
+    return { error: "You've already got a build with us — it's on your dashboard." };
+  }
+
+  const briefId = crypto.randomUUID();
+  /* Built field by field rather than spread from EMPTY_BRIEF, whose nested
+     objects are shared: this row is handed straight to the admin queue, which
+     reads business.type, style.brandColor and images.mode unconditionally. */
+  const brief: Brief = {
+    business: { name: "", type: "", location: "" },
+    features: [],
+    style: { ...EMPTY_BRIEF.style },
+    prompt: notes,
+    images: { mode: "stock" }, // their repo already has whatever imagery they used
+    repo: { url: repoUrl, framework },
+    contact: { email, phone: "" },
+  };
+
+  const { error: insertError } = await admin
+    .from("briefs")
+    .insert({ id: briefId, brief, user_id: user.id });
+  if (insertError) {
+    console.error("[handoff] could not save request:", insertError);
+    return { error: "We couldn't send that — please try again." };
+  }
+
+  try {
+    await sendMail({
+      to: teamInbox(),
+      subject: `DIY handoff — ${repoSlug(repoUrl)}`,
+      text: [
+        `${email} has been building with the ${FRAMEWORKS[framework].label} kit and wants us to finish it.`,
+        "",
+        notes,
+        "",
+        `Repo:     ${repoUrl}`,
+        `Brief:    ${briefId}`,
+        `Reply to: ${email}`,
+        "",
+        "Their code is the starting point — clone it instead of the kit:",
+        `  git clone ${repoUrl}`,
+        "",
+        "Work on a branch and open a PR so they can see the changes and pull them;",
+        "never push to their main. Then set the stage in /admin/briefs as usual.",
+      ].join("\n"),
+    });
+  } catch (err) {
+    console.error("[handoff] team mail failed:", err);
+  }
+
+  try {
+    await sendMail({ to: email, ...handoffReceivedEmail() });
+  } catch (err) {
+    console.error("[handoff] customer mail failed:", err);
+  }
 
   revalidatePath("/dashboard");
   return null;

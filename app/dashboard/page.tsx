@@ -7,6 +7,7 @@ import BuildTracker from "@/components/dashboard/BuildTracker";
 import KitCard from "@/components/dashboard/KitCard";
 import KitUpdates from "@/components/dashboard/KitUpdates";
 import LinkSiteCard from "@/components/dashboard/LinkSiteCard";
+import FinishForMeCard from "@/components/dashboard/FinishForMeCard";
 import PreviewCard from "@/components/dashboard/PreviewCard";
 import SeoCard from "@/components/dashboard/SeoCard";
 import ChecklistCard from "@/components/dashboard/ChecklistCard";
@@ -123,9 +124,19 @@ export default async function DashboardHomePage() {
         <>
          {/* <KitCard framework={diy.framework} /> */}
 
-          {/* Keyed by siteUrl: a successful save remounts the card, closing
-              its edit form. */}
-          <LinkSiteCard key={diy.siteUrl} siteUrl={diy.siteUrl} framework={diy.framework} />
+          {/* Keyed by the links themselves: a successful save remounts the
+              card, closing its edit form. */}
+          <LinkSiteCard
+            key={`${diy.siteUrl}|${diy.repoUrl}`}
+            siteUrl={diy.siteUrl}
+            repoUrl={diy.repoUrl}
+            framework={diy.framework}
+          />
+
+          {/* The way out of a stuck build. Sits under the links card because a
+              linked repo is what it runs on — and because sending it creates
+              their brief, which replaces this whole section with the tracker. */}
+          <FinishForMeCard repoUrl={diy.repoUrl} />
 
           {/* Renders nothing when the kit repo has no CHANGELOG.md yet. */}
           {/*<KitUpdates framework={diy.framework} /> */}
