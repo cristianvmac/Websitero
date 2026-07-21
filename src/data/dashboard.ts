@@ -6,7 +6,7 @@ import { isDiyFramework, type DiyFramework } from "@/lib/diy";
 import { asSiteStage, type SiteStage } from "@/lib/site-stage";
 import { isTier, paymentLink, TIERS, type Tier } from "@/lib/pricing";
 import { currentUser } from "@/lib/session";
-import { retryOnDroppedSocket, supabaseAdmin } from "@/lib/supabase";
+import { retryOnClockSkew, retryOnDroppedSocket, supabaseAdmin } from "@/lib/supabase";
 import { CLAIM_COOKIE, readClaim } from "@/lib/brief-claim";
 
 export type DashboardSite = {
@@ -84,8 +84,19 @@ export type DashboardUser = {
 /** The DIY product's account state — set the moment they pick a framework on
     the dashboard. It's the only signal DIY leaves: the kits are public repos
     and the docs are open, so nothing else tells us an account is building.
-    siteUrl is "" until they link their deployed site. */
-export type DiyProfile = { framework: DiyFramework; startedAt: string; siteUrl: string };
+    siteUrl is "" until they link their deployed site.
+
+    The two links are independent, not two spellings of one thing. siteUrl is
+    where the site is SERVED — it renders a Visit button and nothing more.
+    repoUrl is where the code LIVES, and it's the one that lets us work on a
+    site somebody built on their own laptop, so it's what gates "Have us finish
+    it". An account can have either, both, or neither. */
+export type DiyProfile = {
+  framework: DiyFramework;
+  startedAt: string;
+  siteUrl: string;
+  repoUrl: string;
+};
 
 export type DashboardData = {
   user: DashboardUser;
@@ -174,18 +185,26 @@ export async function getDashboardData(): Promise<DashboardData> {
     if (error) console.error("[dashboard] could not claim briefs:", error);
   }
 
+  /* Both reads throw on failure (see below), so both are shielded from the one
+     failure mode that isn't really a failure: Supabase rejecting its own
+     freshly-minted token as future-dated. postgrest-js retries reads for a
+     dropped socket already, but not for this. */
   const [briefsRes, diyRes] = await Promise.all([
-    admin
-      .from("briefs")
-      .select("id, brief, status, received_at, preview_url, live_url, tier")
-      .eq("user_id", user.id)
-      .order("received_at", { ascending: false })
-      .limit(1),
-    admin
-      .from("diy_profiles")
-      .select("framework, started_at, site_url")
-      .eq("user_id", user.id)
-      .maybeSingle(),
+    retryOnClockSkew(() =>
+      admin
+        .from("briefs")
+        .select("id, brief, status, received_at, preview_url, live_url, tier")
+        .eq("user_id", user.id)
+        .order("received_at", { ascending: false })
+        .limit(1),
+    ),
+    retryOnClockSkew(() =>
+      admin
+        .from("diy_profiles")
+        .select("framework, started_at, site_url, repo_url")
+        .eq("user_id", user.id)
+        .maybeSingle(),
+    ),
   ]);
   const { data: rows, error } = briefsRes;
   if (error) throw new Error(`Could not load your site: ${error.message}`);
@@ -251,6 +270,7 @@ export async function getDashboardData(): Promise<DashboardData> {
             framework: diyRes.data.framework,
             startedAt: diyRes.data.started_at,
             siteUrl: diyRes.data.site_url ?? "",
+            repoUrl: diyRes.data.repo_url ?? "",
           }
         : null,
     credits: { available: 0, freePerMonth: 15 }, // PLACEHOLDER — no credit ledger
