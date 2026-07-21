@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { BRIEFS_BUCKET, supabaseAdmin } from "@/lib/supabase";
+import { currentUser } from "@/lib/session";
 
 /* Mints a brief id plus a one-shot signed upload URL per file, so the browser
    can PUT its bytes straight to storage.
@@ -10,8 +11,9 @@ import { BRIEFS_BUCKET, supabaseAdmin } from "@/lib/supabase";
    multipart, the way this used to work, means the submission dies at the
    platform edge before any of our code runs.
 
-   Public by necessity: owners submitting a brief aren't logged in. What that
-   exposes is deliberately thin — write access to a fresh, server-chosen path
+   Signed-in only, now that both ways to start require an account. It used to be
+   public by necessity, since owners submitted before signing up. What it exposes
+   was always deliberately thin — write access to a fresh, server-chosen path
    under an id the caller never picks, and nothing else. Size and type are
    enforced by the bucket itself (supabase/migrations/0001_briefs.sql), so a
    caller's declared filename only ever decides the extension. It cannot name
@@ -53,6 +55,11 @@ interface Target {
 }
 
 export async function POST(req: Request) {
+  // Same posture as /api/forme: the proxy's cookie check is UX, this is the gate.
+  if (!(await currentUser())) {
+    return NextResponse.json({ ok: false, error: "Not signed in" }, { status: 401 });
+  }
+
   let body: { doc?: { name?: string } | null; photos?: { name?: string }[] };
   try {
     body = await req.json();
