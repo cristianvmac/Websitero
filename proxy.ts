@@ -14,6 +14,13 @@ import { getSessionCookie } from "better-auth/cookies";
    src/data/dashboard.ts redirects to /login when the cookie isn't a live
    session.
 
+   /builditforme, /forme, /api/forme, /api/uploads — the two ways to start a
+   build. Both now require an account BEFORE anything is created, so a brief is
+   owned from the moment it is inserted (app/api/forme/route.ts stamps user_id)
+   instead of landing anonymous and being claimed back afterwards. The claim
+   paths in src/data/dashboard.ts stay regardless: briefs submitted before this
+   gate existed are still out there unowned, and they still need claiming.
+
    /admin, /api/admin, /api/briefs — the admin, and there is exactly one (see
    lib/admin.ts). This used to be a shared password over HTTP Basic; it is now
    a role check on the same session customers hold, which is what that comment
@@ -23,8 +30,8 @@ import { getSessionCookie } from "better-auth/cookies";
    at the top of each handler in app/api/briefs/[id]/route.ts. Getting past
    this file only proves someone is signed in as *somebody*.
 
-   Everything else is public — /, /forme, /builditforme, /api/forme,
-   /api/uploads/sign (owners submit without an account), /login, /signup,
+   Everything else is public — /, /startyourwebsite, /docs/* (the DIY kits are
+   public repos and their docs stay open to read), /login, /signup,
    /forgot-password, /reset-password, and /api/auth/* (the doors people use to
    GET a session — Better Auth's own token and state checks live there). */
 
@@ -42,5 +49,14 @@ export function proxy(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/admin/:path*", "/api/admin/:path*", "/api/briefs/:path*"],
+  matcher: [
+    "/dashboard/:path*",
+    "/builditforme/:path*",
+    "/forme/:path*",
+    "/api/forme/:path*",
+    "/api/uploads/:path*",
+    "/admin/:path*",
+    "/api/admin/:path*",
+    "/api/briefs/:path*",
+  ],
 };
