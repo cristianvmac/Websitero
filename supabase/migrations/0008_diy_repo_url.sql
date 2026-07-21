@@ -1,0 +1,24 @@
+-- Where a DIY account's CODE lives, as opposed to where their site is served.
+-- Run once:
+--
+--   node --env-file=.env.local scripts/apply-migration.mjs 0008
+--
+-- 0005 added site_url: the public address of a deployed site. That answers
+-- "can we look at it?" and nothing more — you cannot edit a website by
+-- visiting it. This column answers "can we work on it?", which is the question
+-- that matters the moment an owner gets stuck halfway and asks us to finish
+-- the build (the dashboard's "Have us finish it").
+--
+-- A git remote is the only link that carries code BOTH ways: they push, we
+-- clone, we push a branch back, they pull. A zip upload only goes one way and
+-- a live URL goes neither.
+--
+-- Deliberately a second column rather than one link plus a "kind" flag: the two
+-- are not alternatives. Someone who has both deployed and pushed has both, and
+-- each drives something different — site_url renders a Visit button, repo_url
+-- is what unlocks asking us to take over.
+--
+-- Normalized to https://<host>/<owner>/<repo> by lib/diy.ts before it lands
+-- here, so the stored value is always cloneable as-is.
+alter table public.diy_profiles
+  add column if not exists repo_url text;
