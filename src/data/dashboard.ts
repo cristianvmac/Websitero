@@ -47,12 +47,15 @@ export type ChangeRequest = { body: string; createdAt: string };
    DashboardSite shipped the payment link and the full text of every change
    request to pages that render neither. Narrow on purpose — widen it only for
    a field the sidebar actually reads. */
-export type ShellSite = Pick<DashboardSite, "stage" | "url" | "previewUrl" | "editUrl">;
+export type ShellSite = Pick<DashboardSite, "stage" | "url" | "previewUrl" | "editUrl" | "tier">;
 
 export function toShellSite(site: DashboardSite | null): ShellSite | null {
   if (!site) return null;
-  const { stage, url, previewUrl, editUrl } = site;
-  return { stage, url, previewUrl, editUrl };
+  // `tier` is the plan badge on the account menu's Billing row. The payment
+  // link stays out — it's the one field here that shouldn't ride along into
+  // every page's payload.
+  const { stage, url, previewUrl, editUrl, tier } = site;
+  return { stage, url, previewUrl, editUrl, tier };
 }
 
 export type ChecklistStep = {
