@@ -9,6 +9,7 @@ import {
   ChevronRight,
   Clock,
   ContactRound,
+  CreditCard,
   ExternalLink,
   Eye,
   FileText,
@@ -16,9 +17,10 @@ import {
   Globe,
   Home,
   Image as ImageIcon,
-  Languages,
-  LogOut,
+  LineChart,
+  Mail,
   MapPin,
+  Megaphone,
   MessageSquare,
   PenLine,
   Palette,
@@ -31,14 +33,17 @@ import {
   Sparkles,
   Type,
   UserRound,
+  Users,
   UtensilsCrossed,
   Zap,
   type LucideIcon,
 } from "lucide-react";
 import { FRAMEWORKS } from "@/lib/diy";
+import { TIERS } from "@/lib/pricing";
 import type { DashboardData, ShellSite } from "@/src/data/dashboard";
 import type { ShellUser } from "./DashboardShell";
-import LogOutButton from "@/components/auth/LogOutButton";
+// Same panel the marketing header shows, opening left-ward from this corner.
+import AccountMenu from "@/components/ui/AccountMenu";
 
 /* The nav below is the planned information architecture, but what renders is a
    function of the account's state — two gates per entry:
@@ -74,6 +79,13 @@ type NavItem = {
   ready?: boolean;
   /** Groups expand in place; their sub-pages are added as routes later. */
   children?: NavChild[];
+  /** Always render this entry, whatever state the account is in — the app has
+      one shape and everybody sees it. Overrides both gates: `when`, because a
+      sidebar holding nothing but "Overview" reads as broken rather than new,
+      and `ready`, because the route exists as an honest placeholder saying the
+      feature isn't built. Its own page decides what to show (My Site is the
+      one that offers to build you a site). */
+  preview?: boolean;
 };
 
 export const homeItem: NavItem = { label: "Overview", href: "/dashboard", icon: Home };
@@ -82,7 +94,7 @@ export const navSections: { label: string; items: NavItem[] }[] = [
   {
     label: "My site",
     items: [
-      { label: "My Site", href: "/dashboard/site", icon: Globe, when: "live" },
+      { label: "My Site", href: "/dashboard/site", icon: Globe, when: "live", preview: true },
       {
         label: "Content",
         href: "/dashboard/content",
@@ -116,6 +128,7 @@ export const navSections: { label: string; items: NavItem[] }[] = [
         href: "/dashboard/settings",
         icon: Settings,
         when: "site",
+        preview: true,
         children: [
           { label: "Settings", href: "/dashboard/settings", icon: Settings },
           { label: "Domain", href: "/dashboard/settings/domain", icon: Search },
@@ -124,12 +137,68 @@ export const navSections: { label: string; items: NavItem[] }[] = [
       },
     ],
   },
+  /* The presence platform, not just the website: the site is one surface, and
+     these are the others a local business is actually judged on. All unbuilt —
+     they exist here as teasers for an empty account, which is the whole point
+     of `preview`. */
+  {
+    label: "Marketing",
+    items: [
+      { label: "SEO", href: "/dashboard/marketing/seo", icon: Search, when: "live", preview: true },
+      {
+        label: "Google Business",
+        href: "/dashboard/marketing/google-business",
+        icon: MapPin,
+        when: "live",
+        preview: true,
+      },
+      {
+        label: "Social posts",
+        href: "/dashboard/marketing/social",
+        icon: Megaphone,
+        when: "live",
+        preview: true,
+      },
+      {
+        label: "Email campaigns",
+        href: "/dashboard/marketing/email",
+        icon: Mail,
+        when: "live",
+        preview: true,
+      },
+    ],
+  },
+  {
+    label: "Analytics",
+    items: [
+      {
+        label: "Site analytics",
+        href: "/dashboard/analytics",
+        icon: BarChart3,
+        when: "live",
+        preview: true,
+      },
+      { label: "Visitors", href: "/dashboard/analytics/visitors", icon: Users, when: "live" },
+      { label: "Reports", href: "/dashboard/analytics/reports", icon: LineChart, when: "live" },
+    ],
+  },
   {
     label: "My activity",
     items: [
-      { label: "Analytics", href: "/dashboard/analytics", icon: BarChart3, when: "live" },
-      { label: "Messages", href: "/dashboard/messages", icon: MessageSquare, when: "site" },
-      { label: "Contact form", href: "/dashboard/contact-form", icon: ContactRound, when: "live" },
+      {
+        label: "Messages",
+        href: "/dashboard/messages",
+        icon: MessageSquare,
+        when: "site",
+        preview: true,
+      },
+      {
+        label: "Contact form",
+        href: "/dashboard/contact-form",
+        icon: ContactRound,
+        when: "live",
+        preview: true,
+      },
     ],
   },
   {
@@ -146,9 +215,17 @@ export const navSections: { label: string; items: NavItem[] }[] = [
       { label: "Add-ons & extras", href: "/dashboard/addons", icon: ShoppingBag, when: "site" },
       { label: "Orders", href: "/dashboard/orders", icon: Receipt },
       { label: "Referral", href: "/dashboard/referral", icon: Gift },
-      { label: "My Account", href: "/dashboard/account", icon: UserRound, ready: true },
     ],
   },
+];
+
+/* Not in navSections: both are reached from the account menu at the top of the
+   sidebar, so neither gets a nav row of its own. They still have to be listed
+   somewhere, or pageLabel() would fall back to "Overview" in the topbar while
+   you're standing on one. */
+const menuItems: NavItem[] = [
+  { label: "My Account", href: "/dashboard/account", icon: UserRound, ready: true },
+  { label: "Billing", href: "/dashboard/billing", icon: CreditCard, ready: true },
 ];
 
 function allows(
@@ -169,7 +246,12 @@ function allows(
 }
 
 /** The sections this account gets to see: both gates applied, empty groups and
-    empty sections dropped entirely (an empty "My activity" header is noise). */
+    empty sections dropped entirely (an empty "My activity" header is noise).
+
+    `preview` entries skip both gates and render for everyone — the app has one
+    shape, whether or not there's a site behind it yet. Nothing is promised by
+    that: each of those routes exists and says plainly what it is. Everything
+    else still appears only when its stage and its page are both real. */
 function visibleSections(site: ShellSite | null, diy: DashboardData["diy"]) {
   // Docs entries point at the account's chosen framework, not the docs hub.
   const retarget = (item: NavItem): NavItem =>
@@ -179,13 +261,16 @@ function visibleSections(site: ShellSite | null, diy: DashboardData["diy"]) {
     .map((section) => ({
       label: section.label,
       items: section.items.flatMap((item) => {
-        if (!item.children) {
-          return allows(item.when, site, diy) && item.ready ? [retarget(item)] : [];
-        }
-        const children = item.children.filter(
+        const children = (item.children ?? []).filter(
           (child) => allows(child.when ?? item.when, site, diy) && child.ready,
         );
-        return children.length > 0 ? [{ ...item, children }] : [];
+        /* A group whose sub-pages are all still gated off collapses to a plain
+           link — a chevron that expands into nothing is a worse row than none.
+           It becomes a real group again the day a child ships. */
+        if (children.length > 0) return [{ ...item, children }];
+        if (item.preview) return [{ ...item, children: undefined }];
+        if (item.children) return [];
+        return allows(item.when, site, diy) && item.ready ? [retarget(item)] : [];
       }),
     }))
     .filter((section) => section.items.length > 0);
@@ -204,7 +289,7 @@ function matches(pathname: string, href: string): boolean {
 export function pageLabel(pathname: string): string {
   let label = homeItem.label;
   let len = -1;
-  for (const section of navSections) {
+  for (const section of [...navSections, { label: "", items: menuItems }]) {
     for (const item of section.items) {
       if (matches(pathname, item.href) && item.href.length > len) {
         label = item.label;
@@ -356,102 +441,68 @@ export default function Sidebar({ user, site, diy, locale }: SidebarProps) {
           : null;
 
   return (
-    <div className="sidebar-scroll flex h-full w-full flex-col overflow-y-auto bg-white p-4">
-      <p className="px-2 pb-4 pt-1 text-xl font-bold tracking-tight text-slate-900">
-        My Dashboard
-      </p>
-
-      <nav className="flex flex-col gap-1">
-        <NavLink item={homeItem} active={pathname === homeItem.href} />
-      </nav>
-
-      {siteLink && (
-        <a
-          href={siteLink.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-3 flex items-center justify-center gap-2 rounded-xl bg-blue-500 hover:bg-blue-700 px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-blue-500/25 transition-all hover:shadow-lg hover:shadow-blue-500/40"
-        >
-          <siteLink.icon className="h-4 w-4" />
-          {siteLink.label}
-        </a>
-      )}
-
-      <label className="mt-3 flex cursor-text items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-2">
-        <Search className="h-4 w-4 shrink-0 text-slate-400" />
-        <input
-          type="search"
-          placeholder="Search..."
-          className="w-full min-w-0 bg-transparent text-sm text-slate-700 outline-none placeholder:text-slate-400"
+    <div className="flex h-full w-full flex-col bg-white">
+      {/* Outside the scroll container on purpose: `overflow-y-auto` clips on
+          both axes, so in there the open panel would be cut off at the
+          sidebar's edge. Identity + the door to the account page + Log out all
+          live in here now, which is why there's no footer block below. */}
+      <div className="shrink-0 px-4 pb-2 pt-3">
+        <AccountMenu
+          user={user}
+          align="left"
+          trigger="identity"
+          // Null until the team scopes the brief during triage — no badge
+          // rather than a guessed one.
+          plan={site?.tier ? TIERS[site.tier].label : null}
         />
+      </div>
 
-      </label>
-
-      {/*<Link
-        href="/dashboard/credits"
-        className="mt-3 flex items-center gap-3 rounded-xl border border-blue-500/25 bg-blue-500/10 px-4 py-3 transition-colors hover:border-blue-500/40"
-      >
-        <Zap className="h-5 w-5 shrink-0 text-blue-700" />
-        <span>
-          <span className="block text-sm font-bold text-slate-900">
-            {credits.available} credits
-          </span>
-          <span className="block text-xs text-slate-500">
-            {credits.freePerMonth} free / month
-          </span>
-        </span>
-      </Link>*/}
-
-      {sections.map((section) => (
-        <nav key={section.label} className="mt-6 flex flex-col gap-1">
-          <p className="px-2.5 pb-1 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
-            {section.label}
-          </p>
-          {section.items.map((item) =>
-            item.children ? (
-              <NavGroup
-                key={item.label}
-                item={item}
-                pathname={pathname}
-                open={!!effectiveOpen[item.label]}
-                onToggle={() => toggle(item.label)}
-              />
-            ) : (
-              <NavLink key={item.label} item={item} active={matches(pathname, item.href)} />
-            ),
-          )}
+      <div className="sidebar-scroll flex min-h-0 flex-1 flex-col overflow-y-auto px-4 pb-4">
+        <nav className="flex flex-col gap-1">
+          <NavLink item={homeItem} active={pathname === homeItem.href} />
         </nav>
-      ))}
 
-      <div className="mt-auto flex flex-col gap-1 border-t border-slate-200 pt-4">
-        {/* Who's signed in — and the door to their profile. Sits above Log out
-            on purpose: on a shared laptop the question "is this my account?"
-            wants an answer right next to the button that fixes it. */}
-        <Link
-          href="/dashboard/account"
-          className={rowClass(matches(pathname, "/dashboard/account"))}
-        >
-          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-500 text-xs font-bold uppercase text-white">
-            {user.name.charAt(0)}
-          </span>
-          <span className="min-w-0 flex-1 text-left">
-            <span className="block truncate font-semibold text-slate-900">{user.name}</span>
-            <span className="block truncate text-xs font-normal text-slate-500">
-              {user.email}
-            </span>
-          </span>
-        </Link>
+        {siteLink && (
+          <a
+            href={siteLink.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 flex items-center justify-center gap-2 rounded-xl bg-blue-500 hover:bg-blue-700 px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-blue-500/25 transition-all hover:shadow-lg hover:shadow-blue-500/40"
+          >
+            <siteLink.icon className="h-4 w-4" />
+            {siteLink.label}
+          </a>
+        )}
 
-       {/* <span className="flex items-center gap-3 rounded-lg px-2.5 py-2 text-sm font-medium text-slate-600">
-          <Languages className="h-4.5 w-4.5" />
-          {locale}
-        </span>*/}
-        {/* A link here only navigated away — the session cookie survived, so
-            /dashboard let you straight back in. This actually ends it. */}
-        <LogOutButton className="flex w-full cursor-pointer items-center gap-3 rounded-lg px-2.5 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900">
-          <LogOut className="h-4.5 w-4.5" />
-          Log out
-        </LogOutButton>
+        <label className="mt-3 flex cursor-text items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-2">
+          <Search className="h-4 w-4 shrink-0 text-slate-400" />
+          <input
+            type="search"
+            placeholder="Search..."
+            className="w-full min-w-0 bg-transparent text-sm text-slate-700 outline-none placeholder:text-slate-400"
+          />
+        </label>
+
+        {sections.map((section) => (
+          <nav key={section.label} className="mt-6 flex flex-col gap-1">
+            <p className="px-2.5 pb-1 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+              {section.label}
+            </p>
+            {section.items.map((item) =>
+              item.children ? (
+                <NavGroup
+                  key={item.label}
+                  item={item}
+                  pathname={pathname}
+                  open={!!effectiveOpen[item.label]}
+                  onToggle={() => toggle(item.label)}
+                />
+              ) : (
+                <NavLink key={item.label} item={item} active={matches(pathname, item.href)} />
+              ),
+            )}
+          </nav>
+        ))}
       </div>
     </div>
   );
