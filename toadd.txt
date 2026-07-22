@@ -24,7 +24,6 @@ DO IT AS YOU WILL LIKE TO HAVE IT:
 !!! - UI changes after done the content changes:
 # finish Docs UI
 # add icons to sidebar categories
-# add higher margin to the right of main content in docs check Additional Resources structure page
 # add Mobile Responsiveness
 # add See Demo in the nav bar like in supastarter and see the description of site demo and get inspired for clones
 
@@ -62,4 +61,48 @@ as I want the final pages constructed from pure HTML, CSS, and JS components.
 To help build better websites for 'Build it for me using prompts' I think its better 
 to create templates that have 3 pages(landing page with others dispayed as id # faq, reviews, about; services page; contact form) for each industry 
 from CodeStitch components (https://codestitch.app/app) and internal documentation found at docs/ or
-better Store the composition as an ordered list of component ids, not as copied HTML
+better Store the composition as an ordered list of component ids, not as copied HTML.
+TO REMEMBER FOR Building based on prompts:
+or I just realized that users can build their website fast based on prompts, for example when they choose what pages to have the components for those pages they can choose based on some small images near their prompts or something like that the AI picks components based on their choices. I dont think I express my thoughts well but perhaps you understand it
+Show less
+Yes — I understood you, and I think you just landed on something better than what I described.
+
+Let me say it back: instead of the AI guessing the layout from a prompt, the owner picks pages, then for each section sees small rendered previews of 3–4 real options and taps one. The prompt fills in the words. Choice by picture, not by description.
+
+Why this is the stronger version
+Pure prompt→site has one fatal failure mode: a non-technical owner cannot describe layout in words, and when the output is wrong they don't know what to say to fix it. "Make it more modern" isn't actionable. Pictures need no vocabulary, no learning curve, and they're instantly legible.
+
+And structurally it's safer: every output is a combination you already know renders correctly. There's no "generate and hope."
+
+It also dissolves the variety problem I raised earlier. "Why does my site look like the other plumber's?" stops being your bug and becomes their choice.
+
+The mechanic I'd build
+Pick pages — Home, About, Services, Contact, Gallery, Blog. Maps directly onto the interior pages composeSite() already emits.
+Per section, show the pool as thumbnails — but with the AI's recommendation already selected, alternates beside it. This is the important detail: never show a blank chooser. Someone who doesn't care taps through in 20 seconds; someone who cares gets full control. Same flow, both audiences.
+Prompt writes the copy into whatever they chose.
+Cap it at ~5 choices. Hero, services layout, about, gallery/reviews, CTA — everything else auto. Non-technical owners abandon around step 8.
+
+Thumbnails are nearly free for you
+Every variant is already rendered in the docs — app/docs/<kit>/components/<cat>/templates/*.tsx with CodePreview. Screenshot each one once with Playwright at ~400px, store keyed by variant id (hero/LandingCenter), regenerate when a variant changes. ~150 images, generated in CI.
+
+One upgrade worth the effort: tint the thumbnails with their brand colour (and their photo, if uploaded) before showing them. The blocks are already scoped to :root CSS variables — per the comment in compose-home.mjs. A grey generic thumbnail is a catalog; a thumbnail already in their colours is their site, and that converts very differently.
+
+This changes the AI's job — for the better
+It stops guessing layouts and does three things it's genuinely good at:
+
+Narrow the pool per business type — a restaurant's gallery options aren't a plumber's. Your brief already carries business.type and features[] (brief.ts).
+Write copy sized to the chosen block — 3-card vs 4-card vs 6-card need different amounts of text.
+Treat the prompt as a filter, not an author — "clean and minimal" ranks the pools; it doesn't invent markup.
+That reframe is the whole idea: the prompt steers the picker, not the layout. Cheaper, faster, and it can never produce something broken.
+
+The one real refactor this needs
+Today the order is copy → compose: generate-copy.mjs has a fixed SiteCopy schema (exactly 3 services, exactly 2 paragraphs, exactly 3 reviews), and build-site.mjs generates it before composeSite() picks blocks. If someone chooses a 6-card services block, the schema is already wrong.
+
+You want to invert it: picks first, then build the zod schema dynamically from the chosen variants' slot counts, then generate copy against it. That's the main structural change — worth knowing now, cheap now, expensive later.
+
+Bonus: a chooser step is also the natural place to ask "do you have customer reviews? paste them, or skip this section" — which quietly kills the fake-testimonial problem I flagged.
+
+The strategic bit
+This makes your component library one asset with two front doors: CodeStitch shows blocks to developers to copy; you show the same blocks to business owners to choose. component-library.mjs already reads straight from the docs, so adding one component ships it to both products at once.
+
+And it's a better story than AI generation: not a robot guessing — you pick, we build it. That's a claim you can defend against every "AI website builder" on the market, and it doesn't contradict the hand-coded positioning you're already selling.
