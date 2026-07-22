@@ -52,6 +52,19 @@ export function supabaseAdmin(): SupabaseClient {
   return cached;
 }
 
+/* Flatten a PostgREST error into one line before logging it.
+
+   Logged as a string rather than as the object, because a server console.error
+   is replayed into the browser's dev overlay through React's flight serializer,
+   which renders the object as a bare `{}` — the message, code and hint, the only
+   parts worth reading, are dropped on the way. A string survives intact in both
+   the terminal and the overlay. */
+export function describeError(error: PostgrestError): string {
+  return [error.code && `[${error.code}]`, error.message, error.hint, error.details]
+    .filter(Boolean)
+    .join(" ");
+}
+
 /* Run a write again when the connection died under it, not the query.
 
    Node's fetch keeps TLS sockets pooled between requests and Supabase's edge

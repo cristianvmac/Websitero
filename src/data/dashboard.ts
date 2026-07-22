@@ -6,7 +6,7 @@ import { isDiyFramework, type DiyFramework } from "@/lib/diy";
 import { asSiteStage, type SiteStage } from "@/lib/site-stage";
 import { isTier, paymentLink, TIERS, type Tier } from "@/lib/pricing";
 import { currentUser } from "@/lib/session";
-import { retryOnClockSkew, retryOnDroppedSocket, supabaseAdmin } from "@/lib/supabase";
+import { describeError, retryOnClockSkew, retryOnDroppedSocket, supabaseAdmin } from "@/lib/supabase";
 import { CLAIM_COOKIE, readClaim } from "@/lib/brief-claim";
 
 export type DashboardSite = {
@@ -161,28 +161,37 @@ export async function getDashboardData(): Promise<DashboardData> {
      the `user_id is null` filter matches nothing on the second pass, which is
      also what stops a stale cookie on a shared browser from stealing a brief
      that someone has already claimed. That same filter is what makes them safe
-     to send twice when the connection drops under one. */
+     to send twice when the connection drops under one.
+
+     Both retries apply, in the order a failure reaches us: clock skew outside,
+     because a token rejected as future-dated means the statement never ran, and
+     a dropped socket inside, because that request never left. Reads below need
+     only the first — postgrest-js already retries GETs for a dead socket. */
   const claimedBriefId = readClaim((await cookies()).get(CLAIM_COOKIE)?.value);
   if (claimedBriefId) {
-    const { error } = await retryOnDroppedSocket(() =>
-      admin
-        .from("briefs")
-        .update({ user_id: user.id })
-        .is("user_id", null)
-        .eq("id", claimedBriefId),
+    const { error } = await retryOnClockSkew(() =>
+      retryOnDroppedSocket(() =>
+        admin
+          .from("briefs")
+          .update({ user_id: user.id })
+          .is("user_id", null)
+          .eq("id", claimedBriefId),
+      ),
     );
-    if (error) console.error("[dashboard] could not claim brief from cookie:", error);
+    if (error) console.error("[dashboard] could not claim brief from cookie:", describeError(error));
   }
 
   if (email && user.emailVerified) {
-    const { error } = await retryOnDroppedSocket(() =>
-      admin
-        .from("briefs")
-        .update({ user_id: user.id })
-        .is("user_id", null)
-        .filter("brief->contact->>email", "eq", email),
+    const { error } = await retryOnClockSkew(() =>
+      retryOnDroppedSocket(() =>
+        admin
+          .from("briefs")
+          .update({ user_id: user.id })
+          .is("user_id", null)
+          .filter("brief->contact->>email", "eq", email),
+      ),
     );
-    if (error) console.error("[dashboard] could not claim briefs:", error);
+    if (error) console.error("[dashboard] could not claim briefs:", describeError(error));
   }
 
   /* Both reads throw on failure (see below), so both are shielded from the one
@@ -224,7 +233,7 @@ export async function getDashboardData(): Promise<DashboardData> {
       .eq("brief_id", record.id)
       .eq("author", "customer")
       .order("created_at", { ascending: false });
-    if (reqError) console.error("[dashboard] could not load change requests:", reqError);
+    if (reqError) console.error("[dashboard] could not load change requests:", describeError(reqError));
     else changeRequests = (reqs ?? []).map((r) => ({ body: r.body, createdAt: r.created_at }));
   }
 
