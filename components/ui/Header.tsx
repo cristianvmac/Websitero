@@ -168,7 +168,7 @@ const Header = () => {
                   </Link>
                 )}
                 <Link
-                  href="#cta"
+                  href="/startyourwebsite"
                   onClick={() => setIsOpen(false)}
                   className="flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-700 px-5 py-3 text-sm font-semibold text-white"
                 >
