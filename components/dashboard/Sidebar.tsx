@@ -95,46 +95,6 @@ export const navSections: { label: string; items: NavItem[] }[] = [
     label: "My site",
     items: [
       { label: "My Site", href: "/dashboard/site", icon: Globe, when: "live", preview: true },
-      {
-        label: "Content",
-        href: "/dashboard/content",
-        icon: FileText,
-        when: "live",
-        children: [
-          { label: "Pages", href: "/dashboard/content/pages", icon: FileText },
-          { label: "Menu labels", href: "/dashboard/content/menu-labels", icon: Type },
-          { label: "Media", href: "/dashboard/content/media", icon: ImageIcon },
-          { label: "Menu", href: "/dashboard/content/menu", icon: UtensilsCrossed },
-          { label: "Our story", href: "/dashboard/content/our-story", icon: Clock },
-          { label: "Blog", href: "/dashboard/content/blog", icon: BookOpen },
-          { label: "My contact details", href: "/dashboard/content/contact-details", icon: MapPin },
-          { label: "Languages", href: "/dashboard/content/languages", icon: Globe },
-          { label: "Legal Pages", href: "/dashboard/content/legal", icon: Scale },
-        ],
-      },
-      {
-        label: "Appearance",
-        href: "/dashboard/appearance",
-        icon: Palette,
-        when: "live",
-        children: [
-          { label: "Mood", href: "/dashboard/appearance/mood", icon: Sparkles },
-          { label: "Logo", href: "/dashboard/appearance/logo", icon: ImageIcon },
-          { label: "Change Design", href: "/dashboard/appearance/design", icon: Globe },
-        ],
-      },
-      {
-        label: "Settings",
-        href: "/dashboard/settings",
-        icon: Settings,
-        when: "site",
-        preview: true,
-        children: [
-          { label: "Settings", href: "/dashboard/settings", icon: Settings },
-          { label: "Domain", href: "/dashboard/settings/domain", icon: Search },
-          { label: "Backups", href: "/dashboard/settings/backups", icon: ShieldCheck },
-        ],
-      },
     ],
   },
   /* The presence platform, not just the website: the site is one surface, and
@@ -144,25 +104,11 @@ export const navSections: { label: string; items: NavItem[] }[] = [
   {
     label: "Marketing",
     items: [
-      { label: "SEO", href: "/dashboard/marketing/seo", icon: Search, when: "live", preview: true },
+      { label: "SEO & GEO", href: "/dashboard/marketing/seo-geo", icon: Search, when: "live", preview: true },
       {
-        label: "Google Business",
+        label: "Google Business Profile",
         href: "/dashboard/marketing/google-business",
         icon: MapPin,
-        when: "live",
-        preview: true,
-      },
-      {
-        label: "Social posts",
-        href: "/dashboard/marketing/social",
-        icon: Megaphone,
-        when: "live",
-        preview: true,
-      },
-      {
-        label: "Email campaigns",
-        href: "/dashboard/marketing/email",
-        icon: Mail,
         when: "live",
         preview: true,
       },
@@ -178,12 +124,11 @@ export const navSections: { label: string; items: NavItem[] }[] = [
         when: "live",
         preview: true,
       },
-      { label: "Visitors", href: "/dashboard/analytics/visitors", icon: Users, when: "live" },
-      { label: "Reports", href: "/dashboard/analytics/reports", icon: LineChart, when: "live" },
     ],
   },
   {
-    label: "My activity",
+    // "My activity" group with a label over a single row.
+    label: "Inbox",
     items: [
       {
         label: "Messages",
@@ -192,13 +137,7 @@ export const navSections: { label: string; items: NavItem[] }[] = [
         when: "site",
         preview: true,
       },
-      {
-        label: "Contact form",
-        href: "/dashboard/contact-form",
-        icon: ContactRound,
-        when: "live",
-        preview: true,
-      },
+
     ],
   },
   {
@@ -458,11 +397,11 @@ export default function Sidebar({ user, site, diy, locale }: SidebarProps) {
       </div>
 
       <div className="sidebar-scroll flex min-h-0 flex-1 flex-col overflow-y-auto px-4 pb-4">
-        <nav className="flex flex-col gap-1">
+       <nav className="flex flex-col gap-1">
           <NavLink item={homeItem} active={pathname === homeItem.href} />
         </nav>
 
-        {siteLink && (
+       {/* {siteLink && (
           <a
             href={siteLink.href}
             target="_blank"
@@ -472,7 +411,7 @@ export default function Sidebar({ user, site, diy, locale }: SidebarProps) {
             <siteLink.icon className="h-4 w-4" />
             {siteLink.label}
           </a>
-        )}
+        )}*/}
 
         <label className="mt-3 flex cursor-text items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-2">
           <Search className="h-4 w-4 shrink-0 text-slate-400" />
@@ -485,9 +424,11 @@ export default function Sidebar({ user, site, diy, locale }: SidebarProps) {
 
         {sections.map((section) => (
           <nav key={section.label} className="mt-6 flex flex-col gap-1">
-            <p className="px-2.5 pb-1 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
-              {section.label}
-            </p>
+            {section.label && (
+              <p className="px-2.5 pb-1 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                {section.label}
+              </p>
+            )}
             {section.items.map((item) =>
               item.children ? (
                 <NavGroup
