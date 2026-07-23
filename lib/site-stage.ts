@@ -33,6 +33,18 @@ export const STAGE_LABELS: Record<SiteStage, string> = {
   live: "Live",
 };
 
+/* Where the owner may still walk away and start over. Up to the preview they've
+   promised nothing, so cancelling is theirs to do: the brief, their uploads and
+   the preview go, and they can send us a new business.
+
+   Approving is where that stops. It's the moment they commit to paying (see
+   lib/pricing.ts), and past it there's a payment to reconcile or a site already
+   serving on its own address — neither is something a button on the dashboard
+   should be able to erase. Those two stages route to /contact instead. */
+export function canDeleteSite(stage: SiteStage): boolean {
+  return stage !== "approved" && stage !== "live";
+}
+
 /* Normalizes whatever the status column holds into a SiteStage. The legacy
    values ('new'…'delivered', from migration 0001) map to their successors so a
    dashboard deployed ahead of the 0003 migration degrades to a sane stage
