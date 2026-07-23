@@ -229,7 +229,7 @@ export default async function DashboardHomePage() {
                   View my site
                 </a>
               )}
-            </div>
+            </div>*/
           </section>
 
           <SeoCard seo={seo} />
