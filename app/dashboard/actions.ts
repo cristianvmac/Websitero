@@ -4,8 +4,10 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { EMPTY_BRIEF, type Brief } from "@/app/forme/brief";
 import { FRAMEWORKS, isDiyFramework, normalizeRepoUrl, repoSlug } from "@/lib/diy";
+import { asSiteStage, canDeleteSite } from "@/lib/site-stage";
 import { currentUser } from "@/lib/session";
-import { supabaseAdmin } from "@/lib/supabase";
+import { BRIEFS_BUCKET, supabaseAdmin } from "@/lib/supabase";
+import { removeLocalPreview } from "@/lib/preview-cleanup";
 import { sendMail } from "@/lib/mailer";
 import { approvedActivateEmail, handoffReceivedEmail } from "@/lib/customer-emails";
 import { CURRENCY, isTier, paymentLink, TIERS } from "@/lib/pricing";
@@ -61,6 +63,9 @@ async function ownReviewableBrief() {
   const brief = row.brief as Brief;
   return {
     id: row.id as string,
+    // Carried so a mutation can put it in its own WHERE clause rather than
+    // trusting that this read found the right row.
+    userId: user.id,
     status: row.status as string,
     previewUrl: (row.preview_url as string | null) ?? "",
     tier: isTier(row.tier) ? row.tier : null,
@@ -216,6 +221,104 @@ export async function requestChanges(
   }
 
   revalidatePath("/dashboard");
+  return null;
+}
+
+/* "Delete my site" — the owner cancels their build and clears the slate.
+   Without it an account is stuck with the first business it ever sent us: the
+   dashboard renders exactly one brief, and requestBuildHelp refuses a second,
+   so the only way to start over is for this row to go.
+
+   It is a real delete, not a hidden status. What it removes is the material
+   they trusted us with — a business document, their photos, whatever they
+   typed — and "cancelled" rows that quietly keep all of that are the wrong
+   default for a page whose button says Delete.
+
+   Order matters, and it's the opposite of the review actions: uploads first,
+   then the row. An orphaned row is visible in the admin queue and fixable; an
+   orphaned storage folder is invisible and would keep customer documents alive
+   after the brief naming them is gone. Same reasoning as the admin route's
+   DELETE, which this deliberately mirrors.
+
+   Stage-gated by canDeleteSite: past approval there's a payment to reconcile or
+   a live site to take down, so those two route to /contact in the UI. The guard
+   is repeated here because the UI can be stale — the team may have moved the
+   brief while the page sat open. */
+export async function deleteSite(
+  _prev: ReviewFormState,
+  _formData: FormData,
+): Promise<ReviewFormState> {
+  const target = await ownReviewableBrief();
+  // Nothing to delete reads as success: they wanted no site, and there is none.
+  if (!target) {
+    revalidatePath("/dashboard", "layout");
+    return null;
+  }
+
+  if (!canDeleteSite(asSiteStage(target.status))) {
+    revalidatePath("/dashboard", "layout"); // their page is stale — show them the real stage
+    return {
+      error: "This build has gone too far to delete here — get in touch and we'll sort it out.",
+    };
+  }
+
+  const admin = supabaseAdmin();
+
+  const { data: listed } = await admin.storage.from(BRIEFS_BUCKET).list(target.id);
+  if (listed?.length) {
+    const { error } = await admin.storage
+      .from(BRIEFS_BUCKET)
+      .remove(listed.map((f) => `${target.id}/${f.name}`));
+    if (error) {
+      console.error("[delete-site] could not remove uploads:", error);
+      return { error: "We couldn't delete your files — please try again." };
+    }
+  }
+
+  /* user_id in the WHERE clause, not just in the read that found this id: the
+     delete itself has to be the thing that proves ownership. change_requests
+     rows go with it, by the cascade on their foreign key. */
+  const { data: deleted, error } = await admin
+    .from("briefs")
+    .delete()
+    .eq("id", target.id)
+    .eq("user_id", target.userId)
+    .select("id");
+  if (error) {
+    console.error("[delete-site] could not delete brief:", error);
+    return { error: "We couldn't delete your site — please try again." };
+  }
+  if (!deleted?.length) {
+    revalidatePath("/dashboard", "layout");
+    return { error: "We couldn't find your site — try reloading the page." };
+  }
+
+  await removeLocalPreview(target.id);
+
+  /* Tell the team, best-effort. Someone may be hand-coding this site right now,
+     and the row that would have told them it's cancelled is gone — but the
+     delete is what the owner asked for, so a failed send is logged, never
+     surfaced as a failure they'd retry against an already-deleted brief. */
+  try {
+    await sendMail({
+      to: teamInbox(),
+      subject: `Build cancelled — ${target.siteName}`,
+      text: [
+        `${target.userEmail || target.ownerEmail} deleted their site from the dashboard.`,
+        "",
+        `Brief:    ${target.id} (deleted, along with their uploads)`,
+        `Stage:    ${target.status}`,
+        "",
+        "Stop any work in progress on it. They can send us a new brief whenever they like.",
+      ].join("\n"),
+    });
+  } catch (err) {
+    console.error("[delete-site] cancellation mail failed:", err);
+  }
+
+  // Layout-wide: the sidebar and topbar read the site too, and they're rendered
+  // by the dashboard layout rather than the page.
+  revalidatePath("/dashboard", "layout");
   return null;
 }
 
