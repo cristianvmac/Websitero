@@ -7,35 +7,21 @@ import {
   BarChart3,
   BookOpen,
   ChevronRight,
-  Clock,
-  ContactRound,
   CreditCard,
   ExternalLink,
   Eye,
-  FileText,
   Gift,
   Globe,
   Home,
   Image as ImageIcon,
-  LineChart,
-  Mail,
   MapPin,
-  Megaphone,
   MessageSquare,
+  Newspaper,
   PenLine,
-  Palette,
   Receipt,
-  Scale,
   Search,
-  Settings,
-  ShieldCheck,
   ShoppingBag,
-  Sparkles,
-  Type,
   UserRound,
-  Users,
-  UtensilsCrossed,
-  Zap,
   type LucideIcon,
 } from "lucide-react";
 import { FRAMEWORKS } from "@/lib/diy";
@@ -94,7 +80,18 @@ export const navSections: { label: string; items: NavItem[] }[] = [
   {
     label: "My site",
     items: [
-      { label: "My Site", href: "/dashboard/site", icon: Globe, when: "live", preview: true },
+      { 
+        label: "My Site", 
+        href: "/dashboard/site", 
+        icon: Globe, when: "live", 
+        preview: true 
+      },
+      {
+        label: "Blog (beta)",
+        href: "/dashboard/site/blog",
+        icon: Newspaper, when: "live",
+        preview: true
+      },
     ],
   },
   /* The presence platform, not just the website: the site is one surface, and
@@ -104,9 +101,15 @@ export const navSections: { label: string; items: NavItem[] }[] = [
   {
     label: "Marketing",
     items: [
-      { label: "SEO & GEO", href: "/dashboard/marketing/seo-geo", icon: Search, when: "live", preview: true },
+      { 
+        label: "SEO & GEO (beta)", 
+        href: "/dashboard/marketing/seo-geo", 
+        icon: Search, 
+        when: "live", 
+        preview: true 
+      },
       {
-        label: "Google Business Profile",
+        label: "Google Business Profile (beta)",
         href: "/dashboard/marketing/google-business",
         icon: MapPin,
         when: "live",
@@ -118,7 +121,7 @@ export const navSections: { label: string; items: NavItem[] }[] = [
     label: "Analytics",
     items: [
       {
-        label: "Site analytics",
+        label: "Site Analytics (beta)",
         href: "/dashboard/analytics",
         icon: BarChart3,
         when: "live",
@@ -365,6 +368,16 @@ export default function Sidebar({ user, site, diy, locale }: SidebarProps) {
 
   const sections = visibleSections(site, diy);
 
+  /* One row lights up at a time — the longest matching href wins, same rule as
+     activeChildHref. Nested routes are why: /dashboard/site/blog is a prefix
+     match for My Site as well as an exact match for Blog, and highlighting
+     both makes the nav look like it's lost track of where you are. */
+  const activeHref =
+    sections
+      .flatMap((section) => section.items)
+      .filter((item) => matches(pathname, item.href))
+      .sort((a, b) => b.href.length - a.href.length)[0]?.href ?? null;
+
   /* One primary door to the site itself, in order of how real it is: the
      editor (none exists yet), the live address, the review preview, and for
      DIY accounts the site they linked themselves. External targets, hence
@@ -413,6 +426,7 @@ export default function Sidebar({ user, site, diy, locale }: SidebarProps) {
           </a>
         )}*/}
 
+        {/*
         <label className="mt-3 flex cursor-text items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-2">
           <Search className="h-4 w-4 shrink-0 text-slate-400" />
           <input
@@ -421,7 +435,7 @@ export default function Sidebar({ user, site, diy, locale }: SidebarProps) {
             className="w-full min-w-0 bg-transparent text-sm text-slate-700 outline-none placeholder:text-slate-400"
           />
         </label>
-
+        */}
         {sections.map((section) => (
           <nav key={section.label} className="mt-6 flex flex-col gap-1">
             {section.label && (
@@ -439,7 +453,7 @@ export default function Sidebar({ user, site, diy, locale }: SidebarProps) {
                   onToggle={() => toggle(item.label)}
                 />
               ) : (
-                <NavLink key={item.label} item={item} active={matches(pathname, item.href)} />
+                <NavLink key={item.label} item={item} active={item.href === activeHref} />
               ),
             )}
           </nav>
