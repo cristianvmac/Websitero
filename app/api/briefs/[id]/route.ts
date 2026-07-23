@@ -1,7 +1,6 @@
-import { promises as fs } from "fs";
-import path from "path";
 import { NextResponse } from "next/server";
 import { BRIEFS_BUCKET, supabaseAdmin } from "@/lib/supabase";
+import { removeLocalPreview } from "@/lib/preview-cleanup";
 import { SITE_STAGES, type SiteStage } from "@/lib/site-stage";
 import { isTier } from "@/lib/pricing";
 import { previewReadyEmail, siteLiveEmail } from "@/lib/customer-emails";
@@ -293,26 +292,7 @@ export async function DELETE(_req: Request, { params }: { params: Promise<{ id: 
     return NextResponse.json({ ok: false, error: "Brief not found" }, { status: 404 });
   }
 
-  // Local-only cleanup: the preview, its manifest entry, and the workspace (which
-  // holds any code hand-written for this customer). None of these exist on a
-  // deployed host — previews/ and workspaces/ are gitignored build output — so
-  // this is a no-op there and only does real work on the developer's machine.
-  try {
-    const manifestPath = path.join(process.cwd(), "previews", "manifest.json");
-    const manifest = JSON.parse(await fs.readFile(manifestPath, "utf8"));
-    const slug: string | undefined = manifest[id]?.slug;
-    if (slug) {
-      delete manifest[id];
-      await fs.writeFile(manifestPath, JSON.stringify(manifest, null, 2));
-      if (ID_RE.test(slug)) {
-        for (const dir of ["previews", "workspaces"]) {
-          await fs.rm(path.join(process.cwd(), dir, slug), { recursive: true, force: true });
-        }
-      }
-    }
-  } catch {
-    /* never built, or not running locally — no preview or workspace to clean */
-  }
+  await removeLocalPreview(id);
 
   return NextResponse.json({ ok: true });
 }
