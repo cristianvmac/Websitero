@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import type { Brief } from "@/app/forme/brief";
 import { isDiyFramework, type DiyFramework } from "@/lib/diy";
-import { asSiteStage, type SiteStage } from "@/lib/site-stage";
+import { asSiteStage, SITE_STAGES, type SiteStage } from "@/lib/site-stage";
 import { isTier, paymentLink, TIERS, type Tier } from "@/lib/pricing";
 import { currentUser } from "@/lib/session";
 import { describeError, retryOnClockSkew, retryOnDroppedSocket, supabaseAdmin } from "@/lib/supabase";
@@ -202,13 +202,14 @@ export async function getDashboardData(): Promise<DashboardData> {
      freshly-minted token as future-dated. postgrest-js retries reads for a
      dropped socket already, but not for this. */
   const [briefsRes, diyRes] = await Promise.all([
+    // Every brief of theirs, newest first — the pick happens below, and it
+    // isn't "the newest". Unbounded in name only: an account has one site.
     retryOnClockSkew(() =>
       admin
         .from("briefs")
         .select("id, brief, status, received_at, preview_url, live_url, tier")
         .eq("user_id", user.id)
-        .order("received_at", { ascending: false })
-        .limit(1),
+        .order("received_at", { ascending: false }),
     ),
     retryOnClockSkew(() =>
       admin
@@ -224,7 +225,25 @@ export async function getDashboardData(): Promise<DashboardData> {
   // rendered from a failed read is indistinguishable from the real thing.
   if (diyRes.error) throw new Error(`Could not load your kit: ${diyRes.error.message}`);
 
-  const record = rows?.[0];
+  /* One site per account: the one they paid for. Briefs get claimed onto the
+     account on every read (above), so a second one can always arrive — same
+     browser, or the same verified address. Taking the newest would hand the
+     dashboard to that draft and quietly take the live site away from its owner,
+     so the pick is by lifecycle: SITE_STAGES is declared in build order, which
+     makes its index the rank. sort() is stable, so briefs at the same stage
+     keep the newest-first order the query returned.
+
+     The trade is deliberate. A second brief stays invisible to the owner (it's
+     still in the admin queue, and still gets built) rather than displacing a
+     site that's live. Somebody who wants a second website opens a second
+     account; multi-site per account is a real feature — a switcher here, plus a
+     scope on every marketing page — and waits until someone asks for it. */
+  const record = (rows ?? [])
+    .slice()
+    .sort(
+      (a, b) =>
+        SITE_STAGES.indexOf(asSiteStage(b.status)) - SITE_STAGES.indexOf(asSiteStage(a.status)),
+    )[0];
   const brief = record?.brief as Brief | undefined;
 
   // Their own change-request history for this brief, newest first.
