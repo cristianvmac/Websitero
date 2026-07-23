@@ -33,7 +33,7 @@ export default async function BillingPage() {
   return (
     <div className="flex flex-col gap-8">
       <header>
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">Billing</h1>
+        <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-3xl">Billing</h1>
         <p className="mt-2 text-slate-500">
           Your package and what it costs. One payment, no subscription.
         </p>
