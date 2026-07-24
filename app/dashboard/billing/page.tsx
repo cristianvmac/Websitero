@@ -42,9 +42,7 @@ export default async function BillingPage() {
       {/* ------------------------------------------------- nothing to bill yet */}
       {!site ? (
         <section className="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-          <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 text-blue-700">
-            <Sparkles className="h-6 w-6" />
-          </span>
+          
           <h2 className="mt-4 text-lg font-bold text-slate-900">No package yet</h2>
           <p className="mt-1 text-sm text-slate-500">
             Nothing to pay for until you have a site being built. Send us your business and
