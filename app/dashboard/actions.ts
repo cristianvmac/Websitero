@@ -406,7 +406,11 @@ export async function linkDiySite(
   // a stale tab could get here.
   if (!data?.length) return { error: "Pick your kit first — reload the page." };
 
-  revalidatePath("/dashboard");
+  // Layout-wide: this card lives on both the overview and My Site, and the
+  // sidebar's "Visit my site" link falls back to this very URL. Page-scoped
+  // revalidation left whichever of those the owner wasn't looking at showing
+  // the old links until a hard reload.
+  revalidatePath("/dashboard", "layout");
   return null;
 }
 
