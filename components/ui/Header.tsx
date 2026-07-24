@@ -76,12 +76,20 @@ const Header = () => {
             {/* Cosmetic only — this hides the door, it doesn't lock it. The lock
                 is app/admin/layout.tsx, which re-checks against the database. */}
             {isAdminEmail(user?.email) && (
-              <Link
-                href="/admin/briefs"
-                className="items-center rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900 inline-flex"
-              >
-                Briefs
-              </Link>
+              <>
+                <Link
+                  href="/admin/overview"
+                  className="items-center rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900 inline-flex"
+                >
+                  Overview
+                </Link>
+                <Link
+                  href="/admin/briefs"
+                  className="items-center rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900 inline-flex"
+                >
+                  Briefs
+                </Link>
+              </>
             )}
 
             {/* Signed in: the account menu — who you are, and the two things
