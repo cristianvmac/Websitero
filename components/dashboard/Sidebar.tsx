@@ -87,7 +87,7 @@ export const navSections: { label: string; items: NavItem[] }[] = [
         preview: true 
       },
       {
-        label: "Blog (beta)",
+        label: "Blog",
         href: "/dashboard/site/blog",
         icon: Newspaper, when: "live",
         preview: true
@@ -102,14 +102,14 @@ export const navSections: { label: string; items: NavItem[] }[] = [
     label: "Marketing",
     items: [
       { 
-        label: "SEO & GEO (beta)", 
+        label: "SEO & GEO", 
         href: "/dashboard/marketing/seo-geo", 
         icon: Search, 
         when: "live", 
         preview: true 
       },
       {
-        label: "Google Business Profile (beta)",
+        label: "Google Business Profile",
         href: "/dashboard/marketing/google-business",
         icon: MapPin,
         when: "live",
@@ -121,7 +121,7 @@ export const navSections: { label: string; items: NavItem[] }[] = [
     label: "Analytics",
     items: [
       {
-        label: "Site Analytics (beta)",
+        label: "Site Analytics",
         href: "/dashboard/analytics",
         icon: BarChart3,
         when: "live",
