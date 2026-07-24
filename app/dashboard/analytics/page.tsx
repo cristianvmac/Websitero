@@ -19,7 +19,7 @@ import {
   Users,
   Video,
 } from "lucide-react";
-import UnderConstruction from "@/components/dashboard/UnderConstruction";
+import TellUsYouWantIt from "@/components/dashboard/TellUsYouWantIt";
 import { getDashboardData } from "@/src/data/dashboard";
 
 export const metadata: Metadata = { title: "Analytics | Websitero" };
@@ -118,9 +118,10 @@ const MARKETING: MarketingCard[] = [
 export default async function AnalyticsPage() {
   if (UNDER_CONSTRUCTION) {
     return (
-      <UnderConstruction
+      <TellUsYouWantIt
         title="Site Analytics"
-        note="Your visitor stats will live here — where people come from, which pages they read, and what they do next."
+        feature="analytics"
+        note="Visitor stats would live here — where people come from, which pages they read, and what they do next."
       />
     );
   }
