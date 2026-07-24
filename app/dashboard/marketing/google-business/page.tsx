@@ -24,7 +24,7 @@ import {
   Search,
   Star,
 } from "lucide-react";
-import UnderConstruction from "@/components/dashboard/UnderConstruction";
+import TellUsYouWantIt from "@/components/dashboard/TellUsYouWantIt";
 import { getDashboardData } from "@/src/data/dashboard";
 
 export const metadata: Metadata = { title: "Google Business Profile | Websitero" };
@@ -141,9 +141,10 @@ function Badge({ children }: { children: string }) {
 export default async function GoogleBusinessPage() {
   if (UNDER_CONSTRUCTION) {
     return (
-      <UnderConstruction
+      <TellUsYouWantIt
         title="Google Business Profile"
-        note="Managing your Google listing from here — the map pack, your reviews and your opening hours — is on the way."
+        feature="Google Business Profile management"
+        note="Managing your Google listing from here — the map pack, your reviews and your opening hours."
       />
     );
   }

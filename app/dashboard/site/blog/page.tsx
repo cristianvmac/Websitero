@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, BookOpen, ExternalLink, GitBranch, Globe, PenLine, Rocket } from "lucide-react";
-import UnderConstruction from "@/components/dashboard/UnderConstruction";
+import TellUsYouWantIt from "@/components/dashboard/TellUsYouWantIt";
 import { FRAMEWORKS } from "@/lib/diy";
 import { getDashboardData } from "@/src/data/dashboard";
 
@@ -55,9 +55,10 @@ const STEPS = [
 export default async function BlogPage() {
   if (UNDER_CONSTRUCTION) {
     return (
-      <UnderConstruction
+      <TellUsYouWantIt
         title="Blog"
-        note="Writing and publishing posts from the dashboard isn't ready yet."
+        feature="a blog"
+        note="Writing and publishing posts to your site straight from this dashboard, without touching code."
       />
     );
   }

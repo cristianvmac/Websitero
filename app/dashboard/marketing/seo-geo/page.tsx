@@ -22,7 +22,7 @@ import {
   Sparkles,
   TrendingUp,
 } from "lucide-react";
-import UnderConstruction from "@/components/dashboard/UnderConstruction";
+import TellUsYouWantIt from "@/components/dashboard/TellUsYouWantIt";
 import { getDashboardData } from "@/src/data/dashboard";
 
 export const metadata: Metadata = { title: "SEO & GEO | Websitero" };
@@ -161,9 +161,10 @@ function Stat({ label, hint }: { label: string; hint: string }) {
 export default async function SeoGeoPage() {
   if (UNDER_CONSTRUCTION) {
     return (
-      <UnderConstruction
+      <TellUsYouWantIt
         title="SEO & GEO"
-        note="The tools for getting found — on Google and inside AI answers — are being finished."
+        feature="SEO & GEO tools"
+        note="The tools for getting found — on Google and inside AI answers like ChatGPT."
       />
     );
   }
