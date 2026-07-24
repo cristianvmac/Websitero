@@ -9,6 +9,7 @@ import {
   FileText,
   Code2,
   GitBranch,
+  Users,
 } from "lucide-react";
 import type { Brief } from "@/app/forme/brief";
 import { FRAMEWORKS, repoSlug } from "@/lib/diy";
@@ -139,16 +140,27 @@ export default async function AdminBriefs() {
   return (
     <section className="min-h-screen bg-white px-6 pb-24 pt-28">
       <div className="mx-auto w-full max-w-4xl">
-        <div className="flex items-center gap-3">
-          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-500 text-white shadow-lg shadow-blue-500/30">
-            <Inbox className="h-5 w-5" />
-          </span>
-          <div>
-            <h1 className="text-2xl font-bold tracking-tight text-slate-900">Briefs</h1>
-            <p className="text-sm text-slate-500">
-              {records.length} {""} submitted · every build request and DIY handoff lands here
-            </p>
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center gap-3">
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-500 text-white shadow-lg shadow-blue-500/30">
+              <Inbox className="h-5 w-5" />
+            </span>
+            <div>
+              <h1 className="text-2xl font-bold tracking-tight text-slate-900">Briefs</h1>
+              <p className="text-sm text-slate-500">
+                {records.length} {""} submitted · every build request and DIY handoff lands here
+              </p>
+            </div>
           </div>
+          {/* The queue is "what do I build next?"; the overview is who these
+              people are and what they owe. */}
+          <Link
+            href="/admin/overview"
+            className="inline-flex w-fit items-center gap-1.5 rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700 transition-colors hover:border-blue-500/40 hover:text-blue-700"
+          >
+            <Users className="h-3.5 w-3.5 text-blue-500" />
+            Accounts overview
+          </Link>
         </div>
 
         <div className="mt-8 space-y-4">
