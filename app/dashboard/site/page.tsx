@@ -4,18 +4,43 @@ import { STAGE_LABELS } from "@/lib/site-stage";
 import { getDashboardData } from "@/src/data/dashboard";
 import NoSiteYet from "@/components/dashboard/NoSiteYet";
 import DeleteSiteCard from "@/components/dashboard/DeleteSiteCard";
+import LinkSiteCard from "@/components/dashboard/LinkSiteCard";
 
 export const metadata: Metadata = { title: "My Site | Websitero" };
 
+/* A site gets here two ways, and this page has to know both — someone who
+   linked their own site and then opened the page named after it was being told
+   they don't have one:
+
+   brief → the build we're hand-coding. Its address book, below.
+   diy   → they built it themselves and told us where it lives. That's the same
+           card the overview uses, because linking IS the address book for a
+           site we don't host: nothing else about it is ours to show. It also
+           covers the DIY account that hasn't linked anything yet — the form is
+           a better answer there than a pitch to build them a second site.
+
+   A brief outranks the kit, same rule as the overview. */
+
 export default async function MySitePage() {
-  const { site } = await getDashboardData();
+  const { site, diy } = await getDashboardData();
 
   return (
     <div className="flex flex-col gap-8">
       <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-3xl">My Site</h1>
 
       {!site ? (
-        <NoSiteYet />
+        diy ? (
+          // Keyed by the links so a successful save remounts the card and
+          // closes its edit form — same reason as the overview.
+          <LinkSiteCard
+            key={`${diy.siteUrl}|${diy.repoUrl}`}
+            siteUrl={diy.siteUrl}
+            repoUrl={diy.repoUrl}
+            framework={diy.framework}
+          />
+        ) : (
+          <NoSiteYet />
+        )
       ) : (
         /* Only what the brief row actually knows: its name, where the build has
            got to, and whichever addresses exist. The overview owns the tracker
